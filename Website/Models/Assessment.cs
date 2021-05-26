@@ -9,7 +9,6 @@ namespace Website.Models
 {
     public class Assessment
     {
-        public string[] fraction { get; set; }
         [Required]
         public string name { get; set; }
 

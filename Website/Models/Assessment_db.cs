@@ -169,7 +169,7 @@ namespace Website.Models
 
 		public List<Assessment> assessment_select(string uname, string year)
 		{
-			List<Assessment> personnel = new List<Assessment>();
+			List<Assessment> assessment = new List<Assessment>();
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
 			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM assessment WHERE year = '"+year+"' and (name IN (SELECT name FROM organization_account where class = (select class from organization_account where name = '" + uname + "'))) ORDER BY tim DESC ");
 			sqlCommand.Connection = sqlConnection;
@@ -215,11 +215,11 @@ namespace Website.Models
 						rewards = reader.GetString(reader.GetOrdinal("rewards")),
 						tim = reader.GetString(reader.GetOrdinal("tim")),
 					};
-					personnel.Add(assessment1);
+					assessment.Add(assessment1);
 				}
 			}
 			sqlConnection.Close();
-			return personnel;
+			return assessment;
 		}
 	}
 }

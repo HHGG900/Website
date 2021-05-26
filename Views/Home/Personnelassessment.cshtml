@@ -28,10 +28,10 @@
 		function save() {
 			var year = document.getElementById("s_year").value;
 			window.alert(year);
-			$.post('Home/Personnelassessment',
+			$.post('@Url.Action("Personnelassessment")',
 				{ years: year },
 				function (loc) {
-					window.location.href = "Home/Personnelassessment";
+					window.location.href = "Personnelassessment";
 				});
 
 		}
@@ -138,7 +138,7 @@
 
 			<br>-->
 			<br>
-			<form id="form1" method="post" action="~/Home/Personnelassessment1">
+			@*<form id="form1" method="post" action="~/Home/Personnelassessment">*@
 				<p>
 					已存檔者--查詢年度
 					<select id="s_year" name="s_year" class="form-control col-md-2 d-inline-block">
@@ -148,9 +148,9 @@
 						<option value="107">107</option>
 					</select>
 					年
-					<button class="btnBgColorWithShadow--blue btn-query mg-left-30" onclick="save();"><i class="fas fa-search"></i>查詢</button>
+					<button class="btnBgColorWithShadow--blue btn-query mg-left-30" onclick="save()"><i class="fas fa-search"></i>查詢</button>
 				</p>
-			</form>
+			@*</form>*@
 		</div>
 	</header>
 	<main class="main">

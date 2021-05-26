@@ -524,7 +524,7 @@ namespace Website.Controllers
 			//		photo.SaveAs(path);
 			//	}
 			//}
-			return Json(Url.Action("Personnelassessment", "Home"));
+			return Json("Home/Personnelassessment");
 		}
 		/*	public string ShowPersonnelassessment()
 			{
