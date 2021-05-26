@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>資源緊密合作 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-6-1.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src="~/popper.js/popper.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				 history.back();
+				//location.href = "/Home/Link_work";
+			});
+
+			$(document).on("click", "#occur_date", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+		});
+
+		function doSubmit() {
+			var thisform = $('#form1');
+
+			if ($('#year').val() == '' || $('#season').val() == '' || $('#occur_date').val() == '' || $('#unit').val() == '' ||
+				$('#purpose').val() == '' || $('#uploadfile01').val() == '' || $('#uploadfile02').val() == '' ||
+				$('#uploadfile03').val() == '' || $('#uploadfile04').val() == '') {
+				alert('請完整輸入表格內容！');
+
+				var position = $("#year").offset().top;
+				$('html, body').animate({
+					scrollTop: position * 2 / 3
+				}, 1000);
+
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				thisform.submit();
+			}
+		}
+	</script>
+	<style>
+		.header h1 {
+			background-color: white;
+			color: black;
+		}
+	</style>
+</head>
+
+
+
+<!--<script src="/js/jquery-1.10.2.min.js"></script>-->
+
+
+
+
+<body>
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1>資源緊密合作</h1>
+	</header>
+	<main class="main wrapper">
+		<p class="descP">
+			資源緊密合作的前提是案件的交換，互利共生，勤於跑各種聯誼會議，勤於合作單位拜訪是非常必要的。
+		</p>
+
+		<form id="form1" name="form1" method="post" action="/monthly/resource_cowork_save" target="actFrame" enctype="multipart/form-data">
+			<div class="tableContainer">
+				<table class="mainTable">
+					<thead>
+						<tr>
+							<th class="mainTable__th">資源名稱</th>
+							<th class="mainTable__th" colspan="3">
+								<input type="text" id="year" name="year"> 年度 第 <input type="text" id="season" name="season"> 季 長照資源聯繫表
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="mainTable__th">
+								日期
+							</th>
+							<td class="mainTable__td"><input type="text" class="Wdate" id="occur_date" name="occur_date"></td>
+							<th class="mainTable__th">單位</th>
+							<td class="mainTable__td"><input type="text" id="unit" name="unit"></td>
+						</tr>
+						<tr>
+							<th class="mainTable__th">目的</th>
+							<td class="mainTable__td" colspan="3">
+								<textarea class="mainTable__textarea" rows="5" id="purpose" name="purpose"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th class="mainTable__th">照片紀錄</th>
+							<td class="mainTable__td mainTable__td--file" colspan="3">
+								<table class="fileUploadTable">
+									<tbody>
+										<tr>
+											<td>
+												<div class="fileUploadTable__block">
+													<input type="file" id="uploadfile01" name="uploadfile01">
+												</div>
+											</td>
+											<td>
+												<div class="fileUploadTable__block">
+													<input type="file" id="uploadfile02" name="uploadfile02">
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="fileUploadTable__block">
+													<input type="file" id="uploadfile03" name="uploadfile03">
+												</div>
+											</td>
+											<td>
+												<div class="fileUploadTable__block">
+													<input type="file" id="uploadfile04" name="uploadfile04">
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="btnBar"><button class="btn btn-w btn-blue" onclick="return doSubmit();">存檔</button></div>
+		</form>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 187px; height: 200px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

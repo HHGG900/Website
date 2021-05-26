@@ -1,0 +1,158 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 7, ../sass/index.scss */
+header {
+  text-align: center;
+}
+/* line 10, ../sass/index.scss */
+header h1 {
+  position: relative;
+  display: inline-block;
+  padding-left: 120px;
+  padding-right: 120px;
+  min-height: 143px;
+  line-height: 143px;
+  font-size: 2.8rem;
+  color: #930a9a;
+  margin: auto;
+  margin-bottom: -1rem;
+}
+/* line 22, ../sass/index.scss */
+header h1:before, header h1:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  height: 143px;
+  margin: auto;
+  content: '';
+  background-size: contain;
+}
+/* line 34, ../sass/index.scss */
+header h1:before {
+  left: 0;
+  background-image: url(../images/img_decoration_heart.png);
+}
+/* line 38, ../sass/index.scss */
+header h1:after {
+  right: 0;
+  background-image: url(../images/img_decoration_people.png);
+}
+@media (max-width: 1599.98px) {
+  /* line 45, ../sass/index.scss */
+  header h1 {
+    padding-left: 90px;
+    padding-right: 90px;
+  }
+  /* line 49, ../sass/index.scss */
+  header h1:before, header h1:after {
+    width: 90px;
+    height: 108px;
+  }
+}
+
+/* line 60, ../sass/index.scss */
+.certificate {
+  text-align: center;
+}
+/* line 62, ../sass/index.scss */
+.certificate img {
+  width: 360px;
+  /*width: 440px;*/
+}
+@media (max-width: 1599.98px) {
+  /* line 62, ../sass/index.scss */
+  .certificate img {
+    width: 240px;
+    /*width: 360px;*/
+  }
+}
+
+/* line 70, ../sass/index.scss */
+.slogan {
+  text-align: center;
+  font-size: 2.3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  color: #930a9a;
+}
+
+/* line 77, ../sass/index.scss */
+.loginTable {
+  margin: auto;
+}
+/* line 79, ../sass/index.scss */
+.loginTable th,
+.loginTable td {
+  padding-bottom: 0.5rem;
+  vertical-align: middle;
+}
+/* line 84, ../sass/index.scss */
+.loginTable th {
+  text-align: right;
+  padding-right: 1rem;
+  color: #30aeff;
+}
+/* line 89, ../sass/index.scss */
+.loginTable td {
+  font-size: 1rem;
+}
+
+/* line 93, ../sass/index.scss */
+.loginTable__input {
+  width: 100%;
+  height: 1.8rem;
+  border-radius: 4px;
+  border: 1px solid gray;
+  font-size: 0.8rem;
+}
+
+/* line 100, ../sass/index.scss */
+.form-check {
+  text-align: center;
+}
+
+/* line 103, ../sass/index.scss */
+.form-check-label {
+  font-size: 0.8rem;
+}
+
+/* line 106, ../sass/index.scss */
+.loginBtn__container {
+  text-align: center;
+  margin-top: 0.5rem;
+}

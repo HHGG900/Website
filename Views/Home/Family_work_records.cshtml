@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>家屬工作紀錄 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-6-1.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		$(function () {
+
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$(document).on("click", ".Wdate", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+
+			// $('.datepicker').datepicker({
+			//     format: "yyyy-mm-dd",
+			//     language: "zh-TW",
+			//     todayHighlight: true
+			// });
+		});
+
+		function doSubmit() {
+			if (!($('#year').val() != '' && $('#season').val() != '' && $('#occur_date').val() != '' && $('#place').val() != '' &&
+				$('#participant').val() != '' && $('#uploadfile01').val() != '' && $('#uploadfile02').val() != '' &&
+				$('#content').val() != '' && $('#quiz_reviews').val() != '')) {
+				alert('您所填的表格欄位資料不完整，請確認，謝謝！');
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#form1').submit();
+			}
+		}
+	</script>
+	<style>
+		.header {
+			text-align: center;
+			width: 20%;
+			display: inline-block;
+			margin-left: 20px;
+		}
+
+		.main {
+			width: 900px;
+		}
+
+		.div1 {
+			display: inline-block;
+			width: 30%;
+		}
+
+		.fileUploadTable {
+			/*width: 86%;*/
+		}
+
+		.mainTable__container {
+			overflow-x: auto;
+			margin-top: 10px;
+		}
+
+		.mainTable2 td, .mainTable2 th {
+			padding: 0.5rem 1rem;
+			border: 1px solid #101010;
+			text-align: center;
+		}
+
+		.container-fluid2 {
+			width: 90%;
+		}
+	</style>
+</head>
+
+
+<!--<link rel="stylesheet" type="text/css" href="/libs/datepicker/css/bootstrap-datepicker3.min.css">-->
+<!--<script src="/libs/datepicker/js/bootstrap-datepicker.min.js"></script>-->
+<!--<script src="/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>-->
+
+
+
+<body style="">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1>家屬工作紀錄</h1>
+	</header>
+	<main class="main wrapper">
+
+		<form id="form1" name="form1" method="post" action="/familywork/add_record" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="user_id" name="user_id" value="22">
+			<div class="tableContainer">
+				<table class="mainTable">
+					<thead>
+						<tr>
+							<th class="mainTable__th">名稱</th>
+							<th class="mainTable__th" colspan="3">
+								<select id="year" name="year" class="form-control col-md-3 d-inline-block">
+									<option value="">---選擇年---</option>
+									<option value="109">109</option>
+									<option value="108">108</option>
+									<option value="107">107</option>
+								</select> 年度
+								<span style="margin-left:50px;">
+									第 <select id="season" name="season" class="form-control col-md-3 d-inline-block">
+										<option value="">---選擇季度---</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+									</select> 季
+								</span>  <span style="margin-left:50px;">會議記錄</span><br>
+								<div class="div1"><input type="radio" id="catalog1" name="catalog[]" value="1"> 家庭座談會議</div>
+								<div class="div1"><input type="radio" id="catalog2" name="catalog[]" value="2"> 照顧技巧課程</div>
+								<div class="div1"><input type="radio" id="catalog3" name="catalog[]" value="3"> 經驗分享支持團體</div><br>
+								<div class="div1"><input type="radio" id="catalog4" name="catalog[]" value="4"> 家庭紓壓活動</div>
+								<div class="div1"><input type="radio" id="catalog5" name="catalog[]" value="5"> 家庭生活講座</div>
+								<div class="div1"><input type="radio" id="catalog6" name="catalog[]" value="6"> 家庭個別化諮詢</div>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="mainTable__th">
+								日期
+							</th>
+							<td class="mainTable__td">
+								<input type="text" class="Wdate mainTable__input form-control col-md-6" id="date1" name="date1">
+							</td>
+							<th class="mainTable__th">地點</th>
+							<td class="mainTable__td">
+								<input type="text" class="mainTable__input form-control" id="place" name="place">
+							</td>
+						</tr>
+						<tr>
+							<th class="mainTable__th">參加者</th>
+							<td class="mainTable__td" colspan="3">
+								<input type="text" class="mainTable__input form-control" id="participant" name="participant">
+							</td>
+						</tr>
+						<tr>
+							<th class="mainTable__th">照片紀錄</th>
+							<td class="mainTable__td mainTable__td--file" colspan="3">
+								<table class="fileUploadTable">
+									<tbody>
+										<tr>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile01" name="uploadfile01">
+												</div>
+											</td>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile02" name="uploadfile02">
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="btnBar" style="position: relative; text-align: right;">
+				關鍵字 <input type="text">
+				<button class="btn btn-blue"><i class="fas fa-search"></i>查詢</button>
+			</div>
+			<div class="tableContainer">
+				<table class="mainTable">
+					<tbody>
+						<tr>
+							<th class="mainTable__th" style="width:100px;">內容</th>
+							<td class="mainTable__td" colspan="3">
+								<textarea id="content" name="content" rows="6" class="form-control d-inline-block"></textarea>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+
+		<div class="btnBar"><button class="btn btn-w btn-blue" onclick="return doSubmit();">存檔</button></div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 186px; height: 198px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

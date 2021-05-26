@@ -1,0 +1,180 @@
+﻿@using Website.Models;
+@{
+	string post1 = ViewBag.post1;
+	string post2 = ViewBag.post2;
+}
+<!DOCTYPE html>
+<html lang="zh-TW" class="translated-ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>台灣長照大聯盟居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/bootstrap.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/index.css">
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script> -->
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="~/Scripts/jquery.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<script>
+		window.onload = function () {
+
+			var log = document.getElementById("login");
+			var s2 = "";
+			var s = "";
+			console.log(123);
+			console.log('@ViewBag.name');
+			
+			if ("@ViewBag.post1" == "已離職")
+				window.alert("員工已離職");
+			else if ("@ViewBag.post1" == "帳密錯誤")
+				window.alert("請重新輸入帳密");
+			else if ("@ViewBag.post1" == "主任" & "@ViewBag.post2" == "督導") {
+				var log1 = "location.href='/Home/DirectorHandbook'";
+				var log2 = "location.href='/Home/SuperviseHandbook'";
+				s2 = "<button  class='btn - w btn - info' onclick = " + log2 + "><font style='vertical - align: inherit; '><font style='vertical - align: inherit;'>督導登入</font></font></button>";
+				s = "<button  class='btn - w btn - info' onclick = " + log1 + "><font style='vertical - align: inherit; '><font style='vertical - align: inherit;'>主任登入</font></font></button>";
+			}
+			else if ("@ViewBag.post1" == "督導") {
+				window.location.href = '/Home/SuperviseHandbook';
+			}
+			else if ("@ViewBag.post1" == "主任")
+				window.location.href = '/Home/DirectorHandbook';
+			else
+				s = log.innerHTML;
+			log.innerHTML = s + s2;
+		}
+
+	</script>
+	<!--<script src="/Scripts/util.js"></script>-->
+	<!--
+		<script>
+			$(function () {
+			});
+
+			function choosePos(uid, num) {
+				$.ajax({
+					url: "/Home/setPosition",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						id: uid,
+						num: num
+					},
+					success: function (data, status, xhr) {
+						// console.log(data,status,xhr);
+						if (data.code == 200) {
+							if (data.result != '')
+								location.href = data.result;
+						}
+						else {
+							alert(data.message);
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+					}
+				});
+			}
+		</script>
+	<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">-->
+</head>
+<!--<script src="/js/jquery-1.10.2.min.js"></script>-->
+
+<body>
+	<header>
+		<h1><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">台灣長照大聯盟居服管理系統</font></font></h1>
+		<!-- <h1>台灣伯佐克智慧型居服照顧管理系統</h1> -->
+	</header>
+
+	<figure class="certificate">
+		<img src="~/images/img_certificate.jpg" alt="">
+	</figure>
+	<p class="slogan"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">用心呵護更加關愛我們致力於專業照顧</font></font></p>
+	<div id="login" class="loginBtn__container">
+		<form class="form-horizontal" role="form" method="post" action="~/Home/Login" name="login_form" id="login_form">
+			<table id="tab" class="loginTable">
+				<tbody>
+					<tr>
+						<th>
+							<font style="vertical-align: inherit;">
+								<font style="vertical-align: inherit;">
+									單位代號
+								</font>
+							</font>
+						</th>
+						<td>
+							<input type="text" class="form-control loginTable__input" id="usr_index" name="usr_index" placeholder="請輸入單位代碼" value="" required="">
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<font style="vertical-align: inherit;">
+								<font style="vertical-align: inherit;">
+									帳號
+								</font>
+							</font>
+						</th>
+						<td>
+							<input type="text" class="form-control loginTable__input" name="usr_name" id="usr_name" placeholder="請輸入帳號" value="" required="">
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<font style="vertical-align: inherit;">
+								<font style="vertical-align: inherit;">
+									密碼
+								</font>
+							</font>
+						</th>
+						<td>
+							<input type="password" class="form-control loginTable__input" name="usr_key" id="usr_key" placeholder="請輸入密碼" required="">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+			<div class="loginBtn__container">
+				<button type="submit" class="btn-w btn-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登入</font></font></button>
+				<!--onclick="location.href='/Home/DirectorHandbook'" onclick="location.href='/Home/SuperviseHandbook'"-->
+				<!--        <button type="submit" class="btn-w btn-info"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">登入</font></font></button>
+								<input type="button" class="btn btn-primary" onclick="location.href='https://website20201229.azurewebsites.net/Home/Register'" value="註冊"/>
+			-->
+			</div>
+		</form>
+	</div>
+	<script src="~/Scripts/main.js"></script>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="~/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">請稍後，系統正在處理中...</font></font></p>
+	</div>
+	<!--
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe><div id="goog-gt-tt" class="skiptranslate" dir="ltr">
+		<div style="padding: 8px;">
+			<div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google 翻譯"></div></div>
+		</div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">建議更好的譯法</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div>
+	</div>
+		-->
+
+	<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 3, ../sass/page2-2-1-1.scss */
+#homepageBtn,
+#lastPage {
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* line 11, ../sass/page2-2-1-1.scss */
+.header {
+  text-align: left;
+}
+/* line 13, ../sass/page2-2-1-1.scss */
+.header h1 {
+  font-size: 1.2rem;
+  padding: 1rem 3rem;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  border: none;
+  background-color: #5677fc;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+.header h1:hover, .header h1:active {
+  background-color: #3d63fc;
+}
+
+/* line 22, ../sass/page2-2-1-1.scss */
+.main {
+  margin-top: 1.7rem;
+}
+
+/* line 25, ../sass/page2-2-1-1.scss */
+form {
+  text-align: center;
+}
+/* line 28, ../sass/page2-2-1-1.scss */
+form input[type='text'] {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 33, ../sass/page2-2-1-1.scss */
+.inputYear {
+  width: 80px;
+}
+
+/* line 36, ../sass/page2-2-1-1.scss */
+form + form {
+  margin-top: 40px;
+}
+
+/* line 40, ../sass/page2-2-1-1.scss */
+.serviceBlock__whiteBlock {
+  display: inline-block;
+  padding: 20px;
+  width: 360px;
+  background-color: #fff;
+  margin: 10px auto;
+}
+/* line 47, ../sass/page2-2-1-1.scss */
+.serviceBlock__whiteBlock header {
+  color: #939393;
+}
+/* line 50, ../sass/page2-2-1-1.scss */
+.serviceBlock__whiteBlock input[type='file'] {
+  margin-top: 50px;
+}
+
+/* line 55, ../sass/page2-2-1-1.scss */
+.serviceBlock {
+  text-align: center;
+  margin-top: 3rem;
+}
+/* line 59, ../sass/page2-2-1-1.scss */
+.serviceBlock input[type='text'] {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+/* line 67, ../sass/page2-2-1-1.scss */
+.serviceBlock__h2 {
+  display: inline-block;
+  font-size: 1.7rem;
+  border: 1px solid #bbbbbb;
+  background-color: #fff;
+  width: 300px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  margin-bottom: 30px;
+}

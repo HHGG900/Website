@@ -1,0 +1,146 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 3, ../sass/page2.scss */
+.brandTitle {
+  text-align: center;
+  font-size: 2.4rem;
+  color: #930a9a;
+}
+
+/* line 8, ../sass/page2.scss */
+.slogan {
+  font-size: 3.5rem;
+  color: #930a9a;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* line 14, ../sass/page2.scss */
+h1 {
+  display: none;
+}
+
+/* line 18, ../sass/page2.scss */
+.sectionHeader {
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+/* line 22, ../sass/page2.scss */
+.borderBlock {
+  border: 1px solid #000;
+  padding: 5px 10px;
+}
+/* line 26, ../sass/page2.scss */
+.borderBlock.borderBlock--whiteBG {
+  background-color: #fff;
+}
+
+/* line 31, ../sass/page2.scss */
+.mainSection {
+  margin-top: 30px;
+}
+
+/* line 36, ../sass/page2.scss */
+#block1 .cjkUL {
+  list-style-type: none;
+    /* list-style-type: decimal;
+list-style-type: cjk-decimal;
+margin-left: 35px; */
+}
+/* line 42, ../sass/page2.scss */
+#block1 .cjkUL > li {
+  padding-left: 36px;
+  position: relative;
+}
+/* line 46, ../sass/page2.scss */
+#block1 .cjkUL > li:before {
+  content: attr(li-idx);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 36px;
+  text-align: right;
+}
+
+/* line 58, ../sass/page2.scss */
+.hashUl {
+  list-style-type: none;
+}
+/* line 60, ../sass/page2.scss */
+.hashUl > li {
+  padding-left: 30px;
+  position: relative;
+}
+/* line 64, ../sass/page2.scss */
+.hashUl > li:before {
+  content: '# ';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  text-align: center;
+}
+/* line 73, ../sass/page2.scss */
+.hashUl > li + li {
+  margin-top: 15px;
+}
+
+/* line 79, ../sass/page2.scss */
+.cjkQuoteUL {
+  list-style-type: none;
+}
+/* line 81, ../sass/page2.scss */
+.cjkQuoteUL > li {
+  padding-left: 54px;
+  position: relative;
+}
+/* line 85, ../sass/page2.scss */
+.cjkQuoteUL > li:before {
+  content: attr(li-idx);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 54px;
+  text-align: right;
+}
+
+/* line 95, ../sass/page2.scss */
+.btnContainer {
+  text-align: center;
+  margin-top: 30px;
+}

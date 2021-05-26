@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>流行疫苗管理 | 台灣長照大聯盟居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/5.13.0/css/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-6.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#firstzone').click(function () {
+				location.href = "/familywork/checkSenseControlSheet";
+			});
+
+			$('#secondzone').click(function () {
+				// location.href = "/familywork/columnzone";
+			});
+
+			$('#thirdzone').click(function () {
+				// location.href = "/familywork/workrecord";
+			});
+		});
+	</script>
+	<style>
+		.header__iconCell {
+			width: 200px;
+			text-align: center;
+		}
+
+		.h1 {
+			display: inline-block;
+			width: 200px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			background-color: #5576fc;
+			color: white;
+		}
+
+		.header__btns {
+			text-align: left;
+		}
+
+		#thirdzone {
+			margin-right: 6%;
+		}
+
+		#firstzone {
+			margin: 0px 6%;
+		}
+
+		#secondzone {
+			margin-left: 6%;
+		}
+
+		.fa-ambulance, .fa-syringe {
+			font-size: 60pt;
+			margin-bottom: 10px;
+		}
+
+		.mt100 {
+			margin-top: 100px;
+		}
+
+		.header__textCell_div {
+			margin: 0px auto;
+			width: 100%;
+			margin-left: 15%;
+		}
+
+		.header__textCell_div2 {
+			margin: 0px auto;
+			text-align: center;
+			width: 50%;
+		}
+
+		.tableContainer {
+			width: 80%;
+			margin-top: 10px;
+			overflow-x: auto;
+			border-left: 1px solid #101010;
+			border-right: 1px solid #101010;
+			margin-left: 10%;
+		}
+
+			.tableContainer .mainTable {
+				min-width: 100%;
+				border-collapse: collapse;
+			}
+
+		.fileUploadTable {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0.5rem;
+		}
+
+		.tableContainer table td {
+			border-style: none;
+		}
+
+		.fileUploadTable__block {
+			border: 1px solid #bbbbbb;
+			background-color: #fff;
+			text-align: center;
+			padding-top: 100px;
+			padding-bottom: 100px;
+		}
+
+		.mainTable__td.mainTable__td--file {
+			border-bottom: 1px solid #101010;
+		}
+
+		.tableContainer table thead th:nth-child(n + 3) {
+			width: 80%;
+		}
+
+		.queryBlock {
+			text-align: center;
+		}
+	</style>
+</head>
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<i class="fas fa-ambulance"></i>
+			<h1 class="h1">感控管理</h1>
+		</div>
+		<div class="header__textCell">
+			<div class="header__textCell_div">
+				<div class="rich-text">
+					<p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">為什麼長照機構要做感染管制？</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">      1.為早期偵測機構內發生傳染群聚事件</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">      2.讓防疫人員即時妥適處理及採取必要 防疫措施</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">      3.提供高品質優質照護</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">      4.查核、評鑑規範</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">長期照護機構特性</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •是一個獨立自足的環境 </span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •機構內的個案可能存有潛在性疾病 </span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •有較多特定的活動 </span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •個案和工作人員的比例不平衡</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •缺乏對診斷感染症重要而簡單的檢驗</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •機構對象包括慢性病個案，且入住時間長</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">長期照護機構常見問題</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •教育未能落實</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •個案不容易被訓練成良好衛生習慣 </span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">    •普遍缺乏感染管制觀念</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;"><br></span></p>
+				</div>
+
+				<div class="header__btns">
+					<!-- <button class="header__btn" id="thirdzone">流行疫苗接種</button> -->
+					<button class="header__btn" id="firstzone">感控自我檢核紀錄</button>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<header class="header wrapper mt100">
+		<div class="header__iconCell">
+			<i class="fas fa-syringe"></i>
+			<h1 class="h1">流感感控</h1>
+		</div>
+		<div class="header__textCell">
+			<div class="header__textCell_div2">
+				<a href="https://www.cdc.gov.tw/professional/page.aspx?treeid=8208EB95DDA7842A&amp;nowtreeid=553E84B9914424AF" target="_blank"> <img src="/images/raw_1536052176.png"> </a>
+				<img src="/images/raw_1536051633.png">
+			</div>
+		</div>
+	</header>
+
+	<main class="main wrapper">
+		<div class="queryBlock">
+			<p style="font-size: 24pt;">異常彙整表</p>
+			<p>
+			</p><form id="form1" method="post">
+				年度 <select id="year" name="year" class="form-control col-md-2 d-inline-block">
+					<option value="">---選擇年---</option>
+					<option value="109">109</option>
+					<option value="108">108</option>
+					<option value="107">107</option>
+				</select> 年度
+				<!-- <input type="text" class="form-control col-md-1 d-inline-block" /> 年 -->
+				<button class="btn-blue form-control col-md-1 d-inline-block" onclick="return doSearch();"><i class="fa fa-search" aria-hidden="true"></i>查詢</button>
+			</form>
+			<p></p>
+		</div>
+
+		<form id="form1" name="form1" method="post" action="/familywork/add_record" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="user_id" name="user_id" value="4">
+			<div class="tableContainer">
+				<table class="mainTable">
+					<thead>
+						<tr>
+							<th class="mainTable__th">疫苗施打者名冊</th>
+							<th class="mainTable__th" colspan="2">
+								<table class="fileUploadTable">
+									<tbody>
+										<tr>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile01" name="uploadfile01">
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</th>
+						</tr>
+						<tr>
+							<th class="mainTable__th" rowspan="6">未參加者</th>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="姓名：">
+							</th>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="原因：">
+							</th>
+						</tr>
+						<tr>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="姓名：">
+							</th>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="原因：">
+							</th>
+						</tr>
+						<tr>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="姓名：">
+							</th>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="原因：">
+							</th>
+						</tr>
+						<tr>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="姓名：">
+							</th>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="原因：">
+							</th>
+						</tr>
+						<tr>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="姓名：">
+							</th>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="原因：">
+							</th>
+						</tr>
+						<tr>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="姓名：">
+							</th>
+							<th class="mainTable__th">
+								<input type="text" class="form-control d-inline-block" placeholder="原因：">
+							</th>
+						</tr>
+						<tr>
+							<th class="mainTable__th">接種疫苗<br>照片紀錄</th>
+							<td class="mainTable__td mainTable__td--file" colspan="2">
+								<table class="fileUploadTable">
+									<tbody>
+										<tr>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile01" name="uploadfile01">
+												</div>
+											</td>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile02" name="uploadfile02">
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</thead>
+				</table>
+			</div>
+
+			<div style="text-align: center; margin-top: 50px;">
+				<button class="btn btn-w btn-blue" onclick="return doSubmit();">存檔</button>
+			</div>
+
+		</form>
+
+		<br>
+		<br>
+		<br>
+	</main>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

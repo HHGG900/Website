@@ -1,0 +1,634 @@
+﻿@using Website.Models;
+@{
+	List<Roser> rosers = ViewBag.roser;
+}
+@using Website.Models;
+@{
+	List<Roser> roser = ViewBag.roser_list;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>個案新進 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		window.onload = function () {
+			if (@TempData["tr"] == true)
+				document.getElementById("inpu").innerHTML = "";
+		}
+		
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+		});
+	</script>
+	<style>
+				.tableContainer table th, .tableContainer table td {
+					font-size: medium;
+				}
+
+				/*.tableContainer {
+					margin-left:50px;
+					margin-right:50px;
+					margin-top:50px;
+					margin-bottom:50px;
+				}
+		*/
+				.tableContainer table tbody td:last-child {
+					border-right: 1px solid #000;
+				}
+
+				.tableContainer table th, .tableContainer table td {
+					padding: 2px;
+				}
+
+				.tableContainer table {
+					background-color: #D8BFD8;
+				}
+
+				.auto-style1 {
+					text-align: center;
+					font-size: medium;
+				}
+
+				* {
+					padding: 0;
+					margin: 0;
+				}
+
+				.table1 {
+					border-collapse: collapse;
+					border: 1px #525152 solid;
+					width: 50%;
+					margin: 0 auto;
+					margin-top: 100px;
+				}
+
+					.table1 th, .table1 td {
+						border: 1px #525152 solid;
+						text-align: center;
+						font-size: medium;
+						line-height: 30px;
+						background: #F5DEB3;
+					}
+
+					.table1 .t1_header {
+						background: #F5DEB3;
+						font-weight: bold;
+						font-size: medium;
+					}
+				/*表格斜線*/
+				.out {
+					border-top: 40px #F5DEB3 solid; /*上邊框寬度等於表格第一行行高*/
+					width: 0px; /*讓容器寬度為0*/
+					height: 0px; /*讓容器高度為0*/
+					border-left: 80px #F5DEB3 solid; /*左邊框寬度等於表格第一行第一格寬度*/
+					position: relative; /*讓裡面的兩個子容器絕對定位*/
+				}
+
+				b {
+					font-style: normal;
+					display: block;
+					font-size: medium;
+					position: absolute;
+					top: -40px;
+					left: -40px;
+					width: 35px;
+				}
+
+				em {
+					font-style: normal;
+					display: block;
+					position: absolute;
+					font-size: medium;
+					top: -25px;
+					left: -70px;
+					width: 55px;
+				}
+
+				.t1 {
+					background: #F5DEB3;
+				}
+
+				.auto-style2 {
+					text-align: center;
+				}
+	</style>
+
+</head>
+<body style="zoom: 1;">
+	<div class="auto-style2">
+		<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+		<form class="form-horizontal" role="form" method="post" action="~/Home/New_class_schedule" name="login_form" id="login_form">
+
+			<div class="tableContainer">
+				<div class="auto-style1">
+					<span  style="font-size: xx-large;">派案管理表</span>
+					<select id="in_time " name="in_time">
+						<option value="">請選擇時間</option>
+						<option value="one_one">週一8點前</option>
+						<option value="one_two">週一8點-9點</option>
+						<option value="one_three">週一9點-10點</option>
+						<option value="one_four">週一10點-11點</option>
+						<option value="one_five">週一11點-12點</option>
+						<option value="one_six">週一14點-15點</option>
+						<option value="one_seven">週一15點-16點</option>
+						<option value="one_eight">週一17點後</option>
+						<option value="two_one">週二8點前</option>
+						<option value="two_two">週二8點-9點</option>
+						<option value="two_three">週二9點-10點</option>
+						<option value="two_four">週二10點-11點</option>
+						<option value="two_five">週二11點-12點</option>
+						<option value="two_six">週二14點-15點</option>
+						<option value="two_seven">週二15點-16點</option>
+						<option value="two_eight">週二17點後</option>
+						<option value="three_one">週三8點前</option>
+						<option value="three_two">週三8點-9點</option>
+						<option value="three_three">週三9點-10點</option>
+						<option value="three_four">週三10點-11點</option>
+						<option value="three_five">週三11點-12點</option>
+						<option value="three_six">週三14點-15點</option>
+						<option value="three_seven">週三15點-16點</option>
+						<option value="three_eight">週三17點後</option>
+						<option value="four_one">週四8點前</option>
+						<option value="four_two">週四8點-9點</option>
+						<option value="four_three">週四9點-10點</option>
+						<option value="four_four">週四10點-11點</option>
+						<option value="four_five">週四11點-12點</option>
+						<option value="four_six">週四14點-15點</option>
+						<option value="four_seven">週四15點-16點</option>
+						<option value="four_eight">週四17點後</option>
+						<option value="five_one">週五8點前</option>
+						<option value="five_two">週五8點-9點</option>
+						<option value="five_three">週五9點-10點</option>
+						<option value="five_four">週五10點-11點</option>
+						<option value="five_five">週五11點-12點</option>
+						<option value="five_six">週五14點-15點</option>
+						<option value="five_seven">週五15點-16點</option>
+						<option value="five_eight">週五17點後</option>
+						<option value="six_one">週六8點前</option>
+						<option value="six_two">週六8點-9點</option>
+						<option value="six_three">週六9點-10點</option>
+						<option value="six_four">週六10點-11點</option>
+						<option value="six_five">週六11點-12點</option>
+						<option value="six_six">週六14點-15點</option>
+						<option value="six_seven">週六15點-16點</option>
+						<option value="six_eight">週六17點後</option>
+					</select>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="submit" class="btn btn-blue " value="搜尋" /><br />
+&nbsp;</div>
+				<table>
+					<tr>
+						<td>
+							照顧服務人員
+						</td>
+						<td>
+							排班率
+						</td>
+						<td>
+							備註
+						</td>
+					</tr>
+					@foreach (Roser ros in rosers)
+					{
+						<tr>
+							<td> @ros.worker_name</td>
+							<td>1</td>
+							<td></td>					
+						</tr>
+					}
+				<tr>
+					<td colspan="3" style="font-size:large;">
+						<span style="font-size:xx-large">排班原則:</span> <br />
+					1.排班率不得超過90%。
+					<br />
+					2.以排班率不足70%優先派案。
+					<br />
+					3.其次考慮照顧專長對於服務個案之需求貼切度。
+					<br />
+					4.再參考照顧區域遠近的問題。
+					<br />
+					5.男性服務員不得服務女案主。
+					<br />
+					</td>
+
+				</tr>
+				</table>
+			</div>
+			<br />
+				<table id="tab" class="table1" >
+					<tr>
+						<td colspan="7" class="text-left">
+							<br />
+							<input type="text" id="in_name " name="in_name" value="" placeholder="姓名" /> &nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" class="btn btn-blue" value="編輯" /><br />
+							<br />
+						</td>
+					</tr>
+
+					<tr>
+						<th style="width: 80px;">
+							<div class="out">
+								<b>日期</b>
+								<em>時段</em>
+							</div>
+						</th>
+						<td style="font-size:xx-large;" class="t1_header">週一</td>
+						<td style="font-size:xx-large;" class="t1_header">週二</td>
+						<td style="font-size:xx-large;" class="t1_header">週三</td>
+						<td style="font-size:xx-large;" class="t1_header">週四</td>
+						<td style="font-size:xx-large;" class="t1_header">週五</td>
+						<td style="font-size:xx-large;" class="t1_header">週六</td>
+					</tr>
+					<tr>
+
+						@try
+						{
+							foreach (Roser ros in roser)
+							{
+								<td class="t1" style="font-size:large;">8點前</td>
+								<td>
+									<select name="one_one">
+										<option value=@ros.one_one>@ros.one_one</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="two_one" >
+										<option value=@ros.two_one>@ros.two_one</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="three_one">
+										<option value=@ros.three_one>@ros.three_one</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="four_one">
+										<option value=@ros.four_one>@ros.four_one</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="five_one">
+										<option value=@ros.five_one>@ros.five_one</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="six_one">
+										<option value=@ros.six_one>@ros.six_one</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+							<tr>
+								<td class="t1" style="font-size:large;">8點-9點</td>
+								<td>
+									<select name="one_two">
+										<option value=@ros.one_two>@ros.one_two</option>
+										@*<option value="">請下拉</option>*@
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="two_two">
+										<option value=@ros.two_two>@ros.two_two</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="three_two">
+										<option value=@ros.three_two>@ros.three_two</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="four_two">
+										<option value=@ros.four_two>@ros.four_two</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="five_two">
+										<option value=@ros.five_two>@ros.five_two</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="six_two">
+										<option value=@ros.six_two>@ros.six_two</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="t1" style="font-size:medium;">9點-10點</td>
+								<td>
+									<select name="one_three">
+										<option value=@ros.one_three>@ros.one_three</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="two_three">
+										<option value=@ros.two_three>@ros.two_three</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="three_three">
+										<option value=@ros.three_three>@ros.three_three</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="four_three">
+										<option value=@ros.four_three>@ros.four_three</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="five_three">
+										<option value=@ros.five_three>@ros.five_three</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="six_three">
+										<option value=@ros.six_three>@ros.six_three</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="t1" style="font-size:medium;">10點-11點</td>
+								<td>
+									<select name="one_four">
+										<option value=@ros.one_four>@ros.one_four</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="two_four">
+										<option value=@ros.two_four>@ros.two_four</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="three_four">
+										<option value=@ros.three_four>@ros.three_four</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="four_four">
+										<option value=@ros.four_four>@ros.four_four</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="five_four">
+										<option value=@ros.five_four>@ros.five_four</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="six_four">
+										<option value=@ros.six_four>@ros.six_four</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="t1" style="font-size:medium;">11點-12點</td>
+								<td>
+									<select name="one_five">
+										<option value=@ros.one_five>@ros.one_five</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="two_five">
+										<option value=@ros.two_five>@ros.two_five</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="three_five">
+										<option value=@ros.three_five>@ros.three_five</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="four_five">
+										<option value=@ros.four_five>@ros.four_five</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="five_five">
+										<option value=@ros.five_five>@ros.five_five</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="six_five">
+										<option value=@ros.six_five>@ros.six_five</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="t1" style="font-size:medium;">14點-15點</td>
+								<td>
+									<select name="one_six">
+										<option value=@ros.one_six>@ros.one_six</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="two_six">
+										<option value=@ros.two_six>@ros.two_six</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="three_six">
+										<option value=@ros.three_six>@ros.three_six</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="four_six">
+										<option value=@ros.four_six>@ros.four_six</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="five_six">
+										<option value=@ros.five_six>@ros.five_six</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="six_six">
+										<option value=@ros.six_six>@ros.six_six</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="t1" style="font-size:medium;">15點-16點</td>
+								<td>
+									<select name="one_seven">
+										<option value=@ros.one_seven>@ros.one_seven</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="two_seven">
+										<option value=@ros.two_seven>@ros.two_seven</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="three_seven">
+										<option value=@ros.three_seven>@ros.three_seven</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="four_seven">
+										<option value=@ros.four_seven>@ros.four_seven</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="five_seven">
+										<option value=@ros.five_seven>@ros.five_seven</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="six_seven">
+										<option value=@ros.six_seven>@ros.six_seven</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="t1" style="font-size:medium;">17點後</td>
+								<td>
+									<select name="one_eight">
+										<option value=@ros.one_eight>@ros.one_eight</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="two_eight">
+										<option value=@ros.two_eight>@ros.two_eight</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="three_eight">
+										<option value=@ros.three_eight>@ros.three_eight</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="four_eight">
+										<option value=@ros.four_eight>@ros.four_eight</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="five_eight">
+										<option value=@ros.five_eight>@ros.five_eight</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+								<td>
+									<select name="six_eight">
+										<option value=@ros.six_eight>@ros.six_eight</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+									</select>
+								</td>
+							</tr>
+						}
+
+					}
+					catch {; }
+					</table>
+					<br />
+			<br />
+					<input id="inpu" type="submit" class="btn btn-blue" value="確認" onclick="window.alert('存取成功');  " />
+
+
+			</form>
+			</div>
+		</div>
+</body>
+</html>

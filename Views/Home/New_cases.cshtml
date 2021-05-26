@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>個案新進 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#enter_key').click(function () {
+				location.href = "/Home/New_cases";
+			});
+
+			$('#enter_key3').click(function () {
+				location.href = "/Home/Assessing_care_plan_selection_cases";
+			});
+			
+		});
+
+		function doPrint() {
+			window.open('/Home/New_cases_print');
+		}
+	</script>
+	<style>
+		.h1 {
+			display: inline-block;
+			width: 200px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			background-color: #5677fc;
+			color: white;
+		}
+
+		.header__iconCell .h1 {
+			border-radius: 4px;
+		}
+
+		.header__btns {
+			text-align: inherit;
+			/*margin-top: inherit;*/
+			width: 100%
+		}
+
+		.header__btn + .header__btn {
+			margin-left: 12%;
+		}
+
+		.header__btn {
+			cursor: pointer;
+		}
+
+		button {
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<h1 class="h1">個案新進</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div style="text-align:center; padding: 10px; font-size: 20pt; margin-bottom:30px;">
+				<span>每一個新進個案的來到都不容易</span><span style="padding-left:10%">
+					一步步都是細節關鍵<span>
+						<br>
+						<span>我們的照顧專業度值得細細欣賞</span><span style="padding-left:10%">
+							這些都是經驗累積出來的<span>
+								<br>
+								<span>很開心又迎接了一個長輩</span><span style="padding-left:10%">
+									接著期待能夠陪伴度一生<span>
+									</span>
+								</span>
+							</span>
+						</span>
+					</span>
+				</span>
+			</div>
+			個案在新進一個環境之適應過程是具有個別性的，所以適應問題的嚴重度也因人而異，而適度運用措施是可以預防和減少老人的適應問題。有效措施可包括以下幾項：
+			<br>
+			<br>
+			1.可在入住機構之前，提供家人及老人一同參觀機構，使得老人對環境有較多實際的預期。<br>
+			2.主動及適應前的持續性關注，個管人員應主動關懷老人入住以後的感受，了解是否有適應困難，及時提供老人協助。<br>
+			3.主動傾聽--避免一昧以個管人員的角度來詮釋老人行為表現，個管人員應讓老人知道，在老人有任何問題時個管人員是樂於幫忙的。<br>
+			4.機構中應給予老人較多自主權，如彈性進食時間、活動與休閒自主性等。<br>
+			5.當老人的需求與現實環境有所衝突時，協助老人選擇一個同時可被機構與老人都願意接受的策略。<br>
+			6.盡量讓老人更有趣的生活型態，包括與共同特性(同地方、同語言、同工作經驗、同興趣、同人格特質)，入居後可能造成相互關係的改變，必須共同建立新的生活模式，以適應新環境<br>
+
+			<div class="header__btns">
+				<button id="enter_key" class="header__btn" style="background-color:#3f50b5">入住須知</button>
+				<button id="enter_key3" class="header__btn" style="background-color:#3f50b5">初次評估</button>
+			</div>
+
+			<div class="header__btns" style="text-align: center; margin-top:100px;">
+				<img src="~/images/img_enternotice.png">
+			</div>
+
+			<div class="header__btns" style="text-align: center; margin-top:60px;">
+				<button class="btn-big btn-blue" onclick="doPrint(this);">列印</button>
+			</div>
+
+		</div>
+	</header>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

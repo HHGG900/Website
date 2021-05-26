@@ -1,0 +1,145 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 3, ../sass/page2-2-1.scss */
+#homepageBtn,
+#lastPage {
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* line 14, ../sass/page2-2-1.scss */
+.header {
+  position: relative;
+  padding-top: 30px;
+}
+
+/* line 18, ../sass/page2-2-1.scss */
+.h1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  font-size: 1.7rem;
+  border: 1px solid #bbbbbb;
+  background-color: #fff;
+  width: 300px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+}
+
+/* line 31, ../sass/page2-2-1.scss */
+.queryBlock {
+  margin-left: 380px;
+  font-size: 1.4rem;
+}
+/* line 35, ../sass/page2-2-1.scss */
+.queryBlock input {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  width: 100px;
+  height: 60px;
+  border: 1px solid #bbbbbb;
+}
+/* line 42, ../sass/page2-2-1.scss */
+.queryBlock p + p {
+  margin-top: 30px;
+}
+/* line 45, ../sass/page2-2-1.scss */
+.queryBlock .btnQuery {
+  height: 60px;
+  vertical-align: top;
+  border-color: #bbbbbb;
+}
+
+/* line 54, ../sass/page2-2-1.scss */
+.main .paper {
+  margin-top: 3.7rem;
+  background-color: #fff;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 30px;
+}
+/* line 61, ../sass/page2-2-1.scss */
+.main header {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* line 67, ../sass/page2-2-1.scss */
+.tableContainer {
+  margin-top: 10px;
+  overflow-x: auto;
+  border-left: 1px solid #101010;
+  border-right: 1px solid #101010;
+  margin-top: 30px;
+  overflow-x: hidden;
+}
+/* line 74, ../sass/page2-2-1.scss */
+.tableContainer table {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+/* line 78, ../sass/page2-2-1.scss */
+.tableContainer table th,
+.tableContainer table td {
+  border: 1px solid #101010;
+  white-space: nowrap;
+  padding: 5px 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+/* line 89, ../sass/page2-2-1.scss */
+.tableContainer table thead th:first-child {
+  border-left: none;
+}
+/* line 92, ../sass/page2-2-1.scss */
+.tableContainer table thead th:last-child {
+  border-right: none;
+}
+/* line 97, ../sass/page2-2-1.scss */
+.tableContainer table tbody th:first-child {
+  border-left: none;
+}
+/* line 100, ../sass/page2-2-1.scss */
+.tableContainer table tbody td:last-child {
+  border-right: none;
+}

@@ -1,0 +1,225 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 5, ../sass/page2-4.scss */
+.header {
+  position: relative;
+}
+
+/* line 8, ../sass/page2-4.scss */
+.header__iconCell {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  text-align: center;
+}
+/* line 14, ../sass/page2-4.scss */
+.header__iconCell img {
+  margin: auto;
+}
+/* line 17, ../sass/page2-4.scss */
+.header__iconCell .h1 {
+  font-size: 2rem;
+  white-space: nowrap;
+}
+
+/* line 22, ../sass/page2-4.scss */
+.header__textCell {
+  margin-left: 280px;
+}
+
+/* line 25, ../sass/page2-4.scss */
+.header__btns {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* line 29, ../sass/page2-4.scss */
+.header__btn {
+  display: inline-block;
+  border: none;
+  background-color: #ea407a;
+  box-shadow: 0 8px 10px #0003;
+  font-size: 1.3rem;
+  width: 11.5rem;
+  height: 4rem;
+  color: #fff;
+}
+/* line 78, ../sass/_var.scss */
+.header__btn:hover, .header__btn:active {
+  background-color: #e7296a;
+}
+
+/* line 37, ../sass/page2-4.scss */
+.header__btn + .header__btn {
+  margin-left: 70px;
+}
+
+/* line 43, ../sass/page2-4.scss */
+.container {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+/* line 47, ../sass/page2-4.scss */
+.container .row {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+/* line 51, ../sass/page2-4.scss */
+.container .row .col {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 40px;
+}
+/* line 56, ../sass/page2-4.scss */
+.container .row .col.serviceBlock__h3Col {
+  margin-bottom: 10px;
+}
+@media (min-width: 992px) {
+  /* line 56, ../sass/page2-4.scss */
+  .container .row .col.serviceBlock__h3Col {
+    padding-left: 25px;
+  }
+}
+
+/* line 65, ../sass/page2-4.scss */
+.serviceBlock {
+  margin-top: 3rem;
+}
+
+/* line 71, ../sass/page2-4.scss */
+.serviceBlock__h2 {
+  display: inline-block;
+  font-size: 1.7rem;
+  border: 1px solid #bbbbbb;
+  background-color: #fff;
+  width: 300px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+  margin-bottom: 30px;
+}
+
+/* line 82, ../sass/page2-4.scss */
+.serviceBlock__h3 {
+  font-size: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+/* line 88, ../sass/page2-4.scss */
+.serviceBlock__h3--lightdust {
+  border: none;
+  background-color: #dbb680;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+.serviceBlock__h3--lightdust:hover, .serviceBlock__h3--lightdust:active {
+  background-color: #d5ab6c;
+}
+
+/* line 91, ../sass/page2-4.scss */
+.serviceBlock__h3--darkpink {
+  border: none;
+  background-color: #e38989;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+.serviceBlock__h3--darkpink:hover, .serviceBlock__h3--darkpink:active {
+  background-color: #de7474;
+}
+
+/* line 94, ../sass/page2-4.scss */
+.serviceBlock__h3--greenyellow {
+  border: none;
+  background-color: #c2ec91;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+.serviceBlock__h3--greenyellow:hover, .serviceBlock__h3--greenyellow:active {
+  background-color: #b6e87b;
+}
+
+/* line 97, ../sass/page2-4.scss */
+.serviceBlock__whiteBlock {
+  background-color: #fff;
+  border: 1px solid #bbbbbb;
+  text-align: center;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  overflow-x: hidden;
+}
+/* line 105, ../sass/page2-4.scss */
+.serviceBlock__whiteBlock header {
+  text-align: left;
+  color: #939393;
+}
+/* line 109, ../sass/page2-4.scss */
+.serviceBlock__whiteBlock input[type='file'] {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 116, ../sass/page2-4.scss */
+.serviceBlock__countTimeBar {
+  margin-bottom: 10px;
+}
+
+/* line 119, ../sass/page2-4.scss */
+.serviceBlock__countTimeBtn {
+  background-color: #42b2a8;
+  border: 1px solid #bbbbbb;
+}
+
+/* line 124, ../sass/page2-4.scss */
+.serviceBlock__saveBtn {
+  margin-top: 10px;
+}
+
+/* line 127, ../sass/page2-4.scss */
+#aLogin {
+  font-size: 50px;
+  line-height: 1.2;
+  color: #101010;
+}
+/* line 131, ../sass/page2-4.scss */
+#aLogin:hover, #aLogin:active {
+  color: #5677fc;
+}

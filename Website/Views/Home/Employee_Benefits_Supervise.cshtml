@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>員工福利 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />-->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-4.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/libs/datepicker/css/bootstrap-datepicker3.min.css">
+	<script src="/libs/datepicker/js/bootstrap-datepicker.min.js"></script>
+	<script src="/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			// $('.datepicker').datepicker({
+			//     format: "yyyy-mm-dd",
+			//     language: "zh-TW",
+			//     todayHighlight: true
+			// });
+
+			$(document).on("click", ".Wdate", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+		});
+
+		function doSubmit() {
+			var catalog_num = $('input[name="catalog[]"]:checkbox:checked').map(function () {
+				return $(this).val();
+			}).get().join(',');
+
+			if ($('#year').val() == '') {
+				alert('請輸入年度!');
+				$('#year').focus();
+				return false;
+			}
+			else if ($('#season').val() == '') {
+				alert('請選擇季度!');
+				$('#season').select();
+				return false;
+			}
+			else if (catalog_num == '') {
+				alert('請選擇福利類別!');
+				$('#catalog1').focus();
+				return false;
+			}
+			else if ($('#occur_date').val() == '') {
+				alert('請選擇日期!');
+				$('#occur_date').select();
+				return false;
+			}
+			else if ($('#place').val() == '') {
+				alert('請選擇地點!');
+				$('#place').select();
+				return false;
+			}
+			else if ($('#uploadfile01').val() == '') {
+				alert('請選擇檔案!');
+				$('#uploadfile01').select();
+				return false;
+			}
+			else if ($('#uploadfile02').val() == '') {
+				alert('請選擇檔案!');
+				$('#uploadfile02').select();
+				return false;
+			}
+			else if ($('#uploadfile03').val() == '') {
+				alert('請選擇檔案!');
+				$('#uploadfile03').select();
+				return false;
+			}
+			else if ($('#uploadfile04').val() == '') {
+				alert('請選擇檔案!');
+				$('#uploadfile04').select();
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+				$('#form1').submit();
+			}
+		}
+	</script>
+	<style>
+		body, html {
+			overflow-x: hidden;
+		}
+
+		select {
+			width: auto;
+		}
+
+		.h1 {
+			display: inline-block;
+			width: 200px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			color: #fff;
+			background-color: #5677fc;
+		}
+
+		.fa-american-sign-language-interpreting {
+			font-size: 60pt;
+			margin-bottom: 20px;
+		}
+
+		.rich-text {
+			font-size: 20px;
+		}
+
+		.mainTable__container {
+			overflow-x: auto;
+			text-align: center;
+		}
+
+		.mainTable {
+			border-collapse: collapse;
+			width: 100%;
+			margin-top: 10px;
+		}
+
+			.mainTable td,
+			.mainTable th {
+				padding: 0.5rem 1rem;
+				border: 1px solid #1010101a;
+				text-align: center;
+			}
+
+			.mainTable th {
+				width: 1%;
+				white-space: nowrap;
+			}
+
+			.mainTable td {
+				text-align: left;
+			}
+
+				.mainTable td .mainTable__noBorder {
+					border: none;
+				}
+
+		.mainTable__fileBlock {
+			padding-top: 100px;
+			padding-bottom: 100px;
+			background-color: #fff;
+			border: 1px solid #bbbbbb;
+			text-align: center;
+		}
+
+		.mainTable__input {
+			width: 30%;
+			box-sizing: border-box;
+		}
+
+		.align-center {
+			text-align: center;
+		}
+
+		.tdCamera {
+			background-image: url(../images/uplod_picture.png);
+			/*background-image: url(../images/camera-solid.svg);*/
+			background-repeat: no-repeat;
+			background-position: center;
+			/*background-position: center top;*/
+			/*background-size: auto;*/
+		}
+
+			.tdCamera input {
+				position: relative;
+				top: 80px;
+			}
+
+		.title {
+			display: inline-block;
+			font-size: 1.7rem;
+			border: 1px solid #bbbbbb;
+			background-color: #fff;
+			width: 300px;
+			height: 80px;
+			text-align: center;
+			line-height: 80px;
+		}
+
+		.div1 {
+			display: inline-block;
+			width: 30%;
+		}
+
+		.place {
+			width: 100%;
+		}
+
+		.datepicker {
+			width: 200px;
+		}
+
+		.container-fluid {
+			margin: 5px 0px;
+		}
+	</style>
+</head>
+
+
+
+
+
+
+
+
+<body style="">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<i class="fas fa-american-sign-language-interpreting"></i>
+			<h1 class="h1">員工福利</h1>
+		</div>
+		<div class="header__textCell">
+			<div class="rich-text">
+				<div class="text" style="padding: 0px;"><p>福利是員工的間接報酬。一般包括健康保險、津貼、分紅、獎金或退休金等形式。這些獎勵作為長照單位成員福利的一部分，獎給職工個人或者員工部門。 </p><p><span style="background-color: transparent;">福利必須被視為全部報酬的一部分，從管理層的角度看，福利可對以下戰略目標作出貢獻：協助吸引員工；協助保持員工；提高長照單位在員工和其他長照單位心目中的形象；提高員工對職務的滿意度。</span></p><p><span style="background-color: transparent;">（1）吸引優秀員工--優秀員工是組織發展的頂梁柱。以前組織主要靠高工資來吸引優秀   </span></p><p><span style="background-color: transparent;">          員工，現在良好的福利有時比高工資更能吸引優秀員工。 </span></p><p><span style="background-color: transparent;">（2）提高員工士氣--良好的福利使員工無後顧之憂，使員工有與組織共榮辱之感，士氣</span><span style="background-color: transparent;">          </span></p><p><span style="background-color: transparent;">          必然會高漲。 </span></p><p><span style="background-color: transparent;">（3）降低員工辭職率--員工過高的辭職率必然會使組織的工作受到一定損失，而良好的</span></p><p><span style="background-color: transparent;">          福利會使很多可能流動的員工打消辭職的念頭。 </span></p><p><span style="background-color: transparent;">（4）激勵員工--良好的福利會使員工產生由衷的工作滿意感，進而激發員工自覺為組織</span></p><p><span style="background-color: transparent;">          目標而奮鬥的動力。 </span></p><p><span style="background-color: transparent;">（5）凝聚員工--組織的凝聚力由許多的因素組成，但良好的福利無疑是一個重要因素，</span></p><p><span style="background-color: transparent;">           因為良好的福利體現了組織的高層管理者以人為本的經營思想。 </span></p><p><br></p><p><span style="background-color: transparent;"> </span></p><p><br></p></div><div class="region gesture " style="display: none;"></div>
+			</div>
+
+			<div class="mainTable__container">
+
+				<div class="title">員工福利紀錄</div>
+				<form id="form1" name="form1" method="post" action="/user/employee_benefits_save" target="actFrame" enctype="multipart/form-data">
+					<input type="hidden" id="user_id" name="user_id" value="22">
+					<table class="mainTable">
+						<tbody>
+							<tr>
+								<th>名稱</th>
+								<td colspan="3">
+									<select id="year" name="year" class="form-control col-md-2 d-inline-block">
+										<option value="">---選擇年---</option>
+										<option value="109">109</option>
+										<option value="108">108</option>
+										<option value="107">107</option>
+									</select> 年度
+									<span style="margin-left:50px;">
+										第 <select id="season" name="season" class="form-control col-md-2 d-inline-block">
+											<option value="">---選擇季度---</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+										</select> 季
+									</span><br>
+									<div class="div1"><input type="checkbox" id="catalog1" name="catalog[]" value="1"> 分紅獎勵</div>
+									<div class="div1"><input type="checkbox" id="catalog2" name="catalog[]" value="2"> 年度晉級獎勵</div>
+									<div class="div1"><input type="checkbox" id="catalog3" name="catalog[]" value="3"> 工作優秀獎勵</div><br>
+									<div class="div1"><input type="checkbox" id="catalog4" name="catalog[]" value="4"> 員工家庭聚餐</div>
+									<div class="div1"><input type="checkbox" id="catalog5" name="catalog[]" value="5"> 員工自強活動</div>
+									<div class="div1"><input type="checkbox" id="catalog6" name="catalog[]" value="6"> 久任禮</div>
+
+									<div class="div1"><input type="checkbox" id="catalog4" name="catalog[]" value="4"> 生日禮</div>
+									<div class="div1"><input type="checkbox" id="catalog5" name="catalog[]" value="5"> 身體健檢</div>
+									<div class="div1"><input type="checkbox" id="catalog6" name="catalog[]" value="6"> 獎勵就修</div>
+								</td>
+							</tr>
+							<tr>
+								<th>日期</th>
+								<td width="40%">
+									<input type="text" class="Wdate form-control col-md-6" id="occur_date" name="occur_date">
+								</td>
+								<th>地點</th>
+								<td>
+									<input type="text" class="place form-control col-md-12" id="place" name="place">
+								</td>
+							</tr>
+							<tr>
+								<th>照片紀錄</th>
+								<td colspan="3">
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-12 col-md-6">
+												<div class="mainTable__fileBlock tdCamera">
+													<input type="file" id="uploadfile01" name="uploadfile01">
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="mainTable__fileBlock tdCamera">
+													<input type="file" id="uploadfile02" name="uploadfile02">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-12 col-md-6">
+												<div class="mainTable__fileBlock tdCamera">
+													<input type="file" id="uploadfile03" name="uploadfile03">
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="mainTable__fileBlock tdCamera">
+													<input type="file" id="uploadfile04" name="uploadfile04">
+												</div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+				<br>
+				<div class="align-center">
+					<button type="button" class="btn btn-info" onclick="doSubmit();">存檔</button>
+				</div>
+			</div>
+
+		</div>
+	</header>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 188px; height: 202px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

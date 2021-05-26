@@ -1,0 +1,280 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>申訴處理表 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<link rel="stylesheet" href="~/css/page2-3-3.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+		});
+
+		function doSubmit() {
+			var appellant_identity = $("input[name='appellant_identity']:checked").val();
+			var category = $('input[type="radio"][name="category"]:checked').val()
+
+			if ($('#appellant_name').val() == '') {
+				alert('請輸入申訴者姓名！');
+				$('#appellant_name').focus();
+				return false;
+			}
+			else if (typeof (appellant_identity) == 'undefined') {
+				alert('請輸入申訴者身份！');
+				$('#appellant_identity1').focus();
+				return false;
+			}
+			else if ($('#phone').val() == '') {
+				alert('請輸入申訴人聯絡電話！');
+				$('#phone').focus();
+				return false;
+			}
+			else if (typeof (category) == 'undefined') {
+				alert('請輸入申訴類別！');
+				$('#category1').focus();
+				return false;
+			}
+			else if ($('#reason').val() == '') {
+				alert('請輸入事件原由！');
+				$('#reason').focus();
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#form1').submit();
+			}
+		}
+	</script>
+	<style>
+		.h1 {
+			display: inline-block;
+			width: 200px;
+			height: 70px;
+			line-height: 70px;
+			border: none;
+			background-color: #c08b3c;
+			margin-top: 20px;
+		}
+
+		.tableContainer table tbody td {
+			font-size: 1rem;
+		}
+
+		.next1, .next2, .next3, .next4 {
+			cursor: pointer;
+		}
+
+		.tableContainer table {
+			/*border-left: 1px solid #000;*/
+			background-color: initial;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+			font-size: 2rem;
+		}
+
+		.queryBlock input {
+			height: inherit;
+			width: 120px;
+		}
+
+		.tableContainer table td {
+			height: 4.5rem;
+		}
+
+		.tableContainer {
+			width: 90%;
+			border-left: 0px solid #ffffff;
+			border-right: none;
+		}
+
+		.fa-balance-scale {
+			font-size: 60pt;
+		}
+
+		.header__iconCell {
+			text-align: center;
+			width: 200px;
+		}
+
+		.btnBgColorWithShadow--blue.btn-query {
+			padding: 10px 20px;
+		}
+
+		.header__textCell {
+			margin-right: 5%;
+		}
+
+		.wrapper {
+			width: 95%;
+		}
+
+		.tableContainer table th, .tableContainer table td {
+			border-style: none;
+			height: 3rem;
+		}
+
+		.main {
+			margin-top: 0px;
+		}
+
+		input[type=radio] {
+			width: 30px;
+			height: 30px;
+			position: relative;
+			top: 5px;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<i class="fas fa-balance-scale"></i>
+			<h1 class="h1">申訴處理表</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div class="rich-text">
+				<p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">申訴目的</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">為增進團結和諧、保障員工權益，協助員工解決工作上有關個人權益或不公平待遇等事項。</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">一般申訴範圍</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">員工於在職期間發生下列情事，並能證明者，得提出申訴：</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">一、因現行之制度、規章、辦法或行政措施未盡事宜或執行疏失，致損</span><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">害其合法權益者。</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">二、對獎懲之決定有異議，且有具體證明者。</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">三、因其他員工之違法、濫權或不當對待行為，致侵犯權益或影響</span><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">正常工作者。</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">四、對職務升遷、或工作調派認為處置不當，而影響其權益者。</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;">五、其他與公務有關，有提申訴之必要且能證明者。</span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:28px; text-decoration:none;"><br></span></p>
+			</div>
+		</div>
+	</header>
+
+	<main class="main">
+		<div class="wrapper">
+			<div class="tableContainer">
+				<form id="form1" name="form1" method="post" action="/employee_appeal/save" target="actFrame" enctype="multipart/form-data">
+					<table>
+						<thead>
+							<tr>
+								<th style="width: 20%;text-align: right;">申訴者姓名：</th>
+								<td style="text-align: left;">
+									<input type="text" class="form-control col-md-6" id="appellant_name" name="appellant_name">
+								</td>
+							</tr>
+							<tr>
+								<th style="text-align: right;">申訴者身份：</th>
+								<td style="text-align: left;">
+									<input type="radio" name="appellant_identity" id="appellant_identity1" value="1">個案本人
+									<input type="radio" name="appellant_identity" id="appellant_identity2" value="2">個案家屬
+									<input type="radio" name="appellant_identity" id="appellant_identity3" value="3">員工
+								</td>
+							</tr>
+							<tr>
+								<th style="text-align: right;">申訴者聯絡電話：</th>
+								<td style="text-align: left;">
+									<input type="text" class="form-control col-md-6" id="phone" name="phone">
+								</td>
+							</tr>
+							<tr>
+								<th style="text-align: right;">申訴者日期：</th>
+								<td style="text-align: left;">2020.12.30 10:35</td>
+							</tr>
+							<tr>
+								<th style="text-align: right;">申訴類別：</th>
+								<td style="text-align: left;">
+									<label class="nowrap" for="category1">
+										<input type="radio" name="category" id="category1" value="1">受傷
+									</label>
+									<label class="nowrap" for="category2">
+										<input type="radio" name="category" id="category2" value="2">不當處置
+									</label>
+									<label class="nowrap" for="category3">
+										<input type="radio" name="category" id="category3" value="3">權益損
+									</label>
+									<label class="nowrap" for="category4">
+										<input type="radio" name="category" id="category4" value="4">忽略
+									</label>
+									<label class="nowrap" for="category5">
+										<input type="radio" name="category" id="category5" value="5">被欺
+									</label>
+									<label class="nowrap" for="category6">
+										<input type="radio" name="category" id="category6" value="6">性騷擾
+									</label>
+									<label class="nowrap" for="category7">
+										<input type="radio" name="category" id="category7" value="7">職霸凌
+									</label>
+									<label class="nowrap" for="category8">
+										<input type="radio" name="category" id="category8" value="8">誤判
+									</label>
+								</td>
+							</tr>
+							<tr>
+								<th style="text-align: right;">事件原由：</th>
+								<td style="text-align: left;">
+									<textarea name="reason" id="reason" rows="5" class="form-control"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<button class="btn btn-blue btn-square" onclick="return doSubmit();">送出</button>
+								</td>
+
+							</tr>
+						</thead>
+					</table>
+				</form>
+			</div>
+		</div>
+	</main>
+
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

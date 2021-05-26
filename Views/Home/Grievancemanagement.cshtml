@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>申訴管理 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<link rel="stylesheet" href="~/css/page2-3-3.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<!--Get your own code at fontawesome.com-->
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('.next1').click(function () {
+				var id = $(this).attr('info');
+				location.href = "/appeal_mgt/step1/" + id;
+			});
+
+			$('.next2').click(function () {
+				var id = $(this).attr('info');
+				location.href = "/appeal_mgt/step2/" + id;
+			});
+
+			$('.next3').click(function () {
+				var id = $(this).attr('info');
+				location.href = "/appeal_mgt/step3/" + id;
+			});
+
+			$('.next4').click(function () {
+				var id = $(this).attr('info');
+				location.href = "/appeal_mgt/step4/" + id;
+			});
+
+		});
+
+		function toDel(num) {
+			if (confirm('確定要刪除？')) {
+				$('#wait').show();
+				$('#wait_content').show();
+
+				$.ajax({
+					url: "/appeal_mgt/delitem",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						id: num
+					},
+					success: function (data, status, xhr) {
+						// console.log(data,status,xhr);
+						// console.log(data);
+						alert('刪除完成！');
+						location.reload();
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						// console.log(xhr, ajaxOptions, thrownError);
+						alert('確認error');
+					}
+				});
+			}
+			else {
+				return false;
+			}
+		}
+	</script>
+	<style>
+		.h1 {
+			display: inline-block;
+			width: 174px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			background-color: initial;
+		}
+
+		.tableContainer table tbody td {
+			font-size: 1rem;
+		}
+
+		.next1, .next2, .next3, .next4 {
+			cursor: pointer;
+		}
+
+		.tableContainer table {
+			border-left: 1px solid #000;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+			font-size: 2rem;
+		}
+
+		.queryBlock input {
+			height: inherit;
+			width: 120px;
+		}
+
+		.tableContainer table td {
+			height: 4.5rem;
+		}
+
+		.tableContainer {
+			border-left: 0px solid #ffffff;
+		}
+
+		.fa-balance-scale {
+			font-size: 60pt;
+		}
+
+		.header__iconCell {
+			text-align: center;
+		}
+
+		.btnBgColorWithShadow--blue.btn-query {
+			padding: 10px 20px;
+			cursor: pointer;
+		}
+
+		.wrapper {
+			width: 95%;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<i class="fas fa-balance-scale"></i>
+			<h1 class="h1">申訴管理</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div class="text" style="padding: 0px;">
+				<p>大多數的工作者聽到客訴就害怕，因為顧客強勢的態度總是讓他們陷入恐慌。但其實，客人願意抱怨，表示他強烈的在乎、關心中心服務，所以中心應該把客訴視為美意，幫助你察覺自家單位服務的優缺點，只要拿出正確的態度處理，使客人滿意，就有機會能為自家品牌或產品增加忠誠者。</p><p>1. 感同身受的傾聽而不是急著辯解</p><p>客人在抱怨時，他的心情一定是負面的。為了要建立與顧客之間的情感，先認真地把顧客的話聽完，無論客人是否有誤解，都不要插嘴，否則會讓對方感覺你在找藉口，適得其反。在確實理解客人的心聲之後才能開口，但不是急著為自己的任何行為作解釋，而是適時針對顧客的心情道歉。具體說出因為哪件事情讓顧客受到影響，當顧客的心情獲得理解時，原本的憤怒就在當下轉為平靜。</p><p>2. 使用提問確認客人需求</p><p>平撫了顧客的情緒之後，再來是深入了解他的需求。建議應視情況採用兩種不同提問法，了解顧客到底在氣什麼。</p><p>開放式提問</p><p>   客人：昨天才買的產品，怎麼一下子就壞了？</p><p>   客服：非常不好意思，可以詳細告訴我是什麼狀況嗎？</p><p>封閉式提問</p><p>   客人：我剛買的產品，結果開關處沒有反應！</p><p>   客服：按了開關沒有反應，是這樣沒錯嗎？</p><p>3. 提出解決辦法</p><p>比起直接告訴顧客該怎麼做、可以怎麼做，不如給他多個選項選擇。給予顧客自由的選擇空間，能夠增加顧客的認同。當覺得自己的能力無法提出解決辦法時，不妨先請客人等會兒，晚點再回覆電話，然後請較有經驗的前輩幫忙解決或是商量如何應對。回覆的時間以不超過15分鐘為主，超過這個時間容易使客人產生不信任感。因此，最好在15分鐘內回報處理的進度，以勤快處理的姿態贏得顧客好感。</p><p>4. 向顧客傳達感謝</p><p>顧客會投訴其實是希望他們面臨的處境能夠被瞭解，也想告訴店家如何改善，下次才能有機會獲得更好的服務。顧客每一個寶貴意見，都能使店家的服務變得更好，所以必須感謝他們的批評指教。道歉不如感謝，儘管道歉是必要的但有時會說得像賠罪，會讓客人會有罪惡感。給予客人最真誠的感謝，也能使客人有好的印象。</p>
+			</div>
+		</div>
+
+		<form id="form1" method="post">
+			<div class="queryBlock">
+				<p style="font-size: 24pt;">申訴彙整表</p>
+				<p>
+					已存檔者--查詢年度 <input type="text" name="s_year" value="109" style="text-align:right"> 年
+					<button class="btnBgColorWithShadow--blue btn-query" onclick="$('#form1').submit();"><i class="fas fa-search"></i>查詢</button>
+				</p>
+			</div>
+		</form>
+	</header>
+
+	<main class="main">
+		<form action="">
+			<div class="wrapper">
+				<div class="tableContainer">
+					<table>
+						<thead>
+							<tr>
+								<th>申訴日期</th>
+								<th>人員姓名</th>
+								<th>申訴事由</th>
+								<th>調查<br>處置<br>(主任)</th>
+								<th>後續<br>追蹤<br>(主任)</th>
+								<th>檢討<br>(主任)</th>
+								<th>回覆<br>(主任)</th>
+								<th>回覆時間</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr><td colspan="8">無資料</td></tr>
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</form>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

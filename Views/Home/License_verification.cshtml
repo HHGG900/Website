@@ -1,0 +1,334 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>照顧核銷 | 台灣柏佐克智慧型日間照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-5-3.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+
+
+		});
+
+		function doSubmit01() {
+
+			if ($('#amount1').val() == '') {
+				alert('請輸入金額');
+				$('#amount1').focus();
+				return false;
+			}
+			else if ($('#uploadfile01').val() == '') {
+				alert('請選擇「照顧清冊」檔案');
+				$('#uploadfile01').focus();
+				return false;
+			}
+			else if ($('#uploadfile02').val() == '') {
+				alert('請選擇「照顧總表」檔案');
+				$('#uploadfile02').focus();
+				return false;
+			}
+			else if ($('#uploadfile03').val() == '') {
+				alert('請選擇「經費領據」檔案');
+				$('#uploadfile03').focus();
+				return false;
+			}
+			else {
+				$('#wait').show();
+				$('#wait_content').show();
+
+				$('#writeoff1').submit();
+			}
+		}
+
+		function doSubmit02() {
+			var _f = $('#writeoff2');
+
+			if (_f.find('#amount1').val() == '') {
+				alert('請輸入金額');
+				_f.find('#amount1').focus();
+				return false;
+			}
+			else if (_f.find('#uploadfile01').val() == '') {
+				alert('請選擇「照顧清冊」檔案');
+				_f.find('#uploadfile01').focus();
+				return false;
+			}
+			else if (_f.find('#uploadfile02').val() == '') {
+				alert('請選擇「照顧總表」檔案');
+				_f.find('#uploadfile02').focus();
+				return false;
+			}
+			else if (_f.find('#uploadfile03').val() == '') {
+				alert('請選擇「經費領據」檔案');
+				_f.find('#uploadfile03').focus();
+				return false;
+			}
+			else {
+				$('#wait').show();
+				$('#wait_content').show();
+
+				$('#writeoff2').submit();
+			}
+		}
+
+		function doSearch() {
+			$('#wait').show();
+			$('#wait_content').show();
+
+			setTimeout(function () {
+				// $('#wait').hide();
+				// $('#wait_content').hide();
+				$('#form3').submit();
+			}, 1000)
+
+		}
+	</script>
+	<style>
+		.container {
+			margin-left: 7%;
+		}
+	</style>
+</head>
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1> 照顧核銷</h1>
+	</header>
+	<main class="main wrapper">
+		<form id="writeoff1" name="writeoff1" method="post" action="/monthly/writeoffsave" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="category" name="category" value="1">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 mainCol__query">
+						核銷期間
+						<select id="year1" name="year1" class="form-control col-md-1 d-inline-block">
+							<option selected="">109</option>
+							<option>108</option>
+						</select>
+						<!-- <input type="text" class="form-control col-md-1 d-inline-block" id="year1" name="year1"/> --> 年
+						<select class="form-control col-md-1 d-inline-block" name="month1" id="month1">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+						月
+						<span style="color:red;">＊</span><input type="text" class="form-control col-md-2 d-inline-block" name="amount1" id="amount1" placeholder="請輸入金額...">
+						元
+					</div>
+					<div class="col-12 col-lg-3">
+						<div class="serviceBlock__whiteBlock">
+							<header><span style="color:red;">＊</span>照顧清冊</header>
+							<input type="file" name="uploadfile01" id="uploadfile01">
+						</div>
+					</div>
+					<div class="col-12 col-lg-3">
+						<div class="serviceBlock__whiteBlock">
+							<header><span style="color:red;">＊</span>照顧總表</header>
+							<input type="file" name="uploadfile02" id="uploadfile02">
+						</div>
+					</div>
+					<div class="col-12 col-lg-3">
+						<div class="serviceBlock__whiteBlock">
+							<header><span style="color:red;">＊</span>經費領據</header>
+							<input type="file" name="uploadfile03" id="uploadfile03">
+						</div>
+					</div>
+					<div class="col-12 col-lg-3"><button class="btn btn-w btn-orange" onclick="return doSubmit01();">存檔</button></div>
+				</div>
+			</div>
+		</form>
+
+		<form id="writeoff2" name="writeoff2" method="post" action="/monthly/writeoffsave" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="category" name="category" value="2">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 mainCol__query">
+						出院銜接核銷  期間
+						<select id="year1" name="year1" class="form-control col-md-1 d-inline-block">
+							<option selected="">109</option>
+							<option>108</option>
+						</select>  年
+						<select class="form-control col-md-1 d-inline-block" name="month1" id="month1">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+						月
+						<span style="color:red;">＊</span><input type="text" class="form-control col-md-2 d-inline-block" name="amount1" id="amount1" placeholder="請輸入金額...">
+						元
+					</div>
+					<div class="col-12 col-lg-3">
+						<div class="serviceBlock__whiteBlock">
+							<header><span style="color:red;">＊</span>照顧清冊</header>
+							<input type="file" name="uploadfile01" id="uploadfile01">
+						</div>
+					</div>
+					<div class="col-12 col-lg-3">
+						<div class="serviceBlock__whiteBlock">
+							<header><span style="color:red;">＊</span>照顧總表</header>
+							<input type="file" name="uploadfile02" id="uploadfile02">
+						</div>
+					</div>
+					<div class="col-12 col-lg-3">
+						<div class="serviceBlock__whiteBlock">
+							<header><span style="color:red;">＊</span>經費領據</header>
+							<input type="file" name="uploadfile03" id="uploadfile03">
+						</div>
+					</div>
+					<div class="col-12 col-lg-3"><button class="btn btn-w btn-orange" onclick="return doSubmit02();">存檔</button></div>
+				</div>
+			</div>
+		</form>
+
+		<form id="form3" name="form3" method="post">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 mainCol__query">
+						查詢時間 <select id="year" name="year" class="form-control col-md-1 d-inline-block">
+							<option selected="">109</option>
+							<option>108</option>
+						</select>  年
+						<select class="form-control col-md-1 d-inline-block" name="month" id="month">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="11">11</option>
+							<option value="12">12</option>
+						</select>
+						月
+						<button class="btn btn-blue" onclick="return doSearch();"><i class="fa fa-search"></i>查詢</button>
+					</div>
+
+					<div class="col-12 col-lg-3">&nbsp;</div>
+				</div>
+
+
+			</div>
+		</form>
+
+		<div class="auditFlow">
+			<h2 class="auditFlow__header">核銷流程</h2>
+			<table class="auditFlow__table">
+				<tbody>
+					<tr>
+						<th>
+							<div class="auditFlow__num">
+								第一步
+							</div>
+						</th>
+						<td>登打服務紀錄（當月服務紀錄，次月初登打）</td>
+					</tr>
+					<tr>
+						<th>
+							<div class="auditFlow__num">
+								第二步
+							</div>
+						</th>
+						<td>
+							待長照系統審核，確認檢驗通過
+							<p class="auditFlow__note">
+								※
+								若登打超過照專照會天數系統才會跳出警示，若服務二十天，登打十五天，系統無法判斷，因此需人工再次確認。
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<th>
+							<div class="auditFlow__num">
+								第三步
+							</div>
+						</th>
+						<td>
+							（系統上）列印總表、（自有，如下圖）提領據（一式兩份），蓋章後寄到衛生局。
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<figure class="auditFlow__figure"><img src="/images/img_form1.jpg" alt=""></figure>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 3, ../sass/page3-1-2-2.scss */
+#homepageBtn,
+#lastPage {
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* line 11, ../sass/page3-1-2-2.scss */
+.main {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+}
+
+/* line 15, ../sass/page3-1-2-2.scss */
+.row + .row {
+  margin-top: 1.5rem;
+}
+
+/* line 18, ../sass/page3-1-2-2.scss */
+.mainForm__textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* line 22, ../sass/page3-1-2-2.scss */
+.mainForm__itemCol {
+  text-align: left;
+}
+
+/* line 25, ../sass/page3-1-2-2.scss */
+.mainForm__inputGroup {
+  margin-right: 50px;
+  white-space: nowrap;
+}
+
+/* line 29, ../sass/page3-1-2-2.scss */
+.mainForm__ps {
+  font-size: 0.8rem;
+}
+
+/* line 32, ../sass/page3-1-2-2.scss */
+.mainForm__specialColHeader {
+  margin-bottom: 5px;
+}
+/* line 34, ../sass/page3-1-2-2.scss */
+.mainForm__specialColHeader:after {
+  content: '';
+  display: block;
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+/* line 42, ../sass/page3-1-2-2.scss */
+.mainForm__specialColHeaderP {
+  float: left;
+}
+@media (max-width: 767.98px) {
+  /* line 42, ../sass/page3-1-2-2.scss */
+  .mainForm__specialColHeaderP {
+    float: none;
+  }
+}
+
+/* line 49, ../sass/page3-1-2-2.scss */
+.mainForm__searchBar {
+  white-space: nowrap;
+  float: right;
+}
+@media (max-width: 767.98px) {
+  /* line 49, ../sass/page3-1-2-2.scss */
+  .mainForm__searchBar {
+    float: none;
+  }
+}

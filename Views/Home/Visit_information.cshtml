@@ -1,0 +1,492 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>主動關懷訪視 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page3-1.css">
+
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link rel="stylesheet" href="~/css/plugins/iCheck/all.css">
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script> -->
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$(document).on("click", ".Wdate", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}",
+					maxDate: "2019" + "-12-31",
+					minDate: "2019" + "-01-01"
+				});
+			});
+		});
+
+		function toEdit(num) {
+			var label = '#date' + num;
+			var label2 = '#string' + num;
+			var label3 = '#recordInput' + num;
+			var label4 = '#recordString' + num;
+			var btnOrange = '#btn-orange' + num;
+			var btnGreen = '#btn-green' + num;
+
+			$(btnOrange).removeClass('button-hidden');
+			$(btnGreen).addClass('button-hidden');
+
+			$(label).attr('type', 'text');
+			$(label2).hide();
+
+			$(label3).attr('type', 'text');
+			$(label4).hide();
+		}
+
+		function toSave(num) {
+			var pk = '#id' + num;
+			var label = '#date' + num;
+			var label2 = '#string' + num;
+			var label3 = '#recordInput' + num;
+			var label4 = '#recordString' + num;
+
+			if ($(label).val() == '') {
+				alert('請輸入日期!');
+				$(label).focus();
+				return false;
+			}
+			else if ($(label3).val() == '') {
+				alert('請輸入訪談紀錄!');
+				$(label3).focus();
+				return false;
+			}
+			else {
+				$.ajax({
+					url: "/monthly/active_care_save",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						id: $(pk).val(),
+						client_id: '5',
+						year: $('#year').val(),
+						month: num,
+						date_to_care: $(label).val(),
+						content: $(label3).val(),
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						alert('存檔完成');
+						location.reload();
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('存檔失敗，請聯絡系統管理者！');
+					}
+				});
+			}
+			// $('.btn-green').removeClass('button-hidden');
+			// $('.btn-orange').addClass('button-hidden');
+			//
+			// $(label).attr('type','hidden');
+			// $(label2).show();
+			//
+			// $(label3).attr('type','hidden');
+			// $(label4).show();
+		}
+	</script>
+	<style>
+		body, html {
+			overflow-x: hidden;
+		}
+
+		select {
+			width: auto;
+		}
+
+		.h1 {
+			display: inline-block;
+			width: auto;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			color: #fff;
+			background-color: #5677fc;
+			padding: 0px 20px;
+			box-shadow: 3px 3px #646b86;
+		}
+
+		.fa-coffee {
+			font-size: 60pt;
+		}
+
+		.rich-text {
+			font-size: 20px;
+		}
+
+		.mainTable__container {
+			overflow-x: auto;
+			text-align: center;
+		}
+
+		.mainTable {
+			border-collapse: collapse;
+			width: 100%;
+			margin-top: 10px;
+		}
+
+			.mainTable td,
+			.mainTable th {
+				padding: 0.5rem 1rem;
+				border: 1px solid #101010;
+				text-align: center;
+			}
+
+			.mainTable th {
+				width: 1%;
+				white-space: nowrap;
+			}
+
+			.mainTable td {
+				text-align: left;
+			}
+
+				.mainTable td .mainTable__noBorder {
+					border: none;
+				}
+
+		.mainTable__fileBlock {
+			padding-top: 100px;
+			padding-bottom: 100px;
+			background-color: #fff;
+			border: 1px solid #bbbbbb;
+			text-align: center;
+		}
+
+		.mainTable__input {
+			width: 30%;
+			box-sizing: border-box;
+		}
+
+		.align-center {
+			text-align: center;
+		}
+
+		.tdCamera {
+			/*vertical-align: bottom;*/
+			/*text-align: center;*/
+			background-image: url(../images/camera-solid.svg);
+			background-repeat: no-repeat;
+			background-position: center top;
+			background-size: auto;
+		}
+
+			.tdCamera input {
+				position: relative;
+				top: 80px;
+			}
+
+		th.dateColumn {
+			width: 10%;
+		}
+
+		th.recordColumn {
+			width: 40%;
+		}
+
+		#noBoard {
+			border-top-width: 0px;
+			border-bottom-width: 0px;
+			border-right-width: 0px;
+			width: 5%;
+		}
+
+		.btn-green {
+			background-color: #42b2a8;
+			color: #ffffff;
+		}
+
+		.button-hidden {
+			display: none;
+		}
+
+		.dateCss {
+			width: 100%;
+		}
+
+		.recordCss {
+			width: 100%;
+		}
+
+		.dateColumn {
+			text-align: center;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<header class="header wrapper">
+		<div class="header__textCell">
+			<div class="mainTable__container">
+				<h1 class="h1">主動關懷訪視</h1>
+				<input type="hidden" id="year" name="year" value="2019">
+				<div style="font-size: 1.5rem;text-align: left;">個案姓名： 余001</div>
+				<div style="font-size: 1.5rem;text-align: left;">年度：108年</div>
+				<table class="mainTable">
+					<tbody>
+						<tr>
+							<th class="dateColumn">項目</th>
+							<th class="dateColumn">日期</th>
+							<th class="recordColumn">訪談紀錄</th>
+							<th id="noBoard"></th>
+						</tr>
+						<tr>
+							<th class="dateColumn">1月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id01" name="id01" value="-1">
+								<span id="string01" class="dateString"></span>
+								<input class="dateCss Wdate" type="hidden" id="date01" name="date01" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString01"></span>
+								<input class="recordCss" type="hidden" id="recordInput01" name="recordInput01" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green01" class="btn btn-green" onclick="toEdit('01');">編輯</button>
+								<button type="button" id="btn-orange01" class="btn btn-orange button-hidden" onclick="toSave('01');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>2月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id02" name="id02" value="-1">
+								<span id="string02"></span>
+								<input class="dateCss Wdate" type="hidden" id="date02" name="date02" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString02"></span>
+								<input class="recordCss" type="hidden" id="recordInput02" name="recordInput02" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green02" class="btn btn-green" onclick="toEdit('02');">編輯</button>
+								<button type="button" id="btn-orange02" class="btn btn-orange button-hidden" onclick="toSave('02');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>3月居家訪視</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id03" name="id03" value="-1">
+								<span id="string03"></span>
+								<input class="dateCss Wdate" type="hidden" id="date03" name="date03" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString03"></span>
+								<input class="recordCss" type="hidden" id="recordInput03" name="recordInput03" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green03" class="btn btn-green" onclick="toEdit('03');">編輯</button>
+								<button type="button" id="btn-orange03" class="btn btn-orange button-hidden" onclick="toSave('03');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>4月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id04" name="id04" value="-1">
+								<span id="string04"></span>
+								<input class="dateCss Wdate" type="hidden" id="date04" name="date04" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString04"></span>
+								<input class="recordCss" type="hidden" id="recordInput04" name="recordInput04" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green04" class="btn btn-green" onclick="toEdit('04');">編輯</button>
+								<button type="button" id="btn-orange04" class="btn btn-orange button-hidden" onclick="toSave('04');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>5月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id05" name="id05" value="-1">
+								<span id="string05"></span>
+								<input class="dateCss Wdate" type="hidden" id="date05" name="date05" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString05"></span>
+								<input class="recordCss" type="hidden" id="recordInput05" name="recordInput05" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green05" class="btn btn-green" onclick="toEdit('05');">編輯</button>
+								<button type="button" id="btn-orange05" class="btn btn-orange button-hidden" onclick="toSave('05');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>6月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id06" name="id06" value="-1">
+								<span id="string06"></span>
+								<input class="dateCss Wdate" type="hidden" id="date06" name="date06" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString06"></span>
+								<input class="recordCss" type="hidden" id="recordInput06" name="recordInput06" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green06" class="btn btn-green" onclick="toEdit('06');">編輯</button>
+								<button type="button" id="btn-orange06" class="btn btn-orange button-hidden" onclick="toSave('06');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>7月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id07" name="id07" value="-1">
+								<span id="string07"></span>
+								<input class="dateCss Wdate" type="hidden" id="date07" name="date07" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString07"></span>
+								<input class="recordCss" type="hidden" id="recordInput07" name="recordInput07" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green07" class="btn btn-green" onclick="toEdit('07');">編輯</button>
+								<button type="button" id="btn-orange07" class="btn btn-orange button-hidden" onclick="toSave('07');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>8月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id08" name="id08" value="-1">
+								<span id="string08"></span>
+								<input class="dateCss Wdate" type="hidden" id="date08" name="date08" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString08"></span>
+								<input class="recordCss" type="hidden" id="recordInput08" name="recordInput08" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green08" class="btn btn-green" onclick="toEdit('08');">編輯</button>
+								<button type="button" id="btn-orange08" class="btn btn-orange button-hidden" onclick="toSave('08');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>9月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id09" name="id09" value="-1">
+								<span id="string09"></span>
+								<input class="dateCss Wdate" type="hidden" id="date09" name="date09" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString09"></span>
+								<input class="recordCss" type="hidden" id="recordInput09" name="recordInput09" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green09" class="btn btn-green" onclick="toEdit('09');">編輯</button>
+								<button type="button" id="btn-orange09" class="btn btn-orange button-hidden" onclick="toSave('09');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>10月居家訪視</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id10" name="id10" value="-1">
+								<span id="string10"></span>
+								<input class="dateCss Wdate" type="hidden" id="date10" name="date10" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString10"></span>
+								<input class="recordCss" type="hidden" id="recordInput10" name="recordInput10" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green10" class="btn btn-green" onclick="toEdit('10');">編輯</button>
+								<button type="button" id="btn-orange10" class="btn btn-orange button-hidden" onclick="toSave('10');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>11月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id11" name="id11" value="-1">
+								<span id="string11"></span>
+								<input class="dateCss Wdate" type="hidden" id="date11" name="date11" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString11"></span>
+								<input class="recordCss" type="hidden" id="recordInput11" name="recordInput11" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green11" class="btn btn-green" onclick="toEdit('11');">編輯</button>
+								<button type="button" id="btn-orange11" class="btn btn-orange button-hidden" onclick="toSave('11');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<th>12月電訪</th>
+							<td class="dateColumn">
+								<input type="hidden" id="id12" name="id12" value="-1">
+								<span id="string12"></span>
+								<input class="dateCss Wdate" type="hidden" id="date12" name="date12" value="">
+							</td>
+							<td class="recordColumn">
+								<span id="recordString12"></span>
+								<input class="recordCss" type="hidden" id="recordInput12" name="recordInput12" value="">
+							</td>
+							<td id="noBoard">
+								<button type="button" id="btn-green12" class="btn btn-green" onclick="toEdit('12');">編輯</button>
+								<button type="button" id="btn-orange12" class="btn btn-orange button-hidden" onclick="toSave('12');">存檔</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+
+			<div class="row">
+				<div class="col-12 text-center">
+					<button class="btn btn-big btn-default" onclick="history.back(-1);">返回</button>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 187px; height: 200px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

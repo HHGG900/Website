@@ -1,0 +1,405 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>身體健檢 | 台灣長照大聯盟居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<link rel="stylesheet" href="~/css/page2-3-3.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$(document).on("click", ".Wdate", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+
+
+		});
+
+		function doSubmit(formName) {
+			var _f = $('#' + formName);
+
+			if (formName == 'form2') {
+				if (_f.find('#year').val() == '') {
+					_f.find('#year').focus();
+					alert('請選擇年度！');
+					return false;
+				}
+				else if (_f.find('#month').val() == '') {
+					_f.find('#month').focus();
+					alert('請選擇月份！');
+					return false;
+				}
+			}
+
+			if (_f.find('#uploadfile01').val() == '') {
+				_f.find('#uploadfile01').focus();
+				alert('請選擇檔案上傳！');
+				return false;
+			}
+			else {
+				$('#wait').show();
+				$('#wait_content').show();
+				_f.submit();
+			}
+		}
+
+		function doSearch() {
+			if ($('#s_year').val() == '') {
+				alert('請選擇年度！');
+				$('#s_year').focus();
+				return false;
+			}
+			// else if($('#s_month').val()=='')
+			// {
+			//     alert('請選擇月份！');
+			//     $('#s_month').focus();
+			//     return false;
+			// }
+			else {
+				$('#form3').submit();
+			}
+		}
+
+		function doSave(id) {
+			var changeaction = $('#changeaction' + id).html();
+			var changedesc = $('#changedesc' + id).html();
+
+			if (changeaction == '') {
+				alert('請填寫改善項目！');
+				return false;
+			}
+			else if (changedesc == '') {
+				alert('請填寫改善說明！');
+				return false;
+			}
+			else if (confirm("確定存檔?")) {
+				$.ajax({
+					url: "/yearly/bodycheckup_save2",
+					async: true,
+					cache: false,
+					method: "POST",
+					data: {
+						id: id,
+						change_action: typeValue,
+						change_desc: act_type
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						alert(data.message);
+						// location.reload();
+					},
+					error: function (xhr, stauts, err) {
+						console.log(xhr, stauts, err);
+					}
+				});
+			}
+		}
+	</script>
+	<style>
+		.h1 {
+			display: inline-block;
+			width: 200px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			background-color: #2196F3;
+			color: #fff;
+			margin-top: 20px;
+		}
+
+		.tableContainer table tbody td {
+			font-size: 1rem;
+		}
+
+		.next1, .next2, .next3, .next4 {
+			cursor: pointer;
+		}
+
+		.tableContainer table {
+			border-left: 1px solid #000;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+			font-size: 2rem;
+		}
+
+		.queryBlock input {
+			height: inherit;
+			width: 120px;
+		}
+
+		.tableContainer table td {
+			height: 4.5rem;
+		}
+
+		.tableContainer {
+			border-left: 0px solid #ffffff;
+		}
+
+		.fa-balance-scale {
+			font-size: 60pt;
+		}
+
+		.header__iconCell {
+			text-align: center;
+			width: 200px;
+		}
+
+		.btnBgColorWithShadow--blue.btn-query {
+			padding: 10px 20px;
+		}
+
+		.fa-utensils {
+			font-size: 60pt;
+			color: #8d2c4d;
+		}
+
+		.serviceBlock__whiteBlock {
+			display: inline-block;
+			padding: 20px;
+			width: 360px;
+			background-color: #fff;
+			margin: 10px auto;
+			border-radius: 5px;
+		}
+
+		.blockA {
+			width: auto;
+			/*display: inline-block;*/
+			margin: 30px;
+			position: relative;
+			top: 50px;
+			left: 10%;
+			margin-left: 10%;
+			margin-bottom: 200px;
+			text-align: center;
+		}
+
+		.serviceBlock {
+			text-align: center;
+			margin-top: 3rem;
+		}
+
+		.serviceBlock__h2 {
+			display: inline-block;
+			font-size: 1.7rem;
+			border: 1px solid #bbbbbb;
+			background-color: #fff;
+			width: 300px;
+			height: 80px;
+			text-align: center;
+			line-height: 80px;
+			margin-bottom: 30px;
+		}
+
+		table.tableCss {
+			width: 100%;
+			background-color: #fff;
+			margin-top: 30px;
+		}
+
+			table.tableCss tr th {
+				border: 1px solid #000;
+				text-align: center;
+				height: 4rem;
+			}
+
+			table.tableCss tr td {
+				border: 1px solid #000;
+				text-align: center;
+				height: 3rem;
+			}
+
+		.serviceBlock__whiteBlock header {
+			color: #939393;
+		}
+
+		.serviceBlock__whiteBlock input[type="file"] {
+			margin-top: 50px;
+			font-family: '標楷體';
+			font-size: 0.8rem;
+		}
+
+		.col {
+			padding-left: 2px;
+			padding-right: 2px;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<i class="fas fa fa-user-md" style="font-size:40pt;"></i>
+			<h1 class="h1">身體健檢</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div class="rich-text">
+				<p style="line-height:0; margin-bottom:5px;">
+					<span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:28px; color:#101010; font-style:normal; letter-spacing:0px; line-height:42px; text-decoration:none;">
+						國民健康署署長表示，只要能讓人健康幸福，身心快樂，人就會更有創意，產業就會發展。長照單位應提供優質的工作環境，關心員工健康的生活與壓力，如鼓勵員工規律運動、健康飲食、參與身體健康檢查、並營造健康的支持性環境，讓員工擁有健康才可使長照單位健全成長及永續發展。
+					</span>
+				</p>
+			</div>
+		</div>
+	</header>
+
+	<main class="main wrapper">
+
+		<div class="blockA">
+			<form id="form2" name="form2" method="post" action="/yearly/bodycheckup_save" target="actFrame" enctype="multipart/form-data">
+				<p class="descP">
+					年度：<select id="year" name="year" class="form-control col-md-2 d-inline-block">
+						<option value="">---請選擇---</option>
+						<option value="109">109</option>
+						<option value="108">108</option>
+						<option value="107">107</option>
+					</select>  <br>
+					姓名：<input type="text" name="client_name" id="client_name" class="form-control col-md-2 d-inline-block">
+				</p>
+				<div class="serviceBlock__whiteBlock">
+					<header>體檢文件存擋</header>
+					<input type="file" id="uploadfile01" name="uploadfile01">
+					<input type="hidden" id="ctype" name="ctype" value="1">
+				</div>
+				<div>
+					<div style="color:red; font-weight:bolder;">✸限上傳 PDF 檔案</div>
+					<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doSubmit('form2');">儲存</button>
+				</div>
+			</form>
+		</div>
+		<hr>
+
+		<div class="serviceBlock">
+			<form id="form3" method="post">
+				<header>
+					<h2 class="serviceBlock__h2">體檢報告查詢</h2>
+				</header>
+				<p>
+					<select id="s_year" name="s_year" class="form-control col-md-2 d-inline-block">
+						<option value="">---選擇年---</option>
+						<option value="109">109</option>
+						<option value="108">108</option>
+						<option value="107">107</option>
+					</select>  年度
+					<!-- <select class="form-control col-md-1 d-inline-block" name="s_month" id="s_month">
+						<option value="">---選擇月---</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					月 -->
+					<button class="btn btn-blue" onclick="return doSearch();">
+						<i class="fas fa-search"></i>查詢
+					</button>
+				</p>
+			</form>
+
+			<table class="tableCss">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>個案姓名</th>
+						<th>須改善項目</th>
+						<th>改善說明</th>
+						<th>建立時間</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>陳A</td>
+						<td><textarea id="changeaction2" rows="5"></textarea></td>
+						<td><textarea id="changedesc2" rows="5"></textarea></td>
+						<td style="width:20%">2020-08-30<br>22:02:57</td>
+						<td><button class="btn btn-blue" onclick="return doSave(2);">存檔</button></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td>余某某</td>
+						<td><textarea id="changeaction1" rows="5"></textarea></td>
+						<td><textarea id="changedesc1" rows="5"></textarea></td>
+						<td style="width:20%">2020-08-30<br>22:01:07</td>
+						<td><button class="btn btn-blue" onclick="return doSave(1);">存檔</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 187px; height: 200px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

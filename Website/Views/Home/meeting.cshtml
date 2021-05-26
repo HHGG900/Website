@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>會議舉行 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#firstzone').click(function () {
+				location.href = "/Home/meeting_Record";
+			});
+
+			$('#secondzone').click(function () {
+				location.href = "/Home/Satisfaction_improvement_meeting";
+			});
+		});
+	</script>
+	<style>
+		.header__btns {
+			text-align: left;
+		}
+
+		#thirdzone {
+			margin-right: 6%;
+			background-color: initial;
+			color: #000;
+		}
+
+		#firstzone {
+			margin: 0px 6%;
+			cursor: pointer;
+		}
+
+		#secondzone {
+			margin-left: 6%;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<img src="~/images/icon_map.png" alt="">
+			<h1 class="h1">會議舉行</h1>
+		</div>
+		<div class="header__textCell">
+			<div class="text" style="padding:0px; text-align: center; font-size: 1.2rem;">高效率團隊會議的重要性</div>
+			<div class="text" style="padding:0px; font-size: 1.2rem;">
+				<p>1.會議的好處 </p><p>  (1)開會是一種群體決策的方式，可以避免結論的片面性。 </p><p>  (2)通過會議讓大家面對面地溝通和交流，可以彌合工作中的一些裂痕。 </p><p>  (3)會議比公告更有效，因為會議是通過互動把某些觀點提升、提煉、進行有效的過程。 </p><p>  (4)會議能夠讓與會者參與決策，更容易執行會議所定的目標和任務。 </p><p>  (5)會議也是一種有效的培訓，是進行資訊交流和培訓的很好方式。 </p><p>2.高效率的會議：什麼樣的會議才高效率？ 應該從以下幾個方面來衡量一個會議是否有效</p><p>  (1) 目標能實現。 </p><p>  (2)目標在最短的時間內被實現。 </p><p>  (3)令所有的與會者都感到滿意或是負效應降到最低。 </p><p>3.無效會議的危害 </p><p>   (1)目標沒有辦法實現，會議的成本泡湯。 </p><p>   (2)機會成本、場地費用、資料成本等損失巨大。 </p><p>   (3)與會者對會議不滿，會降低士氣，對團隊工作沒有任何幫助。</p><p> 4.避免五不傾向 </p><p>    在會議過程中，應避免五不傾向：不守時、不負責、議而不決、不投入、不執行。</p><p> 5.成功會議中會議的記錄：記錄人員應該準確的把會議中的一些要點完整記錄下來，這是   </p><p>   後面行動的基礎或依據。</p><p>   記錄人員的職責： </p><p>   ●準確記錄會議要點，不能有差錯。 </p><p>   ●發放會議紀要，發放前，要讓主持人閱讀簽發。 </p><p>   ●確認執行人、完成時間，以及在哪裡找到資源。</p><p><br></p>
+			</div>
+
+			<div class="header__btns">
+				<button class="header__btn" id="thirdzone">會議記錄撰寫</button>
+				<button class="header__btn" id="firstzone">工作會議記錄</button>
+				<button class="header__btn" id="secondzone">十大指標品質會議</button>
+			</div>
+		</div>
+
+	</header>
+	<main class="main wrapper">
+
+	</main>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

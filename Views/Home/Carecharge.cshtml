@@ -1,0 +1,353 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>照顧收費 | 台灣長照大聯盟居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/page3-1-1-1-1.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<!--    <link rel="stylesheet" href="/css/page2-5-3.css" />-->
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src="~/Scripts/jquery.cookie.js"></script>
+	<script>
+		var choosenId = '';
+
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('.cases__case').click(function () {
+				var info = $(this).attr('info');
+
+				/*if ($('#unitname').val() == '') {
+					alert('請輸入單位全名！');
+					$('#unitname').focus();
+					return false;
+				}
+				else */
+				if ($('#s_year').val() == '') {
+					alert('請選擇年份！');
+					$('#s_year').focus();
+					return false;
+				}
+				else if ($('#s_month').val() == '') {
+					alert('請選擇月份！');
+					$('#s_month').focus();
+					return false;
+				}
+				else {
+					$("#wait_content").show();
+					$("#wait").show();
+
+					setTimeout(check_case(info), 5000);
+				}
+
+			});
+
+
+
+
+			$('#first').click(function () {
+				/*$.cookie("unitname", $('#unitname').val(), {
+					expires: 2147483647, path: '/', domain: '', secure: true
+				});*/
+				$.cookie("s_year", $('#s_year').val(), {
+					expires: 2147483647, path: '/', domain: '', secure: true
+				});
+				$.cookie("s_month", $('#s_month').val(), {
+					expires: 2147483647, path: '/', domain: '', secure: true
+				});
+
+				location.href = '/case_manage/care_charges_payment/' + choosenId;
+			});
+
+			$('#s_year, #s_month').change(function () {
+				var s_year = $('#s_year').val();
+				var s_month = $('#s_month').val();
+
+				if (s_year != '' && s_month != '') {
+					get_service_payments();
+				}
+			});
+
+		});
+
+		function check_case(info) {
+			$.ajax({
+				url: "/case_manage/get_service_data",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					id: info,
+					year: $('#s_year').val(),
+					month: $('#s_month').val()
+				},
+				success: function (data, status, xhr) {
+					console.log(data, status, xhr);
+					$('#wait_content').hide();
+					$('#wait').hide();
+					$('.checkzone').html('');
+
+					if (data.code == 200) {
+						$('#checkzone' + info).html('<i class="fas fa-check-circle"></i>');
+
+						if (data.result != 0) {
+							choosenId = data.result.client_id;
+
+							$.cookie("s_year", $('#s_year').val(), {
+								expires: 2147483647, path: '/', domain: '', secure: true
+							});
+							$.cookie("s_month", $('#s_month').val(), {
+								expires: 2147483647, path: '/', domain: '', secure: true
+							});
+
+							var position = $(".block3").offset().top;
+							$('html, body').animate({
+								scrollTop: position * 2 / 3
+							}, 1000);
+
+							$('#first').show();
+						}
+						else {
+							alert('無收費登打紀錄，請先進行再列印！');
+							$('#first').hide();
+						}
+					}
+					else {
+						ezBSAlert({
+							messageText: data.message,
+							alertType: "danger"
+						}).done(function (e) {
+							// location.href='/shoppingcart';
+						});
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(xhr, ajaxOptions, thrownError);
+					$('#wait_content').hide();
+					$('#wait').hide();
+					alert('發生錯誤!');
+				}
+			});
+		}
+
+		function get_service_payments() {
+			$.ajax({
+				url: "/case_manage/get_service_payments",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					year: $('#s_year').val(),
+					month: $('#s_month').val()
+				},
+				success: function (data, status, xhr) {
+					console.log(data, status, xhr);
+					$('#wait_content').hide();
+					$('#wait').hide();
+					$('.hasdone').html('');
+
+					if (data.code == 200) {
+						if (data.result.length > 0) {
+							for (var i = 0; i < data.result.length; i++) {
+								$('#hasdone' + data.result[i].client_id).html('<i class="fas fa-file-invoice"></i>');
+							}
+						}
+					}
+					else {
+
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(xhr, ajaxOptions, thrownError);
+					alert('發生錯誤!');
+				}
+			});
+		}
+	</script>
+	<style>
+		.container {
+			margin-left: 7%;
+		}
+
+		.wrapper {
+			width: 95%;
+		}
+
+		.hint {
+			padding: 0px 10px;
+		}
+
+		.cases__case, .btnSet__btn {
+			cursor: pointer;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+		}
+
+		.h1, h1 {
+			font-size: 2rem;
+			float: left;
+			background-color: blue;
+			color: white;
+			padding: 10px 20px;
+		}
+
+		.header_right {
+			display: inline-block;
+			width: 75%;
+			text-align: center;
+			margin-top: 30px;
+			margin-left: 30px;
+		}
+
+		.block2 {
+			margin-top: 30px;
+		}
+
+		.cases {
+			display: -webkit-inline-box;
+			width: 100%;
+		}
+
+			.cases .cases__case {
+				margin-right: 16px;
+			}
+
+		#first {
+			margin-top: 20%;
+		}
+
+		.btnSet {
+			margin: 0px auto;
+		}
+
+		.fa-file-invoice {
+			color: orange;
+			font-size: 24px;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<!--    <h1>照顧收費</h1>-->
+		<h1 class="h1">照顧收費</h1>
+	</header>
+
+	<div class="header_right">
+		<h2 class="h2">照顧收費---選擇個案</h2>
+		<div class="row">
+			<div class="col-md-12">
+				<div>
+					收費月份：
+					<select id="s_year" name="s_year" class="form-control col-md-2 d-inline-block">
+						<option value="">---選擇年---</option>
+						<option value="109">109</option>
+						<option value="108">108</option>
+						<option value="107">107</option>
+					</select>  年
+					<select class="form-control col-md-2 d-inline-block" name="s_month" id="s_month">
+						<option value="">---選擇月---</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					月
+				</div>
+			</div>
+		</div>
+		<div class="row block2">
+			<div class="col-md-12">
+				<ul class="cases">
+					<li class="cases__case" info="5">
+						余001 <span id="checkzone5" class="checkzone"></span>
+						<span id="hasdone5" class="hasdone"></span>
+					</li>
+					<li class="cases__case" info="7">
+						陳陳某1 <span id="checkzone7" class="checkzone"></span>
+						<span id="hasdone7" class="hasdone"></span>
+					</li>
+					<li class="cases__case" info="9">
+						林某1A <span id="checkzone9" class="checkzone"></span>
+						<span id="hasdone9" class="hasdone"></span>
+					</li>
+					<li class="cases__case" info="11">
+						黃大達01 <span id="checkzone11" class="checkzone"></span>
+						<span id="hasdone11" class="hasdone"></span>
+					</li>
+					<li class="cases__case" info="13">
+						余002 <span id="checkzone13" class="checkzone"></span>
+						<span id="hasdone13" class="hasdone"></span>
+					</li>
+					<li class="cases__case" info="74">
+						張某某 <span id="checkzone74" class="checkzone"></span>
+						<span id="hasdone74" class="hasdone"></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="first" class="row block3" style="display: none;">
+
+			<div class="btnSet">
+				<button class="btnSet__btn">新增並帶入資料</button>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

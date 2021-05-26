@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>社區連結工作 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-6.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#Resource_teamwork').click(function () {
+				location.href = "/Home/Resource_teamwork";
+			});
+
+			$('#Community_advocacy').click(function () {
+				location.href = "/Home/Community_advocacy";
+			});
+		});
+
+		function doSubmit() {
+			if ($('#name').val() == '' || $('#source').val() == '' || $('#zone').val() == '' || $('#window').val() == '' || $('#contact').val() == '' ||
+				$('#address').val() == '' || $('#remarks').val() == '') {
+				alert('您所填的表格欄位資料不完整，請確認，謝謝！');
+				return false;
+			}
+			else {
+				$('#wait').show();
+				$('#wait_content').show();
+
+				$('#form1').submit();
+			}
+
+		}
+	</script>
+	<style>
+		.main {
+			width: 95%;
+		}
+
+		.tableContainer table tr td:nth-last-child(2) {
+		}
+
+		.tableContainer table tr td:nth-child(1) {
+			width: 15%;
+		}
+
+		.tableContainer table tr td:nth-child(2) {
+			width: 15%;
+		}
+
+		.tableContainer table tr td:nth-child(3) {
+			width: 10%;
+		}
+
+		.tableContainer table tr td:nth-child(4) {
+			width: 10%;
+		}
+
+		.tableContainer table tr td:nth-child(5) {
+			width: 20%;
+		}
+
+		.tableContainer table tr td:nth-child(6) {
+			width: 20%;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<img src="~/images/icon_bullhorn.png" alt="">
+			<h1 class="h1">連結工作</h1>
+		</div>
+		<div class="header__textCell">
+			<div class="text" style="padding: 0px;"><p><span style="background-color: transparent;"></span></p><p></p><p><span style="background-color: transparent;">跨專業團隊合作模式</span><br></p><p>跨專業團隊整合模式是Doroyhy Hutchinson在一九七０年，從美國腦性麻痺協會在「全國協同嬰幼兒合作性計畫方案」中發展出來的服務模式，在專業整合運作模式中，跨專業整合模式是以專業成員相互成長，以及提供個案整體性服務為重點的合作性服務方式，是由家庭和不同專業人員組成。跨專業團隊一起共識，在評量、計畫課程、執行計畫及評鑑進展等，分享跨越專業疆界資訊和技能。並指定一位成員擔任主要服務提供者，而其他成原則給予角色支持。專業人員間通合作是模式運作重要關鍵;跨專業團隊評估中採一人主導評估。因此「角色釋放」相當重要，主導者需要對案主整體發展非常瞭解;參與評估專業人員對跨專業團隊評估模式持肯定態度。因此「跨專業」合作模式是現今被視為最佳專業整合模式</p><p><span style="background-color: transparent;">關於專業團隊合作模式所產生優點與功能歸納，說明如下： </span><br></p><p>1.各專業貢獻所學，共同幫助個案解決問題</p><p>2.增進個案功能，提供家庭支援性服務</p><p>3.彼此分享專業能力與經驗</p><p>4.共同設計、執行個別化服務計畫</p><p>5.提供全面性教育復健整合系統</p></div>
+
+			<div class="header__btns">
+				<button class="header__btn">區域長照資源盤點</button>
+				<button class="header__btn" id="Resource_teamwork">資源緊密合作</button>
+				<button class="header__btn" id="Community_advocacy">社區宣導</button>
+			</div>
+		</div>
+	</header>
+	<main class="main wrapper">
+		<header>
+			<h2 class="h2">區域長照資源盤點</h2>
+		</header>
+
+		<form id="form1" name="form1" method="post" action="/monthly/community_link_save" target="actFrame" enctype="multipart/form-data">
+
+			<div>
+				資源名稱：<input type="text" id="name" name="name" class="form-control col-md-2 d-inline-block" placeholder="請輸入...">&nbsp;
+				提供資源：<input type="text" id="source" name="source" class="form-control col-md-2 d-inline-block" placeholder="請輸入...">&nbsp;
+				服務區域：<input type="text" id="zone" name="zone" class="form-control col-md-2 d-inline-block" placeholder="請輸入...">&nbsp;
+				負責窗口：<input type="text" id="window" name="window" class="form-control col-md-1 d-inline-block" placeholder="請輸入...">&nbsp;
+			</div>
+			<div>
+				聯繫方式：<input type="text" id="contact" name="contact" class="form-control col-md-2 d-inline-block" placeholder="請輸入...">&nbsp;
+				地址：<input type="text" id="address" name="address" class="form-control col-md-3 d-inline-block" placeholder="請輸入...">&nbsp;
+				備註：<input type="text" id="remarks" name="remarks" class="form-control col-md-3 d-inline-block" placeholder="請輸入...">&nbsp;
+				<button class="btn btn-blue" onclick="return doSubmit();" style="float: right;"><i class="fas fa-edit"></i>輸入</button>
+			</div>
+		</form>
+		<!-- <div class="btnBar">
+			<button class="btn btn-w btn-darkPink">新增</button>
+		</div> -->
+		<div class="tableContainer">
+			<table>
+				<thead>
+					<tr>
+						<th>資源名稱</th>
+						<th>提供資源</th>
+						<th>服務區域</th>
+						<th>負責窗口</th>
+						<th>聯繫方式</th>
+						<th>地址</th>
+						<th>備註</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>&nbsp;111</td>
+						<td>&nbsp;111</td>
+						<td>&nbsp;111</td>
+						<td>&nbsp;111</td>
+						<td>&nbsp;111</td>
+						<td>&nbsp;111</td>
+						<td>&nbsp;111</td>
+					</tr>
+					<tr>
+						<td>&nbsp;gngnn</td>
+						<td>&nbsp;mhmmh</td>
+						<td>&nbsp;hmmm</td>
+						<td>&nbsp;fbgb</td>
+						<td>&nbsp;vnbvnb</td>
+						<td>&nbsp;vnbn</td>
+						<td>&nbsp;nbvnbn</td>
+					</tr>
+					<tr>
+						<td>&nbsp;FDNGNMHGM</td>
+						<td>&nbsp;FMGJGMJM</td>
+						<td>&nbsp;K,LK</td>
+						<td>&nbsp;.L/</td>
+						<td>&nbsp;3T4YYTJYJK</td>
+						<td>&nbsp;UJ,K.,K.KJ.JK.JL.JKL/.L.JK</td>
+						<td>&nbsp;22</td>
+					</tr>
+					<tr>
+						<td>&nbsp;資源名稱aaa</td>
+						<td>&nbsp;提供資源aaa</td>
+						<td>&nbsp;服務區域aaa</td>
+						<td>&nbsp;負責窗口aaa</td>
+						<td>&nbsp;聯繫方式aaa</td>
+						<td>&nbsp;地址aaa</td>
+						<td>&nbsp;備註aaaa</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main><!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

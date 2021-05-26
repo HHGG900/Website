@@ -1,0 +1,317 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 2, ../sass/page2-1.scss */
+#logout {
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* line 9, ../sass/page2-1.scss */
+.slogan {
+  font-size: 1.3rem;
+  color: #930a9a;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* line 15, ../sass/page2-1.scss */
+h1 {
+  display: none;
+}
+
+/* line 21, ../sass/page2-1.scss */
+.table {
+  font-size: 1.3rem;
+  border-collapse: separate;
+  border-spacing: 0 1em;
+  width: 100%;
+}
+/* line 27, ../sass/page2-1.scss */
+.table th,
+.table td {
+  padding-top: 1.3rem;
+  padding-bottom: 1.3rem;
+}
+/* line 32, ../sass/page2-1.scss */
+.table .table_thBorder {
+  width: 1px;
+  white-space: nowrap;
+  border-style: solid;
+  border-left-width: 2px;
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  padding-left: 8px;
+  padding-right: 28px;
+  text-align: center;
+}
+/* line 43, ../sass/page2-1.scss */
+.table .table_thBorder.table_thBorder--orange {
+  border-color: #ff9800;
+}
+/* line 46, ../sass/page2-1.scss */
+.table .table_thBorder.table_thBorder--red {
+  border-color: #e51c23;
+}
+/* line 50, ../sass/page2-1.scss */
+.table .table_thBorder.table_thBlock {
+  position: relative;
+}
+/* line 53, ../sass/page2-1.scss */
+.table .table_thBorder.table_thBlock:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: auto;
+  width: 20px;
+}
+/* line 65, ../sass/page2-1.scss */
+.table .table_thBorder.table_thBlock.table_thBlock--orange:before {
+  background-color: #ff9800;
+}
+/* line 70, ../sass/page2-1.scss */
+.table .table_thBorder.table_thBlock.table_thBlock--red:before {
+  background-color: #e51c23;
+}
+/* line 76, ../sass/page2-1.scss */
+.table .table_tdBorder {
+  border-style: solid;
+  border-top-width: 2px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+/* line 84, ../sass/page2-1.scss */
+.table .table_tdBorder.table_tdBorder--orange {
+  border-color: #ff9800;
+}
+/* line 87, ../sass/page2-1.scss */
+.table .table_tdBorder.table_tdBorder--red {
+  border-color: #e51c23;
+}
+/* line 91, ../sass/page2-1.scss */
+.table .table_tdBtn {
+  width: 1px;
+  padding-left: 8px;
+}
+/* line 95, ../sass/page2-1.scss */
+.table .table_tdBtn .btn {
+  white-space: nowrap;
+}
+/* line 99, ../sass/page2-1.scss */
+.table .table_tdTextarea {
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+}
+/* line 103, ../sass/page2-1.scss */
+.table .table_tdTextarea textarea {
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 100%;
+  border: 0;
+  padding: 8px;
+  background-color: transparent;
+  resize: none;
+}
+/* line 112, ../sass/page2-1.scss */
+.table .table_tdTextarea textarea:hover, .table .table_tdTextarea textarea:focus, .table .table_tdTextarea textarea:active {
+  outline: none;
+}
+
+/* line 120, ../sass/page2-1.scss */
+.span_spacer {
+  margin-left: 40px;
+}
+
+/* line 131, ../sass/page2-1.scss */
+.sectionFunc .container {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* line 134, ../sass/page2-1.scss */
+.sectionFunc .container .row {
+  margin-left: -10px;
+  margin-right: -10px;
+}
+/* line 137, ../sass/page2-1.scss */
+.sectionFunc .container .row .col,
+.sectionFunc .container .row .col-1,
+.sectionFunc .container .row .col-10,
+.sectionFunc .container .row .col-11,
+.sectionFunc .container .row .col-12,
+.sectionFunc .container .row .col-2,
+.sectionFunc .container .row .col-3,
+.sectionFunc .container .row .col-4,
+.sectionFunc .container .row .col-5,
+.sectionFunc .container .row .col-6,
+.sectionFunc .container .row .col-7,
+.sectionFunc .container .row .col-8,
+.sectionFunc .container .row .col-9,
+.sectionFunc .container .row .col-auto,
+.sectionFunc .container .row .col-lg,
+.sectionFunc .container .row .col-lg-1,
+.sectionFunc .container .row .col-lg-10,
+.sectionFunc .container .row .col-lg-11,
+.sectionFunc .container .row .col-lg-12,
+.sectionFunc .container .row .col-lg-2,
+.sectionFunc .container .row .col-lg-3,
+.sectionFunc .container .row .col-lg-4,
+.sectionFunc .container .row .col-lg-5,
+.sectionFunc .container .row .col-lg-6,
+.sectionFunc .container .row .col-lg-7,
+.sectionFunc .container .row .col-lg-8,
+.sectionFunc .container .row .col-lg-9,
+.sectionFunc .container .row .col-lg-auto,
+.sectionFunc .container .row .col-md,
+.sectionFunc .container .row .col-md-1,
+.sectionFunc .container .row .col-md-10,
+.sectionFunc .container .row .col-md-11,
+.sectionFunc .container .row .col-md-12,
+.sectionFunc .container .row .col-md-2,
+.sectionFunc .container .row .col-md-3,
+.sectionFunc .container .row .col-md-4,
+.sectionFunc .container .row .col-md-5,
+.sectionFunc .container .row .col-md-6,
+.sectionFunc .container .row .col-md-7,
+.sectionFunc .container .row .col-md-8,
+.sectionFunc .container .row .col-md-9,
+.sectionFunc .container .row .col-md-auto,
+.sectionFunc .container .row .col-sm,
+.sectionFunc .container .row .col-sm-1,
+.sectionFunc .container .row .col-sm-10,
+.sectionFunc .container .row .col-sm-11,
+.sectionFunc .container .row .col-sm-12,
+.sectionFunc .container .row .col-sm-2,
+.sectionFunc .container .row .col-sm-3,
+.sectionFunc .container .row .col-sm-4,
+.sectionFunc .container .row .col-sm-5,
+.sectionFunc .container .row .col-sm-6,
+.sectionFunc .container .row .col-sm-7,
+.sectionFunc .container .row .col-sm-8,
+.sectionFunc .container .row .col-sm-9,
+.sectionFunc .container .row .col-sm-auto,
+.sectionFunc .container .row .col-xl,
+.sectionFunc .container .row .col-xl-1,
+.sectionFunc .container .row .col-xl-10,
+.sectionFunc .container .row .col-xl-11,
+.sectionFunc .container .row .col-xl-12,
+.sectionFunc .container .row .col-xl-2,
+.sectionFunc .container .row .col-xl-3,
+.sectionFunc .container .row .col-xl-4,
+.sectionFunc .container .row .col-xl-5,
+.sectionFunc .container .row .col-xl-6,
+.sectionFunc .container .row .col-xl-7,
+.sectionFunc .container .row .col-xl-8,
+.sectionFunc .container .row .col-xl-9,
+.sectionFunc .container .row .col-xl-auto {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* line 212, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__block {
+  background-color: #fefac0;
+  min-height: 200px;
+  border: 1px dotted #000;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+/* line 219, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__header {
+  text-align: center;
+  font-size: 1.2rem;
+}
+/* line 223, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__item {
+  margin-top: 20px;
+  box-shadow: 0 5px 5px 2px #0003;
+}
+/* line 227, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__a {
+  display: block;
+  height: 50px;
+  text-align: left;
+  color: #fff;
+  font-size: 18px;
+  position: relative;
+  padding-top: 13px;
+  padding-left: 40px;
+  text-decoration: none;
+}
+/* line 240, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__a.sectionFunc__a--1 {
+  background-color: #c08b3c;
+}
+/* line 240, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__a.sectionFunc__a--2 {
+  background-color: #e51c23;
+}
+/* line 240, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__a.sectionFunc__a--3 {
+  background-color: #5677fc;
+}
+/* line 240, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__a.sectionFunc__a--4 {
+  background-color: #bf567a;
+}
+/* line 240, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__a.sectionFunc__a--5 {
+  background-color: #009688;
+}
+/* line 240, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__a.sectionFunc__a--6 {
+  background-color: #259b24;
+}
+/* line 245, ../sass/page2-1.scss */
+.sectionFunc .sectionFunc__a .fab,
+.sectionFunc .sectionFunc__a .fas,
+.sectionFunc .sectionFunc__a .far {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 13px;
+}

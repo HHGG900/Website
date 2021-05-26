@@ -1,0 +1,400 @@
+﻿@model Website.Models.Organization_account
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>單位帳號管理 | 台灣柏佐克智慧型居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-3.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="/libs/datepicker/css/bootstrap-datepicker3.min.css">
+	<!--    <script src="/js/jquery-1.10.2.min.js"></script>-->
+	<script src="/libs/datepicker/js/bootstrap-datepicker.min.js"></script>
+	<script src="/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>
+
+	<script>
+		var item = 1;
+		var toEdit = 0;
+
+		$(function () {
+
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('.datepicker').datepicker({
+				format: "yyyy-mm-dd",
+				language: "zh-TW",
+				// endDate: new Date(),
+				// endDate: '-18y',
+				// endDate: '+0d',
+				todayHighlight: true
+			});
+
+			$('.datepicker2').datepicker({
+				format: "yyyy-mm-dd",
+				language: "zh-TW",
+				// endDate: new Date(),
+				// endDate: '-18y',
+				endDate: '+0d',
+				todayHighlight: true
+			});
+
+			//$('#addNoteDetail').click(function () {
+			//	var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+			//		'<label for="message-text" class="col-form-label col-md-6">' +
+			//		'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+			//		'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+			//		'</label>' +
+			//		'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
+			//		'</div>';
+
+			//	$('#addDiv').append(addhtml);
+			//	item++;
+			//});
+
+			//$('#editModal').on('hidden.bs.modal', function (e) {
+			//	// do something...
+			//});
+
+			//$('#editModal').on('click', '.editModal', function () {
+			//	alert('button clicked');
+			//});
+
+			//$('#editModal').on('show.bs.modal', function (event) {
+			//	var modal = $(this);
+			//	var chk = $('input[type=radio]:checked').val();
+
+			//	if (typeof (chk) === "undefined") {
+			//		alert('請先確認修改項目！');
+			//		location.reload();
+			//		return false;
+			//	}
+
+			//	if (toEdit == 0) {
+			//		$.ajax({
+			//			url: "/Home/Organization_account_management",
+			//			type: "POST",
+			//			dataType: 'json',
+			//			data: {
+			//				Id: chk,
+			//			},
+			//			success: function (data, status, xhr) {
+			//				console.log(data, status, xhr);
+			//				if (data.code == 200) {
+			//					toEdit = 1;
+			//					modal.find('#Id').val(data.result.Id);
+			//					modal.find('#name').val(data.result.name);
+			//					modal.find('#nickname').val(data.result.nickname);
+			//					modal.find('#unitname').val(data.result.unitname);
+			//					modal.find('#unitcode').val(data.result.unitcode);
+			//					modal.find('#unitcodeReadonly').val(data.result.unitcode);
+			//					modal.find('#pid').val(data.result.pid);
+			//					modal.find('#phone').val(data.result.phone);
+			//					modal.find('#status').val(data.result.status);
+			//				}
+			//				else {
+			//					alert('無此資料!');
+			//					return false;
+			//				}
+			//			},
+			//			error: function (xhr, ajaxOptions, thrownError) {
+			//				console.log(xhr, ajaxOptions, thrownError);
+			//				alert('發生錯誤!');
+			//				return false;
+			//			}
+			//		});
+
+			//	}
+			//});
+
+		//	$('#exampleModal').on('show.bs.modal', function (event) {
+		//		var button = $(event.relatedTarget) // Button that triggered the modal
+		//		var notetitle = button.data('notetitle') // Extract info from data-* attributes
+		//		var recipient = button.data('whatever') // Extract info from data-* attributes
+		//		var messageid = button.data('messageid') // Extract info from data-* attributes
+		//		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+		//		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+		//		var modal = $(this)
+		//		modal.find('.modal-id').val(messageid);
+		//		modal.find('.modal-title').text('修改公告： ' + notetitle);
+		//		modal.find('.modal-body textarea').val(recipient);
+		//	})
+
+		//	$('#addModal').find('#status').click(function () {
+		//		var thisValue = $(this).val();
+		//	})
+		//});
+
+		//function delNoteDetail(num) {
+		//	if (confirm('確定移除？')) {
+		//		$('#addDiv' + num).remove();
+		//	}
+		//}
+
+		//function addNoteDetail(num) {
+		//	var item = 2;
+
+		//	for (i = 0; i < num; i++) {
+		//		var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+		//			'<label for="message-text" class="col-form-label col-md-6">' +
+		//			'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+		//			'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+		//			'</label>' +
+		//			'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
+		//			'</div>';
+
+		//		item++;
+
+		//		$('#editModal').find('#addDiv').append(addhtml);
+		//	}
+		//}
+
+	</script>
+	<style>
+		.tableContainer table th, .tableContainer table td {
+			font-size: 1.2rem;
+			border:0px;
+
+		}
+
+		.tableContainer {
+			border-left: 0px solid #000;
+			border-right: 0px solid #000;
+			border-collapse:collapse;
+
+		}
+/*
+			.tableContainer table tbody td:last-child {
+				border-right: 1px solid #000;
+			}*/
+
+		.btnBgColorWithShadow--blue.btn-query {
+			padding: 5px 15px;
+		}
+
+		.modal-header {
+			padding: 0.5rem 0.5rem;
+		}
+
+		.modal-body {
+			padding: 0.5rem;
+		}
+
+		.modal-dialog {
+			width: 800px;
+			max-width: 800px;
+			margin: 30px auto;
+		}
+
+		.col-md-6 {
+			max-width: 49%;
+		}
+
+		.form-group {
+			margin-bottom: 0px;
+		}
+
+		.redfont {
+			color: red;
+		}
+/*
+		.tableContainer table th, .tableContainer table td {
+			padding: 2px;
+		}*/
+
+		.tableContainer table td {
+			color: #3851b4;
+		}
+
+		.fa-minus-circle {
+			color: red;
+		}
+		.auto-style1 {
+			text-align: right;
+		}
+		.auto-style3 {
+			text-align: left;
+			margin-bottom: 0px;
+		}
+		.auto-style4 {
+			left: -1px;
+			top: 15px;
+		}
+		.auto-style5 {
+			width: 356px;
+		}
+
+		.form{
+			margin-left:150px;
+			margin-right:150px;
+		}
+
+	</style>
+</head>
+
+<body >
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<img src="~/images/icon_profile.png" alt="">
+			<h1 class="h1">單位帳號管理</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div class="rich-text" style="min-height: 200px;">
+				<p style="line-height:0; margin-bottom:5px;"></p>
+			</div>
+		</div>
+	</header>
+	<br />
+	<br />
+		<br />
+	<br />	
+	<main class="main">	
+			<div  class="tableContainer">
+
+		<form method="post" action="/Home/Organization_account_management_Edit" class="form">
+
+		<table  >
+			<tr>
+				<td colspan="2">
+
+						<div class="auto-style3">
+							<label for="inputunitname"><span class="redfont">＊</span>序號:
+								<input type="text" id="inputunitname" name="Id" value="@Model.Id" readonly>
+								<br />
+							<br />
+							</label>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="auto-style3">
+							<label for="inputunitname">
+								<span class="redfont">＊</span>單位名稱:<input id="inputunitname" name="unitname" value="@Model.unitname"><br />
+&nbsp;</label></div>
+							</td>
+							<td class="auto-style5">
+							<div class="auto-style3">
+							<label for="inputunitcode" class="auto-style4">
+								<span class="redfont">＊</span>單位代碼:<input id="inputunitcode" name="unitcode" value="@Model.unitcode"><br />
+&nbsp;</label></div>
+
+							</td>
+					</tr>
+					<tr>
+						<td>
+						<div class="auto-style3">
+							<label for="inputname">
+								<span class="redfont">＊</span>帳號:<input id="inputname" name="name" value="@Model.name"><br />
+&nbsp;</label></div>
+							</td>
+						<td class="auto-style5">
+						<div class="auto-style3">
+							<label for="inputnickname">
+								<span class="redfont">＊</span>聯絡人姓名:<input id="inputnickname" name="nickname" value="@Model.nickname"><br />
+&nbsp;</label></div>
+							</td>
+						</tr>
+			<tr>
+				<td>
+						<div class="auto-style3">
+							<label for="inputphone">
+								<span class="redfont">＊</span>聯絡電話:<input id="inputphone" name="phone" value="@Model.phone"><br />
+&nbsp;</label></div>
+					</td>
+				<td class="auto-style5">
+						<div class="auto-style3">
+							<label for="inputstatus">
+								<span class="redfont">＊</span>個案狀態:
+								<select id="inputstatus" name="status" >
+									<option value="@Model.status">@Model.status</option>
+									<option value="正常">正常</option>
+									<option value="停止服務">停止服務</option>
+								</select><br />
+&nbsp;</label></div>
+							</td>
+							</tr>
+			<tr>
+				<td colspan="2">
+						<div class="auto-style3">
+							<label for="inputtime">
+								<span class="redfont">＊</span>建立時間:
+								<input id="inputtime" name="time" value="@Model.time" placeholder="@Model.time" readonly /><br />
+&nbsp;</label></div>
+					</td>
+				</tr>
+			<tr>
+				<td colspan="2">
+
+						<div class="auto-style1">
+							<br />
+						<input type="submit" class="btn btn-primary" value="送出修改">
+						</div>
+					</td>
+			</tr>
+		</table>
+
+		</form>
+				</div>
+
+	</main>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+
+		<div id="wait" style="display:none">
+			<p><img src="/images/loading.gif" width="150" height="150"></p>
+		</div>
+		<div id="wait_content" style="display:none">
+			<p>請稍後，系統正在處理中...</p>
+		</div>
+		<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+		<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+
+			gtag('config', 'UA-148420718-4');
+		</script>
+
+		<div id="wait" style="display:none">
+			<p><img src="/images/loading.gif" width="150" height="150"></p>
+		</div>
+		<div id="wait_content" style="display:none">
+			<p>請稍後，系統正在處理中...</p>
+		</div>
+		<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

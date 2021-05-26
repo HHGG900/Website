@@ -1,0 +1,721 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>專欄區 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-4.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="/js/util.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#exampleModal').on('hidden.bs.modal', function (e) {
+				// do something...
+				// alert('111');
+			});
+
+			$('#editModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget) // Button that triggered the modal
+				var notetitle = button.data('notetitle') // Extract info from data-* attributes
+				var recipient = button.data('whatever') // Extract info from data-* attributes
+				var part1_id = button.data('messageid') // Extract info from data-* attributes
+				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+				var modal = $(this)
+				modal.find('.modal-id').val(part1_id);
+				modal.find('.modal-title').text('修改： ' + notetitle);
+				modal.find('.modal-body textarea').val(recipient);
+			});
+
+			$('#editModal01').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget) // Button that triggered the modal
+				var notetitle = button.data('notetitle') // Extract info from data-* attributes
+				var title = button.data('title') // Extract info from data-* attributes
+				var recipient = button.data('whatever') // Extract info from data-* attributes
+				var part2_id = button.data('messageid') // Extract info from data-* attributes
+				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+				var modal = $(this)
+				modal.find('.modal-id').val(part2_id);
+				modal.find('.modal-title').text('修改： ' + notetitle);
+				modal.find('.modal-body input').val(title);
+				modal.find('.modal-body textarea').val(recipient);
+			});
+
+			$('#editModal02').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget) // Button that triggered the modal
+				var notetitle = button.data('notetitle') // Extract info from data-* attributes
+				var title = button.data('title') // Extract info from data-* attributes
+				var recipient = button.data('whatever') // Extract info from data-* attributes
+				var part2_id = button.data('messageid') // Extract info from data-* attributes
+				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+				var modal = $(this)
+				modal.find('.modal-id').val(part2_id);
+				modal.find('.modal-title').text('修改： ' + notetitle);
+				modal.find('.modal-body input').val(title);
+				modal.find('.modal-body textarea').val(recipient);
+			});
+		});
+
+		function sendmessageone() {
+			var messagetext = $('#part1_messagetext').val();
+			var part1_id = $('#part1_id').val();
+			$('#editModal').hide();
+
+			$.ajax({
+				url: "/familywork/edit_columnzone_part1",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					id: part1_id,
+					message: messagetext,
+					user_id: 22
+				},
+				success: function (data, status, xhr) {
+					console.log(data, status, xhr);
+					if (data.code == 200) {
+						alert(data.message);
+						location.href = data.result;
+						// ezBSAlert({
+						//     messageText: data.message,
+						//     alertType: "success"
+						// }).done(function(e)
+						// {
+						//     location.href = data.result;
+						// });
+					}
+					else {
+						alert(data.message);
+						// ezBSAlert({
+						//     messageText: data.message,
+						//     alertType: "danger"
+						// }).done(function(e)
+						// {
+						//     location.href='/shoppingcart';
+						// });
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(xhr, ajaxOptions, thrownError);
+					alert('發生錯誤!');
+				}
+			});
+
+			$('#wait_content').show();
+			$('#wait').show();
+		}
+
+		function sendmessage02(type) {
+			if (type == "add") {
+				var titletext = $('#add01_titletext').val();
+				var messagetext = $('#add01_messagetext').val();
+				$('#addModal01').hide();
+
+				$.ajax({
+					url: "/familywork/add_columnzone_part2",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						title: titletext,
+						message: messagetext,
+						user_id: 22
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						if (data.code == 200) {
+							alert(data.message);
+							location.href = data.result;
+							// ezBSAlert({
+							//     messageText: data.message,
+							//     alertType: "success"
+							// }).done(function(e)
+							// {
+							//     location.href='/familywork/notepost';
+							// });
+						}
+						else {
+							alert(data.message);
+							// ezBSAlert({
+							//     messageText: data.message,
+							//     alertType: "danger"
+							// }).done(function(e)
+							// {
+							//     location.href='/shoppingcart';
+							// });
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+					}
+				});
+			}
+			else {
+				var messageid = $('#edit01_id').val();
+				var titletext = $('#edit01_titletext').val();
+				var messagetext = $('#edit01_messagetext').val();
+				$('#editModal01').hide();
+
+				$.ajax({
+					url: "/familywork/edit_columnzone_part2",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						id: messageid,
+						title: titletext,
+						message: messagetext,
+						user_id: 22
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						if (data.code == 200) {
+							alert(data.message);
+							location.href = data.result;
+							// ezBSAlert({
+							//     messageText: data.message,
+							//     alertType: "success"
+							// }).done(function(e)
+							// {
+							//     location.href='/familywork/notepost';
+							// });
+						}
+						else {
+							alert(data.message);
+							// ezBSAlert({
+							//     messageText: data.message,
+							//     alertType: "danger"
+							// }).done(function(e)
+							// {
+							//     location.href='/shoppingcart';
+							// });
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+					}
+				});
+			}
+
+			$('#wait_content').show();
+			$('#wait').show();
+		}
+
+		function sendmessage03(type) {
+			if (type == "add") {
+				var titletext = $('#add02_titletext').val();
+				var messagetext = $('#add02_messagetext').val();
+				$('#addModal02').hide();
+
+				$.ajax({
+					url: "/familywork/add_columnzone_part3",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						title: titletext,
+						message: messagetext,
+						user_id: 22
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						if (data.code == 200) {
+							alert(data.message);
+							location.href = data.result;
+						}
+						else {
+							alert(data.message);
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+					}
+				});
+			}
+			else {
+				var messageid = $('#edit02_id').val();
+				var titletext = $('#edit02_titletext').val();
+				var messagetext = $('#edit02_messagetext').val();
+				$('#editModal02').hide();
+
+				$.ajax({
+					url: "/familywork/edit_columnzone_part3",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						id: messageid,
+						title: titletext,
+						message: messagetext,
+						user_id: 22
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						if (data.code == 200) {
+							alert(data.message);
+							location.href = data.result;
+						}
+						else {
+							alert(data.message);
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+					}
+				});
+			}
+
+			$('#wait_content').show();
+			$('#wait').show();
+		}
+
+		function sendmessage(type) {
+			if (type == "add") {
+				var messagetext = $('#message_addtext').val();
+				$('#addModal').hide();
+
+				$.ajax({
+					url: "/familywork/add_marquee",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						message: messagetext,
+						user_id: 22
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						if (data.code == 200) {
+							// alert(data.message);
+							// location.href='/familywork/notepost';
+							ezBSAlert({
+								messageText: data.message,
+								alertType: "success"
+							}).done(function (e) {
+								location.href = '/familywork/notepost';
+							});
+						}
+						else {
+							alert(data.message);
+							// ezBSAlert({
+							//     messageText: data.message,
+							//     alertType: "danger"
+							// }).done(function(e)
+							// {
+							//     location.href='/shoppingcart';
+							// });
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+					}
+				});
+			}
+			else {
+				var messagetext = $('#message-text').val();
+				var messageid = $('#message_id').val();
+				$('#exampleModal').hide();
+
+				$.ajax({
+					url: "/familywork/edit_marquee",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						id: messageid,
+						message: messagetext,
+						user_id: 22
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						if (data.code == 200) {
+							alert(data.message);
+							location.href = '/familywork/notepost';
+							// ezBSAlert({
+							//     messageText: data.message,
+							//     alertType: "success"
+							// }).done(function(e)
+							// {
+							//     location.href='/familywork/notepost';
+							// });
+						}
+						else {
+							alert(data.message);
+							// ezBSAlert({
+							//     messageText: data.message,
+							//     alertType: "danger"
+							// }).done(function(e)
+							// {
+							//     location.href='/shoppingcart';
+							// });
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+					}
+				});
+			}
+
+			$('#wait_content').show();
+			$('#wait').show();
+		}
+
+		function sendmessage_0(type) {
+			var messagetext = $('#message-text').val();
+
+			$('#exampleModal').hide();
+			$('#addModal').hide();
+			$('#wait_content').show();
+			$('#wait').show();
+		}
+	</script>
+	<style>
+		.wrapper {
+			width: 95%;
+		}
+
+		.header__btn {
+			width: 120px;
+			height: 2rem;
+			font-size: 20px;
+		}
+
+		.serviceBlock__h2 {
+			font-size: 1rem;
+			width: 150px;
+			height: 60px;
+			line-height: 60px;
+			vertical-align: top;
+		}
+
+		.serviceBlock__h4 {
+			font-size: 20px;
+			width: 80px;
+			height: 40px;
+			line-height: 35px;
+			vertical-align: top;
+			display: inline-block;
+			border: 3px solid black;
+			text-align: center;
+			margin-top: 10px;
+		}
+
+		.serviceBlock {
+			width: 99%;
+			display: inline-block;
+		}
+
+		.middlezone {
+			display: inline-block;
+			width: 66%;
+			vertical-align: middle;
+			margin-top: 10px;
+		}
+
+		.zone3 {
+			display: inline-block;
+			width: 20%;
+			vertical-align: middle;
+			margin-top: 10px;
+		}
+
+		.zone4 {
+			display: inline-block;
+			width: 40%;
+			vertical-align: middle;
+			margin-top: 10px;
+		}
+
+		.rightzone {
+			display: inline-block;
+			width: 10%;
+			text-align: right;
+			vertical-align: top;
+		}
+
+		.edit_btn_0 {
+			font-size: 1rem;
+			width: 120px;
+			height: 60px;
+			line-height: 60px;
+		}
+
+		.edit_btn {
+			font-size: 16px;
+			width: 70px;
+			height: 40px;
+			line-height: 40px;
+			border-radius: 10px;
+		}
+
+		.serviceBlock2 {
+			margin-top: 30px;
+		}
+
+		.invisible {
+			background-color: #f6dce5;
+			border-color: #f6dce5;
+		}
+	</style>
+</head>
+<!--    <script src="/js/jquery-1.10.2.min.js"></script>-->
+<!--<script src="/js/jquery.min.js"></script>-->
+<!--<script src="/js/bootstrap.min.js"></script>-->
+
+
+
+
+<body>
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<header class="header wrapper">
+	</header>
+	<main class="main wrapper">
+
+		<div class="serviceBlock serviceBlock2">
+			<h2 class="serviceBlock__h2">照顧技巧</h2>
+			<h2 class="serviceBlock__h4">網址</h2>
+			<div class="middlezone">https://ghsha.com/articles/129</div>
+			<div class="rightzone">
+				<button class="header__btn edit_btn" data-toggle="modal" data-target="#editModal" data-notetitle="照顧技巧" data-messageid="1" data-whatever="https://ghsha.com/articles/129" style="background-color: #009688;">編輯</button>
+			</div>
+		</div>
+
+		<div class="header__btns">
+			<button class="header__btn" data-toggle="modal" data-target="#addModal01" data-notetitle="打氣區" data-whatever="" style="background-color: #009688;">新增+</button>
+		</div>
+		<div class="serviceBlock serviceBlock2">
+			<h2 class="serviceBlock__h2 ">打氣區</h2>
+			<h2 class="serviceBlock__h4">標題</h2>
+			<div class="zone3">為家庭照顧者打氣、向防疫英雄致敬《愛不孤單》彩蛋版—2017年陳時中部長為家庭照顧者錄製《愛不孤單》MV，在此新冠疫情肆虐之際，也為你我加油打氣。</div>
+			<h2 class="serviceBlock__h4">網址</h2>
+			<div class="zone4">https://youtu.be/ugtUPaLphDM</div>
+			<div class="rightzone">
+				<button class="header__btn edit_btn" data-toggle="modal" data-target="#editModal01" data-notetitle="打氣區1" data-title="為家庭照顧者打氣、向防疫英雄致敬《愛不孤單》彩蛋版—2017年陳時中部長為家庭照顧者錄製《愛不孤單》MV，在此新冠疫情肆虐之際，也為你我加油打氣。" data-messageid="2" data-whatever="https://youtu.be/ugtUPaLphDM" style="background-color: #009688;">編輯</button>
+			</div>
+			<h2 class="serviceBlock__h2 invisible"></h2>
+			<h2 class="serviceBlock__h4">標題</h2>
+			<div class="zone3">陳時中開金嗓 「愛不孤單」為防疫打氣〔聯合報2020-04-02 記者陳雨鑫〕</div>
+			<h2 class="serviceBlock__h4">網址</h2>
+			<div class="zone4">https://www.google.com/amp/s/udn.com/news/amp/story/6656/4464397</div>
+			<div class="rightzone">
+				<button class="header__btn edit_btn" data-toggle="modal" data-target="#editModal01" data-notetitle="打氣區2" data-title="陳時中開金嗓 「愛不孤單」為防疫打氣〔聯合報2020-04-02 記者陳雨鑫〕" data-messageid="3" data-whatever="https://www.google.com/amp/s/udn.com/news/amp/story/6656/4464397" style="background-color: #009688;">編輯</button>
+			</div>
+			<h2 class="serviceBlock__h2 invisible"></h2>
+			<h2 class="serviceBlock__h4">標題</h2>
+			<div class="zone3">照顧者關懷協會</div>
+			<h2 class="serviceBlock__h4">網址</h2>
+			<div class="zone4">https://www.commonhealth.com.tw/blog/blogIndividual.action?nid=49</div>
+			<div class="rightzone">
+				<button class="header__btn edit_btn" data-toggle="modal" data-target="#editModal01" data-notetitle="打氣區3" data-title="照顧者關懷協會" data-messageid="6" data-whatever="https://www.commonhealth.com.tw/blog/blogIndividual.action?nid=49" style="background-color: #009688;">編輯</button>
+			</div>
+		</div>
+
+		<div class="header__btns">
+			<button class="header__btn" data-toggle="modal" data-target="#addModal02" data-notetitle="課程資訊" data-whatever="" style="background-color: #009688;">新增+</button>
+		</div>
+		<div class="serviceBlock serviceBlock2">
+			<h2 class="serviceBlock__h2 ">課程資訊</h2>
+			<h2 class="serviceBlock__h4">標題</h2>
+			<div class="zone3">照護知識庫-課程資訊</div>
+			<h2 class="serviceBlock__h4">網址</h2>
+			<div class="zone4">https://ghsha.com/articles/349</div>
+			<div class="rightzone">
+				<button class="header__btn edit_btn" data-toggle="modal" data-target="#editModal02" data-notetitle="課程資訊1" data-title="照護知識庫-課程資訊" data-messageid="4" data-whatever="https://ghsha.com/articles/349" style="background-color: #009688;">編輯</button>
+			</div>
+			<h2 class="serviceBlock__h2 invisible"></h2>
+			<h2 class="serviceBlock__h4">標題</h2>
+			<div class="zone3">臺中市長期照顧管理中心 &gt; 照顧服務員訓練課程專區</div>
+			<h2 class="serviceBlock__h4">網址</h2>
+			<div class="zone4">http://ltcc2.health.taichung.gov.tw/files/11-1000-117.php</div>
+			<div class="rightzone">
+				<button class="header__btn edit_btn" data-toggle="modal" data-target="#editModal02" data-notetitle="課程資訊2" data-title="臺中市長期照顧管理中心 > 照顧服務員訓練課程專區" data-messageid="5" data-whatever="http://ltcc2.health.taichung.gov.tw/files/11-1000-117.php" style="background-color: #009688;">編輯</button>
+			</div>
+		</div>
+
+	</main>
+
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true" style="width:90%">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<input class="modal-id" type="hidden" id="part1_id" name="part1_id" value="">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">[修改]-照顧技巧</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">網址:</label>
+						<textarea class="form-control" id="part1_messagetext"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessageone();">送出修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="addModal01" tabindex="-1" role="dialog" aria-labelledby="addModal01Label" aria-hidden="true" style="width:90%">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addModal01Label">新增打氣區</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">標題:</label>
+						<input type="text" class="form-control" id="add01_titletext">
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">網址:</label>
+						<textarea class="form-control" id="add01_messagetext"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage02('add');">送出新增</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="editModal01" tabindex="-1" role="dialog" aria-labelledby="editModal01Label" aria-hidden="true" style="width:90%">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<input class="modal-id" type="hidden" id="edit01_id" name="edit01_id" value="">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModal01Label">[修改]-打氣區</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">標題:</label>
+						<input type="text" class="form-control" id="edit01_titletext">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">網址:</label>
+						<textarea class="form-control" id="edit01_messagetext"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage02('edit');">送出修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="addModal02" tabindex="-1" role="dialog" aria-labelledby="addModal02Label" aria-hidden="true" style="width:90%">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addModal02Label">新增課程資訊</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">標題:</label>
+						<input type="text" class="form-control" id="add02_titletext">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">網址:</label>
+						<textarea class="form-control" id="add02_messagetext"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage03('add');">送出新增</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="editModal02" tabindex="-1" role="dialog" aria-labelledby="editModal02Label" aria-hidden="true" style="width:90%">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<input class="modal-id" type="hidden" id="edit02_id" name="edit02_id" value="">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModal02Label">[修改]-課程資訊</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">標題:</label>
+						<input type="text" class="form-control" id="edit02_titletext">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label">網址:</label>
+						<textarea class="form-control" id="edit02_messagetext"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage03('edit');">送出修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

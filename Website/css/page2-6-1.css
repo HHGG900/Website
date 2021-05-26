@@ -1,0 +1,145 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 3, ../sass/page2-6-1.scss */
+#homepageBtn,
+#lastPage {
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* line 11, ../sass/page2-6-1.scss */
+.header {
+  text-align: left;
+}
+/* line 13, ../sass/page2-6-1.scss */
+.header h1 {
+  font-size: 1.2rem;
+  padding: 1rem 3rem;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  border: none;
+  background-color: #5677fc;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+.header h1:hover, .header h1:active {
+  background-color: #3d63fc;
+}
+
+/* line 22, ../sass/page2-6-1.scss */
+.main {
+  margin-top: 1.7rem;
+}
+
+/* line 26, ../sass/page2-6-1.scss */
+.tableContainer {
+  margin-top: 10px;
+  overflow-x: auto;
+  border-left: 1px solid #101010;
+  border-right: 1px solid #101010;
+}
+/* line 32, ../sass/page2-6-1.scss */
+.tableContainer .mainTable {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+/* line 36, ../sass/page2-6-1.scss */
+.tableContainer .mainTable .mainTable__th,
+.tableContainer .mainTable .mainTable__td {
+  border: 1px solid #101010;
+  white-space: nowrap;
+  padding: 0.5rem;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+/* line 47, ../sass/page2-6-1.scss */
+.tableContainer .mainTable thead .mainTable__th:first-child {
+  border-left: none;
+}
+/* line 50, ../sass/page2-6-1.scss */
+.tableContainer .mainTable thead .mainTable__th:last-child {
+  border-right: none;
+  text-align: left;
+}
+/* line 56, ../sass/page2-6-1.scss */
+.tableContainer .mainTable tbody .mainTable__th:first-child {
+  border-left: none;
+}
+/* line 59, ../sass/page2-6-1.scss */
+.tableContainer .mainTable tbody .mainTable__td {
+  text-align: left;
+}
+/* line 62, ../sass/page2-6-1.scss */
+.tableContainer .mainTable tbody .mainTable__td:last-child {
+  border-right: none;
+}
+/* line 65, ../sass/page2-6-1.scss */
+.tableContainer .mainTable tbody .mainTable__td.mainTable__td--file {
+  padding: 0;
+}
+
+/* line 71, ../sass/page2-6-1.scss */
+.mainTable__textarea {
+  width: 100%;
+}
+
+/* line 74, ../sass/page2-6-1.scss */
+.fileUploadTable {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0.5rem;
+}
+
+/* line 79, ../sass/page2-6-1.scss */
+.fileUploadTable__block {
+  border: 1px solid #bbbbbb;
+  background-color: #fff;
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+/* line 86, ../sass/page2-6-1.scss */
+.btnBar {
+  text-align: center;
+  margin-top: 10px;
+}

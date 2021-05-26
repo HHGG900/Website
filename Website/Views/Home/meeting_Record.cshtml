@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>工作會議紀錄 | 台灣長照大聯盟居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page3-1-5-1.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+				// history.back();
+			});
+
+			$(document).on("click", ".Wdate", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+
+
+		});
+
+		function doSubmit() {
+			if ($('#year').val() == '' || $('#season').val() == '' || $('#occur_date').val() == '' || $('#place').val() == '' ||
+				$('#participant').val() == '' || $('#uploadfile01').val() == '' || $('#uploadfile02').val() == '' ||
+				$('#content').val() == '' || $('#quiz_reviews').val() == '' || $('#period').val() == '') {
+				alert('您所填的表格欄位資料不完整，請確認，謝謝！');
+				var position = $("#year").offset().top;
+				$('html, body').animate({
+					scrollTop: position * 2 / 3
+				}, 1000);
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#form1').submit();
+			}
+		}
+	</script>
+	<style>
+		textarea {
+			width: 100%;
+		}
+
+		.text-center {
+			margin-top: 20px;
+		}
+
+		.fa-map {
+			font-size: 60pt;
+		}
+
+		.headerImg {
+			width: 200px;
+			text-align: center;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<div class="headerImg"><i class="fas fa-map"></i></div>
+		<h1>會議舉行</h1>
+	</header>
+	<main class="main wrapper">
+		<header class="text-center">
+			<h2 class="mainPlan__header">工作會議紀錄</h2>
+		</header>
+
+		<form id="form1" name="form1" method="post" action="/Home/meeting_Record" target="actFrame" enctype="multipart/form-data">
+			<div class="mainTable__container">
+				<table class="mainTable">
+					<tbody>
+						<tr>
+							<th>主題</th>
+							<td colspan="3">
+								<select id="year" name="year" class="form-control col-md-2 d-inline-block">
+									<option value="">---選擇年---</option>
+									<option value="109">109</option>
+									<option value="108">108</option>
+									<option value="107">107</option>
+								</select> 年度
+								<span style="margin-left: 30px;margin-right: 30px;">
+									<select id="season" name="season" class="form-control col-md-2 d-inline-block">
+										<option value="">---選擇季度---</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11</option>
+										<option value="12">12</option>
+									</select> 月份
+								</span>
+								類別 <select class="form-control col-md-2 d-inline-block" id="category" name="category">
+									<option value="">---請選擇---</option>
+									<option value="1">主管月會議</option>
+									<option value="2">居服工作月會議</option>
+									<!-- <option value="3">跨專業會議</option> -->
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>日期</th>
+							<td><input type="text" class="Wdate mainTable__input form-control col-md-6" id="occur_date" name="occur_date"></td>
+							<th>地點</th>
+							<td>
+								<input type="text" class="mainTable__input form-control" id="place" name="place">
+							</td>
+						</tr>
+						<tr>
+							<th>參加者</th>
+							<td colspan="3">
+								<input type="text" class="mainTable__input form-control" id="participant" name="participant">
+							</td>
+						</tr>
+						<tr>
+							<th>照片紀錄</th>
+							<td colspan="3">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-12 col-md-6">
+											<div class="mainTable__fileBlock form-control">
+												<input type="file" id="uploadfile01" name="uploadfile01">
+											</div>
+										</div>
+										<div class="col-12 col-md-6">
+											<div class="mainTable__fileBlock form-control">
+												<input type="file" id="uploadfile02" name="uploadfile02">
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="btnBar" style="position: relative; text-align: right; margin-top: 20px;">
+				關鍵字 <input type="text" class="form-control col-md-3 d-inline-block">
+				<button class="btn btn-blue"><i class="fas fa-search"></i>查詢</button>
+			</div>
+			<div class="mainTable__container">
+				<table class="mainTable">
+					<tbody>
+						<tr>
+							<th>議題與<br>討論內容</th>
+							<td colspan="3">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-12 col-md-12">
+											<textarea id="content" name="content" rows="6" class="form-control d-inline-block"></textarea>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br>
+			<div class="btnBar" style="position: relative; text-align: right;">
+				關鍵字 <input type="text" class="form-control col-md-3 d-inline-block">
+				<button class="btn btn-blue"><i class="fas fa-search"></i>查詢</button>
+			</div>
+			<div class="mainTable__container">
+				<table class="mainTable">
+					<tbody>
+						<tr>
+							<th>決議事項</th>
+							<td colspan="3">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-12 col-md-12">
+											<textarea id="quiz_reviews" name="quiz_reviews" rows="6" class="form-control d-inline-block"></textarea>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<div class="col-12 text-center">
+					追蹤期間設定
+					<select name="period" id="period">
+						<option value="">--- 請選擇 ---</option>
+						<option value="+10 mins">十分鐘</option>
+						<option value="+0.5 hours">半小時</option>
+						<option value="+1 hours">一小時</option>
+						<option value="+3 hours">三小時</option>
+						<option value="+1 days">一天</option>
+						<option value="+1 week">一周</option>
+						<option value="+0.5 months">半月</option>
+						<option value="+1 months">一月</option>
+						<option value="+3 months">三月</option>
+						<option value="+6 months">半年</option>
+						<option value="+1 years">一年</option>
+					</select>
+				</div>
+			</div>
+		</form>
+
+		<div class="text-center">
+			<button class="btn btn-blue" onclick="return doSubmit();">儲存</button>
+		</div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 187px; height: 200px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

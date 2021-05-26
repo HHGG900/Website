@@ -1,0 +1,124 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 5, ../sass/page2-5.scss */
+.header {
+  position: relative;
+}
+
+/* line 8, ../sass/page2-5.scss */
+.header__iconCell {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px;
+  text-align: center;
+}
+/* line 14, ../sass/page2-5.scss */
+.header__iconCell img {
+  margin: auto;
+}
+/* line 17, ../sass/page2-5.scss */
+.header__iconCell .h1 {
+  font-size: 2rem;
+  white-space: nowrap;
+}
+
+/* line 22, ../sass/page2-5.scss */
+.header__textCell {
+  margin-left: 280px;
+}
+
+/* line 25, ../sass/page2-5.scss */
+.header__btns {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* line 29, ../sass/page2-5.scss */
+.header__btn {
+  display: inline-block;
+  border: none;
+  background-color: #ea407a;
+  box-shadow: 0 8px 10px #0003;
+  font-size: 1.3rem;
+  width: 11.5rem;
+  height: 4rem;
+  color: #fff;
+}
+/* line 78, ../sass/_var.scss */
+.header__btn:hover, .header__btn:active {
+  background-color: #e7296a;
+}
+
+/* line 37, ../sass/page2-5.scss */
+.header__btn + .header__btn {
+  margin-left: 70px;
+}
+
+/* line 42, ../sass/page2-5.scss */
+.container.container-btn {
+  margin-top: 60px;
+  max-width: 500px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+/* line 47, ../sass/page2-5.scss */
+.container.container-btn .row {
+  margin-left: -30px;
+  margin-right: -30px;
+}
+/* line 50, ../sass/page2-5.scss */
+.container.container-btn .row .col-12 {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-bottom: 30px;
+}
+/* line 55, ../sass/page2-5.scss */
+.container.container-btn .row .col-12 .btnA {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border: none;
+  background-color: #5677fc;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+.container.container-btn .row .col-12 .btnA:hover, .container.container-btn .row .col-12 .btnA:active {
+  background-color: #3d63fc;
+}

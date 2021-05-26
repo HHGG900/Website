@@ -1,0 +1,1254 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>個案資料 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/5.13.0/css/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-3.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="~/libs/datepicker/css/bootstrap-datepicker3.min.css">
+
+	<!--    <script src="/js/jquery-1.10.2.min.js"></script>-->
+	<script src="/libs/datepicker/js/bootstrap-datepicker.min.js"></script>
+	<script src="/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>
+
+	<script>
+		var item = 1;
+		var toEdit = 0;
+
+		$(function () {
+
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('.datepicker').datepicker({
+				format: "yyyy-mm-dd",
+				language: "zh-TW",
+				// endDate: new Date(),
+				// endDate: '-18y',
+				// endDate: '+0d',
+				todayHighlight: true
+			});
+
+			$('.datepicker2').datepicker({
+				format: "yyyy-mm-dd",
+				language: "zh-TW",
+				// endDate: new Date(),
+				// endDate: '-18y',
+				endDate: '+0d',
+				todayHighlight: true
+			});
+
+			
+
+			$('#addNoteDetail').click(function () {
+				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+					'<label for="message-text" class="col-form-label col-md-6">' +
+					'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+					'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+					'</label>' +
+					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
+					'</div>';
+
+				$('#addDiv').append(addhtml);
+				item++;
+			});
+
+			$('#editModal').on('hidden.bs.modal', function (e) {
+				// do something...
+			});
+
+			$('#editModal').on('click', '.editModal', function () {
+				alert('button clicked');
+			});
+
+			$('#editModal').on('show.bs.modal', function (event) {
+				var modal = $(this);
+				var chk = $('input[type=radio]:checked').val();
+
+				if (typeof (chk) === "undefined") {
+					alert('請先確認修改項目！');
+					location.reload();
+					return false;
+				}
+
+				if (toEdit == 0) {
+					$.ajax({
+						url: "/case_manage/get_case_infomation_data",
+						type: "POST",
+						dataType: 'json',
+						data: {
+							id: chk,
+						},
+						success: function (data, status, xhr) {
+							console.log(data, status, xhr);
+							if (data.code == 200) {
+								toEdit = 1;
+								modal.find('#id').val(data.result.id);
+								modal.find('#firstname').val(data.result.firstname);
+								modal.find('#lastname').val(data.result.lastname);
+								// modal.find('#lastname').val(data.result.name);
+								modal.find('#gender').val(data.result.gender);
+								modal.find('#birthday').val(data.result.birthday);
+								modal.find('#pid_last_5').val(data.result.pid_last_5);
+								modal.find('#phone').val(data.result.phone);
+								modal.find('#economic_class').val(data.result.economic_class);
+								modal.find('#obstacle_category').val(data.result.obstacle_category);
+								modal.find('#obstacle_degree').val(data.result.obstacle_degree);
+								modal.find('#contact_person').val(data.result.contact_person);
+								modal.find('#contact_mobile').val(data.result.contact_mobile);
+								modal.find('#note_date').val(data.result.note_date);
+								modal.find('#cms_class').val(data.result.cms_class);
+								modal.find('#note_unit').val(data.result.note_unit);
+								modal.find('#familypart').val(data.result.familypart);
+								modal.find('#status').val(data.result.status);
+								modal.find('#no_service_reason').val(data.result.no_service_reason);
+								modal.find('#no_service_date').val(data.result.no_service_date);
+
+								var note_details = data.result.note_details_decode;
+								console.log(note_details);
+								var num = note_details.length;
+								addNoteDetail(num - 1);
+
+								for (var i = 0; i < note_details.length; i++) {
+									var j = i + 1;
+									// console.log(note_details);
+									modal.find('#note_item-' + j).val(note_details[i].note_item);
+									modal.find('#note_count-' + j).val(note_details[i].note_count);
+								}
+								// modal.find('#note_item-1').val(data.result.note_details_decode-0->note_item);
+								// modal.find('#note_count-1').val(data.result.note_details_decode[0]->note_count);
+							}
+							else {
+								alert('無此資料!');
+								return false;
+							}
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+							console.log(xhr, ajaxOptions, thrownError);
+							alert('發生錯誤!');
+							return false;
+						}
+					});
+
+				}
+
+				// var button = $(event.relatedTarget) // Button that triggered the modal
+				// var notetitle = button.data('notetitle') // Extract info from data-* attributes
+				// alert('notetitle='+notetitle);
+			});
+
+			$('#exampleModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget) // Button that triggered the modal
+				var notetitle = button.data('notetitle') // Extract info from data-* attributes
+				var recipient = button.data('whatever') // Extract info from data-* attributes
+				var messageid = button.data('messageid') // Extract info from data-* attributes
+				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+				var modal = $(this)
+				modal.find('.modal-id').val(messageid);
+				modal.find('.modal-title').text('修改公告： ' + notetitle);
+				modal.find('.modal-body textarea').val(recipient);
+			})
+
+			$('#addModal').find('#status').click(function () {
+				var thisValue = $(this).val();
+
+				if (thisValue == 2) {
+					$('#addModal').find('#no_service_reason_label').hide();
+					$('#addModal').find('#no_service_date_div').hide();
+				}
+				else if (thisValue == 1 || thisValue == 3) {
+					$('#addModal').find('#no_service_reason_label').show();
+					$('#addModal').find('#no_service_date_div').show();
+				}
+			})
+		});
+
+		function delNoteDetail(num) {
+			if (confirm('確定移除？')) {
+				$('#addDiv' + num).remove();
+			}
+		}
+		function Addhtml() {
+			var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+				'<label for="message-text" class="col-form-label col-md-6">' +
+				'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+				'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+				'</label>' +
+				'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
+				'</div>';
+			document.getElementById("addDiv").innerHTML += addhtml;
+			item++;
+		}
+
+		function Delhtml() {
+			var addhtml = '<div id="addDiv' +0 + '" class="form-group">' +
+				'<label for="message-text" class="col-form-label col-md-6">' +
+				'<a href="javascript:delNoteDetail(' + 0 + ');" class="delNoteDetail" info="' + 0 + '" ><i class="fas fa-minus-circle"></i></a>' +
+				'照會項目:<input class="form-control" id="note_item-' + 0 + '" name="note_item[]">' +
+				'</label>' +
+				'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + 0 + '" name="note_count[]"></label>' +
+				'</div>';
+			console.log(item);
+			document.getElementById("addDiv").innerHTML = addhtml;
+			item = 1;
+		}
+
+		function addNoteDetail(num) {
+			// var item = 2;
+			for (i = 0; i < num; i++) {
+				item++;
+				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+					'<label for="message-text" class="col-form-label col-md-6">' +
+					'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+					'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+					'</label>' +
+					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
+					'</div>';
+				// item++;
+				$('#editModal').find('#addDiv').append(addhtml);
+			}
+		}
+
+		function send_casedata_to_jubo(jsondata) {
+			$.ajax({
+				url: "https://smc.jubo.health/api/vitalLink/patient",
+				type: "POST",
+				// dataType:'json',
+				contentType: 'application/json',
+				headers: {
+					'Content-Type': 'application/json',
+					'apikey': '78A7HF2-N2E48GR-JFT7ARY-YB8P893',
+					'Access-Control-Allow-Origin': '*',
+					'Cookie': '__cfduid=d73cd404d30f3da4f10158bfb3d0df5941600048620'
+				},
+				// data: jsondata,
+				data: JSON.stringify(jsondata),
+				success: function (data, status, xhr) {
+					console.log(data, status, xhr);
+					alert('上傳成功!');
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(xhr, ajaxOptions, thrownError);
+					alert('發生錯誤: ' + thrownError);
+				}
+			});
+		}
+
+		var gender_label = { 'M': '男', 'F': '女', 'O': '其他' };
+		var familypart_label = { '2': '1', '3': '2', '4': '3' };
+		var status_label = { '2': 'present', '1': 'suspend', '3': 'closed' };
+
+		function sendmessage(type) {
+			if (type == "add") {
+				var firstname = $('#firstname').val();
+				var lastname = $('#lastname').val();
+				var name = firstname + lastname;
+				var gender = $('#gender').val();
+				var birthday = $('#birthday').val();
+				var pid_last_5 = $('#pid_last_5').val();
+				var phone = $('#phone').val();
+				var economic_class = $('#economic_class').val();
+				var obstacle_category = $('#obstacle_category').val();
+				var obstacle_degree = $('#obstacle_degree').val();
+				var contact_person = $('#contact_person').val();
+				var contact_mobile = $('#contact_mobile').val();
+				var note_date = $('#note_date').val();
+				var cms_class = $('#cms_class').val();
+				var note_unit = $('#note_unit').val();
+				var familypart = $('#familypart').val();
+				var status = $('#status').val();
+				var no_service_reason = $('#no_service_reason').val();
+				var no_service_date = $('#no_service_date').val();
+
+				var note_item_str = $('input[name="note_item[]"]').map(function () {
+					return $(this).val();
+				}).get().join('####');
+
+				var note_count_str = $('input[name="note_count[]"]').map(function () {
+					return $(this).val();
+				}).get().join('####');
+
+				if (name == '') {
+					alert('請輸入個案姓名！');
+					$('#name').focus();
+					return false;
+				}
+				else if (gender == '') {
+					alert('請選擇性別！');
+					$('#gender').focus();
+					return false;
+				}
+				else if (birthday == '') {
+					alert('請填寫個案生日！');
+					$('#birthday').focus();
+					return false;
+				}
+				else if (pid_last_5 == '') {
+					alert('請輸入身分證ID！');
+					$('#pid_last_5').focus();
+					return false;
+				}
+				else if (phone == '') {
+					alert('請輸入個案電話！');
+					$('#phone').focus();
+					return false;
+				}
+				else if (phone.search(/^[0-9]+$/) < 0) {
+					alert("「個案電話」欄位僅限數入數字");
+					$('#phone').focus();
+					return false;
+				}
+				else if (economic_class == '') {
+					alert('請輸入經濟別！');
+					$('#economic_class').focus();
+					return false;
+				}
+				// else if(obstacle_category=='') {
+				//     alert('請輸入障礙類別！');
+				//     $('#name').focus();
+				//     return false;
+				// }
+				// else if(obstacle_degree=='') {
+				//     alert('請輸入障礙程度！');
+				//     $('#name').focus();
+				//     return false;
+				// }
+				else if (contact_person == '') {
+					alert('請輸入聯絡人！');
+					$('#contact_person').focus();
+					return false;
+				}
+				else if (contact_mobile == '') {
+					alert('請輸入聯絡手機！');
+					$('#contact_mobile').focus();
+					return false;
+				}
+				else if (contact_mobile.search(/^[0-9]+$/) < 0) {
+					alert("「聯絡手機」欄位僅限數入數字");
+					$('#contact_mobile').focus();
+					return false;
+				}
+				else if (note_date == '') {
+					alert('請輸入照會日期！');
+					$('#note_date').focus();
+					return false;
+				}
+				else if (note_unit == '') {
+					alert('請輸入照會單位！');
+					$('#note_unit').focus();
+					return false;
+				}
+				else if (cms_class == '') {
+					alert('請選擇CMS等級！');
+					$('#cms_class').focus();
+					return false;
+				}
+				else if (familypart == '') {
+					alert('請選擇小家別！');
+					$('#familypart').focus();
+					return false;
+				}
+				else if (status == '') {
+					alert('請選擇個案狀態！');
+					$('#status').focus();
+					return false;
+				}
+				else {
+					// $('#addModal').hide();
+					// $('#wait_content').show();
+					// $('#wait').show();
+					var patientdata = {
+						lastName: firstname,
+						firstname: lastname,
+						checkInDate: note_date,
+						branch: '0001',
+						room: familypart_label[familypart],
+						idNumber: pid_last_5,
+						sex: gender_label[gender],
+						bed: '小家',
+						status: status_label[status],
+						userId: '5f1fc5e10dac9d003b2dc30e'
+					}
+					console.log(patientdata);
+					$.ajax({
+						url: "/case_manage/save_case_infomation",
+						type: "POST",
+						dataType: 'json',
+						data: {
+							user_id: '22',
+							name: name,
+							firstname: firstname,
+							lastname: lastname,
+							gender: gender,
+							birthday: birthday,
+							pid_last_5: pid_last_5,
+							phone: phone,
+							economic_class: economic_class,
+							obstacle_category: obstacle_category,
+							obstacle_degree: obstacle_degree,
+							contact_person: contact_person,
+							contact_mobile: contact_mobile,
+							note_date: note_date,
+							cms_class: cms_class,
+							note_item_str: note_item_str,
+							note_count_str: note_count_str,
+							note_unit: note_unit,
+							familypart: familypart,
+							status: status,
+							no_service_reason: no_service_reason,
+							no_service_date: no_service_date
+						},
+						success: function (data, status, xhr) {
+							console.log(data, status, xhr);
+							if (data.code == 200) {
+								alert(data.message);
+								// send_casedata_to_jubo(patientdata);
+								if (data.result != '') location.href = data.result;
+							}
+							else {
+								alert(data.message);
+								// ezBSAlert({
+								//     messageText: data.message,
+								//     alertType: "danger"
+								// }).done(function(e)
+								// {
+								//     location.href='/shoppingcart';
+								// });
+							}
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+							console.log(xhr, ajaxOptions, thrownError);
+							alert('發生錯誤!');
+						}
+					});
+				}
+			}
+			else {
+				var editModal = $('#editModal');
+
+				var id = editModal.find('#id').val();
+				// var name                = editModal.find('#name').val();
+				var firstname = editModal.find('#firstname').val();
+				var lastname = editModal.find('#lastname').val();
+				var name = firstname + lastname;
+				var gender = editModal.find('#gender').val();
+				var birthday = editModal.find('#birthday').val();
+				var pid_last_5 = editModal.find('#pid_last_5').val();
+				var phone = editModal.find('#phone').val();
+				var economic_class = editModal.find('#economic_class').val();
+				var obstacle_category = editModal.find('#obstacle_category').val();
+				var obstacle_degree = editModal.find('#obstacle_degree').val();
+				var contact_person = editModal.find('#contact_person').val();
+				var contact_mobile = editModal.find('#contact_mobile').val();
+				var note_date = editModal.find('#note_date').val();
+				var cms_class = editModal.find('#cms_class').val();
+				var note_unit = editModal.find('#note_unit').val();
+				var familypart = editModal.find('#familypart').val();
+				var status = editModal.find('#status').val();
+				var no_service_reason = editModal.find('#no_service_reason').val();
+				var no_service_date = editModal.find('#no_service_date').val();
+
+				var note_item_str = editModal.find('input[name="note_item[]"]').map(function () {
+					return $(this).val();
+				}).get().join('####');
+
+				var note_count_str = editModal.find('input[name="note_count[]"]').map(function () {
+					return $(this).val();
+				}).get().join('####');
+
+				if (name == '') {
+					alert('請輸入個案姓名！');
+					$('#name').focus();
+					return false;
+				}
+				else if (gender == '') {
+					alert('請選擇性別！');
+					$('#gender').focus();
+					return false;
+				}
+				else if (birthday == '') {
+					alert('請填寫個案生日！');
+					$('#birthday').focus();
+					return false;
+				}
+				else if (pid_last_5 == '') {
+					alert('請輸入身分證ID！');
+					$('#pid_last_5').focus();
+					return false;
+				}
+				else if (phone == '') {
+					alert('請輸入個案電話！');
+					$('#phone').focus();
+					return false;
+				}
+				else if (economic_class == '') {
+					alert('請輸入經濟別！');
+					$('#economic_class').focus();
+					return false;
+				}
+				else if (contact_person == '') {
+					alert('請輸入聯絡人！');
+					$('#contact_person').focus();
+					return false;
+				}
+				else if (contact_mobile == '') {
+					alert('請輸入聯絡手機！');
+					$('#contact_mobile').focus();
+					return false;
+				}
+				else if (note_date == '') {
+					alert('請輸入照會日期！');
+					$('#note_date').focus();
+					return false;
+				}
+				else if (cms_class == '') {
+					alert('請選擇CMS等級！');
+					$('#cms_class').focus();
+					return false;
+				}
+				else if (note_unit == '') {
+					alert('請輸入照會單位！');
+					$('#note_unit').focus();
+					return false;
+				}
+				else if (familypart == '') {
+					alert('請選擇小家別！');
+					$('#familypart').focus();
+					return false;
+				}
+				else if (status == '') {
+					alert('請選擇個案狀態！');
+					$('#status').focus();
+					return false;
+				}
+				else {
+					$('#editModal').hide();
+					$('#wait_content').show();
+					$('#wait').show();
+
+					var patientdata = {
+						lastName: lastname,
+						firstName: firstname,
+						// checkInDate: note_date,
+						branch: '0001',
+						room: familypart_label[familypart],
+						bed: '小家',
+						idNumber: pid_last_5,
+						sex: gender_label[gender],
+						status: status_label[status],
+						userId: '5f7305b178c794002fcc2b50'
+					}
+					console.log(patientdata);
+					$.ajax({
+						url: "/case_manage/save_case_infomation",
+						type: "POST",
+						dataType: 'json',
+						data: {
+							//user_id: '',
+							id: id,
+							name: name,
+							firstname: firstname,
+							lastname: lastname,
+							gender: gender,
+							birthday: birthday,
+							pid_last_5: pid_last_5,
+							phone: phone,
+							economic_class: economic_class,
+							obstacle_category: obstacle_category,
+							obstacle_degree: obstacle_degree,
+							contact_person: contact_person,
+							contact_mobile: contact_mobile,
+							note_date: note_date,
+							cms_class: cms_class,
+							note_item_str: note_item_str,
+							note_count_str: note_count_str,
+							note_unit: note_unit,
+							familypart: familypart,
+							status: status,
+							no_service_reason: no_service_reason,
+							no_service_date: no_service_date
+						},
+						success: function (data, status, xhr) {
+							console.log(data, status, xhr);
+							if (data.code == 200) {
+								alert(data.message);
+								// send_casedata_to_jubo(patientdata);
+								if (data.result != '') location.href = data.result;
+							}
+							else {
+								alert(data.message);
+							}
+						},
+						error: function (xhr, ajaxOptions, thrownError) {
+							console.log(xhr, ajaxOptions, thrownError);
+							alert('發生錯誤!');
+						}
+					});
+				}
+			}
+		}
+	</script>
+	<style>
+		.tableContainer table th, .tableContainer table td {
+			font-size: 14px;
+		}
+
+		.tableContainer {
+			border-left: 0px solid #000;
+			border-right: 0px solid #000;
+		}
+
+			.tableContainer table tbody td:last-child {
+				border-right: 1px solid #000;
+				;
+			}
+
+		.btnBgColorWithShadow--blue.btn-query {
+			padding: 5px 15px;
+		}
+
+		.modal-header {
+			padding: 0.5rem 0.5rem;
+		}
+
+		.modal-body {
+			padding: 0.5rem;
+		}
+
+		.modal-dialog {
+			width: 800px;
+			max-width: 800px;
+			margin: 30px auto;
+		}
+
+		.col-md-6 {
+			max-width: 49%;
+		}
+
+		.form-group {
+			margin-bottom: 0px;
+		}
+
+		.redfont {
+			color: red;
+		}
+
+		.tableContainer table th, .tableContainer table td {
+			padding: 2px;
+		}
+
+		.tableContainer table td {
+			color: #3851b4;
+		}
+
+		.fa-minus-circle {
+			color: red;
+		}
+	</style>
+</head>
+<!--<script src="/js/jquery-1.10.2.min.js"></script>-->
+
+
+
+
+<body>
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<img src="~/images/icon_profile.png" alt="">
+			<h1 class="h1">個案資料</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div class="rich-text"><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:36px; text-decoration:none;">動態個案管理是指單位督導在照顧管理過程中，通過統整的個案情況了解，快速了解.快速分應的一種管理模式。 </span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:36px; text-decoration:none;">1.成立發現與解決問題的管理機制 </span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:36px; text-decoration:none;">2.廣泛尋找問題 </span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:36px; text-decoration:none;">3.建立預警系統 </span></p><p style="line-height:0; margin-bottom:5px;"><span class="--mb--rich-text" data-boldtype="0" style="font-weight:400; font-size:24px; color:rgb(16, 16, 16); font-style:normal; letter-spacing:0px; line-height:36px; text-decoration:none;">4.制訂問題提案的管理辦法</span></p></div>
+		</div>
+	</header>
+
+	<main class="main">
+		<div class="wrapper" style="text-align: right; width:95%">
+			<button class="btn btn-blue" data-toggle="modal" data-target="#addModal" data-notetitle="新增個案" data-whatever="" onclick="Delhtml()"><i class="far fa-file-alt"></i>新增</button>
+			<button class="btn btn-blue" data-toggle="modal" data-target="#editModal" data-notetitle="修改個案"><i class="fas fa-edit"></i>修改</button>
+			<!--        <button class="btn btn-blue"><i class="fas fa-file-export"></i>排序</button>-->
+			<div class="tableContainer">
+				<table>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>個案姓名</th>
+							<th>性別</th>
+							<th>個案生日</th>
+							<th>身分證ID</th>
+							<th>個案電話</th>
+							<th>經濟別</th>
+							<th>障礙類別</th>
+							<th>障礙程度</th>
+							<th>聯絡人</th>
+							<th>聯絡手機</th>
+							<th>照會日期</th>
+							<th>CMS等級</th>
+							<th>照會項目</th>
+							<th>照會數量</th>
+							<th>照會單位</th>
+							<th>服務員別</th>
+							<th>個案狀態</th>
+							<th>無服務原因</th>
+							<th>無服務日期</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr style="background-color:#e65256;">
+							<td style="color:white;" rowspan="1">
+								<input type="radio" id="chk0" name="chk" value="6">
+							</td>
+							<td style="color:white;" rowspan="1">個案2</td>
+							<td style="color:white;" rowspan="1">女</td>
+							<td style="color:white;" rowspan="1">2009-01-07</td>
+							<td style="color:white;" rowspan="1">中文</td>
+							<td style="color:white;" rowspan="1">中文</td>
+							<td style="color:white;" rowspan="1">長照低收(未達1倍)</td>
+							<td style="color:white;" rowspan="1">興趣喜好1</td>
+							<td style="color:white;" rowspan="1">中度</td>
+							<td style="color:white;" rowspan="1">過去職業過去職業過去職業</td>
+							<td style="color:white;" rowspan="1">現在個性現在個性現在個性</td>
+							<td style="color:white;" rowspan="1">2020-03-01</td>
+							<td style="color:white;" rowspan="1">6</td>
+							<td style="color:white;">2622-</td>
+							<td style="color:white;">2</td>
+							<td style="color:white;" rowspan="1">BMIBMIBMI</td>
+							<td style="color:white;" rowspan="1">第三小家</td>
+							<td style="color:white;" rowspan="1">停案</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1"></td>
+						</tr>
+						<tr style="background-color:#e65256;">
+							<td style="color:white;" rowspan="2">
+								<input type="radio" id="chk1" name="chk" value="10">
+							</td>
+							<td style="color:white;" rowspan="2">黃一達</td>
+							<td style="color:white;" rowspan="2">男</td>
+							<td style="color:white;" rowspan="2">2020-04-05</td>
+							<td style="color:white;" rowspan="2">66666</td>
+							<td style="color:white;" rowspan="2">0+30+</td>
+							<td style="color:white;" rowspan="2">長照中低(1.5-2.5倍)</td>
+							<td style="color:white;" rowspan="2"></td>
+							<td style="color:white;" rowspan="2"></td>
+							<td style="color:white;" rowspan="2">21+.0</td>
+							<td style="color:white;" rowspan="2">0212.0</td>
+							<td style="color:white;" rowspan="2">2020-04-26</td>
+							<td style="color:white;" rowspan="2">1</td>
+							<td style="color:white;">1132</td>
+							<td style="color:white;">2</td>
+							<td style="color:white;" rowspan="2">32132</td>
+							<td style="color:white;" rowspan="2">第二小家</td>
+							<td style="color:white;" rowspan="2">停案</td>
+							<td style="color:white;" rowspan="2"></td>
+							<td style="color:white;" rowspan="2"></td>
+						</tr>
+						<tr style="background-color:#e65256;">
+							<td style="color:white;">231</td>
+							<td style="color:white;">33</td>
+						</tr>
+						<tr style="background-color:#009688;">
+							<td style="color:white;" rowspan="1">
+								<input type="radio" id="chk2" name="chk" value="74">
+							</td>
+							<td style="color:white;" rowspan="1">張某某</td>
+							<td style="color:white;" rowspan="1">男</td>
+							<td style="color:white;" rowspan="1">1980-01-01</td>
+							<td style="color:white;" rowspan="1">F123455555</td>
+							<td style="color:white;" rowspan="1">0988555555</td>
+							<td style="color:white;" rowspan="1">一般戶</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1">輕度</td>
+							<td style="color:white;" rowspan="1">張家長</td>
+							<td style="color:white;" rowspan="1">0988555555</td>
+							<td style="color:white;" rowspan="1">2020-08-01</td>
+							<td style="color:white;" rowspan="1">1</td>
+							<td style="color:white;"></td>
+							<td style="color:white;"></td>
+							<td style="color:white;" rowspan="1">照會單位照會單位照會單位</td>
+							<td style="color:white;" rowspan="1">第一小家</td>
+							<td style="color:white;" rowspan="1">穩定服務</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1"></td>
+						</tr>
+						<tr style="background-color:#009688;">
+							<td style="color:white;" rowspan="1">
+								<input type="radio" id="chk3" name="chk" value="7">
+							</td>
+							<td style="color:white;" rowspan="1">陳陳某1</td>
+							<td style="color:white;" rowspan="1">男</td>
+							<td style="color:white;" rowspan="1">2010-01-01</td>
+							<td style="color:white;" rowspan="1">F888888888</td>
+							<td style="color:white;" rowspan="1">09111111111</td>
+							<td style="color:white;" rowspan="1">長照中低(1.5-2.5倍)</td>
+							<td style="color:white;" rowspan="1">障礙類別</td>
+							<td style="color:white;" rowspan="1">重度</td>
+							<td style="color:white;" rowspan="1">陳家屬</td>
+							<td style="color:white;" rowspan="1">09111111111</td>
+							<td style="color:white;" rowspan="1">2020-01-08</td>
+							<td style="color:white;" rowspan="1">7</td>
+							<td style="color:white;">照會項目ㄙㄘdghdgd</td>
+							<td style="color:white;">20</td>
+							<td style="color:white;" rowspan="1">照會單位</td>
+							<td style="color:white;" rowspan="1">第二小家</td>
+							<td style="color:white;" rowspan="1">穩定服務</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1"></td>
+						</tr>
+						<tr style="background-color:#009688;">
+							<td style="color:white;" rowspan="1">
+								<input type="radio" id="chk4" name="chk" value="5">
+							</td>
+							<td style="color:white;" rowspan="1"> 余001</td>
+							<td style="color:white;" rowspan="1">男</td>
+							<td style="color:white;" rowspan="1">2020-04-01</td>
+							<td style="color:white;" rowspan="1">F123456789</td>
+							<td style="color:white;" rowspan="1">喜歡語言</td>
+							<td style="color:white;" rowspan="1">一般戶</td>
+							<td style="color:white;" rowspan="1">興趣喜好</td>
+							<td style="color:white;" rowspan="1">中度</td>
+							<td style="color:white;" rowspan="1">余昊騰</td>
+							<td style="color:white;" rowspan="1">0988777666</td>
+							<td style="color:white;" rowspan="1">2020-04-07</td>
+							<td style="color:white;" rowspan="1">1</td>
+							<td style="color:white;">照會項目1</td>
+							<td style="color:white;">2</td>
+							<td style="color:white;" rowspan="1">照會單位</td>
+							<td style="color:white;" rowspan="1">第二小家</td>
+							<td style="color:white;" rowspan="1">穩定服務</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1"></td>
+						</tr>
+						<tr style="background-color:#009688;">
+							<td style="color:white;" rowspan="3">
+								<input type="radio" id="chk5" name="chk" value="9">
+							</td>
+							<td style="color:white;" rowspan="3">林某1A</td>
+							<td style="color:white;" rowspan="3">男</td>
+							<td style="color:white;" rowspan="3">2020-04-17</td>
+							<td style="color:white;" rowspan="3">12345</td>
+							<td style="color:white;" rowspan="3">02-33334444</td>
+							<td style="color:white;" rowspan="3">長照低收(未達1倍)</td>
+							<td style="color:white;" rowspan="3">障礙類別</td>
+							<td style="color:white;" rowspan="3">輕度</td>
+							<td style="color:white;" rowspan="3">余001</td>
+							<td style="color:white;" rowspan="3">0988777666</td>
+							<td style="color:white;" rowspan="3">2020-04-30</td>
+							<td style="color:white;" rowspan="3">5</td>
+							<td style="color:white;">照會項目1</td>
+							<td style="color:white;">4</td>
+							<td style="color:white;" rowspan="3">明康護理所</td>
+							<td style="color:white;" rowspan="3">第一小家</td>
+							<td style="color:white;" rowspan="3">穩定服務</td>
+							<td style="color:white;" rowspan="3"></td>
+							<td style="color:white;" rowspan="3"></td>
+						</tr>
+						<tr style="background-color:#009688;">
+							<td style="color:white;">照會項目2</td>
+							<td style="color:white;">5</td>
+						</tr>
+						<tr style="background-color:#009688;">
+							<td style="color:white;">照會項目3</td>
+							<td style="color:white;">6</td>
+						</tr>
+						<tr style="background-color:#009688;">
+							<td style="color:white;" rowspan="1">
+								<input type="radio" id="chk6" name="chk" value="11">
+							</td>
+							<td style="color:white;" rowspan="1">黃大達01</td>
+							<td style="color:white;" rowspan="1">男</td>
+							<td style="color:white;" rowspan="1">2020-04-27</td>
+							<td style="color:white;" rowspan="1"> L77777777</td>
+							<td style="color:white;" rowspan="1">15661651515</td>
+							<td style="color:white;" rowspan="1">一般戶</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1">23</td>
+							<td style="color:white;" rowspan="1">253623566</td>
+							<td style="color:white;" rowspan="1">2020-05-13</td>
+							<td style="color:white;" rowspan="1">4</td>
+							<td style="color:white;"></td>
+							<td style="color:white;"></td>
+							<td style="color:white;" rowspan="1">3115156</td>
+							<td style="color:white;" rowspan="1">第二小家</td>
+							<td style="color:white;" rowspan="1">穩定服務</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1"></td>
+						</tr>
+						<tr style="background-color:#009688;">
+							<td style="color:white;" rowspan="1">
+								<input type="radio" id="chk7" name="chk" value="13">
+							</td>
+							<td style="color:white;" rowspan="1">余002</td>
+							<td style="color:white;" rowspan="1">男</td>
+							<td style="color:white;" rowspan="1">2020-05-06</td>
+							<td style="color:white;" rowspan="1">L77777776</td>
+							<td style="color:white;" rowspan="1">0988333222</td>
+							<td style="color:white;" rowspan="1">一般戶</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1">中度</td>
+							<td style="color:white;" rowspan="1">余媽</td>
+							<td style="color:white;" rowspan="1">0988777666</td>
+							<td style="color:white;" rowspan="1">2020-05-13</td>
+							<td style="color:white;" rowspan="1">2</td>
+							<td style="color:white;"></td>
+							<td style="color:white;"></td>
+							<td style="color:white;" rowspan="1">照會單位</td>
+							<td style="color:white;" rowspan="1">第一小家</td>
+							<td style="color:white;" rowspan="1">穩定服務</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;" rowspan="1"></td>
+						</tr>
+						<tr style="background-color:#930a9a;">
+							<td style="color:white;" rowspan="1">
+								<input type="radio" id="chk8" name="chk" value="8">
+							</td>
+							<td style="color:white;" rowspan="1">陳某2</td>
+							<td style="color:white;" rowspan="1">女</td>
+							<td style="color:white;" rowspan="1">0000-00-00</td>
+							<td style="color:white;" rowspan="1">22333</td>
+							<td style="color:white;" rowspan="1">02-99998888</td>
+							<td style="color:white;" rowspan="1">長照中低(1.5-2.5倍)</td>
+							<td style="color:white;" rowspan="1">障礙類別</td>
+							<td style="color:white;" rowspan="1">重度</td>
+							<td style="color:white;" rowspan="1">Yu</td>
+							<td style="color:white;" rowspan="1">0988670970</td>
+							<td style="color:white;" rowspan="1">2020-04-30</td>
+							<td style="color:white;" rowspan="1"></td>
+							<td style="color:white;"></td>
+							<td style="color:white;"></td>
+							<td style="color:white;" rowspan="1">明康護理所</td>
+							<td style="color:white;" rowspan="1">第二小家</td>
+							<td style="color:white;" rowspan="1">結案</td>
+							<td style="color:white;" rowspan="1">不繼續</td>
+							<td style="color:white;" rowspan="1">2020-04-22</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addModalLabel">新增個案</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>個案姓氏:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名字:<br>
+							<input class="form-control col-md-5 d-inline-block" id="firstname" placeholder="請輸入姓氏"><input class="form-control col-md-7 d-inline-block" id="lastname" placeholder="請輸入名字">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>性別:
+							<select class="form-control" id="gender">
+								<option value="">---請選擇---</option>
+								<option value="M">男</option>
+								<option value="F">女</option>
+								<option value="O">其他</option>
+							</select>
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>個案生日:<input class="form-control datepicker2" id="birthday">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>身分證ID:<input class="form-control" id="pid_last_5" maxlength="10">
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>個案電話:<input class="form-control" id="phone">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>經濟別:
+							<select class="form-control" id="economic_class">
+								<option value="">---請選擇---</option>
+								<option value="1">一般戶</option>
+								<option value="2">長照中低(1.5-2.5倍)</option>
+								<option value="3">長照低收(未達1.5倍)</option>
+								<option value="4">長照低收(未達1倍)</option>
+							</select>
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							障礙類別:<input class="form-control" id="obstacle_category">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							障礙程度:
+							<select class="form-control" id="obstacle_degree">
+								<option value="">---請選擇---</option>
+								<option value="1">重度</option>
+								<option value="2">中度</option>
+								<option value="3">輕度</option>
+							</select>
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>聯絡人:<input class="form-control" id="contact_person">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>聯絡手機:<input class="form-control" id="contact_mobile">
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>照會日期:<input class="form-control datepicker" id="note_date">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>CMS等級:
+							<select class="form-control" id="cms_class">
+								<option value="">---請選擇---</option>
+								<option value="1">第1級</option>
+								<option value="2">第2級</option>
+								<option value="3">第3級</option>
+								<option value="4">第4級</option>
+								<option value="5">第5級</option>
+								<option value="6">第6級</option>
+								<option value="7">第7級</option>
+								<option value="8">第8級</option>
+							</select>
+						</label>
+					</div>
+					<button onclick="Addhtml()">新增照會項目</button>
+					<button onclick="Delhtml()">削減照會項目</button>
+					<div id="addDiv" class="form-group">
+						<div id="addDiv0" class="form-group">
+							<label for="message-text" class="col-form-label col-md-6">
+								<a href="javascript:void(0);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
+								照會項目:<input class="form-control" id="note_item-1" name="note_item[]">
+							</label><label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-1" name="note_count[]"></label>
+						</div>
+					</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>照會單位:<input class="form-control" id="note_unit">
+							</label>
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>服務員別:
+								<select class="form-control" id="familypart">
+									<option value="">---請選擇---</option>
+									<option value="2">羅小賢</option>
+									<option value="3">阿賢</option>
+									<option value="4">大賢</option>
+								</select>
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>個案狀態:
+								<select class="form-control" id="status">
+									<option value="">---請選擇---</option>
+									<option value="2">穩定服務</option>
+									<option value="1">停案</option>
+									<option value="3">結案</option>
+								</select>
+							</label>
+							<label id="no_service_reason_label" for="no_service_reason" class="col-form-label col-md-6">無服務原因:<input class="form-control" id="no_service_reason"></label>
+						</div>
+						<div class="form-group" id="no_service_date_div">
+							<label for="no_service_date" class="col-form-label col-md-6">無服務日期:<input class="form-control datepicker" id="no_service_date"></label>
+							<label for="" class="col-form-label col-md-6"></label>
+						</div>
+					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage('add');">送出新增</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+		<input type="hidden" id="id" name="id" value="">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editModalLabel">修改個案</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>個案姓名:<br>
+							<input class="form-control col-md-4 d-inline-block" id="firstname" placeholder="請輸入姓氏"><input class="form-control col-md-8 d-inline-block" id="lastname" placeholder="請輸入名字">
+							<!-- <input class="form-control" id="name"> -->
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>性別:
+							<select class="form-control" id="gender">
+								<option value="">---請選擇---</option>
+								<option value="M">男</option>
+								<option value="F">女</option>
+								<option value="O">其他</option>
+							</select>
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>個案生日:<input class="form-control datepicker2" id="birthday">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>身分證ID:<input class="form-control" id="pid_last_5" maxlength="10">
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>個案電話:<input class="form-control" id="phone">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>經濟別:
+							<select class="form-control" id="economic_class">
+								<option value="">---請選擇---</option>
+								<option value="1">一般戶</option>
+								<option value="2">長照中低(1.5-2.5倍)</option>
+								<option value="3">長照低收(未達1.5倍)</option>
+								<option value="4">長照低收(未達1倍)</option>
+							</select>
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							障礙類別:<input class="form-control" id="obstacle_category">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							障礙程度:
+							<select class="form-control" id="obstacle_degree">
+								<option value="">---請選擇---</option>
+								<option value="1">重度</option>
+								<option value="2">中度</option>
+								<option value="3">輕度</option>
+							</select>
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>聯絡人:<input class="form-control" id="contact_person">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>聯絡手機:<input class="form-control" id="contact_mobile">
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>照會日期:<input class="form-control datepicker" id="note_date">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>CMS等級:
+							<select class="form-control" id="cms_class">
+								<option value="">---請選擇---</option>
+								<option value="1">第1級</option>
+								<option value="2">第2級</option>
+								<option value="3">第3級</option>
+								<option value="4">第4級</option>
+								<option value="5">第5級</option>
+								<option value="6">第6級</option>
+								<option value="7">第7級</option>
+								<option value="8">第8級</option>
+							</select>
+						</label>
+					</div>
+					
+					<div id="addDiv" class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<a href="javascript:addNoteDetail(1);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
+							照會項目:<input class="form-control" id="note_item-1" name="note_item[]">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-1" name="note_count[]"></label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>照會單位:<input class="form-control" id="note_unit">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>服務員別:
+							<select class="form-control" id="familypart">
+								<option value="">---請選擇---</option>
+								<option value="2">羅小賢</option>
+								<option value="3">阿賢</option>
+								<option value="4">大賢</option>
+							</select>
+						</label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>個案狀態:
+							<select class="form-control" id="status">
+								<option value="">---請選擇---</option>
+								<option value="2">穩定服務</option>
+								<option value="1">停案</option>
+								<option value="3">結案</option>
+							</select>
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">無服務原因:<input class="form-control" id="no_service_reason"></label>
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">無服務日期:<input class="form-control datepicker" id="no_service_date"></label>
+						<label for="message-text" class="col-form-label col-md-6"></label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage('edit');">送出修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

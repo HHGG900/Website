@@ -1,0 +1,862 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>督導首頁 | 台灣伯佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page3-1.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link rel="stylesheet" href="~/css/plugins/iCheck/all.css">
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script> -->
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+	<style>
+		.sectionFunc .sectionFunc__a {
+			padding-left: 39px;
+		}
+
+		.nameDisplay {
+			position: absolute;
+			left: 10px;
+			top: 0;
+		}
+
+		.custom-control-input:disabled ~ .custom-control-label {
+			color: #000;
+		}
+
+		.alertCss {
+			max-height: 300px;
+			min-height: 100px;
+			overflow-y: auto;
+			/*color: #007bff;*/
+		}
+
+		.table th, .table td {
+			padding-top: 8px;
+			padding-bottom: 8px;
+		}
+
+		.table {
+			border-collapse: collapse;
+		}
+
+		.chk {
+			position: relative;
+			bottom: 5px;
+			display: none;
+		}
+
+		#saveBtn {
+			display: none;
+		}
+
+		.alertfont {
+			font-size: 1.2rem;
+		}
+
+		input[type=checkbox] {
+			width: 20px;
+			height: 20px;
+		}
+
+		#problem {
+			border: none;
+			border-bottom: 1px solid #bbbbbb;
+			background-color: transparent;
+			font-size: 1rem;
+			cursor: pointer;
+		}
+
+		.modal-header {
+			padding: 0.5rem 0.5rem;
+		}
+
+		.modal-body {
+			padding: 0.5rem;
+		}
+
+		.modal-dialog {
+			width: 800px;
+			max-width: 800px;
+			margin: 30px auto;
+		}
+
+		.col-md-6 {
+			max-width: 49%;
+		}
+
+		.form-group {
+			margin-bottom: 0px;
+		}
+
+		.redfont {
+			color: red;
+		}
+	</style>
+</head>
+
+
+
+<body>
+	<div class="nameDisplay">
+		黃國達 您好！
+		您可切換至 主要職務-<a href="javascript:void(0)" onclick="choosePos(22, 3)">主任</a>
+	</div>
+	<div class="fixedBtns">
+		<button id="problem" data-toggle="modal" data-target="#addModal1" data-notetitle="系統異常反映" data-whatever="">系統異常反映</button>
+		<button id="problem" data-toggle="modal" data-target="#addModal2" data-notetitle="操作問題反映">操作問題反映</button>
+		<button id="problem" data-toggle="modal" data-target="#addModal3" data-notetitle="輔導反映">輔導反映</button>
+		<button id="logout">登出</button>
+	</div>
+	<header>
+		<p class="slogan">你的臉是為了呈現上天賜給人類最貴重的禮物--微笑 必定要成為你工作最大的助力</p>
+	</header>
+	<main>
+		<div class="wrapper">
+			<h1>主任首頁</h1>
+			<table class="table">
+				<tbody>
+					<form method="post" action="/Home/Director">
+						<tr>
+							<th class="table_thBorder table_thBorder--orange table_thBlock table_thBlock--orange">
+								打卡欄
+							</th>
+							<td class="table_tdBorder table_tdBorder--orange">
+								<label for="">
+									<div class="custom-control custom-checkbox checkbox-lg2">
+										<input type="checkbox" class="custom-control-input" id="workButton" name="workButton">
+										<label class="custom-control-label" for="workButton">上班打卡</label>
+									</div>
+								</label>
+								<label for="">
+									<div class="custom-control custom-checkbox checkbox-lg2">
+										<input type="checkbox" class="custom-control-input" id="offworkButton" name="offworkButton">
+										<label class="custom-control-label" for="offworkButton">下班打卡</label>
+									</div>
+								</label>
+							</td>
+							<td class="table_tdBtn"></td>
+						</tr>
+						<tr>
+							<th class="table_thBorder table_thBorder--orange table_thBlock table_thBlock--red">自我感控</th>
+							<td class="table_tdBorder table_tdBorder--orange">
+								<label for="">
+									<div class="custom-control custom-checkbox checkbox-lg2">
+										<input type="checkbox" class="custom-control-input" id="check1" name="temperature" value="1">
+										<label class="custom-control-label" for="check1">量體溫OK</label>
+									</div>
+								</label>
+								<label for="">
+									<div class="custom-control custom-checkbox checkbox-lg2">
+										<input type="checkbox" class="custom-control-input" id="check2" name="Hand" value="2">
+										<label class="custom-control-label" for="check2">手部清潔OK</label>
+									</div>
+								</label>
+								<span class="span_spacer"></span>必要時
+								<label for="">
+									<div class="custom-control custom-checkbox checkbox-lg2">
+										<input type="checkbox" class="custom-control-input" id="check3" name="Mask" value="3">
+										<label class="custom-control-label" for="check3">戴口罩OK</label>
+									</div>
+								</label>
+								<label for="">
+									<div class="custom-control custom-checkbox checkbox-lg2">
+										<input type="checkbox" class="custom-control-input" id="check4" name="Gloves" value="4">
+										<label class="custom-control-label" for="check4">戴手套OK</label>
+									</div>
+								</label>
+							</td>
+							<td class="table_tdBtn">
+								<input id="checkAll" type="submit" class="btn btn-info" value="存檔" />
+							</td>
+					</form>
+					</tr>
+					<tr>
+						<th class="table_thBorder table_thBorder--red table_thBlock table_thBlock--red">警示欄</th>
+						<td class="table_tdBorder table_tdBorder--red">
+							<form id="form1" name="form1" method="post" action="/home/alert_save" target="actFrame" enctype="multipart/form-data">
+								<div class="alertCss">
+									<input type="checkbox" id="alert_78" name="alert[]" class="chk" value="78">
+									1. 黃一達「照會日期」已過期了，該追蹤了！(109-06-25 14:51)                                                                 <br>
+									<input type="checkbox" id="alert_60" name="alert[]" class="chk" value="60">
+									2. 余001 該做複評了！(109-06-25 13:00)                                                                 <br>
+									<input type="checkbox" id="alert_59" name="alert[]" class="chk" value="59">
+									3. 余001 該做複評了！(109-06-25 12:49)                                                                 <br>
+									<input type="checkbox" id="alert_913" name="alert[]" class="chk" value="913">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">4. 余5a 有異常通報產生，請進行處理！(109-12-11)  </a>
+									<br>
+									<input type="checkbox" id="alert_912" name="alert[]" class="chk" value="912">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">5. 余5a 有異常通報產生，請進行處理！(109-12-11)  </a>
+									<br>
+									<input type="checkbox" id="alert_39" name="alert[]" class="chk" value="39">
+									6. 余002「照會日期」已過期了，該追蹤了！(109-05-14 20:20)                                                                 <br>
+									<input type="checkbox" id="alert_36" name="alert[]" class="chk" value="36">
+									7. 黃大達01「照會日期」已過期了，該追蹤了！(109-05-14 18:58)                                                                 <br>
+									<input type="checkbox" id="alert_35" name="alert[]" class="chk" value="35">
+									8. 林某1A「照會日期」已過期了，該追蹤了！(109-05-14 16:33)                                                                 <br>
+									<input type="checkbox" id="alert_34" name="alert[]" class="chk" value="34">
+									9. 陳某1「照會日期」已過期了，該追蹤了！(109-05-14 16:32)                                                                 <br>
+									<input type="checkbox" id="alert_28" name="alert[]" class="chk" value="28">
+									10. 個案2「照會日期」已過期了，該追蹤了！(109-05-08 21:10)                                                                 <br>
+									<input type="checkbox" id="alert_27" name="alert[]" class="chk" value="27">
+									11. 個案2「照會日期」已過期了，該追蹤了！(109-05-08 21:09)                                                                 <br>
+									<input type="checkbox" id="alert_26" name="alert[]" class="chk" value="26">
+									12. 陳某1「照會日期」已過期了，該追蹤了！(109-05-08 21:07)                                                                 <br>
+									<input type="checkbox" id="alert_383" name="alert[]" class="chk" value="383">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">13. 黃忠達 有異常通報產生，請進行處理！(109-09-24)  </a>
+									<br>
+									<input type="checkbox" id="alert_382" name="alert[]" class="chk" value="382">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">14. 黃忠達 有異常通報產生，請進行處理！(109-09-24)  </a>
+									<br>
+									<input type="checkbox" id="alert_353" name="alert[]" class="chk" value="353">
+									15. 「張某某」該做適應輔導了！(109-08-30 17:22)                                                                 <br>
+									<input type="checkbox" id="alert_362" name="alert[]" class="chk" value="362">
+									16. 個案 張某某 有吃飯不正常、飲食不正常 等家屬照顧紀錄，請追蹤處理！(109-08-30 19:45)                                                                 <br>
+									<input type="checkbox" id="alert_361" name="alert[]" class="chk" value="361">
+									17. Hnak 有申訴紀錄產生，請進行處理！(109-08-30 19:25)                                                                 <br>
+									<input type="checkbox" id="alert_345" name="alert[]" class="chk" value="345">
+									18. 有人該針對「異常事件-處理措施」做追蹤了！(109-08-21 14:43)                                                                 <br>
+									<input type="checkbox" id="alert_196" name="alert[]" class="chk" value="196">
+									19. 交通日誌有發生 交通安全 等不正常紀錄，請追蹤處理！(109-07-09 10:56)                                                                 <br>
+									<input type="checkbox" id="alert_189" name="alert[]" class="chk" value="189">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">20. 黃忠達 有異常通報產生，請進行處理！(109-07-03)  </a>
+									<br>
+									<input type="checkbox" id="alert_107" name="alert[]" class="chk" value="107">
+									21. 有人該針對「異常事件-處理措施」做追蹤了！(109-06-30 16:59)                                                                 <br>
+									<input type="checkbox" id="alert_109" name="alert[]" class="chk" value="109">
+									22. 陳陳某1 該做初評了！(109-06-30 17:11)                                                                 <br>
+									<input type="checkbox" id="alert_111" name="alert[]" class="chk" value="111">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">23. 黃中達 有異常通報產生，請進行處理！(109-06-30)  </a>
+									<br>
+									<input type="checkbox" id="alert_112" name="alert[]" class="chk" value="112">
+									24. 交通日誌有發生 人員安全 等不正常紀錄，請追蹤處理！(109-06-30 18:34)                                                                 <br>
+									<input type="checkbox" id="alert_85" name="alert[]" class="chk" value="85">
+									25. 有人該針對「異常事件-處理措施」做追蹤了！(109-06-25 16:11)                                                                 <br>
+									<input type="checkbox" id="alert_80" name="alert[]" class="chk" value="80">
+									26. 有人該針對「異常事件-處理措施」做追蹤了！(109-06-25 14:59)                                                                 <br>
+									<input type="checkbox" id="alert_82" name="alert[]" class="chk" value="82">
+									27. 有人該針對「異常事件-處理措施」做追蹤了！(109-06-25 15:37)                                                                 <br>
+									<input type="checkbox" id="alert_77" name="alert[]" class="chk" value="77">
+									28. 黃一達 該做初評了！(109-06-25 14:51)                                                                 <br>
+									<input type="checkbox" id="alert_79" name="alert[]" class="chk" value="79">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">29. 黃忠達 有異常通報產生，請進行處理！(109-06-25)  </a>
+									<br>
+									<input type="checkbox" id="alert_81" name="alert[]" class="chk" value="81">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">30. 余5a 有異常通報產生，請進行處理！(109-06-25)  </a>
+									<br>
+									<input type="checkbox" id="alert_57" name="alert[]" class="chk" value="57">
+									31. 余001 該做複評了！(109-06-25 12:39)                                                                 <br>
+									<input type="checkbox" id="alert_53" name="alert[]" class="chk" value="53">
+									32. 黃國達 有申訴紀錄產生，請進行處理！(109-06-04 17:15)                                                                 <br>
+									<input type="checkbox" id="alert_46" name="alert[]" class="chk" value="46">
+
+									<a class="alertfont" href="/exception_handling/index" target="_blank">33. 黃忠達 有異常通報產生，請進行處理！(109-06-02)  </a>
+									<br>
+									<input type="checkbox" id="alert_44" name="alert[]" class="chk" value="44">
+									34. 交通日誌有發生 準時與否 等不正常紀錄，請追蹤處理！(109-05-28 15:03)                                                                 <br>
+									<input type="checkbox" id="alert_43" name="alert[]" class="chk" value="43">
+									35. 交通日誌有發生 準時與否 等不正常紀錄，請追蹤處理！(109-05-28 14:03)                                                                 <br>
+									<input type="checkbox" id="alert_41" name="alert[]" class="chk" value="41">
+
+									<a class="alertfont" href="/records/family_careness" target="_blank">36. 個案 黃一達 有有去就醫 等家屬照顧紀錄，請追蹤處理！(109-05-22)  </a>
+									<br>
+									<input type="checkbox" id="alert_40" name="alert[]" class="chk" value="40">
+
+									<a class="alertfont" href="/records/family_careness" target="_blank">37. 個案 余002 有睡眠不正常、有去就醫 等家屬照顧紀錄，請追蹤處理！(109-05-22)  </a>
+									<br>
+									<input type="checkbox" id="alert_31" name="alert[]" class="chk" value="31">
+									38. 個案 黃一達 有吃飯不正常 等家屬照顧紀錄，請追蹤處理！(109-05-09 20:28)                                                                 <br>
+								</div>
+							</form>
+						</td>
+						<td class="table_tdBtn">
+							<button type="button" id="editBtn" class="btn btn-info" onclick="toEdit();">編輯</button>
+							<button type="button" id="saveBtn" class="btn btn-orange" onclick="toSave();">儲存</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+	<aside id="FuncSection" class="sectionFunc">
+		<div class="container">
+			<div class="row">
+				<div class="col-6 col-sm-4 col-xl-2">
+					<div class="sectionFunc__block">
+						<h3 class="sectionFunc__header">個案管理</h3>
+						<ul class="sectionFunc__list">
+							<li id="func1Btn02" class="sectionFunc__item">
+								<a href="/Home/Case_scheduling" class="sectionFunc__a sectionFunc__a--6">
+								<i class="fas fa-book"></i>照服排班
+								</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/New_cases" class="sectionFunc__a sectionFunc__a--6"><i class="fab fa-pagelines"></i>服務須知</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Case_information" class="sectionFunc__a sectionFunc__a--6"><i class="fas fa-id-card"></i>新增動態個案</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Assessing_care_plan_selection_cases" class="sectionFunc__a sectionFunc__a--6" style="height:75px;">
+									<i class="fas fa-child" style="top:10px;"></i>初評複評照顧計劃
+								</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Assessing_care_plan_selection_cases" class="sectionFunc__a sectionFunc__a--6"><i class="far fa-map"></i>複評估重計畫</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Case_information" class="sectionFunc__a sectionFunc__a--6">
+									<i class="far fa-hand-paper"></i>個案結案
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-6 col-sm-4 col-xl-2">
+					<div class="sectionFunc__block">
+						<h3 class="sectionFunc__header">每日例行</h3>
+						<ul class="sectionFunc__list">
+							<li class="sectionFunc__item">
+								<a href="/Home/abnormal_event_process" class="sectionFunc__a sectionFunc__a--7"><i class="fas fa-balance-scale"></i>異常處理</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Family_Care_Form" class="sectionFunc__a sectionFunc__a--7"><i class="fas fa-user-circle"></i>家屬表查閱</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Record_quality_inspection_report" class="sectionFunc__a sectionFunc__a--7"><i class="fas fa-book"></i>報表檢查</a>
+							</li>
+							<!--<li class="sectionFunc__item">
+								<a href="/Home/Sense_control_Report" class="sectionFunc__a sectionFunc__a--7"><i class="fas fa-briefcase-medical"></i>感控管理</a>
+								</li>-->
+							<li class="sectionFunc__item">
+								<a href="/Home/Family_Notice" class="sectionFunc__a sectionFunc__a--7"><i class="fas fa-book"></i>家屬公告</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Official_documents" class="sectionFunc__a sectionFunc__a--7"><i class="fas fa-calendar-alt"></i>公文收錄</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-6 col-sm-4 col-xl-2">
+					<div class="sectionFunc__block">
+						<h3 class="sectionFunc__header">每月例行</h3>
+						<ul class="sectionFunc__list">
+							<li class="sectionFunc__item">
+								<a href="/Home/Visit" class="sectionFunc__a sectionFunc__a--3"><i class="fas fa-users"></i>電訪或家訪</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Service_record" class="sectionFunc__a sectionFunc__a--3"><i class="fas fa-book"></i>服務紀錄核對</a>
+							</li>
+							<li id="func1Btn01" class="sectionFunc__item">
+								<a href="/Home/Column_area" class="sectionFunc__a sectionFunc__a--3" style="padding-top: 5px;padding-left: 5px;height: 60px;">
+									半月一篇新消息<br>
+									新技巧新支持文章
+								</a>
+								<a href="/Home/Column_area" class="sectionFunc__a sectionFunc__a--3">
+									<i class="fas fa-bullhorn"></i>新課程訊息
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-6 col-sm-4 col-xl-2">
+					<div class="sectionFunc__block">
+						<h3 class="sectionFunc__header">每年例行</h3>
+						<ul class="sectionFunc__list">
+							<!--	<li class="sectionFunc__item">
+								<a href="/Home/Sense_control" class="sectionFunc__a sectionFunc__a--5">
+									<i class="fas fa-medkit"></i>流行疫苗施打
+								</a>
+							</li>-->
+							<li class="sectionFunc__item">
+								<a href="/Home/Service_satisfaction" class="sectionFunc__a sectionFunc__a--5"><i class="fas fa-newspaper"></i>服務改善報告</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Physical_examination" class="sectionFunc__a sectionFunc__a--5"><i class="fas fa fa-user-md"></i>身體健檢</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-6 col-sm-4 col-xl-2">
+					<div class="sectionFunc__block">
+						<h3 class="sectionFunc__header" style="font-size:13pt;">主任交辦 做後回報</h3>
+						<ul class="sectionFunc__list">
+							<li class="sectionFunc__item">
+								<a href="/Home/Family_Notice_board" class="sectionFunc__a sectionFunc__a--6"><i class="far fa-user-circle"></i>家屬課程活動</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Education_Training" class="sectionFunc__a sectionFunc__a--6"><i class="fas fa-book"></i>教育訓練</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/meeting" class="sectionFunc__a sectionFunc__a--6"><i class="fas fa-map"></i>會議活動</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Employee_Benefits_Supervise" class="sectionFunc__a sectionFunc__a--6"><i class="fas fa-american-sign-language-interpreting"></i>員工福利紀錄</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-6 col-sm-4 col-xl-2">
+					<div class="sectionFunc__block">
+						<h3 class="sectionFunc__header">工作權益</h3>
+						<ul class="sectionFunc__list">
+							<li class="sectionFunc__item">
+								<a href="/Home/Employee_bulletin_board" class="sectionFunc__a sectionFunc__a--8"><i class="fas fa-users"></i>員工公告欄</a>
+							</li>
+							<li class="sectionFunc__item">
+								<a href="/Home/Appeal" class="sectionFunc__a sectionFunc__a--8"><i class="fas fa-archive"></i>申訴</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</aside>
+
+	<script src="~/Scripts/main.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<!-- iCheck 1.0.1 -->
+	<script src="~/Scripts/iCheck/icheck.min.js"></script>
+
+	<script>
+	$(function ()
+    {
+		//$('#conversation_record_print').click(function () {
+  //          location.href = "/familywork/columnzone";
+  //      });
+
+  //      $('#func1Btn02').click(function () {
+  //          window.open('/Home/conversation_record_print');
+  //      });
+
+        $('#workButton').click(function()
+        {
+            var act_type = $('#workButton').prop("checked") ? 1:2;
+
+            $.ajax({
+                url: "/Home/checkin",
+                async: true,
+                cache: false,
+                method: "POST",
+                data:{
+                    user_id : '22',
+                    type : 1,                               //1: 上班, 2:下班
+                    act_type : act_type                     //true: 打卡, false: 取消
+                },
+                success:function(data, status, xhr)
+                {
+                    console.log(data, status, xhr);
+                    alert(data.message);
+                    location.reload();
+                },
+                error:function(xhr, stauts, err)
+                {
+                    console.log(xhr, stauts, err);
+                }
+            });
+        });
+
+        $('#offworkButton').click(function()
+        {
+            var act_type = $('#offworkButton').prop("checked") ? 1:2;
+
+            $.ajax({
+                url: "/Home/checkin",
+                async: true,
+                cache: false,
+                method: "POST",
+                data:{
+                    user_id : '22',
+                    type : 2,                               //1: 上班, 2:下班
+                    act_type : act_type                     //true: 打卡, false: 取消
+                },
+                success:function(data, status, xhr)
+                {
+                    console.log(data, status, xhr);
+                    alert(data.message+'並登出！');
+					location.href ='/Home/Logout';
+                    // location.reload();
+
+                },
+                error:function(xhr, stauts, err)
+                {
+                    console.log(xhr, stauts, err);
+                }
+            });
+        });
+
+        // $('#check1,#check2,#check3,#check4').click(function()
+        $('#aaa').click(function()
+        {
+            var typeValue = $(this).val();
+            var act_type = $(this).prop("checked") ? 1:2;
+
+            $.ajax({
+                url: "/home/checkitem",
+                async: true,
+                cache: false,
+                method: "POST",
+                data:{
+                    user_id : '22',
+                    type : typeValue,                       //1:量體溫OK , 2:手部清潔OK, 3:戴口罩OK ,4:戴手套OK
+                    act_type : act_type                     //true:確認, false: 取消
+                },
+                success:function(data, status, xhr)
+                {
+                    console.log(data, status, xhr);
+                    alert(data.message);
+                    location.reload();
+                },
+                error:function(xhr, stauts, err)
+                {
+                    console.log(xhr, stauts, err);
+                }
+            });
+        });
+
+        //$('#checkAll').click(function()
+        //{
+        //    var check1 = $('#check1').prop("checked");
+        //    var check2 = $('#check2').prop("checked");
+        //    var check3 = $('#check3').prop("checked");
+        //    var check4 = $('#check4').prop("checked");
+        //    // var typeValue = $(this).val();
+        //    // var act_type = $(this).prop("checked") ? 1:2;
+
+        //    $.ajax({
+        //        url: "/home/checkitemAll",
+        //        async: true,
+        //        cache: false,
+        //        method: "POST",
+        //        data:{
+        //            user_id : '22',
+        //            types : { 1: check1, 2: check2, 3: check3, 4: check4 },     //1:量體溫OK , 2:手部清潔OK, 3:戴口罩OK ,4:戴手套OK
+        //            theDate: '2020-12-26'
+        //        },
+        //        success:function(data, status, xhr)
+        //        {
+        //            console.log(data, status, xhr);
+        //            alert(data.message);
+        //            location.reload();
+        //        },
+        //        error:function(xhr, stauts, err)
+        //        {
+        //            console.log(xhr, stauts, err);
+        //        }
+        //    });
+        //});
+
+        $('#logout').click(function()
+        {
+            if(confirm('確定登出?'))
+            {
+				location.href ="/Home/Logout";
+            }
+        });
+
+        //Red color scheme for iCheck
+        /* $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+            checkboxClass: 'icheckbox_minimal-red',
+            radioClass: 'iradio_minimal-red'
+        }); */
+    });
+
+	function choosePos(uid, num)
+    {
+        $.ajax({
+            url: "/home/setPosition",
+            type:"POST",
+            dataType:'json',
+            data: {
+                id: uid,
+                num: num
+            },
+            success: function(data,status,xhr)
+            {
+                // console.log(data,status,xhr);
+                if(data.code==200)
+                {
+                    if(data.result!='')
+                        location.href = data.result;
+                }
+                else
+                {
+                    alert(data.message);
+                }
+            },
+            error:function(xhr, ajaxOptions, thrownError)
+            {
+                console.log(xhr, ajaxOptions, thrownError);
+                alert('發生錯誤!');
+            }
+        });
+    }
+
+    function toEdit()
+    {
+        $('.chk').show();
+        $('#saveBtn').show();
+        $('#editBtn').hide();
+    }
+
+    function toSave()
+    {
+        var checked = 0;
+        $('.chk:checked').each(function () {
+            checked++;
+        });
+
+        if(checked>0)
+        {
+            $('#wait').show();
+            $('#wait_content').show();
+
+            $('#form1').submit();
+        }
+        else
+        {
+            toClear();
+        }
+    }
+
+    function toClear()
+    {
+        $('.chk').hide();
+        $('#saveBtn').hide();
+        $('#editBtn').show();
+    }
+
+    function sendmessage(pos)
+    {
+    	var modal 		= $("#addModal"+pos);
+	    var nickname	= modal.find('#nickname').val();
+	    var phone       = modal.find('#phone').val();
+	    var description = modal.find('#description').val();
+
+	    if(nickname=='') {
+	        alert('請輸入反映人員姓名！');
+	        modal.find('#nickname').focus();
+	        return false;
+	    }
+	    else if(phone=='') {
+	        alert('請輸入反映人員電話！');
+	        modal.find('#phone').focus();
+	        return false;
+	    }
+	    else if(phone.search(/^[0-9]+$/) < 0)
+	    {
+	        alert("「反映人員電話」欄位僅限數入數字");
+	        modal.find('#phone').focus();
+	        return false;
+	    }
+	    else
+	    {
+	    	event.preventDefault();
+     		var form = $("#myform"+pos)[0];
+     		var mydata = new FormData(form);
+
+	        $.ajax({
+	            url: "/user/sendmessage",
+	            type:"POST",
+	            dataType:'json',
+	            data: mydata,
+	            contentType: false,
+      			processData: false,
+	            success: function(data,status,xhr)
+	            {
+	                console.log(data,status,xhr);
+	                if(data.code==200) {
+	            		alert(data.message);
+	            		location.reload();
+	            	}
+	            	else {
+	            		alert(data.message);
+	            	}
+	            },
+	            error:function(xhr, ajaxOptions, thrownError)
+	            {
+	                console.log(xhr, ajaxOptions, thrownError);
+	                alert('發生錯誤!');
+	            }
+	        });
+	    }
+    }
+	</script>
+
+	<div class="modal fade" id="addModal1" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addModalLabel">系統異常反映</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="myform1" method="post" action="" enctype="multipart/form-data">
+						<input type="hidden" id="pos" name="pos" value="1">
+						<input type="hidden" id="unitcode" name="unitcode" value="0001">
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>反映人員姓名:<input class="form-control" id="nickname" name="nickname">
+							</label>
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>反映人員電話:<input class="form-control" id="phone" name="phone">
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-12">
+								<span class="redfont">＊</span>反映內容:<textarea class="form-control" id="description" name="description"></textarea>
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-12">
+								照片: <input type="file" name="file" id="file" class="form-control"><br>
+								<!-- <input type='button' class='btn btn-info' value='上傳' id='upload'> -->
+							</label>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage(1);">送出</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="addModal2" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addModalLabel">操作問題反映</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="myform2" method="post" action="" enctype="multipart/form-data">
+						<input type="hidden" id="pos" name="pos" value="2">
+						<input type="hidden" id="unitcode" name="unitcode" value="0001">
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>反映人員姓名:<input class="form-control" id="nickname" name="nickname">
+							</label>
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>反映人員電話:<input class="form-control" id="phone" name="phone">
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-12">
+								<span class="redfont">＊</span>反映內容:<textarea class="form-control" id="description" name="description"></textarea>
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-12">
+								照片: <input type="file" name="file" id="file" class="form-control"><br>
+								<!-- <input type='button' class='btn btn-info' value='上傳' id='upload'> -->
+							</label>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage(2);">送出</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="addModal3" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="addModalLabel">輔導反映</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="myform3" method="post" action="" enctype="multipart/form-data">
+						<input type="hidden" id="pos" name="pos" value="3">
+						<input type="hidden" id="unitcode" name="unitcode" value="0001">
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>反映人員姓名:<input class="form-control" id="nickname" name="nickname">
+							</label>
+							<label for="message-text" class="col-form-label col-md-6">
+								<span class="redfont">＊</span>反映人員電話:<input class="form-control" id="phone" name="phone">
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-12">
+								<span class="redfont">＊</span>反映內容:<textarea class="form-control" id="description" name="description"></textarea>
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-12">
+								照片: <input type="file" name="file" id="file" class="form-control"><br>
+								<!-- <input type='button' class='btn btn-info' value='上傳' id='upload'> -->
+							</label>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="sendmessage(3);">送出</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

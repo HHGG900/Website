@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>異常處理 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page3-1-2-2.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src="~/popper.js/popper.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<script>
+		var total = 0;
+
+		$(function () {
+
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$("input:radio").removeAttr("checked");
+			$("input:radio").attr("disabled", true);
+
+			$("input[name=category][value='12']").prop("checked", true);
+			$("input[name=category][value='12']").attr("disabled", false);
+
+			$("input[name=indicator][value='3']").prop("checked", true);
+			$("input[name=indicator][value='3']").attr("disabled", false);
+
+			$('input[type=checkbox]').click(function () {
+
+				var ret = $(this).prop("checked");
+
+				if (ret) total++;
+				else total--;
+
+				if (total > 2) {
+					alert('跨專業會診不能選超過2項！');
+					return false;
+				}
+			})
+		});
+
+		function doSubmit() {
+			var thisform = $('#form1');
+
+			if ($('#follow_up').val() == '') {
+				alert('請輸入檢討改善措施內容！');
+				$('#follow_up').focus();
+				return false;
+			}
+			else if ($('#period').val() == '') {
+				alert('請選擇追蹤時間！');
+				$('#period').focus();
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				thisform.submit();
+			}
+		}
+
+		function doSearch() {
+			var _keywords = $('#keywords');
+			var _f = $('#searchModal');
+			var _url_tag = "exception_handling/step2";
+			var _sn_key = 5;
+
+			if (_keywords.val() == "") {
+				alert('請輸入關鍵字！');
+				_keywords.focus();
+				return false;
+			}
+			else {
+				$.ajax({
+					url: "/search/advance",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						url_tag: _url_tag,
+						sn_key: _sn_key,
+						keywords: _keywords.val()
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						if (data.code == 200) {
+							if (data.result == 0) {
+								$('.modal-body').html('<span style="font-size:1.5rem;color:red">查無紀錄！</span>');
+							}
+							else if (data.result.length > 0) {
+								_f.find('.modal-body').html('');
+
+								for (var i = 0; i < data.result.length; i++) {
+									var innerHtml = '<div class="form-group"><div class="d-inline-block" style="vertical-align:top">(' + (i + 1) +
+										').</div> <div class="d-inline-block" style="width:90%;"><a href="javascript:void(0);" onclick="copyTo(\'' +
+										data.result[i] + '\');">' + data.desc[i] + '</a></div></div>';
+
+									_f.find('.modal-body').append(innerHtml);
+								}
+							}
+						}
+						else {
+							alert('無此資料!');
+							return false;
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+						return false;
+					}
+				});
+
+				_f.modal('show');
+			}
+		}
+
+		function copyTo(keyword) {
+			var enterStr = keyword + '\r\n';
+
+			$('#follow_up').append(enterStr);
+		}
+	</script>
+	<style>
+		.mainForm__searchBar {
+			width: 450px;
+		}
+
+		#keywords {
+			margin-left: 10px;
+		}
+		/*.mainForm__inputGroup {*/
+		/*white-space: initial;*/
+		/*position: relative;*/
+		/*top: -20px;*/
+		/*}*/
+		input[type=radio] {
+			width: 30px;
+			height: 30px;
+		}
+		/*input[type=radio]{
+			transform:scale(1.5);
+		}*/
+		.modal-header {
+			padding: 10px 10px;
+		}
+
+		.modal-body {
+			padding: 0.5rem;
+		}
+
+		.form-group {
+			margin-bottom: 0.5rem;
+		}
+
+		.modal-dialog {
+			width: 60%;
+			max-width: 60%;
+			margin: 30px auto;
+		}
+
+		.modal-footer {
+			padding: 10px 10px;
+		}
+
+		.modal-title {
+			font-size: 1.3rem;
+		}
+	</style>
+</head>
+
+
+
+<!--<script src="/js/jquery-1.10.2.min.js"></script>-->
+
+
+
+<body>
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+
+	<main class="main">
+		<form id="form1" name="form1" method="post" action="/exception_handling/add_step2" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="id" name="id" value="89">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-lg-6"><i class="fas fa-user-alt"></i> 服務人員：黃忠達</div>
+					<div class="col-12 col-lg-6">
+						紀錄時間：2020.12.30
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<header>事件描述</header>
+						<textarea name="" id="" rows="7" class="mainForm__textarea form-control" disabled="disabled">132</textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-2 mainForm__itemCol">異常類別</div>
+					<div class="col-12 col-lg-10">
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-1" name="category" value="1" disabled="disabled"><label for="category-1">個案進步</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-2" name="category" value="2" disabled="disabled"><label for="category-2">情緒改善</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-3" name="category" value="3" disabled="disabled"><label for="category-3">正向反饋</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-4" name="category" value="4" disabled="disabled"><label for="category-4">負向反饋</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-5" name="category" value="5" disabled="disabled"><label for="category-5">日照適應</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-6" name="category" value="6" disabled="disabled"><label for="category-6">情緒異常</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-7" name="category" value="7" disabled="disabled"><label for="category-7">行為異常</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-8" name="category" value="8" disabled="disabled"><label for="category-8">服藥異常</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-9" name="category" value="9" disabled="disabled"><label for="category-9">不明傷口</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-10" name="category" value="10" disabled="disabled"><label for="category-10">意外事件</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-11" name="category" value="11" disabled="disabled"><label for="category-11">不明疼痛</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-12" name="category" value="12"><label for="category-12">設備損壞</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-13" name="category" value="13" disabled="disabled"><label for="category-13">設施損壞</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-14" name="category" value="14" disabled="disabled"><label for="category-14">心理疾病</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-16" name="category" value="16" disabled="disabled"><label for="category-16">生命徵象異常</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="category-15" name="category" value="15" disabled="disabled"><label for="category-15">更好建議</label>
+						</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-2 mainForm__itemCol">
+						十大指標
+						<p class="mainForm__ps">（不是就不用選）</p>
+					</div>
+					<div class="col-12 col-lg-10">
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-1" name="indicator" value="1" disabled="disabled"><label for="indicator-1">跌倒</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-2" name="indicator" value="2" disabled="disabled"><label for="indicator-2">感染</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-3" name="indicator" value="3"><label for="indicator-3">約束</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-4" name="indicator" value="4" disabled="disabled"><label for="indicator-4">非計畫重改</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-5" name="indicator" value="5" disabled="disabled"><label for="indicator-5">壓瘡</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-6" name="indicator" value="6" disabled="disabled"><label for="indicator-6">疼痛</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-7" name="indicator" value="7" disabled="disabled"><label for="indicator-7">非計畫住院</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-8" name="indicator" value="8" disabled="disabled"><label for="indicator-8">多重用藥</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-9" name="indicator" value="9" disabled="disabled"><label for="indicator-9">憂鬱</label>
+						</span>
+						<span class="mainForm__inputGroup">
+							<input type="radio" id="indicator-10" name="indicator" value="10" disabled="disabled"><label for="indicator-10">管路移除</label>
+						</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<header>
+							執行紀錄：
+							<textarea name="" id="" rows="3" class="mainForm__textarea form-control" disabled="disabled"></textarea>
+						</header>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<header>
+							追蹤紀錄：
+							<textarea name="" id="" rows="3" class="mainForm__textarea form-control" disabled="disabled"></textarea>
+						</header>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<header class="mainForm__specialColHeader">
+							<p class="mainForm__specialColHeaderP">檢討改善措施</p>
+							<div class="mainForm__searchBar">關鍵字<input type="text" id="keywords" class="form-control col-md-7 d-inline-block"> <button class="btn btn-blue" onclick="doSearch(); return false;"><i class="fa fa-search"></i> 查詢</button></div>
+						</header>
+						<textarea name="follow_up" id="follow_up" rows="7" class="mainForm__textarea form-control"></textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 text-center">
+						追蹤期間設定
+						<select name="period" id="period" class="form-control col-md-2 d-inline-block">
+							<option value="">---請選擇---</option>
+							<option value="+10 mins">十分鐘</option>
+							<option value="+0.5 hours">半小時</option>
+							<option value="+1 hours">一小時</option>
+							<option value="+3 hours">三小時</option>
+							<option value="+1 days">一天</option>
+							<option value="+1 week">一周</option>
+							<option value="+0.5 months">半月</option>
+							<option value="+1 months">一月</option>
+							<option value="+3 months">三月</option>
+							<option value="+6 months">半年</option>
+							<option value="+1 years">一年</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 text-center">
+						<button class="btn btn-big btn-info" onclick="return doSubmit();">存檔</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</main>
+
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+		<input type="hidden" id="id" name="id" value="">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="searchModalLabel">查詢結果</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<img src="/images/loading2.gif" style="width: 200px;">
+				</div>
+				<div class="modal-footer">
+					<span style="color:red; float: left;">※ 點擊文字會複製到「檢討改善措施」欄位內。</span>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

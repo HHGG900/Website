@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="webphoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'webphone.dbo.sign_in' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="sign_in">
+          <Key>
+            <PropertyRef Name="usr_index" />
+          </Key>
+          <Property Name="usr_index" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usr_name" Type="varchar" MaxLength="50" />
+          <Property Name="usr_key" Type="varchar" MaxLength="50" />
+          <Property Name="work_yes_no" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="webphoneModelStoreContainer">
+          <EntitySet Name="sign_in" EntityType="Self.sign_in" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [sign_in].[usr_index] AS [usr_index], 
+    [sign_in].[usr_name] AS [usr_name], 
+    [sign_in].[usr_key] AS [usr_key], 
+    [sign_in].[work_yes_no] AS [work_yes_no]
+    FROM [dbo].[sign_in] AS [sign_in]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="webphoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sign_in">
+          <Key>
+            <PropertyRef Name="usr_index" />
+          </Key>
+          <Property Name="usr_index" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usr_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="usr_key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="work_yes_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="webphoneEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sign_in" EntityType="Self.sign_in" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="webphoneModelStoreContainer" CdmEntityContainer="webphoneEntities3">
+          <EntitySetMapping Name="sign_in">
+            <EntityTypeMapping TypeName="webphoneModel.sign_in">
+              <MappingFragment StoreEntitySet="sign_in">
+                <ScalarProperty Name="usr_index" ColumnName="usr_index" />
+                <ScalarProperty Name="usr_name" ColumnName="usr_name" />
+                <ScalarProperty Name="usr_key" ColumnName="usr_key" />
+                <ScalarProperty Name="work_yes_no" ColumnName="work_yes_no" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,212 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 3, ../sass/page2-3-3.scss */
+#homepageBtn,
+#lastPage {
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* line 16, ../sass/page2-3-3.scss */
+.h1 {
+  display: inline-block;
+  font-size: 1.7rem;
+  border: 1px solid #bbbbbb;
+  background-color: #fff;
+  width: 300px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+}
+
+/* line 26, ../sass/page2-3-3.scss */
+.btns {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* line 30, ../sass/page2-3-3.scss */
+.btnBgColorWithShadow--blue {
+  display: inline-block;
+  font-size: 1.4rem;
+  min-width: 212px;
+  height: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: #fff;
+  border: none;
+  background-color: #5677fc;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+.btnBgColorWithShadow--blue:hover, .btnBgColorWithShadow--blue:active {
+  background-color: #3d63fc;
+}
+/* line 40, ../sass/page2-3-3.scss */
+.btnBgColorWithShadow--blue.btn-query {
+    min-width: 0;
+    padding-right: 30px;
+    padding-left: 30px;
+    font-family: 'æ¨™æ¥·é«”', 'Noto Sans TC', 'å¾®è»Ÿæ­£é»‘é«”', sans-serif;
+}
+
+/* line 46, ../sass/page2-3-3.scss */
+.btnBgColorWithShadow--blue + .btnBgColorWithShadow--blue {
+  margin-left: 3.5rem;
+}
+
+/* line 49, ../sass/page2-3-3.scss */
+.queryBlock {
+  margin-top: 20px;
+  margin-bottom: 3rem;
+  text-align: center;
+  font-size: 1.4rem;
+}
+/* line 55, ../sass/page2-3-3.scss */
+.queryBlock input {
+  font-size: 1.4rem;
+  line-height: 1.5;
+  width: 100px;
+  height: 60px;
+  border: 1px solid #bbbbbb;
+}
+/* line 62, ../sass/page2-3-3.scss */
+.queryBlock p + p {
+  margin-top: 30px;
+}
+/* line 65, ../sass/page2-3-3.scss */
+.queryBlock .btnQuery {
+  height: 60px;
+  vertical-align: top;
+  border-color: #bbbbbb;
+}
+
+/* line 73, ../sass/page2-3-3.scss */
+.tableContainer {
+  margin-top: 10px;
+  overflow-x: auto;
+  border-left: 1px solid #101010;
+  border-right: 1px solid #101010;
+  margin-top: 30px;
+}
+/* line 80, ../sass/page2-3-3.scss */
+.tableContainer table {
+  min-width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+}
+/* line 85, ../sass/page2-3-3.scss */
+.tableContainer table th,
+.tableContainer table td {
+  border: 1px solid #101010;
+  white-space: nowrap;
+  padding: 5px 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1.4rem;
+}
+/* line 94, ../sass/page2-3-3.scss */
+.tableContainer table td {
+  width: 20%;
+  height: 7.5rem;
+}
+/* line 98, ../sass/page2-3-3.scss */
+.tableContainer table td.tdCamera {
+  vertical-align: bottom;
+  text-align: center;
+  background-image: url(../images/camera-solid.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+/* line 111, ../sass/page2-3-3.scss */
+.tableContainer table thead th:first-child {
+  border-left: none;
+}
+/* line 114, ../sass/page2-3-3.scss */
+.tableContainer table thead th:last-child {
+  border-right: none;
+}
+/* line 119, ../sass/page2-3-3.scss */
+.tableContainer table tbody td:first-child {
+  border-left: none;
+}
+/* line 122, ../sass/page2-3-3.scss */
+.tableContainer table tbody td:last-child {
+  border-right: none;
+}
+
+/* line 128, ../sass/page2-3-3.scss */
+#auditRule {
+  padding: 0.8rem 2rem;
+}
+/* line 131, ../sass/page2-3-3.scss */
+#auditRule header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+/* line 135, ../sass/page2-3-3.scss */
+#auditRule h2 {
+  display: inline-block;
+  width: 13rem;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 1.4rem;
+  border: none;
+  background-color: #fff;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+#auditRule h2:hover, #auditRule h2:active {
+  background-color: #f2f2f2;
+}
+/* line 143, ../sass/page2-3-3.scss */
+#auditRule .auditRule__tb {
+  width: 100%;
+  line-height: 1.75;
+}
+/* line 147, ../sass/page2-3-3.scss */
+#auditRule .auditRule__num {
+  text-align: right;
+  vertical-align: top;
+  width: 1px;
+  white-space: nowrap;
+  padding-right: 10px;
+}

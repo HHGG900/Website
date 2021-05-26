@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>內規管理 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+		});
+	</script>
+</head>
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<img src="~/images/icon_map.png" alt="">
+			<h1 class="h1">內規管理</h1>
+		</div>
+		<div class="header__textCell">
+			<p>
+				現代事業單位在建立和設計內部控制框架時必須遵循和依據的客觀規律和基本法則，稱為內部控制的基本原則。具體包括：
+			</p>
+			<ul>
+				<li>合法性原則；</li>
+				<li>全面性原則；</li>
+				<li>重要性原則；</li>
+				<li>有效性原則；</li>
+				<li>制衡性原則；</li>
+				<li>合理性原則；</li>
+				<li>適應性原則；</li>
+				<li>成本效益原則</li>
+			</ul>
+			<p>
+				內部控制的一般方法通常包括職責分工控制、授權控制、審核批准控制、預算控制、財產保護控制、會計系統控制、內部報告控制、經濟活動分析控制、績效考評控制、信息技術控制等。
+			</p>
+		</div>
+	</header>
+	<main class="main wrapper">
+		<div class="workBooks">
+			<a href="/Home/Employee_Handbook_1" class="workBooks__link">工作手冊1</a>
+			<a href="/Home/Employee_Handbook_2" class="workBooks__link">工作手冊2</a>
+			<a href="/Home/Employee_Handbook_3" class="workBooks__link">工作手冊3</a>
+			<a href="/Home/Employee_Handbook_4" class="workBooks__link">工作手冊4</a>
+			<a href="/Home/Employee_Handbook_5" class="workBooks__link">工作手冊5</a>
+		</div>
+		<div class="workBooks">
+			<a href="/Home/Employee_Handbook_4" class="workBooks__link">緊急意外事件處理辦法</a>
+			<a href="/Home/Personal_information_Method" class="workBooks__link">個資保安辦法</a>
+		</div>
+		<div class="workBooks">
+			<a href="/Home/Financial_Management_Method" class="workBooks__link">財務管理辦法</a>
+			<a href="/Home/Property_Management_Method" class="workBooks__link">財產管理辦法</a>
+			<a href="/Home/Work_safety_measures_for_employees" class="workBooks__link">工作安全規定</a>
+		</div>
+		<div class="workBooks">
+			<a href="/Home/Key_points_of_job_agency" class="workBooks__link">職務代理規定</a>
+			<a href="/Home/Employee_benefits" class="workBooks__link">員工福利辦法</a>
+		</div>
+	</main>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

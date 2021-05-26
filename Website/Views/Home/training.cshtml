@@ -1,0 +1,359 @@
+﻿@using Website.Models;
+@{ 
+	List<Internal_and_external_training> training = ViewBag.training;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>內外訓登錄 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/layout.css">
+	<link rel="stylesheet" href="/css/page2-2.css">
+	<link rel="stylesheet" href="/css/page2-3-3.css">
+	<link rel="stylesheet" href="/css/page2-4.css">
+	<link rel="stylesheet" href="/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+		});
+
+		function doSubmit() {
+			var thisform = $('#form1');
+			// var prof_consult_str = $('input[name="prof_consult[]"]:checkbox:checked').map(function() {
+			//     return $(this).val();
+			// }).get().join(',');
+
+			// if(typeof prof_consult_str == "undefined")
+			// {
+			//     alert('請選擇跨專業會診項目！');
+			//     $('#prof1').focus();
+			//     return false;
+			// }
+			// else
+			if ($('#year').val() == '') {
+				alert('請選擇發證年度！');
+				$('#year').focus();
+				return false;
+			}
+			else if ($('#course_title').val() == '') {
+				alert('請輸入課程名稱！');
+				$('#course_title').focus();
+				return false;
+			}
+			else if ($('#training_class').val() == '') {
+				alert('請選擇課程類型！');
+				$('#training_class').focus();
+				return false;
+			}
+			else if ($('#name').val() == '') {
+				alert('請輸入受訓者姓名！');
+				$('#name').focus();
+				return false;
+			}
+			else if ($('#hour').val() == '') {
+				alert('請輸入訓練時數！');
+				$('#hour').focus();
+				return false;
+			}
+			else if ($('#unit').val() == '') {
+				alert('請輸入訓練單位！');
+				$('#unit').focus();
+				return false;
+			}
+			else if ($('#certified_documents').val() == '') {
+				alert('請選擇檔案！');
+				$('#certified_documents').focus();
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				thisform.submit();
+			}
+		}
+
+		function dogg() {
+			var n = document.getElementById("s_year");
+			if n == null{
+				window.alert("請選擇年分");
+				return false;
+			}
+		}
+		function dohtml() {
+			console.log('123');
+			var a = "";
+			a += "<table>";
+			a += "<thead>";
+			a += "<tr>";
+			a += "<th>項次</th>";
+			a += "<th>訓練年度</th>";
+			a += "<th>受訓者</th>";
+			a += "<th>課程名稱</th>";
+			a += "<th>課程類型</th>";
+			a += "<th>時數</th>";
+			a += "<th>訓練單位</th>";
+			a += "</tr>";
+			a += "</thead>";
+			//a += "<tr>";
+			
+			//for
+			//a += '<td style="width: 5 %; ">'3'</td>';
+			//a += '<td style="width: 5%;">'3'</td>';
+			//a += '<td style="width: 10%;">'109'</td>';
+			//a += '<td style="width: 15%;">'黃小達黃阿皮'</td>';
+			//a += '<td style="width: 25%;">'FBFDBF'</td>';
+			//a += '<td style="width: 10%;">''</td>';
+			//a += '<td style="width: 5%;">'0'</td>';
+			//a += '<td style="width: 20%;">' + VC BB + '</td>';
+			//a += '</tr>';
+			a += "</table>";
+			a += '';
+			document.getElementById("abc").innerHTML = a;
+		}
+		function doSearch() {
+			$('#wait_content').show();
+			$('#wait').show();
+
+			$('#form2').submit();
+		}
+		
+		
+	</script>
+	<style>
+		.h1 {
+			display: inline-block;
+			width: 220px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			background-color: #5677fc;
+			color: white;
+		}
+
+		.tableContainer table tbody td {
+			font-size: 1.5rem;
+		}
+
+		.tableContainer table td {
+			font-size: 1.5rem;
+		}
+
+		.queryBlock input {
+			font-size: initial;
+			height: initial;
+		}
+
+		.tableContainer table th {
+			height: 5rem;
+		}
+
+		.tableContainer table td {
+			height: 3rem;
+		}
+		.auto-style1 {
+			left: 0px;
+			top: 0px;
+		}
+	</style>
+</head>
+
+
+
+
+<body style="zoom: 1;" onload="dohtml()">
+	<div class="fixedBtns"><button id="lastPage" onclick="history.back();">上一頁</button><button id="homepageBtn" onclick="location.href='/Home/Director'">回首頁</button></div>
+	<header class="auto-style1">
+		<div class="header__iconCell">
+			<!--        <img src="/images/icon_calendar.jpg" alt="" />-->
+			<h1 class="h1">內外訓登錄</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div class="text" style="padding: 0px;">
+				<p>依據"長期照顧服務人員訓練認證繼續教育及登錄辦法 "第九條-長照人員應自認證證明文件生效日起，每六年接受下列課程，積分合計達一百二十點以上：</p><p><span style="background-color: transparent;">            一、專業課程。二、專業品質。三、專業倫理。四、專業法規。</span><br></p><p><span style="background-color: transparent;">前項第二款至第四款繼續教育積分課程之分數，合計至少十二點，其中應包括消防安全、緊急應變、傳染病防治、性別敏感度及多元族群文化之課程；超過二十四點者，以二十四點計。</span></p><p>第一項長照人員依各該專門職業人員法規接受繼續教育課程性質相近者，其積分得相互認定。</p>
+			</div>
+		</div>
+	</header>
+
+	<main class="main wrapper">
+		<div class="serviceBlock">
+			<div class="container">
+				<form  method="post" action="/Home/training"  enctype="multipart/form-data">
+					<div class="row">
+						<div class="col-12 col-sm-3 serviceBlock__h3Col">&nbsp;</div>
+						<div class="col-12 col-sm-8">
+
+							<div class="serviceBlock__countTimeBar">
+							<label for="inputyear">	發證年度 <!-- <input type="text" class="form-control col-md-2 d-inline-block" id="year" name="year" /> -->
+								
+									<select id="year" name="year" class="form-control col-md-7 d-inline-block"  required >
+										<option value="">-請選擇-</option>
+										<option value="109">109</option>
+										<option value="108">108</option>
+										<option value="107">107</option>
+									</select>
+								</label>
+								<label for="inputcourse_title">課程名稱
+								
+									<input type="text" class="form-control col-md-6 d-inline-block" id="course_title" name="course_title" required  >
+								</label>
+							</div>
+							<div class="serviceBlock__countTimeBar">
+								<label for="inputname">受訓者姓名
+								
+									<input type="text" class="form-control col-md-6 d-inline-block" id="name" name="name"   required >
+								</label>
+								<label for="inputtraining_class">訓練類型
+								
+									<select id="training_class" name="training_class" class="form-control col-md-7 d-inline-block"  required >
+										<option value="">-請選擇-</option>
+										<option value="專業課程">專業課程</option>
+										<option value="專業品質">專業品質</option>
+										<option value="專業倫理">專業倫理</option>
+										<option value="專業法規">專業法規</option>
+									</select>
+								</label>
+							</div>
+							<div class="serviceBlock__countTimeBar">
+								<label for="inputhour">訓練時數
+								
+									<input type="text" class="form-control col-md-6 d-inline-block" id="hour" name="hour"  required >
+								</label>
+								<label for="inputunit">訓練單位 
+									<input type="text" class="form-control col-md-6 d-inline-block" id="unit" name="unit" required  >
+								</label>
+							</div>
+							<div class="serviceBlock__whiteBlock"><header>訓練證明文件存擋</header>
+								<label for="inputcertified_documents">
+								
+									<input type="file" id="certified_documents" name="certified_documents" required >
+								</label>
+							</div>
+							<div class="text-center">
+								<input type="submit" class="serviceBlock__saveBtn btn-w btn-orange" value="存檔"onclick="return doSubmit();">
+							</div>
+							
+						</div>
+						<div class="col-12 col-sm-3 serviceBlock__h3Col">&nbsp;</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+		<hr>
+		<br>
+	</main>
+
+
+
+	<header class="header wrapper">
+		<form id="form2" action="/Home/training" name="form2" method="post">
+			<div class="queryBlock">
+				<p style="font-size: 24pt;">內外訓練查詢</p>
+				<p>
+					發證年度 <select id="s_year" name="s_year" class="form-control col-md-6 d-inline-block" required>
+						<option value="">--- 請選擇 ---</option>
+						<option value="109">109</option>
+						<option value="108">108</option>
+						<option value="107">107</option>
+					</select> 年&nbsp;&nbsp;&nbsp;
+					受訓者姓名 <input type="text" id="s_train_name" name="s_train_name" class="form-control col-md-6 d-inline-block" value="" required>
+					<button class="btn btn-blue"  style="margin-left: 30px;"><i class="fas fa-search" onclick="dogg();"></i>查詢</button>
+				</p>
+			</div>
+		</form>
+	</header>
+	
+	<main class="main">
+		<form action="">
+			<div class="wrapper">
+				<div class="tableContainer">
+					<table>
+						<thead>
+							<tr>
+								@*<th>項次</th>*@
+								<th>訓練年度</th>
+								<th>受訓者</th>
+								<th>課程名稱</th>
+								<th>課程類型</th>
+								<th>時數</th>
+								<th>訓練單位</th>
+							</tr>
+						</thead>
+						<tbody>
+							@try
+							{
+								foreach (Internal_and_external_training tarin in training)
+								{
+									<tr>
+										<td style="width: 5%;" hidden="hidden">
+											@tarin.year
+										</td>
+										<td style="width: 10%;">
+											@tarin.year
+										</td>
+										<td style="width: 15%;">
+											@tarin.name
+										</td>
+										<td style="width: 25%;">
+											@tarin.course_title
+										</td>
+										<td style="width: 10%;">
+											@tarin.training_class
+										</td>
+										<td style="width: 5%;">
+											@tarin.hour
+										</td>
+										<td style="width: 20%;">
+											@tarin.unit
+										</td>
+									</tr>
+								}
+							}
+							catch { }
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</form>
+	</main>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

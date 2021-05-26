@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>服務紀錄核對 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page3-1-1-1-1.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src="~/Scripts/jquery.cookie.js"></script>
+	<script>
+		var choosenId = 0;
+
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('.cases__case').click(function () {
+				var info = $(this).attr('info');
+
+				if ($('#s_year').val() == '') {
+					alert('請選擇年份');
+					return false;
+				}
+				else if ($('#s_month').val() == '') {
+					alert('請選擇月份');
+					return false;
+				}
+				else {
+					$("#wait_content").show();
+					$("#wait").show();
+
+					setTimeout(check_case(info), 5000);
+				}
+			});
+
+
+
+
+			$('#first').click(function () {
+				$.cookie("s_year", $('#s_year').val(), {
+					expires: 2147483647, path: '/', domain: '', secure: true
+				});
+				$.cookie("s_month", $('#s_month').val(), {
+					expires: 2147483647, path: '/', domain: '', secure: true
+				});
+
+				location.href = '/case_manage/service_statistics/' + choosenId;
+			});
+
+			$('#s_year, #s_month').change(function () {
+				var s_year = $('#s_year').val();
+				var s_month = $('#s_month').val();
+
+				if (s_year != '' && s_month != '') {
+					get_service_datas();
+				}
+			});
+
+		});
+
+		function check_case(info) {
+			$.ajax({
+				url: "/case_manage/check_case",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					id: info
+				},
+				success: function (data, status, xhr) {
+					console.log(data, status, xhr);
+					$('#wait_content').hide();
+					$('#wait').hide();
+					$('.checkzone').html('');
+
+					if (data.code == 200) {
+						if (data.result) {
+							choosenId = data.result.id;
+
+							$('#checkzone' + choosenId).html('<i class="fas fa-check-circle"></i>');
+							$('#first').show();
+							$('#second').show();
+						}
+						else {
+							alert('not');
+							$('#first').hide();
+							$('#second').hide();
+						}
+
+						/* ezBSAlert({
+							messageText: data.message,
+							alertType: "success"
+						}).done(function(e)
+						{
+							// location.href='/home/index';
+						}); */
+					}
+					else {
+						ezBSAlert({
+							messageText: data.message,
+							alertType: "danger"
+						}).done(function (e) {
+							// location.href='/shoppingcart';
+						});
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(xhr, ajaxOptions, thrownError);
+					alert('發生錯誤!');
+
+					/* PM.erro({
+						title: '確認error',
+						text: '請重新確認！'
+					}); */
+				}
+			});
+		}
+
+		function get_service_datas() {
+			$.ajax({
+				url: "/case_manage/get_service_datas",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					year: $('#s_year').val(),
+					month: $('#s_month').val()
+				},
+				success: function (data, status, xhr) {
+					console.log(data, status, xhr);
+					$('#wait_content').hide();
+					$('#wait').hide();
+					$('.hasdone').html('');
+
+					if (data.code == 200) {
+						if (data.result.length > 0) {
+							for (var i = 0; i < data.result.length; i++) {
+								$('#hasdone' + data.result[i].client_id).html('<i class="fas fa-file-invoice"></i>');
+								// $('#checkzone'+ data.result[i].client_id).html('<i class="fas fa-file-invoice"></i>');
+							}
+						}
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(xhr, ajaxOptions, thrownError);
+					alert('發生錯誤!');
+				}
+			});
+		}
+	</script>
+	<style>
+		.hint {
+			padding: 0px 10px;
+		}
+
+		.cases__case, .btnSet__btn {
+			cursor: pointer;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+		}
+
+		.fa-file-invoice {
+			color: orange;
+			font-size: 24px;
+		}
+
+		.check2 {
+			font-size: 24px;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1 class="h1">服務紀錄核對---選擇個案</h1>
+		<div style="margin-top: 30px;font-size: 1.2rem;">
+			收費月份：
+			<select id="s_year" name="s_year" class="form-control col-md-2 d-inline-block">
+				<option value="">---選擇年---</option>
+				<option value="109">109</option>
+				<option value="108">108</option>
+				<option value="107">107</option>
+				<!--                    <option --><!-- >109</option>-->
+				<!--                    <option --><!-- >108</option>-->
+			</select>  年
+			<select class="form-control col-md-2 d-inline-block" name="s_month" id="s_month">
+				<option value="">---選擇月---</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>
+			月
+		</div>
+	</header>
+	<main class="main wrapper">
+		<ul class="cases">
+			<li class="cases__case" info="5">
+				余001                <span id="checkzone5" class="checkzone"></span>
+				<span id="hasdone5" class="hasdone"></span>
+			</li>
+			<li class="cases__case" info="7">
+				陳陳某1                <span id="checkzone7" class="checkzone"></span>
+				<span id="hasdone7" class="hasdone"></span>
+			</li>
+			<li class="cases__case" info="9">
+				林某1A                <span id="checkzone9" class="checkzone"></span>
+				<span id="hasdone9" class="hasdone"></span>
+			</li>
+			<li class="cases__case" info="11">
+				黃大達01                <span id="checkzone11" class="checkzone"></span>
+				<span id="hasdone11" class="hasdone"></span>
+			</li>
+			<li class="cases__case" info="13">
+				余002                <span id="checkzone13" class="checkzone"></span>
+				<span id="hasdone13" class="hasdone"></span>
+			</li>
+			<li class="cases__case" info="74">
+				張某某                <span id="checkzone74" class="checkzone"></span>
+				<span id="hasdone74" class="hasdone"></span>
+			</li>
+		</ul>
+		<div class="btnSet">
+			<button id="first" class="btnSet__btn" style="display:none">服務紀錄登打</button>
+		</div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

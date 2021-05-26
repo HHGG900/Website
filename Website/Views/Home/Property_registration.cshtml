@@ -1,0 +1,397 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>財產登錄 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/5.13.0/css/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<link rel="stylesheet" href="~/css/page2-3-3.css">
+	<link rel="stylesheet" href="~/css/page2-4.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$(document).on("click", "#buy_date", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+
+			// 新增 ~ 符號來表示 +-
+			// $.mask.definitions['~']='[+-]';
+			// $("#buy_date").mask("999-99");
+
+			$('#toPrint').click(function () {
+
+				window.open("/property_record/toprint");
+
+			});
+
+		});
+
+		function doSubmit() {
+
+			if ($('#category_code').val() == '') {
+				alert('請輸入類別代碼！');
+				$('#category_code').focus();
+				return false;
+			}
+			else if ($('#amount').val() == '') {
+				alert('請輸入數量！');
+				$('#amount').focus();
+				return false;
+			}
+			else if ($('#brand').val() == '') {
+				alert('請輸入廠牌！');
+				$('#brand').focus();
+				return false;
+			}
+			else if ($('#product_name').val() == '') {
+				alert('請輸入品名！');
+				$('#product_name').focus();
+				return false;
+			}
+			else if ($('#serail_num').val() == '') {
+				alert('請輸入財產編號！');
+				$('#serail_num').focus();
+				return false;
+			}
+			else if ($('#price').val() == '') {
+				alert('請輸入單價！');
+				$('#price').focus();
+				return false;
+			}
+			else if ($('#place').val() == '') {
+				alert('請輸入使用位置！');
+				$('#place').focus();
+				return false;
+			}
+			else if ($('#buy_date').val() == '') {
+				alert('請輸入購入年月！');
+				$('#buy_date').focus();
+				return false;
+			}
+			else if ($('#keeper').val() == '') {
+				alert('請輸入保管人！');
+				$('#keeper').focus();
+				return false;
+			}
+			else if ($('#uploadfile01').val() == '') {
+				alert('請選擇財產左側照片檔案！');
+				$('#uploadfile01').focus();
+				return false;
+			}
+			else if ($('#uploadfile02').val() == '') {
+				alert('請選擇財產正面照片檔案！');
+				$('#uploadfile02').focus();
+				return false;
+			}
+			else if ($('#uploadfile03').val() == '') {
+				alert('請選擇財產右側照片檔案！');
+				$('#uploadfile03').focus();
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#form1').submit();
+			}
+		}
+	</script>
+	<style>
+		.h1 {
+			display: inline-block;
+			width: 250px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			background-color: #5677fc;
+			color: white;
+		}
+
+		.serviceBlock__whiteBlock {
+			border-radius: 5px;
+			width: 250px;
+		}
+
+		.tableContainer table th {
+			height: 3rem;
+		}
+
+		.tableContainer table tbody td {
+			font-size: 1rem;
+		}
+
+		.serviceBlock__whiteBlock input[type='file'] {
+			font-size: 14px;
+		}
+	</style>
+</head>
+
+
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<h1 class="h1">財產登錄</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<img src="/images/v2_pi2srf.png" alt="" style="width:70%">
+			<img src="/images/v2_pi2th6.png" alt="" style="width:70%">
+		</div>
+	</header>
+
+	<main class="main wrapper">
+		<div class="serviceBlock">
+			<div class="container">
+				<form id="form1" name="form1" method="post" action="/property_record/save" target="actFrame" enctype="multipart/form-data">
+					<div class="row">
+						<div class="col-12 col-sm-1 serviceBlock__h3Col">&nbsp;</div>
+						<div class="col-12 col-sm-10">
+							<div class="serviceBlock__countTimeBar">
+								<span class="col-md-3">
+									類別代碼：<input type="text" class="form-control col-md-1 d-inline-block" id="category_code" name="category_code">
+								</span>
+								<span class="col-md-3">
+									數量：<input type="text" class="form-control col-md-1 d-inline-block" id="amount" name="amount">
+								</span>
+								<span class="col-md-3">
+									廠牌：<input type="text" class="form-control col-md-2 d-inline-block" id="brand" name="brand">
+								</span>
+								<span class="col-md-3">
+									品名：<input type="text" class="form-control col-md-2 d-inline-block" id="product_name" name="product_name">
+								</span>
+							</div>
+							<div class="serviceBlock__countTimeBar">
+								<span class="col-md-3">
+									財產編號：<input type="text" class="form-control col-md-1 d-inline-block" id="serail_num" name="serail_num">
+								</span>
+								<span class="col-md-3">
+									單價：<input type="text" class="form-control col-md-1 d-inline-block" id="price" name="price">
+								</span>
+								<span class="col-md-3">
+									使用位置：<input type="text" class="form-control col-md-5 d-inline-block" id="place" name="place">
+								</span>
+							</div>
+							<div class="serviceBlock__countTimeBar">
+								<span class="col-md-3">
+									購入年月：<input type="text" class="form-control col-md-2 d-inline-block" id="buy_date" name="buy_date">
+								</span>
+								<span class="col-md-3">
+									保管人：<input type="text" class="form-control col-md-2 d-inline-block" id="keeper" name="keeper">
+								</span>
+							</div>
+						</div>
+						<div class="col-12 col-sm-3 serviceBlock__h3Col">&nbsp;</div>
+					</div>
+					<div class="row">
+						<div class="col-12 col-sm-1">&nbsp;</div>
+						<div class="col-12 col-sm-3">
+							<div class="serviceBlock__whiteBlock">
+								<header>財產左側照片存擋</header>
+								<input type="file" id="uploadfile01" name="uploadfile01">
+							</div>
+						</div>
+						<div class="col-12 col-sm-3">
+							<div class="serviceBlock__whiteBlock">
+								<header>財產正面照片存擋</header>
+								<input type="file" id="uploadfile02" name="uploadfile02">
+							</div>
+						</div>
+						<div class="col-12 col-sm-3">
+							<div class="serviceBlock__whiteBlock">
+								<header>財產右側照片存擋</header>
+								<input type="file" id="uploadfile03" name="uploadfile03">
+							</div>
+						</div>
+						<div class="col-12 col-sm-1">&nbsp;</div>
+					</div>
+				</form>
+				<br>
+				<div class="row">
+					<div class="text-center" style="margin:0px auto; left:-50px; position:relative;">
+						<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doSubmit();">存檔</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<br>
+		<div style="text-align: right;">
+			<img src="/images/v2_pihdxy.png" alt="" style="width:30%"><br>
+			<button class="serviceBlock__saveBtn btn-w btn-orange">請自行製作財產標籤</button>
+		</div>
+	</main>
+
+	<hr>
+
+	<header class="header wrapper">
+		<div class="queryBlock">
+			<p style="font-size: 24pt;">財產列表</p>
+		</div>
+	</header>
+
+
+	<main class="main">
+		<div class="wrapper">
+			<div class="tableContainer">
+				<table>
+					<thead>
+						<tr>
+							<th>類別</th>
+							<th>數量</th>
+							<th>廠牌</th>
+							<th>品名</th>
+							<th>單價</th>
+							<th>財產編號</th>
+							<th>使用位置</th>
+							<th>購入年月</th>
+							<th>保管人</th>
+							<td><span style="font-size: 10pt;">民國＿年度<br>盤點<br>(合格O 不合格X)</span></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>NGGN</td>
+							<td>369874</td>
+							<td>FV</td>
+							<td>網路費</td>
+							<td>0</td>
+							<td>TT43T</td>
+							<td>0224</td>
+							<td>2020-07</td>
+							<td>5T54T</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>VDFV</td>
+							<td>0</td>
+							<td>FV</td>
+							<td>VFVFV</td>
+							<td>0</td>
+							<td>VFDVFDV</td>
+							<td>V123</td>
+							<td>2020-07</td>
+							<td>5T54</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>NGGN</td>
+							<td>1288</td>
+							<td>O98O</td>
+							<td></td>
+							<td>0</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>NGGN</td>
+							<td>1288</td>
+							<td>O98O</td>
+							<td>網路費</td>
+							<td>0</td>
+							<td>TT43T</td>
+							<td>T5T54T</td>
+							<td>T5T45</td>
+							<td>5T54T</td>
+							<td>T54T54</td>
+						</tr>
+						<tr>
+							<td>NGGN</td>
+							<td>2</td>
+							<td>O98O</td>
+							<td>T4T4</td>
+							<td>0</td>
+							<td>TT43T</td>
+							<td>T5T54T</td>
+							<td>T5T45</td>
+							<td>5T54T</td>
+							<td>T54T54</td>
+						</tr>
+						<tr>
+							<td>B</td>
+							<td>10</td>
+							<td>ASUS</td>
+							<td>桌機</td>
+							<td>12000</td>
+							<td>A0001</td>
+							<td>一樓辦公室</td>
+							<td>109/08</td>
+							<td>陳xx</td>
+							<td>備註備註備註1</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="text-center">
+			<span style="font-size:1.5rem;color:red">＊按下「友善列印」會跳出新視窗，請透過瀏覽器的「檔案」-&gt;「列印」功能來進行列印。</span><br>
+			<button id="toPrint" class="saveBtn btn-big btn-white"><i class="fas fa-print"></i>友善列印</button><br>
+		</div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 187px; height: 200px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

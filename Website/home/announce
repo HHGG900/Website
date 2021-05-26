@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>主任工作手冊 | 台灣長照大聯盟日照管理系統</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/page2.css" />
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script> -->
+<!--    <script src="/js/jquery-1.10.2.min.js"></script>-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/util.js"></script>
+
+    <!-- Bootstrap -->
+<!--    <script type="text/javascript" src="/admin/theme/assets/js/bootstrap/bootstrap.min.js"></script>-->
+
+<!--    <script src="--><!--/js/jquery.min.js"></script>-->
+<!--    <script src="--><!--/js/bootstrap.min.js"></script>-->
+</head>
+
+<body>
+<header>
+    <p class="brandTitle">
+        台灣長照大聯盟日照管理系統    </p>
+    <p class="slogan">世界因為有你 明天會更好!!</p>
+</header>
+<main>
+    <h1>主任工作手冊</h1>
+    <div class="wrapper">
+        <section class="mainSection">
+            <header class="colorDust sectionHeader">主任工作執掌</header>
+            <div id="block1" class="borderBlock">
+                <ul class="cjkUL">
+                    <li li-idx="一、">
+                        年度計畫工作之發起與督導，包含表定工作之訓練、宣導、衛教、家屬工作、員工福利等。
+                    </li>
+                    <li li-idx="二、">督核中心工作人員執行工作，絕對完全按照本系統執行。</li>
+                    <li li-idx="三、">照顧管理包含照顧流程、技術執行等。</li>
+                    <li li-idx="四、">
+                        人事管理：中心人事任用與管理權，包含人事規章執行、人力資源調配管理、員工出缺勤管理與內、外訓相關證明存擋登錄等。
+                    </li>
+                    <li li-idx="五、">保險業務管理：包含員工勞健保、雇主與公共意外等執行保險。</li>
+                </ul>
+            </div>
+        </section>
+        <section class="mainSection">
+            <header class="colorRed sectionHeader">工作手冊</header>
+            <div class="borderBlock">
+                <ul class="cjkUL">
+                    <li li-idx="壹、">使用須知
+                        <ul class="cjkUL">
+                            <li li-idx="ㄧ、">本單位為使全體夥伴了解單位的管理規定，以便共同遵守，維護單位紀律，特依 其中主要精神原則編訂員工手冊，供全體同仁參閱，若有未盡明瞭之處，請參照原訂章則辦法。</li>
+                            <li li-idx="二、">本手冊內容若有修訂或增添時，以新修訂或公佈者為準，同時本手冊為單位內部，重要文件，請勿轉借外人。&nbsp;</li>
+                            <li li-idx="三、">本手冊僅就正式員工有關部分刊載，定期契約聘僱人員之權利、義務，請參閱所訂契約書之內容。</li>
+                        </ul>
+                    </li>
+                    <li li-idx="貳、">紀律與守則
+                        <ul class="cjkUL">
+                            <li li-idx="一、">
+                                指揮、服從員工應誠實遵守及服從照顧機構之方針與規章，並服從各級主管之合理指揮，如有意見得隨時隨地反應，各級主管應本分層負責之精神，按人事核准權責 表指揮監督，紀律與守則如以下之規定：
+                                <ul class="cjkQuoteUL">
+                                    <li li-idx="（1）">員工應專注於自己之業務保持工作秩序，努力提高工作效率。</li>
+                                    <li li-idx="（2）">各級主管應尊重員工之人格，親切指導指揮員工完成工作。</li>
+                                    <li li-idx="（3）">凡有足以影響照顧機構聲譽之事實均應隨時向主管報告，不得有任何隱瞞。</li>
+                                    <li li-idx="（4）">員工於工作中應主動、積極，並隨時保持機動性，遇有工作相關性時，亦應充分與其他同事協調、互助，共同發揮團隊精神。</li>
+                                    <li li-idx="（5）">應有禮貌及良好之服務態度，並須時時保持服裝儀容整潔。</li>
+                                    <li li-idx="（6）">尊重案主的生命、人性尊嚴及其價值觀。</li>
+                                    <li li-idx="（7）">提供案主各項服務照顧時要先解釋工作目的，且動作須輕柔。</li>
+                                    <li li-idx="（8）">對案主及其家屬應親切常保笑容，說話不可音量過大。</li>
+                                    <li li-idx="（9）">員工應依照顧機構規定時間上、下班，並親自簽到。</li>
+                                    <li li-idx="（10）">員工應誠實遵守照顧機構訂定之規章及服從主管之指揮與調度。</li>
+                                    <li li-idx="（11）">未經照顧機構許可，不得私自攜帶違禁品或公務無關之物品、出入照顧機構辦公室及工作場所。</li>
+                                    <li li-idx="（12）">不得與案主或其家屬、同事發生金錢借貸往來。</li>
+                                    <li li-idx="（13）">不得利用職務上之關係，私下接受案主或家屬之餽贈、金錢、佣金或 其他不當利益。</li>
+                                    <li li-idx="（14）">員工不得直接或間接從事與照顧機構業務有關之事業，或兼任其他機構之顧問等。</li>
+                                    <li li-idx="（15）">員工對於有關照顧機構之機密事項，不得對外洩漏，並不得借閱或調用本職以外之文件與帳冊。</li>
+                                    <li li-idx="（16）">員工對公物應加以保護，不得浪費；使用公物，如無故損壞致不堪使用或遺失時，應負賠償之責。</li>
+                                    <li li-idx="（17）">注意儀容整潔。</li>
+                                    <li li-idx="（18）">員工要有敬業的態度與職業道德。</li>
+                                    <li li-idx="（19）">隨時保持和藹可親的笑容。</li>
+                                    <li li-idx="（20）">確實執行交辦事項，不得藉故拖延或草率了事。</li>
+                                    <li li-idx="（21）">應愛惜公物，做事負責並以愛心耐心隨時注意案主安全。</li>
+                                    <li li-idx="（22）">同事之間應和諧相處，不可挑撥離間影響團隊士氣。</li>
+                                    <li li-idx="（23）">隨時注意言行舉止，以維護形象且不得有過度情緒反應及破壞公物。</li>
+                                    <li li-idx="（24）">上班時間內不得喝酒、吃檳榔。</li>
+                                </ul>
+                            </li>
+                            <li li-idx="二、">職務調動
+                                <ul class="cjkQuoteUL">
+                                    照顧機構為業務需要，增進員工工作歷練，得依下列調動原則實施定期或不定期職務或工作輪調：
+                                    <li li-idx="（1）">基於照顧機構經營所必須。</li>
+                                    <li li-idx="（2）">不得違反勞動契約。</li>
+                                    <li li-idx="（3）">對員工工資及其他勞動條件未做不利之變更。</li>
+                                    <li li-idx="（4）">調動後工作之性質為員工體能、技術所能勝任者。</li>
+                                    <li li-idx="（5）">調動工作地點過遠，照顧機構給予必要之協助。</li>
+                                </ul>
+                            </li>
+                            <li li-idx="三、">門禁管理
+                                <ul class="cjkQuoteUL">
+                                    員工應遵守照顧機構下列進出之管理規定：
+                                    <li li-idx="（1）">員工應依規定時間上班、下班，並依規定親自簽到、簽退。</li>
+                                    <li li-idx="（2）">未經照顧機構許可，不得攜帶危險物品、違禁品（如槍、刀械、彈藥、毒品）或與公務無關之物品進入工作場所或將公物攜出照顧機構。</li>
+                                    <li li-idx="（3）">其他經照顧機構公告之管理規章。</li>
+                                </ul>
+                            </li>
+                            <li li-idx="四、">員工活動之管理
+                                <ul class="cjkQuoteUL">
+                                    為維持照顧機構工作秩序及效率，員工應遵守下列規定：
+                                    <li li-idx="（1）">不得自為或煽惑他人為不合法之罷工、怠工。</li>
+                                    <li li-idx="（2）">工作中非於指定時間、地點內，禁止員工吸煙、喝酒。</li>
+                                </ul>
+                            </li>
+                            <li li-idx="五、">設備、物料管理
+                                <ul class="cjkQuoteUL">
+                                    員工應妥善使用照顧機構內設備，節約能源及其他消耗品。員工非經許可，不得以私人目的使用照顧機構之公物。
+                                </ul>
+                            </li>
+                            <li li-idx="六、">
+                                <ul class="cjkQuoteUL">
+                                    執行業務之管理為維持照顧機構正常之營運及業務推展，使工作有所遵循，員工應遵守下列規定：
+                                    <li li-idx="（1）">對經管之文件、財物應妥為保管，不得攜外、毀損或散失；如遇非常事故時，應盡力做適當之處置。</li>
+                                    <li li-idx="（2）">非法令規定或經告知且經照顧機構核准，不得擔任照顧機構指定工作以外之職務。</li>
+                                    <li li-idx="（3）">行使採購、稽核職務時，必須公正無私，不得有任何偏袒行為。</li>
+                                    <li li-idx="（4）">不可將私人電話號碼留給案主或其家屬，亦不可向案主或其家屬索取私人電話號碼，有任何事應與照顧機構報告或協商。</li>
+                                    <li li-idx="（5）">不得利用職務機會向照顧機構請求或關說對其有關的機構、家屬或個人給予任何好處。</li>
+                                    <li li-idx="（6）">不得以不正當方法執行業務，而使照顧機構遭受損失。</li>
+                                </ul>
+                            </li>
+                            <li li-idx="七、">
+                                <ul class="cjkQuoteUL">
+                                    誠實義務為維持勞資關係之信賴、和諧及照顧機構之形象、信譽，員工應履行下列誠實義務：
+                                    <li li-idx="（1）">對照顧機構業務、客戶情形及其商業秘密應保持高度機密，不得對不相干之人員洩漏，離、退職後亦同，員工若有違反受損致照顧機構遭失，須負賠償及法律上之責任。</li>
+                                    <li li-idx="（2）">務須養成廉潔之操守，注意維護照顧機構聲譽，不得利用職務上之關係要求或接受客戶招待、餽贈及其他不當利益。</li>
+                                    <li li-idx="（3）">不可對外散播任何對照顧機構不利或不實之言語，倘有其事，將依法處理。</li>
+                                    <li li-idx="（4）">不得吸食毒品、賭博財物及其他違法或妨害照顧機構聲譽之行為。</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="mainSection">
+            <header class="colorRed sectionHeader">緊急意外處理規定</header>
+            <div class="borderBlock">
+                <ul class="hashUl">
+                    <li>
+                        緊急事件，包括下列事件：
+                        <ul class="cjkQuoteUL">
+                            <li li-idx="（一）">天然災害：風災、水災、震災、土石流等天然災害。</li>
+                            <li li-idx="（二）">意外事件：毒性化學物質災害、動物性傷害、傳染病、食（藥）物中毒、交通事故及其他意外性傷亡事件。</li>
+                            <li li-idx="（三）">公共安全事件：火災、爆炸災、公用氣體與油料管線、輸電線路災害及其他因公共設施產生之傷害。  </li>
+                            <li li-idx="（四）">暴力衝突事件：各機構內外之衝突、暴力或攻擊事件。  </li>
+                            <li li-idx="（五）">其他緊急事件。</li>
+                        </ul>
+                    </li>
+                    <li>機構應針對可能發生之危機事件，加強防範，採取下列措施：
+                        <ul class="cjkQuoteUL">
+                            <li li-idx="（ㄧ）">成立危機管理小組，明確劃分工作權責，並由主任擔任召集人。</li>
+                            <li li-idx="（二）">針對各種危機事件，訂定應變計畫及處理流程。  </li>
+                            <li li-idx="（三）">隨時偵測發掘可能之危機，加強防範措施。  </li>
+                            <li li-idx="（四）">定期辦理住民與員工防災之安全演練。</li>
+                            <li li-idx="（五）">貫徹工作流程：機構訂定工作正確流程，提供員工遵循執行，減少危機事件發生。  </li>
+                            <li li-idx="（六）">建立緊急通報系統，並隨時更新資料。  </li>
+                            <li li-idx="（七）">加強特殊個案及員工（如：曾有暴力衝突、酗酒等）之輔導。  </li>
+                            <li li-idx="（八）">定期辦理特殊個案研討，並製作紀錄。  </li>
+                            <li li-idx="（九）">建立住民互助及通報機制。  </li>
+                            <li li-idx="（十）">強化安全防護措施，各項救援、防護及逃生設備應定期維修及更新。</li>
+                        </ul>
+                    </li>
+                    <li>機構針對可能發生之危機事件，應依下列原則訂定標準處理程序：
+                        <ul class="cjkQuoteUL">
+                            <li li-idx="（一）">現場緊急處理並通知主任。  </li>
+                            <li li-idx="（二）">依危機處理小組分工權責辦理：<br>
+                                <lj lj-idx="1.">報案：視事件性質轄區派出所報案並配合採證。</lj>
+                                <lj lj-idx="2.">緊急送醫救護。</lj>
+                                <lj lj-idx="3.">通報：通報家屬及主管單位。</lj>
+                            </li>
+                            <li li-idx="（三）">召開危機處理小組會議。</li>
+                            <li li-idx="（四）">確定後續處理工作，並研擬善後計畫。</li>
+                            <li li-idx="（五）">檢討及善後處理。</li>
+                        </ul>
+                    </li>
+                    <li>為適時掌握機構危機事件，加速處理應變，依各級危機事件之輕重程度區分如下：
+                        <ul class="cjkQuoteUL">
+                            <li li-idx="（一）">甲級事件：<br>
+                                <lj lj-idx="1.">住民、員工因危機事件導致人員死亡。</lj>
+                                <lj lj-idx="2.">住民、員工經醫師診斷罹患傳染病或疑似罹患傳染病致死。</lj>
+                                <lj lj-idx="3.">住民、員工疑似群聚感染傳染病。</lj>
+                            </li>
+                            <li li-idx="（二）">乙級事件：<br>
+                                <lj lj-idx="1.">住民、員工因危機事件導致重傷或有死亡之虞。</lj>
+                                <lj lj-idx="2.">住民、員工疑似罹患傳染病。</lj>
+                                <lj lj-idx="3.">其他未達甲級事件程度，且機構無法即時處理之事件。</lj>
+                            </li>
+                            <li li-idx="（三）">丙級事件：<br>
+                                <lj lj-idx="1.">住民、員工因危機事件受傷。</lj>
+                                <lj lj-idx="2.">其他未達乙級事件程度，且各機構無法即時處理之事件。</lj>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>機構發生危機事件時，應依下列時限通報：
+                        <ul class="cjkQuoteUL">
+                            <li li-idx="（一）">甲級事件：應於獲知事件 10 分鐘內先以口頭通報主管單位。</li>
+                            <li li-idx="（二）">乙級事件：應於獲知事件 1 小時內先以口頭通報主管單位。</li>
+                            <li li-idx="（三）">丙級事件：應於獲知事件 24 小時內，通報主管單位。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="mainSection">
+            <header class="colorRed sectionHeader">緊急意外處理流程</header>
+            <div class="borderBlock borderBlock--whiteBG text-center">
+                <img src="/images/img_emergency_process.jpg" class="img-responsive" alt="">
+            </div>
+        </section>
+
+        <div class="btnContainer">
+            <button type="button" class="btn-w btn-info" id="gonext">我了解</button>
+        </div>
+    </div>
+</main>
+<!--<script src="/js/jquery-1.10.2.min.js"></script>-->
+<script>
+    $(function(){
+
+        $('#gonext').click(function() {
+
+            $.ajax({
+                url: "/home/announce/check",
+                type:"POST",
+                dataType:'json',
+                data: {
+                    id: '22'
+                },
+                success: function(data,status,xhr)
+                {
+                    // console.log(data,status,xhr);
+                    // alert('確認OK');
+                    // location.href='/home/index';
+                    if(data.code==200)
+                    {
+                    	location.href='/home/index';
+                        /* ezBSAlert({
+                            messageText: data.message,
+                            alertType: "success"
+                        }).done(function(e)
+                        {
+                            location.href='/home/index';
+                        });*/
+                    }
+                    else
+                    {
+                        ezBSAlert({
+                            messageText: data.message,
+                            alertType: "danger"
+                        }).done(function(e)
+                        {
+                            location.href='/shoppingcart';
+                        });
+                    }
+                },
+                error:function(xhr, ajaxOptions, thrownError)
+                {
+                    console.log(xhr, ajaxOptions, thrownError);
+                    alert('發生錯誤!');
+
+                    /* PM.erro({
+                        title: '確認error',
+                        text: '請重新確認！'
+                    }); */
+                }
+            });
+
+        });
+    });
+</script>
+</body>
+</html><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+</script>
+
+<div id="wait" style="display:none">
+    <p><img src="/images/loading.gif" width="150" height="150" /></p>
+</div>
+<div id="wait_content" style="display:none">
+    <p>請稍後，系統正在處理中...</p>
+</div>
+<IFRAME name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginWidth=0 marginHeight=0 frameBorder=0 noResize scrolling=no></IFRAME>
+
+</body>
+</html>

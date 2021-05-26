@@ -1,0 +1,749 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>服務滿意度管理 | 台灣長照大聯盟居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<link rel="stylesheet" href="~/css/page2-3-3.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$(document).on("click", "#startdate", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+
+			$(document).on("click", "#enddate", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+		});
+
+		function doSearch() {
+			if ($('#year').val() == '') {
+				alert('請選擇年度！');
+				$('#year').focus();
+				return false;
+			}
+			else {
+				$('#wait').show();
+				$('#wait_content').show();
+
+				$('#form1').submit();
+			}
+		}
+
+		function toEdit(num) {
+			var label = '#reply' + num;
+			var label2 = '#string' + num;
+			var label3 = '#recordInput' + num;
+			var label4 = '#recordString' + num;
+			var btnOrange = '#btn-orange' + num;
+			var btnGreen = '#btn-green' + num;
+
+			$(btnOrange).removeClass('button-hidden');
+			$(btnGreen).addClass('button-hidden');
+
+			$(label).attr('type', 'text');
+			$(label2).hide();
+
+			$(label3).attr('type', 'text');
+			$(label4).hide();
+		}
+
+		function toSave(num) {
+			var pk = '#id' + num;
+			var label = '#reply' + num;
+			var label2 = '#string' + num;
+			var label3 = '#recordInput' + num;
+			var label4 = '#recordString' + num;
+
+			if (!($(label).val() == '' && $(label3).val() == '')) {
+				$.ajax({
+					url: "/service_satisfaction/save",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						id: $(pk).val(),
+						reply: $(label).val(),
+						content: $(label3).val(),
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						alert('確認OK');
+						location.reload();
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('確認error');
+					}
+				});
+			}
+		}
+	</script>
+	<style>
+		.wrapper {
+			width: 90%;
+		}
+
+		.header h1 {
+			font-size: 1.5rem;
+			padding: 1rem;
+			color: #fff;
+			text-align: center;
+			display: inline-block;
+			border: none;
+			background-color: #5677fc;
+			box-shadow: 0 8px 10px #0003;
+			margin-top: 10px;
+		}
+
+		.header__iconCell {
+			text-align: center;
+			margin-bottom: 10px;
+			width: 250px;
+		}
+
+		.header__textCell {
+			margin-left: 25%;
+		}
+
+		.header__btns {
+			text-align: left;
+		}
+
+		#firstzone {
+			width: auto;
+		}
+
+		.queryBlock .title {
+			font-size: 24pt;
+			border: 1px solid #10101a3d;
+			width: 300px;
+			margin: 0px auto;
+			margin-top: 100px;
+			padding: 5px 20px;
+			background-color: white;
+		}
+
+		.fa-search {
+			margin-right: 5px;
+		}
+
+		.btnBgColorWithShadow--blue.btn-query {
+			border-radius: 5px;
+			padding: 10px 15px;
+		}
+
+		.tableContainer {
+			margin-top: 0px;
+			/*border-right: none;*/
+		}
+
+			.tableContainer table th {
+				font-size: 1.2rem;
+				padding: 10px 10px;
+				white-space: inherit;
+			}
+
+			.tableContainer table tbody td {
+				font-size: 1rem;
+				height: 4.5rem;
+			}
+
+		.next1, .next2, .next3, .next4 {
+			cursor: pointer;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+			font-size: 2rem;
+		}
+
+		.fa-heart {
+			font-size: 50pt;
+		}
+
+		.queryBlock input {
+			font-size: initial;
+			/*line-height: initial;*/
+			width: initial;
+			height: initial;
+		}
+
+		.main {
+			margin-top: 1rem;
+		}
+
+		.numClass {
+			color: blue;
+			font-weight: bolder;
+			font-size: 1.2rem;
+			width: 50px;
+		}
+		/*#noBoard {
+			border-top-width: 0px;
+			border-bottom-width: 0px;
+			border-right-width: 0px;
+			width: 10%;
+			background-color: #f6dbe5;
+			border-bottom: none;
+			background-color: none;
+		}
+		.noBoard {
+			border-top-width: 0px;
+			border-bottom-width: 0px;
+			border-right-width: 0px;
+			width: 10%;
+			background-color: #f6dbe5;
+			border-bottom: none;
+			background-color: none;
+		}*/
+		.btn-green {
+			background-color: #42b2a8;
+			color: #ffffff;
+		}
+
+		.button-hidden {
+			display: none;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<i class="fas fa-heart"></i>
+			<h1>服務滿意度管理</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div class="text" style="padding: 0px; font-size: 1.5rem">
+				<p>要如何做好客戶服務已經是長照服務所必須<span style="background-color: transparent;">具備的條件，針對各種不同的顧客需求，提供貼心</span><span style="background-color: transparent;">化的服務，以提升顧客安心度與滿意度，因為顧客</span><span style="background-color: transparent;">服務會正面的影響客戶滿意度，所以只要增加顧客</span><span style="background-color: transparent;">滿意才有辦法提升長照業者的經營績效。在</span><span style="background-color: transparent;">Reichheld and Sasser(1990)學者研究表示，營運單位只要</span><span style="background-color: transparent;">成功的降低顧客變動率的5%即可提高25%到85%</span><span style="background-color: transparent;">的利潤，而當顧客服務做的好的話，更可以因為顧</span><span style="background-color: transparent;">客的免費推薦，而使長照事業建立起口碑，如何運用</span><span style="background-color: transparent;">長照事業業者現有的競爭優勢與顧客忠誠度來創造價</span><span style="background-color: transparent;">值，要如何的來做好顧客服務品質、提高顧客滿意</span><span style="background-color: transparent;">度，是達成經營績效的重要課題，</span></p>
+			</div>
+
+			<br>
+			<br>
+
+			<div class="header__btns">
+				<button class="header__btn" id="firstzone">滿意度品質改善會議</button>
+			</div>
+
+		</div>
+
+
+		<div class="queryBlock">
+			<p class="title">品質滿意度查詢</p>
+			<p>
+			</p><form id="form1" method="post">
+				<input type="text" id="startdate" name="startdate" value="2020-01-01" class="Wdate form-control col-md-1 d-inline-block" placeholder="開始日期"> 至 <input type="text" id="enddate" name="enddate" value="2020-12-31" class="Wdate form-control col-md-1 d-inline-block" placeholder="結束日期">
+				<button class="btn btn-blue" onclick="return doSearch();"><i class="fa fa-search" aria-hidden="true"></i> 查詢</button>
+			</form>
+			<p></p>
+		</div>
+	</header>
+
+	<main class="main">
+		<div class="wrapper" style="width:90%;">
+			<div style="text-align: right;">滿意度統計：針對查詢期間，滿意 <span class="numClass">17</span> 項，不滿意 <span class="numClass">4</span> 項 ，滿意度 <span class="numClass">80.9523809524% </span> </div>
+			<div class="tableContainer">
+				<table style="table-layout:fixed; width:100%;">
+					<thead>
+						<tr>
+							<th style="width:10%">日期</th>
+							<th style="width:15%">個案姓名</th>
+							<th style="width:15%">家屬姓名</th>
+							<!-- <th style="width:10%">關係</th> -->
+							<th style="width:10%">滿意度</th>
+							<th style="width:20%">回饋內容</th>
+							<th style="width:20%">單位回饋|改進</th>
+							<th style="width:10%" id="noBoard">動作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>2020-08-30</td>
+							<td>張某某</td>
+							<td>張家長</td>
+							<!-- <td>家屬</td> -->
+							<td>不錯</td>
+							<td>
+								<span id="recordString21">123</span>
+								<input class="recordCss" type="hidden" id="recordInput21" name="recordInput21" value="123">
+							</td>
+							<td>
+								<span id="string21">+++</span>
+								<input type="hidden" id="reply21" name="reply21" value="+++">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id21" name="id21" value="21">
+								<button type="button" id="btn-green21" class="btn btn-green" onclick="toEdit('21');">編輯</button>
+								<button type="button" id="btn-orange21" class="btn btn-orange button-hidden" onclick="toSave('21');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-08-30</td>
+							<td>張某某</td>
+							<td>張家長</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString22">---</span>
+								<input class="recordCss" type="hidden" id="recordInput22" name="recordInput22" value="">
+							</td>
+							<td>
+								<span id="string22">---</span>
+								<input type="hidden" id="reply22" name="reply22" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id22" name="id22" value="22">
+								<button type="button" id="btn-green22" class="btn btn-green" onclick="toEdit('22');">編輯</button>
+								<button type="button" id="btn-orange22" class="btn btn-orange button-hidden" onclick="toSave('22');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-28</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString18">---</span>
+								<input class="recordCss" type="hidden" id="recordInput18" name="recordInput18" value="">
+							</td>
+							<td>
+								<span id="string18">---</span>
+								<input type="hidden" id="reply18" name="reply18" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id18" name="id18" value="18">
+								<button type="button" id="btn-green18" class="btn btn-green" onclick="toEdit('18');">編輯</button>
+								<button type="button" id="btn-orange18" class="btn btn-orange button-hidden" onclick="toSave('18');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-28</td>
+							<td>黃一達</td>
+							<td>21+.0</td>
+							<!-- <td>家屬</td> -->
+							<td>不錯</td>
+							<td>
+								<span id="recordString19">黃一達不錯55</span>
+								<input class="recordCss" type="hidden" id="recordInput19" name="recordInput19" value="黃一達不錯55">
+							</td>
+							<td>
+								<span id="string19">YES黃一達不錯</span>
+								<input type="hidden" id="reply19" name="reply19" value="YES黃一達不錯">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id19" name="id19" value="19">
+								<button type="button" id="btn-green19" class="btn btn-green" onclick="toEdit('19');">編輯</button>
+								<button type="button" id="btn-orange19" class="btn btn-orange button-hidden" onclick="toSave('19');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-22</td>
+							<td>余002</td>
+							<td>余媽</td>
+							<!-- <td>家屬</td> -->
+							<td>不錯</td>
+							<td>
+								<span id="recordString17">回饋 5/22aaaa</span>
+								<input class="recordCss" type="hidden" id="recordInput17" name="recordInput17" value="回饋 5/22aaaa">
+							</td>
+							<td>
+								<span id="string17">aaaa</span>
+								<input type="hidden" id="reply17" name="reply17" value="aaaa">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id17" name="id17" value="17">
+								<button type="button" id="btn-green17" class="btn btn-green" onclick="toEdit('17');">編輯</button>
+								<button type="button" id="btn-orange17" class="btn btn-orange button-hidden" onclick="toSave('17');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-20</td>
+							<td>黃一達</td>
+							<td>21+.0</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString15">aaaaa</span>
+								<input class="recordCss" type="hidden" id="recordInput15" name="recordInput15" value="aaaaa">
+							</td>
+							<td>
+								<span id="string15">bbbb</span>
+								<input type="hidden" id="reply15" name="reply15" value="bbbb">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id15" name="id15" value="15">
+								<button type="button" id="btn-green15" class="btn btn-green" onclick="toEdit('15');">編輯</button>
+								<button type="button" id="btn-orange15" class="btn btn-orange button-hidden" onclick="toSave('15');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-20</td>
+							<td>黃一達</td>
+							<td>21+.0</td>
+							<!-- <td>家屬</td> -->
+							<td>不錯</td>
+							<td>
+								<span id="recordString16">---</span>
+								<input class="recordCss" type="hidden" id="recordInput16" name="recordInput16" value="">
+							</td>
+							<td>
+								<span id="string16">---</span>
+								<input type="hidden" id="reply16" name="reply16" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id16" name="id16" value="16">
+								<button type="button" id="btn-green16" class="btn btn-green" onclick="toEdit('16');">編輯</button>
+								<button type="button" id="btn-orange16" class="btn btn-orange button-hidden" onclick="toSave('16');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-17</td>
+							<td>黃一達</td>
+							<td>21+.0</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString14">---</span>
+								<input class="recordCss" type="hidden" id="recordInput14" name="recordInput14" value="">
+							</td>
+							<td>
+								<span id="string14">---</span>
+								<input type="hidden" id="reply14" name="reply14" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id14" name="id14" value="14">
+								<button type="button" id="btn-green14" class="btn btn-green" onclick="toEdit('14');">編輯</button>
+								<button type="button" id="btn-orange14" class="btn btn-orange button-hidden" onclick="toSave('14');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-14</td>
+							<td>黃一達</td>
+							<td>21+.0</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString13">---</span>
+								<input class="recordCss" type="hidden" id="recordInput13" name="recordInput13" value="">
+							</td>
+							<td>
+								<span id="string13">---</span>
+								<input type="hidden" id="reply13" name="reply13" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id13" name="id13" value="13">
+								<button type="button" id="btn-green13" class="btn btn-green" onclick="toEdit('13');">編輯</button>
+								<button type="button" id="btn-orange13" class="btn btn-orange button-hidden" onclick="toSave('13');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-03</td>
+							<td>黃一達</td>
+							<td>21+.0</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString12">---</span>
+								<input class="recordCss" type="hidden" id="recordInput12" name="recordInput12" value="">
+							</td>
+							<td>
+								<span id="string12">---</span>
+								<input type="hidden" id="reply12" name="reply12" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id12" name="id12" value="12">
+								<button type="button" id="btn-green12" class="btn btn-green" onclick="toEdit('12');">編輯</button>
+								<button type="button" id="btn-orange12" class="btn btn-orange button-hidden" onclick="toSave('12');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-01</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString5">---</span>
+								<input class="recordCss" type="hidden" id="recordInput5" name="recordInput5" value="">
+							</td>
+							<td>
+								<span id="string5">---</span>
+								<input type="hidden" id="reply5" name="reply5" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id5" name="id5" value="5">
+								<button type="button" id="btn-green5" class="btn btn-green" onclick="toEdit('5');">編輯</button>
+								<button type="button" id="btn-orange5" class="btn btn-orange button-hidden" onclick="toSave('5');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-01</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>不錯</td>
+							<td>
+								<span id="recordString6">---</span>
+								<input class="recordCss" type="hidden" id="recordInput6" name="recordInput6" value="">
+							</td>
+							<td>
+								<span id="string6">---</span>
+								<input type="hidden" id="reply6" name="reply6" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id6" name="id6" value="6">
+								<button type="button" id="btn-green6" class="btn btn-green" onclick="toEdit('6');">編輯</button>
+								<button type="button" id="btn-orange6" class="btn btn-orange button-hidden" onclick="toSave('6');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-01</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>普通</td>
+							<td>
+								<span id="recordString7">---</span>
+								<input class="recordCss" type="hidden" id="recordInput7" name="recordInput7" value="">
+							</td>
+							<td>
+								<span id="string7">---</span>
+								<input type="hidden" id="reply7" name="reply7" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id7" name="id7" value="7">
+								<button type="button" id="btn-green7" class="btn btn-green" onclick="toEdit('7');">編輯</button>
+								<button type="button" id="btn-orange7" class="btn btn-orange button-hidden" onclick="toSave('7');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-01</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>普通</td>
+							<td>
+								<span id="recordString8">aaaaaa</span>
+								<input class="recordCss" type="hidden" id="recordInput8" name="recordInput8" value="aaaaaa">
+							</td>
+							<td>
+								<span id="string8">---</span>
+								<input type="hidden" id="reply8" name="reply8" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id8" name="id8" value="8">
+								<button type="button" id="btn-green8" class="btn btn-green" onclick="toEdit('8');">編輯</button>
+								<button type="button" id="btn-orange8" class="btn btn-orange button-hidden" onclick="toSave('8');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-01</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString9">---</span>
+								<input class="recordCss" type="hidden" id="recordInput9" name="recordInput9" value="">
+							</td>
+							<td>
+								<span id="string9">---</span>
+								<input type="hidden" id="reply9" name="reply9" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id9" name="id9" value="9">
+								<button type="button" id="btn-green9" class="btn btn-green" onclick="toEdit('9');">編輯</button>
+								<button type="button" id="btn-orange9" class="btn btn-orange button-hidden" onclick="toSave('9');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-01</td>
+							<td>黃一達</td>
+							<td>21+.0</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString10">---</span>
+								<input class="recordCss" type="hidden" id="recordInput10" name="recordInput10" value="">
+							</td>
+							<td>
+								<span id="string10">---</span>
+								<input type="hidden" id="reply10" name="reply10" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id10" name="id10" value="10">
+								<button type="button" id="btn-green10" class="btn btn-green" onclick="toEdit('10');">編輯</button>
+								<button type="button" id="btn-orange10" class="btn btn-orange button-hidden" onclick="toSave('10');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-05-01</td>
+							<td>黃一達</td>
+							<td>21+.0</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString11">---</span>
+								<input class="recordCss" type="hidden" id="recordInput11" name="recordInput11" value="">
+							</td>
+							<td>
+								<span id="string11">---</span>
+								<input type="hidden" id="reply11" name="reply11" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id11" name="id11" value="11">
+								<button type="button" id="btn-green11" class="btn btn-green" onclick="toEdit('11');">編輯</button>
+								<button type="button" id="btn-orange11" class="btn btn-orange button-hidden" onclick="toSave('11');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-04-27</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>普通</td>
+							<td>
+								<span id="recordString4">---</span>
+								<input class="recordCss" type="hidden" id="recordInput4" name="recordInput4" value="">
+							</td>
+							<td>
+								<span id="string4">---</span>
+								<input type="hidden" id="reply4" name="reply4" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id4" name="id4" value="4">
+								<button type="button" id="btn-green4" class="btn btn-green" onclick="toEdit('4');">編輯</button>
+								<button type="button" id="btn-orange4" class="btn btn-orange button-hidden" onclick="toSave('4');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-04-06</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString1">---</span>
+								<input class="recordCss" type="hidden" id="recordInput1" name="recordInput1" value="">
+							</td>
+							<td>
+								<span id="string1">---</span>
+								<input type="hidden" id="reply1" name="reply1" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id1" name="id1" value="1">
+								<button type="button" id="btn-green1" class="btn btn-green" onclick="toEdit('1');">編輯</button>
+								<button type="button" id="btn-orange1" class="btn btn-orange button-hidden" onclick="toSave('1');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-04-06</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>普通</td>
+							<td>
+								<span id="recordString2">---</span>
+								<input class="recordCss" type="hidden" id="recordInput2" name="recordInput2" value="">
+							</td>
+							<td>
+								<span id="string2">---</span>
+								<input type="hidden" id="reply2" name="reply2" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id2" name="id2" value="2">
+								<button type="button" id="btn-green2" class="btn btn-green" onclick="toEdit('2');">編輯</button>
+								<button type="button" id="btn-orange2" class="btn btn-orange button-hidden" onclick="toSave('2');">存檔</button>
+							</td>
+						</tr>
+						<tr>
+							<td>2020-04-06</td>
+							<td> 余001</td>
+							<td>余昊騰</td>
+							<!-- <td>家屬</td> -->
+							<td>優秀</td>
+							<td>
+								<span id="recordString3">---</span>
+								<input class="recordCss" type="hidden" id="recordInput3" name="recordInput3" value="">
+							</td>
+							<td>
+								<span id="string3">---</span>
+								<input type="hidden" id="reply3" name="reply3" value="">
+							</td>
+							<td class="noBoard">
+								<input type="hidden" id="id3" name="id3" value="3">
+								<button type="button" id="btn-green3" class="btn btn-green" onclick="toEdit('3');">編輯</button>
+								<button type="button" id="btn-orange3" class="btn btn-orange button-hidden" onclick="toSave('3');">存檔</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: 741.792px; left: 541.104px; z-index: 100004; display: none;"><iframe style="width: 187px; height: 200px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

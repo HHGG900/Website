@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>主任自我考核表 | 台灣伯佐克智慧型居家照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<link rel="stylesheet" href="~/css/page2-3-3.css">
+	<link rel="stylesheet" href="~/css/page2-4.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.js"></script>
+	<link rel="stylesheet" type="text/css" href="~/libs/datepicker/css/bootstrap-datepicker3.min.css">
+	<script src="~/libs/datepicker/js/bootstrap-datepicker.min.js"></script>
+	<script src="~/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>
+	<script>
+		var totalArray = [];
+
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('.datepicker').datepicker({
+				format: "yyyy-mm-dd",
+				language: "zh-TW",
+				// endDate: new Date(),
+				// endDate: '-18y',
+				// endDate: '+0d',
+				todayHighlight: true
+			});
+
+			$('.point').click(function () {
+				var info = $(this).attr('info');
+				// var ch = $(this).attr('ch');
+				var point = $(this).html();
+				$('.chk' + info).remove();
+				$(this).append('<i class="chk' + info + ' fas fa-check-circle"></i>');
+
+				totalArray[info] = parseFloat(point);
+
+				countPoint(totalArray);
+			})
+
+
+		});
+		var totals = 0;
+		function countPoint(totalArray) {
+			var total = 0;
+			for (var i = 0; i < totalArray.length; i++) {
+				if (typeof totalArray[i] != "undefined") {
+					console.log(totalArray[i]);
+					total = parseFloat(total) + totalArray[i];
+				}
+			}
+			totals = total;
+			$('#total').html(total.toFixed(0));
+		}
+
+		function save() {
+			var nam = $('#nam').val();
+			var year = $('#year').val();
+			console.log(totals);
+			$.post('@Url.Action("Directorselfassessment")',
+				{ name: nam, years : year, deta : totalArray, total : totals },
+				function (result) {
+					window.location.href = result;
+				});
+			//posting.done();
+		}
+
+		function saveGrade() {
+			if ($('#name').value() == '') {
+				alert('請輸入姓名！');
+				$('#name').focus();
+				return false;
+			}
+			else if ($('#year').value() == '') {
+				alert('請輸入考核日期！');
+				$('#occur_date').focus();
+				return false;
+			}
+			else if (totalArray.length < 21) {
+				alert('請完成所有項目的考核！');
+				return false;
+			}
+			else {
+				$('#wait,#wait_content').show();
+
+				$.ajax({
+					url: "/Home/Directorselfassessment",
+					type: "POST",
+					dataType: 'json',
+					data: {
+						name: $('#name').value(),
+						occur_date: $('#year').value(),
+						score_detail: totalArray,
+						score: $('#total').html(),
+						position: 1
+					},
+					success: function (data, status, xhr) {
+						console.log(data, status, xhr);
+						if (data.code == 200) {
+							alert(data.message);
+							location.href = data.result;
+						}
+						else {
+							alert(data.message);
+						}
+					},
+					error: function (xhr, ajaxOptions, thrownError) {
+						console.log(xhr, ajaxOptions, thrownError);
+						alert('發生錯誤!');
+					}
+				});
+			}
+		}
+	</script>
+	<style>
+		.h1 {
+			display: inline-block;
+			width: 200px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			background-color: #5677fc;
+			color: white;
+		}
+
+		.tableContainer table tbody td {
+			font-size: 1rem;
+			text-align: left;
+		}
+
+		.queryBlock input {
+			font-size: initial;
+			height: initial;
+			width: initial;
+		}
+
+		.queryBlock {
+			margin-bottom: 1rem;
+		}
+
+		.tableContainer table td {
+			height: initial;
+		}
+
+		.tableContainer table tbody td:first-child {
+			text-align: center;
+		}
+
+		.text-right {
+			text-align: right;
+			padding-right: 10px;
+		}
+
+		.text-left {
+			text-align: left;
+			padding-left: 10px;
+		}
+
+		.text-center {
+			text-align: center;
+		}
+
+		table.tableCss tr th {
+			font-size: 1.4rem;
+			border: 1px solid #000000;
+			text-align: center;
+		}
+
+		table.tableCss tr td {
+			font-size: 1rem;
+			border: 1px solid #000000;
+		}
+
+		table.tableCss {
+			background-color: #ffffff;
+			width: 100%;
+		}
+
+		.fa-check-circle {
+			color: #55ca5e;
+		}
+
+		.fas.fa-check-circle {
+			position: absolute;
+		}
+
+		.ui-datepicker-week-end a {
+			background-image: none;
+			background-color: red;
+		}
+
+		.datepicker table tr td:last-child {
+			color: red;
+			font-weight: bolder;
+		}
+
+		.datepicker table tr td:nth-last-child(2) {
+			color: green;
+			font-weight: bolder;
+		}
+
+		.wrapper {
+			text-align: center;
+		}
+
+		.main {
+			margin-top: initial;
+		}
+	</style>
+</head>
+
+
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+
+	@*<form method="post" action="/Home/Directorselfassessment">*@
+		<header class="header wrapper">
+			<div class="queryBlock">
+				<p style="font-size: 24pt;">主　任　自　我　考　核　表</p>
+				<p>
+					姓名 <input type="text" id="nam" name="name" class="form-control col-md-3 d-inline-block" placeholder="請輸入..." value="" required> &nbsp;&nbsp;&nbsp;&nbsp;
+					考核年度 <select id="year" name="year" class="form-control col-md-1 d-inline-block" required>
+						<option value="">-請選擇-</option>
+						<option value="109">109</option>
+						<option value="108">108</option>
+						<option value="107">107</option>
+					</select>  年
+					<!-- <input type="text" id="occur_date" name="occur_date" class="form-control col-md-1 d-inline-block datepicker" placeholder="請選擇..."/> -->
+					<!-- <button class="btn btn-blue"><i class="fa fa-search"></i>查詢</button> -->
+				</p>
+			</div>
+		</header>
+
+
+		<main class="main">
+
+			<div class="wrapper">
+				<table class="tableCss">
+					<thead>
+						<tr>
+							<th rowspan="2" style="width:15%">類別</th>
+							<th rowspan="2" style="width:55%">項目</th>
+							<th colspan="5" style="width:30%">分數</th>
+						</tr>
+						<tr>
+							<th>優</th>
+							<th>佳</th>
+							<th>可</th>
+							<th>劣</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="text-center" rowspan="2">一、計畫及報告</td>
+							<td class="text-left">1、能掌握社會的脈動，對未來有前瞻性的規劃</td>
+							<td class="text-center point" name="one" info="0" ch="1" value="2">2</td>
+							<td class="text-center point" name="one" info="0" ch="2" value="1.6">1.6</td>
+							<td class="text-center point" name="one" info="0" ch="3" value="1.4">1.4</td>
+							<td class="text-center point" name="one" info="0" ch="4" value="0">0</td>
+
+						</tr>
+						<tr>
+							<td class="text-left">2、能準時提出妥善切實之工作計畫</td>
+							<td class="text-center point" name="two" info="1" value="8">8</td>
+							<td class="text-center point" name="two" info="1" value="6.4">6.4</td>
+							<td class="text-center point" name="two" info="1" value="5.6">5.6</td>
+							<td class="text-center point" name="two" info="1" value="2">2</td>
+						</tr>
+						<tr>
+							<td class="text-center" rowspan="2">二、組織</td>
+							<td class="text-left" d="">3、能妥善規劃運用人力職責分派恰當</td>
+							<td class="text-center point" name="there" info="2" value="2">2</td>
+							<td class="text-center point" name="there" info="2" value="1.6">1.6</td>
+							<td class="text-center point" name="there" info="2" value="1.4">1.4</td>
+							<td class="text-center point" name="there" info="2" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-left">4、能關心部屬，與工作人員會談並維持工作士氣</td>
+							<td class="text-center point" name="four" info="3" value="4">4</td>
+							<td class="text-center point" name="four" info="3" value="3.2">3.2</td>
+							<td class="text-center point" name="four" info="3" value="2.8">2.8</td>
+							<td class="text-center point" name="four" info="3" value="1">1</td>
+						</tr>
+						<tr>
+							<td class="text-center">三、關心</td>
+							<td class="text-left">5、關心並盡力滿足個案的個別需求</td>
+							<td class="text-center point" name="five" info="4" value="5">5</td>
+							<td class="text-center point" name="five" info="4" value="4">4</td>
+							<td class="text-center point" name="five" info="4" value="3.5">3.5</td>
+							<td class="text-center point" name="five" info="4" value="1">1</td>
+						</tr>
+						<tr>
+							<td class="text-center" rowspan="4">四、控制</td>
+							<td class="text-left">6、能督導工作、自我反省發現問題，進行改善，促進服務品質</td>
+							<td class="text-center point" name="six" info="5" value="15">15</td>
+							<td class="text-center point" name="six" info="5" value="12">12</td>
+							<td class="text-center point" name="six" info="5" value="10">10</td>
+							<td class="text-center point" name="six" info="5" value="5">5</td>
+						</tr>
+						<tr>
+							<td class="text-left">7、能做有條理的公文及記錄文書管理</td>
+							<td class="text-center point" name="seven" info="6" value="2">2</td>
+							<td class="text-center point" name="seven" info="6" value="1.6">1.6</td>
+							<td class="text-center point" name="seven" info="6" value="1.4">1.4</td>
+							<td class="text-center point" name="seven" info="6" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-left">8、能落實整體環境衛生與安全管理</td>
+							<td class="text-center point" name="eight" info="7" value="10">10</td>
+							<td class="text-center point" name="eight" info="7" value="8">8</td>
+							<td class="text-center point" name="eight" info="7" value="7">7</td>
+							<td class="text-center point" name="eight" info="7" value="3">3</td>
+						</tr>
+						<tr>
+							<td class="text-left">9、能依計畫進度完成任務（簽訂之特約任務）</td>
+							<td class="text-center point" name="nine" info="8" value="4">4</td>
+							<td class="text-center point" name="nine" info="8" value="3.2">3.2</td>
+							<td class="text-center point" name="nine" info="8" value="2.8">2.8</td>
+							<td class="text-center point" name="nine" info="8" value="1">1</td>
+						</tr>
+
+						<tr>
+							<td class="text-center" rowspan="4">五、財務管理</td>
+							<td class="text-left">10、能做妥善的庫存及財產管理</td>
+							<td class="text-center point" name="ten" info="9" value="2">2</td>
+							<td class="text-center point" name="ten" info="9" value="1.6">1.6</td>
+							<td class="text-center point" name="ten" info="9" value="1.4">1.4</td>
+							<td class="text-center point" name="ten" info="9" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-left">11、作合宜的成本分析開源節流</td>
+							<td class="text-center point" name="eleven" info="10" value="5">5</td>
+							<td class="text-center point" name="eleven" info="10" value="4">4</td>
+							<td class="text-center point" name="eleven" info="10" value="3.5">3.5</td>
+							<td class="text-center point" name="eleven" info="10" value="1">1</td>
+						</tr>
+						<tr>
+							<td class="text-left">12、能擬定合理的預算並依計畫執行</td>
+							<td class="text-center point" name="twelve" info="11" value="2">2</td>
+							<td class="text-center point" name="twelve" info="11" value="1.6">1.6</td>
+							<td class="text-center point" name="twelve" info="11" value="1.4">1.4</td>
+							<td class="text-center point" name="twelve" info="11" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-left">13、使機構設備保持最佳狀況並能督促工作人員不浪費工務</td>
+							<td class="text-center point" name="thirteen" info="12" value="2">2</td>
+							<td class="text-center point" name="thirteen" info="12" value="1.6">1.6</td>
+							<td class="text-center point" name="thirteen" info="12" value="1.4">1.4</td>
+							<td class="text-center point" name="thirteen" info="12" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-center" rowspan="3">六、學術</td>
+							<td class="text-left">14、能擬定合宜的在職教育（包含進階制度及勞工安全）並切實執行</td>
+							<td class="text-center point" name="fourteen" info="13" value="8">8</td>
+							<td class="text-center point" name="fourteen" info="13" value="6.4">6.4</td>
+							<td class="text-center point" name="fourteen" info="13" value="5.6">5.6</td>
+							<td class="text-center point" name="fourteen" info="13" value="3">3</td>
+						</tr>
+						<tr>
+							<td class="text-left">15、能對相關議題進行研究</td>
+							<td class="text-center point" name="fifteen" info="14" value="2">2</td>
+							<td class="text-center point" name="fifteen" info="14" value="1.6">1.6</td>
+							<td class="text-center point" name="fifteen" info="14" value="1.4">1.4</td>
+							<td class="text-center point" name="fifteen" info="14" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-left">16、能配合教導單位的學習需求</td>
+							<td class="text-center point" name="sixteen" info="15" value="2">2</td>
+							<td class="text-center point" name="sixteen" info="15" value="1.6">1.6</td>
+							<td class="text-center point" name="sixteen" info="15" value="1.4">1.4</td>
+							<td class="text-center point" name="sixteen" info="15" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-center">七、危機處理</td>
+							<td class="text-left">17、能妥善處理危機事件，並讓上級得到及時應有之資訊</td>
+							<td class="text-center point" name="seventeen" info="16" value="5">5</td>
+							<td class="text-center point" name="seventeen" info="16" value="4">4</td>
+							<td class="text-center point" name="seventeen" info="16" value="3.5">3.5</td>
+							<td class="text-center point" name="seventeen" info="16" value="1">1</td>
+						</tr>
+
+						<tr>
+							<td class="text-center" rowspan="4">八、公關行銷</td>
+							<td class="text-left">18、能隨時保持網站資訊之時效性</td>
+							<td class="text-center point" name="eighteen" info="17" value="2">2</td>
+							<td class="text-center point" name="eighteen" info="17" value="1.6">1.6</td>
+							<td class="text-center point" name="eighteen" info="17" value="1.4">1.4</td>
+							<td class="text-center point" name="eighteen" info="17" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-left">19、與上級主管機關及相關機構人員建立良好關係</td>
+							<td class="text-center point" name="nineteen" info="18" value="2">2</td>
+							<td class="text-center point" name="nineteen" info="18" value="1.6">1.6</td>
+							<td class="text-center point" name="nineteen" info="18" value="1.4">1.4</td>
+							<td class="text-center point" name="nineteen" info="18" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-left">20、能積極開發業務</td>
+							<td class="text-center point" name="twenty" info="19" value="3">3</td>
+							<td class="text-center point" name="twenty" info="19" value="2.5">2.5</td>
+							<td class="text-center point" name="twenty" info="19" value="2.1">2.1</td>
+							<td class="text-center point" name="twenty" info="19" value="1">1</td>
+						</tr>
+						<tr>
+							<td class="text-left">21、能依不同場合應對得體</td>
+							<td class="text-center point" name="twentyone" info="20" value="2">2</td>
+							<td class="text-center point" name="twentyone" info="20" value="1.6">1.6</td>
+							<td class="text-center point" name="twentyone" info="20" value="1.4">1.4</td>
+							<td class="text-center point" name="twentyone" info="20" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-center" rowspan="1">九、團隊精神</td>
+							<td class="text-left">22、配合機構裡念，對機構有向心力，有團隊合作的精神</td>
+							<td class="text-center point" name="twentytwo" info="21" value="5">5</td>
+							<td class="text-center point" name="twentytwo" info="21" value="4">4</td>
+							<td class="text-center point" name="twentytwo" info="21" value="3.5">3.5</td>
+							<td class="text-center point" name="twentytwo" info="21" value="1">1</td>
+						</tr>
+						<tr>
+							<td class="text-center" rowspan="2">十、人際關係</td>
+							<td class="text-left">23、對同事個案及家屬建立良好人際關係</td>
+							<td class="text-center point" name="twentythere" info="22" value="3">3</td>
+							<td class="text-center point" name="twentythere" info="22" value="2.5">2.5</td>
+							<td class="text-center point" name="twentythere" info="22" value="2.1">2.1</td>
+							<td class="text-center point" name="twentythere" info="22" value="1">1</td>
+						</tr>
+						<tr>
+							<td class="text-left">24、有虛心學習的態度</td>
+							<td class="text-center point" name="twentyfour" info="23" value="2">2</td>
+							<td class="text-center point" name="twentyfour" info="23" value="1.6">1.6</td>
+							<td class="text-center point" name="twentyfour" info="23" value="1.4">1.4</td>
+							<td class="text-center point" name="twentyfour" info="23" value="0">0<i class="chk0 fas fa-check-circle"></i></td>
+						</tr>
+						<tr>
+							<td class="text-center" rowspan="1">十一、創意</td>
+							<td class="text-left">25、能依情境需要，改革創新</td>
+							<td class="text-center point" name="twentyfive" info="24" value="5">5</td>
+							<td class="text-center point" name="twentyfive" info="24" value="4">4</td>
+							<td class="text-center point" name="twentyfive" info="24" value="3.5">3.5</td>
+							<td class="text-center point" name="twentyfive" info="24" value="1">1</td>
+						</tr>
+						<tr>
+							<td colspan="2" name="" class="text-right">小計:</td>
+							<td colspan="4" class="text-left" id="total" name="total"></td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<input type="submit" class="btn btn-info" onclick="save()" value="存檔" />
+			</div>
+	@*</form>*@
+	</main>
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

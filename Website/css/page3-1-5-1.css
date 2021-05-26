@@ -1,0 +1,166 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 3, ../sass/page3-1-5-1.scss */
+#homepageBtn,
+#lastPage {
+  border: none;
+  border-bottom: 1px solid #bbbbbb;
+  background-color: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* line 11, ../sass/page3-1-5-1.scss */
+.header {
+  text-align: left;
+}
+/* line 13, ../sass/page3-1-5-1.scss */
+.header h1 {
+  font-size: 1.2rem;
+  padding: 1rem 3rem;
+  color: #fff;
+  text-align: center;
+  display: inline-block;
+  border: none;
+  background-color: #5677fc;
+  box-shadow: 0 8px 10px #0003;
+}
+/* line 78, ../sass/_var.scss */
+.header h1:hover, .header h1:active {
+  background-color: #3d63fc;
+}
+
+/* line 22, ../sass/page3-1-5-1.scss */
+.main {
+  margin-top: 1.7rem;
+}
+
+/* line 25, ../sass/page3-1-5-1.scss */
+.mainPlan__header {
+  display: inline-block;
+  padding: 0 10px;
+  font-size: 1.8rem;
+  border: 1px solid #ff9800;
+}
+
+/* line 32, ../sass/page3-1-5-1.scss */
+.mainPlan__chOL {
+  list-style-type: none;
+}
+/* line 35, ../sass/page3-1-5-1.scss */
+.mainPlan__chOL .mainPlan__chLi {
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 1rem;
+}
+/* line 40, ../sass/page3-1-5-1.scss */
+.mainPlan__chOL .mainPlan__chLi:before {
+  display: inline-block;
+  width: 50px;
+  content: attr(li-idx);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* line 50, ../sass/page3-1-5-1.scss */
+.mainPlan__OL {
+  list-style-type: decimal;
+  margin-left: 25px;
+}
+
+/* line 54, ../sass/page3-1-5-1.scss */
+.mainPlan__table {
+  background-color: #fff;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+}
+/* line 60, ../sass/page3-1-5-1.scss */
+.mainPlan__table td,
+.mainPlan__table th {
+  padding: 0.5rem 1rem;
+  border: 1px solid #101010;
+  text-align: center;
+}
+
+/* line 68, ../sass/page3-1-5-1.scss */
+.mainTable {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+}
+/* line 73, ../sass/page3-1-5-1.scss */
+.mainTable td,
+.mainTable th {
+  padding: 0.5rem 1rem;
+  border: 1px solid #101010;
+  text-align: center;
+}
+/* line 79, ../sass/page3-1-5-1.scss */
+.mainTable th {
+  width: 1%;
+  white-space: nowrap;
+}
+/* line 83, ../sass/page3-1-5-1.scss */
+.mainTable td {
+  text-align: left;
+}
+/* line 85, ../sass/page3-1-5-1.scss */
+.mainTable td .mainTable__noBorder {
+  border: none;
+}
+
+/* line 90, ../sass/page3-1-5-1.scss */
+.mainTable__container {
+  overflow-x: auto;
+}
+
+/* line 93, ../sass/page3-1-5-1.scss */
+.mainTable__input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* line 97, ../sass/page3-1-5-1.scss */
+.mainTable__fileBlock {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: #fff;
+  border: 1px solid #bbbbbb;
+  text-align: center;
+}

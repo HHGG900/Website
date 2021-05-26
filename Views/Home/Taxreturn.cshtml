@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>報稅 | 台灣柏佐克智慧型居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2-1-1.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#s_year').val('109');
+		});
+
+		function doUpload(formName) {
+			var thisForm = $('#' + formName);
+
+			if (formName == 'taxUpload01') {
+				if ($('#taxUploadfile01').val() == '') {
+					alert('請選擇掃描文件存擋!');
+					$('#taxUploadfile01').focus();
+					return false;
+				}
+				else {
+					$('#wait_content').show();
+					$('#wait').show();
+
+					thisForm.submit();
+				}
+			}
+			else if (formName == 'taxUpload02') {
+				if ($('#year').val() == '') {
+					alert('請輸入稅務年度!');
+					$('#year').focus();
+					return false;
+				}
+				else if ($('#sheetName').val() == '') {
+					alert('請輸入表單名稱!');
+					$('#sheetName').focus();
+					return false;
+				}
+				else if ($('#taxUploadfile02').val() == '') {
+					alert('請選擇掃描文件存擋!');
+					$('#taxUploadfile02').focus();
+					return false;
+				}
+				else {
+					$('#wait_content').show();
+					$('#wait').show();
+
+					thisForm.submit();
+				}
+			}
+		}
+
+		function doSearch() {
+			if ($('#s_year').val() == '') {
+				alert('請輸入稅務年度！');
+				$('#s_year').focus();
+				return false;
+			}
+			else {
+				$('#form1').submit();
+			}
+		}
+	</script>
+	<style>
+		table.tableCss {
+			width: 100%;
+			background-color: #fff;
+			margin-top: 30px;
+		}
+
+			table.tableCss tr th {
+				border: 1px solid #000;
+				text-align: center;
+				height: 4rem;
+			}
+
+			table.tableCss tr td {
+				border: 1px solid #000;
+				text-align: center;
+				height: 3rem;
+			}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1>報稅資料存擋</h1>
+	</header>
+	<main class="main wrapper">
+		<form id="taxUpload01" name="taxUpload01" method="post" action="/yearly/taxUpload" target="actFrame" enctype="multipart/form-data">
+			<p class="descP">
+				評鑑要求 須由專人負責會計業務
+			</p>
+			<div class="serviceBlock__whiteBlock">
+				<header>專業證明文件掃描存擋</header>
+				<input type="file" id="taxUploadfile01" name="taxUploadfile01">
+				<input type="hidden" id="taxType" name="taxType" value="1">
+			</div>
+			<div>
+				<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="doUpload('taxUpload01');">儲存</button>
+			</div>
+		</form>
+
+		<form id="taxUpload02" name="taxUpload02" method="post" action="/yearly/taxUpload" target="actFrame" enctype="multipart/form-data">
+			<p class="descP">
+				稅務年度 <select id="year" name="year" class="form-control col-md-1 d-inline-block">
+					<option value="">--- 請選擇 ---</option>
+					<option value="109">109</option>
+					<option value="108">108</option>
+					<option value="107">107</option>
+				</select>  年
+				<!-- <input type="text" id="year" name="year" class="inputYear" size="4"/> -->
+				表單名稱<input type="text" class="form-control col-md-3 d-inline-block" id="sheetName" name="sheetName">
+			</p>
+			<div class="serviceBlock__whiteBlock">
+				<header>掃描文件存擋</header>
+				<input type="file" id="taxUploadfile02" name="taxUploadfile02">
+				<input type="hidden" id="taxType" name="taxType" value="2">
+			</div>
+			<div>
+				<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="doUpload('taxUpload02');">儲存</button>
+			</div>
+		</form>
+
+		<div class="serviceBlock">
+			<form id="form1" method="post">
+				<header>
+					<h2 class="serviceBlock__h2">報稅查詢</h2>
+				</header>
+				<p>
+					稅務年度 <select id="s_year" name="s_year" class="form-control col-md-1 d-inline-block">
+						<option value="">--- 請選擇 ---</option>
+						<option value="109">109</option>
+						<option value="108">108</option>
+						<option value="107">107</option>
+					</select>  年
+					<!-- <input type="text" class="inputYear" id="s_year" name="s_year" value="109" /> -->
+					<button class="btn btn-blue" onclick="return doSearch();">
+						<i class="fas fa-search"></i>查詢
+					</button>
+				</p>
+			</form>
+
+			<table class="tableCss">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>稅務年度</th>
+						<th>表單名稱</th>
+						<th>檔案</th>
+						<th>建立時間</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr>
+						<td>1</td>
+						<td>109</td>
+						<td>AAAAAAA</td>
+						<td>
+							<a href="/uploads/tax_return/taxPara02/S__26910776.jpg" target="_blank">下載檔案</a>
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>2</td>
+						<td>109</td>
+						<td>113</td>
+						<td>
+							<a href="/uploads/tax_return/taxPara02/螢幕快照_2020-04-21_17.33_.32_.png" target="_blank">下載檔案</a>
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>3</td>
+						<td>109</td>
+						<td>023-</td>
+						<td>
+							--- 無檔案 ---
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>4</td>
+						<td>109</td>
+						<td></td>
+						<td>
+							--- 無檔案 ---
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>5</td>
+						<td>109</td>
+						<td>資產負債表</td>
+						<td>
+							<a href="/uploads/tax_return/taxPara02/手簽名-余昊騰3.jpg" target="_blank">下載檔案</a>
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>6</td>
+						<td>109</td>
+						<td></td>
+						<td>
+							--- 無檔案 ---
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>7</td>
+						<td>109</td>
+						<td>023-</td>
+						<td>
+							<a href="/uploads/tax_return/taxPara02/10903_206622.pdf" target="_blank">下載檔案</a>
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>8</td>
+						<td>109</td>
+						<td>023-</td>
+						<td>
+							--- 無檔案 ---
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>9</td>
+						<td>109</td>
+						<td></td>
+						<td>
+							--- 無檔案 ---
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>10</td>
+						<td>109</td>
+						<td>aaaa</td>
+						<td>
+							<a href="/uploads/tax_return/taxPara02/手簽名-余昊騰3.jpg" target="_blank">下載檔案</a>
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>11</td>
+						<td>109</td>
+						<td>aaaa</td>
+						<td>
+							<a href="/uploads/tax_return/taxPara02/手簽名-余昊騰2.jpg" target="_blank">下載檔案</a>
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>12</td>
+						<td>109</td>
+						<td>aaaa</td>
+						<td>
+							<a href="/uploads/tax_return/taxPara02/手簽名-余昊騰1.jpg" target="_blank">下載檔案</a>
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>13</td>
+						<td>109</td>
+						<td>aaaa</td>
+						<td>
+							<a href="/uploads/tax_return/taxPara02/手簽名-余昊騰.jpg" target="_blank">下載檔案</a>
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>14</td>
+						<td>109</td>
+						<td>aaaa</td>
+						<td>
+							--- 無檔案 ---
+						</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>15</td>
+						<td>109</td>
+						<td></td>
+						<td>
+							--- 無檔案 ---
+						</td>
+						<td></td>
+					</tr>
+
+
+				</tbody>
+			</table>
+		</div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

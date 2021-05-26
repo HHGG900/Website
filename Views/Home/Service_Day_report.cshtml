@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>照顧日誌表 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2-1.css">
+	<!--    <link rel="stylesheet" type="text/css" href="/libs/datepicker/css/bootstrap-datepicker3.min.css">-->
+	<link rel="stylesheet" href="/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		var choosenId = 0;
+
+		$(function () {
+			$(document).on("click", "#occur_date", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+
+
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+		});
+	</script>
+	<style>
+		.header {
+			text-align: center;
+		}
+
+		.hint {
+			display: inline-block;
+			margin: 10px auto 0;
+			font-size: 1rem;
+			line-height: 2.6rem;
+			padding: 0px 10px;
+			background-color: #fd417a;
+			color: #fff;
+		}
+
+		.hint {
+			padding: 0px 10px;
+			background-color: #fd417a;
+		}
+
+		.cases__case, .btnSet__btn {
+			cursor: pointer;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+		}
+
+		.inputYear {
+			/*width: 110px;*/
+			margin-left: 80px;
+			padding: 4px;
+			border-radius: 4px;
+		}
+
+		.timeZone {
+			display: inline;
+			vertical-align: middle;
+		}
+
+		.selectCss {
+			width: 80px;
+			height: 35px;
+		}
+
+		.btn {
+			padding: 0.3rem 1rem;
+			margin-bottom: 7px;
+		}
+
+		.main .paper {
+			width: 33%;
+			/*width: 48%;*/
+			border: 3px dotted;
+			margin-top: 1rem;
+			display: inline-block;
+			padding-left: 20px;
+			padding-right: 20px;
+			vertical-align: text-top;
+		}
+
+		h1 {
+			margin-top: 20px;
+		}
+
+		.btn {
+			cursor: pointer;
+		}
+
+		.Wdate {
+			width: 120px;
+		}
+		/*.ui-datepicker {*/
+		/*margin-left: 100px;*/
+		/*z-index: 1000;*/
+		/*}*/
+		/*.datepicker {*/
+		/*position: relative;*/
+		/*z-index: 1000;*/
+		/*}*/
+		.tableContainer table th, .tableContainer table td {
+			white-space: inherit;
+			font-size: 14px;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<form method="post">
+			<h1 class="hint">服務工作日誌</h1>
+			<div class="timeZone">
+				<!-- <input type="text" class="inputYear form-control col-md-1 d-inline-block" placeholder="請輸入年度" value="2020">年度 -->
+				<input type="text" class="Wdate form-control col-md-2 d-inline-block" placeholder="選擇日期" name="occur_date" id="occur_date" value="2020-12-16">
+				<button class="btn btn-blue"><i class="fas fa-search"></i>查詢</button>
+			</div>
+		</form>
+	</header>
+	<main class="header main">
+		<h1>全部共 0位</h1>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 186px; height: 198px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

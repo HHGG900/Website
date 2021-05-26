@@ -1,0 +1,16 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap");
+
+.header__btn {
+    cursor: pointer;
+}
+
+.header__btn.active {
+    cursor: initial;
+    background-color: gray;
+}
+
+:focus {
+    /*outline: -webkit-focus-ring-color auto 1px;*/
+    outline: none;
+}

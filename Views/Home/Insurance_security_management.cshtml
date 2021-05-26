@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>保險安全管理 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-4.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<!--Get your own code at fontawesome.com-->
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#secure_busi_btn').click(function () {
+				location.href = "#secure_busi";
+			});
+
+			$(this).submit();
+		});
+
+		function doUpload() {
+			if ($('#insuranceUploadfile01').val() == '') {
+				alert('請選擇檔案！');
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#insuranceUpload01').submit();
+			}
+		}
+		function doUpload2() {
+			if ($('#insuranceUploadfile02').val() == '') {
+				alert('請選擇檔案！');
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#insuranceUpload01').submit();
+			}
+		}
+		function doUpload3() {
+			if ($('#insuranceUploadfile03').val() == '') {
+				alert('請選擇檔案！');
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#insuranceUpload01').submit();
+			}
+		}
+
+		function doUpload4() {
+			if ($('#insuranceUploadfile04').val() == '') {
+				$('#insuranceUploadfile04').focus();
+				alert('請選擇檔案！');
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#insuranceUpload01').submit();
+			}
+		}
+
+		function doSecureUpload() {
+			var _f = $('#secureUpload01');
+
+			if ($('#secureUploadfile05').val() == '') {
+				$('#secureUploadfile05').focus();
+				alert('請選擇檔案！');
+				return false;
+			}
+			else if (_f.find('#period').val() == '') {
+				_f.find('#period').focus();
+				alert('請選擇追蹤時間！');
+				return false;
+			}
+			else {
+				$('#secureUpload01').find('#isUploadfile').val(1);
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#secureUpload01').submit();
+			}
+		}
+
+		function doSecureUpload2() {
+			var _f = $('#secureUpload02');
+
+			if ($('#secureUploadfile06').val() == '') {
+				$('#secureUploadfile06').focus();
+				alert('請選擇檔案！');
+				return false;
+			}
+			else if (_f.find('#period').val() == '') {
+				_f.find('#period').focus();
+				alert('請選擇追蹤時間！');
+				return false;
+			}
+			else {
+				$('#secureUpload02').find('#isUploadfile').val(1);
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#secureUpload02').submit();
+			}
+		}
+
+		function doSecureUpload3() {
+			var _f = $('#secureUpload03');
+
+			if ($('#secureUploadfile07').val() == '') {
+				$('#secureUploadfile07').focus();
+				alert('請選擇檔案！');
+				return false;
+			}
+			else if (_f.find('#period').val() == '') {
+				_f.find('#period').focus();
+				alert('請選擇追蹤時間！');
+				return false;
+			}
+			else {
+				$('#secureUpload03').find('#isUploadfile').val(1);
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#secureUpload03').submit();
+			}
+		}
+
+		function doSecureUpload4() {
+			var _f = $('#secureUpload04');
+
+			if ($('#secureUploadfile08').val() == '') {
+				$('#secureUploadfile08').focus();
+				alert('請選擇檔案！');
+				return false;
+			}
+			else if (_f.find('#period').val() == '') {
+				_f.find('#period').focus();
+				alert('請選擇追蹤時間！');
+				return false;
+			}
+			else {
+				$('#secureUpload04').find('#isUploadfile').val(1);
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#secureUpload04').submit();
+			}
+		}
+
+		function doSecureUpload5() {
+			var _f = $('#secureUpload05');
+
+			if ($('#secureUploadfile09').val() == '') {
+				$('#secureUploadfile09').focus();
+				alert('請選擇檔案！');
+				return false;
+			}
+			else if (_f.find('#period').val() == '') {
+				_f.find('#period').focus();
+				alert('請選擇追蹤時間！');
+				return false;
+			}
+			else {
+				$('#secureUpload05').find('#isUploadfile').val(1);
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#secureUpload05').submit();
+			}
+		}
+
+		function doSecureUpload6() {
+			var _f = $('#secureUpload06');
+
+			if ($('#secureUploadfile10').val() == '') {
+				$('#secureUploadfile10').focus();
+				alert('請選擇檔案！');
+				return false;
+			}
+			else if (_f.find('#period').val() == '') {
+				_f.find('#period').focus();
+				alert('請選擇追蹤時間！');
+				return false;
+			}
+			else {
+				$('#secureUpload06').find('#isUploadfile').val(1);
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#secureUpload06').submit();
+			}
+		}
+	</script>
+	<style>
+		a#secure_busi_btn:hover {
+			text-decoration: none;
+		}
+
+		.serviceBlock__whiteBlock {
+			border-radius: 5px;
+			width: 380px;
+			font-size: 1rem;
+		}
+
+			.serviceBlock__whiteBlock input[type="file"] {
+				font-size: 0.7rem;
+			}
+
+		.fa-check, .fa-check-circle {
+			font-size: 50pt;
+			color: green;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<img src="~/images/icon_insurance.png" alt="">
+			<h1 class="h1">保險安全管理</h1>
+			<a name="insurance"></a>
+		</div>
+		<div class="header__textCell">
+			<div class="text" style="padding: 0px; width:95%; font-size:14pt;">
+				<p>保險沒有辦避免意外事故發生，但保險是「付出公平合理的保費，集結眾人的力量，在事故發生時轉嫁風險」的好工具，如用1萬元保費得到100萬（倍）的保障。若沒有保險，沒有其他人的幫助，單靠自己力量，難以抵擋事故的衝擊，悲劇往往因而發生。</p>
+				<p>有保險業務員者一定要告知，當保險到期時前務必要告知單位辦理續約事宜。</p><p><br></p>
+			</div>
+			<div class="header__btns">
+				<button class="header__btn">保險業務</button>
+				<button class="header__btn" id="secure_busi_btn">安全業務</button>
+			</div>
+		</div>
+	</header>
+	<main class="main wrapper">
+		<div class="serviceBlock">
+			<header>
+				<h2 class="serviceBlock__h2">保險業務</h2>
+			</header>
+			<div class="container">
+				<div class="row">
+					<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+						<h3 class="serviceBlock__h3 serviceBlock__h3--lightdust">勞健勞退 三合一</h3>
+					</div>
+					<div class="col col-12 col-lg-10">
+						<a id="aLogin" href="https://eservice.nhi.gov.tw/nhiweb1/system/loginca.aspx" target="_blank"><i class="fas fa-laptop"></i></a>
+					</div>
+					<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+						<h3 class="serviceBlock__h3 serviceBlock__h3--darkpink">雇主意外責任保險</h3>
+					</div>
+					<div class="col col-12 col-lg-4">
+						<form id="insuranceUpload01" name="insuranceUpload01" method="post" action="/yearly/insuranceUpload" target="actFrame" enctype="multipart/form-data">
+							<input type="hidden" id="year" name="year" value="2020">
+							<div class="serviceBlock__whiteBlock">
+								<header>雇主意外責任險保單存擋</header>
+								<input type="file" id="insuranceUploadfile01" name="insuranceUploadfile01">
+								<input type="hidden" id="insuranceType" name="insuranceType" value="1">
+								<i class="fas fa-check-circle"></i>
+							</div>
+							<div class="text-center">
+								<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doUpload();">儲存</button>
+							</div>
+						</form>
+					</div>
+
+					<!--	<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+					<h3 class="serviceBlock__h3 serviceBlock__h3--darkpink">場地公共意外險</h3>
+				</div>
+				<div class="col col-12 col-lg-4">
+					<form id="insuranceUpload02" name="insuranceUpload02" method="post" action="/yearly/insuranceUpload" target="actFrame" enctype="multipart/form-data">
+						重要“ 附約要照顧服務責任險
+						<input type="hidden" id="year" name="year" value="2020">
+						<div class="serviceBlock__whiteBlock">
+							<header>場地公共意外險保單存擋</header>
+							<input type="file" id="insuranceUploadfile02" name="insuranceUploadfile02">
+							<input type="hidden" id="insuranceType" name="insuranceType" value="2">
+							<i class="fas fa-check-circle"></i>
+						</div>
+						<div class="text-center">
+							<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doUpload2();">儲存</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+					<h3 class="serviceBlock__h3 serviceBlock__h3--greenyellow">車輛強制險</h3>
+				</div>
+				<div class="col col-12 col-lg-4">
+					<form id="insuranceUpload03" name="insuranceUpload03" method="post" action="/yearly/insuranceUpload" target="actFrame" enctype="multipart/form-data">
+						<input type="hidden" id="year" name="year" value="2020">
+						<div class="serviceBlock__whiteBlock">
+							<header>車輛強制險保單存擋</header>
+							<input type="file" id="insuranceUploadfile03" name="insuranceUploadfile03">
+							<input type="hidden" id="insuranceType" name="insuranceType" value="3">
+						</div>
+						<div class="text-center">
+							<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doUpload3();">儲存</button>
+						</div>
+					</form>
+				</div>
+				<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+					<h3 class="serviceBlock__h3 serviceBlock__h3--greenyellow">車輛任意險</h3>
+				</div>
+
+				<div class="col col-12 col-lg-4">
+					<form id="insuranceUpload04" name="insuranceUpload04" method="post" action="/yearly/insuranceUpload" target="actFrame" enctype="multipart/form-data">
+						<input type="hidden" id="year" name="year" value="2020">
+						<div class="serviceBlock__whiteBlock">
+							<header>車輛任意險保單存擋</header>
+							<input type="file" id="insuranceUploadfile04" name="insuranceUploadfile04">
+							<input type="hidden" id="insuranceType" name="insuranceType" value="4">
+						</div>
+						<div class="text-center">
+							<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doUpload4();">儲存</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="serviceBlock">
+		<a name="secure_busi"></a>
+		<header>
+			<h2 class="serviceBlock__h2">安全業務</h2>
+		</header>
+		<div class="container">
+			<div class="row">
+				<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+					<h3 class="serviceBlock__h3 serviceBlock__h3--darkpink">消防申報</h3>
+				</div>
+				<div class="col col-12 col-lg-4">
+					<form id="secureUpload01" name="secureUpload01" method="post" action="/yearly/secureUpload" target="actFrame" enctype="multipart/form-data">
+						<input type="hidden" id="year" name="year" value="2020">
+						<input type="hidden" id="isUploadfile" name="isUploadfile" value="0">
+						<div class="serviceBlock__countTimeBar">
+							設定追蹤月數
+							<select name="period" id="period">
+								<option value="">--- 請選擇 ---</option>
+								<option value="+6 months">半年</option>
+								<option value="+1 years">一年</option>
+								<option value="+2 years">兩年</option>
+							</select>
+							<!--                            <button class="serviceBlock__countTimeBtn">開始計時</button>-->
+					<!--</div>
+		<div class="serviceBlock__whiteBlock">
+			<header>消防申報紀錄存擋</header>
+			<input type="file" id="secureUploadfile05" name="secureUploadfile05">
+			<input type="hidden" id="securityType" name="securityType" value="5">
+			<i class="fas fa-check-circle"></i>
+		</div>
+		<div class="text-center">
+			<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doSecureUpload();">儲存</button>
+		</div>
+		</form>
+	</div>
+			<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+				<h3 class="serviceBlock__h3 serviceBlock__h3--darkpink">消防演練</h3>
+			</div>
+			<div class="col col-12 col-lg-4">
+				<form id="secureUpload02" name="secureUpload02" method="post" action="/yearly/secureUpload" target="actFrame" enctype="multipart/form-data">
+					<input type="hidden" id="year" name="year" value="2020">
+					<input type="hidden" id="isUploadfile" name="isUploadfile" value="0">
+					<div class="serviceBlock__countTimeBar">
+						設定追蹤月數
+						<select name="period" id="period">
+							<option value="">--- 請選擇 ---</option>
+							<option value="+6 months">半年</option>
+							<option value="+1 years">一年</option>
+							<option value="+2 years">兩年</option>
+						</select>
+						<!--                            <button class="serviceBlock__countTimeBtn">開始計時</button>-->
+					<!--	</div>
+			<div class="serviceBlock__whiteBlock">
+				<header>消防演練紀錄存擋</header>
+				<input type="file" id="secureUploadfile06" name="secureUploadfile06">
+				<input type="hidden" id="securityType" name="securityType" value="6">
+				<i class="fas fa-check-circle"></i>
+			</div>
+			<div class="text-center">
+				<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doSecureUpload2();">儲存</button>
+			</div>
+		</form>
+	</div>
+	<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+		<h3 class="serviceBlock__h3 serviceBlock__h3--lightdust">公共安全申報</h3>
+	</div>
+	<div class="col col-12 col-lg-4">
+		<form id="secureUpload03" name="secureUpload03" method="post" action="/yearly/secureUpload" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="year" name="year" value="2020">
+			<input type="hidden" id="isUploadfile" name="isUploadfile" value="0">
+			<div class="serviceBlock__countTimeBar">
+				設定追蹤月數
+				<select name="period" id="period">
+					<option value="">--- 請選擇 ---</option>
+					<option value="+6 months">半年</option>
+					<option value="+1 years">一年</option>
+					<option value="+2 years">兩年</option>
+				</select>
+				<!--                            <button class="serviceBlock__countTimeBtn">開始計時</button>-->
+					<!--	</div>
+			<div class="serviceBlock__whiteBlock">
+				<header>公共安全申報紀錄存擋</header>
+				<input type="file" id="secureUploadfile07" name="secureUploadfile07">
+				<input type="hidden" id="securityType" name="securityType" value="7">
+				<i class="fas fa-check-circle"></i>
+			</div>
+			<div class="text-center">
+				<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doSecureUpload3();">儲存</button>
+			</div>
+		</form>
+	</div>
+	<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+		<h3 class="serviceBlock__h3 serviceBlock__h3--lightdust">防火管理員訓練</h3>
+	</div>
+	<div class="col col-12 col-lg-4">
+		<form id="secureUpload04" name="secureUpload04" method="post" action="/yearly/secureUpload" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="year" name="year" value="2020">
+			<input type="hidden" id="isUploadfile" name="isUploadfile" value="0">
+			<div class="serviceBlock__countTimeBar">
+				設定追蹤月數
+				<select name="period" id="period">
+					<option value="">--- 請選擇 ---</option>
+					<option value="+3 years">三年</option>
+					<option value="+2 years">兩年</option>
+				</select>
+				<!--                            <button class="serviceBlock__countTimeBtn">開始計時</button>-->
+					<!--		</div>
+			<div class="serviceBlock__whiteBlock">
+				<header>防火管理員訓練證書存擋</header>
+				<input type="file" id="secureUploadfile08" name="secureUploadfile08">
+				<input type="hidden" id="securityType" name="securityType" value="8">
+				<i class="fas fa-check-circle"></i>
+			</div>
+			<div class="text-center">
+				<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doSecureUpload4();">儲存</button>
+			</div>
+		</form>
+	</div>
+	<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+		<h3 class="serviceBlock__h3 serviceBlock__h3--greenyellow">車輛監理定檢</h3>
+	</div>
+	<div class="col col-12 col-lg-4">
+		<form id="secureUpload05" name="secureUpload05" method="post" action="/yearly/secureUpload" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="year" name="year" value="2020">
+			<input type="hidden" id="isUploadfile" name="isUploadfile" value="0">
+			<div class="serviceBlock__countTimeBar">
+				設定追蹤月數
+				<select name="period" id="period">
+					<option value="">--- 請選擇 ---</option>
+					<option value="+6 months">半年</option>
+					<option value="+1 years">一年</option>
+					<option value="+2 years">兩年</option>
+				</select>
+				<!--                            <button class="serviceBlock__countTimeBtn">開始計時</button>-->
+					<!--		</div>
+			<div class="serviceBlock__whiteBlock">
+				<header>車輛行車執照驗合格存擋</header>
+				<input type="file" id="secureUploadfile09" name="secureUploadfile09">
+				<input type="hidden" id="securityType" name="securityType" value="9">
+				<i class="fas fa-check-circle"></i>
+			</div>
+			<div class="text-center">
+				<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doSecureUpload5();">儲存</button>
+			</div>
+		</form>
+	</div>
+	<div class="col col-12 col-lg-2 serviceBlock__h3Col">
+		<h3 class="serviceBlock__h3 serviceBlock__h3--greenyellow">車輛維修定保</h3>
+	</div>
+	<div class="col col-12 col-lg-4">
+		<form id="secureUpload06" name="secureUpload06" method="post" action="/yearly/secureUpload" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="year" name="year" value="2020">
+			<input type="hidden" id="isUploadfile" name="isUploadfile" value="0">
+			<div class="serviceBlock__countTimeBar">
+				設定追蹤月數
+				<select name="period" id="period">
+					<option value="">--- 請選擇 ---</option>
+					<option value="+3 months">三個月</option>
+					<option value="+4 months">四個月</option>
+					<option value="+5 months">五個月</option>
+					<option value="+6 months">半年</option>
+				</select>
+				<!--                            <button class="serviceBlock__countTimeBtn">開始計時</button>-->
+					<!--			</div>
+				<div class="serviceBlock__whiteBlock">
+					<header>車輛維修定保發票存擋</header>
+					<input type="file" id="secureUploadfile10" name="secureUploadfile10">
+					<input type="hidden" id="securityType" name="securityType" value="10">
+					<i class="fas fa-check-circle"></i>
+				</div>
+				<div class="text-center">
+					<button class="serviceBlock__saveBtn btn-w btn-orange" onclick="return doSecureUpload6();">儲存</button>
+				</div>-->
+					</form>
+				</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

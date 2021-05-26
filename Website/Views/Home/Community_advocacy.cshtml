@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>社區宣導 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-6-1.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src="~/popper.js/popper.min.js"></script>
+	<script src="~/Scripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="~/Scripts/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$(document).on("click", "#occur_date", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+		});
+
+		function doSubmit() {
+			if ($('#year').val() == '' || $('#season').val() == '' || $('#occur_date').val() == '' || $('#unit').val() == '' || $('#purpose').val() == '' ||
+				$('#uploadfile01').val() == '' || $('#uploadfile02').val() == '' || $('#uploadfile03').val() == '' || $('#uploadfile04').val() == ''
+			) {
+				alert('您所填的表格欄位資料不完整，請確認，謝謝！');
+				return false;
+			}
+			else {
+				$('#wait, #wait_content').show();
+				$('#form1').submit();
+			}
+		}
+	</script>
+</head>
+
+
+
+<!--<script src="/js/jquery-1.10.2.min.js"></script>-->
+
+
+
+<body>
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1>社區宣導</h1>
+	</header>
+	<main class="main wrapper">
+		<p class="descP">
+		</p><div class="text" style="padding: 0px;"><p>社區宣導策略</p><p>一、結合社區聚會處、醫療院及民間資源共同辦理長照教育宣導活動。</p><p>二、運用社區聚會處及醫療院所等現有通路，宣導長照內容，觸及不同對象以擴大效益。</p><p>三、設計文宣(DM)及運用網路通路，宣傳各項服務措施，提升民眾了解率。</p><p><br></p></div>
+		<p></p>
+
+		<form id="form1" name="form1" method="post" action="/monthly/zone_propaganda_save" target="actFrame" enctype="multipart/form-data">
+			<div class="tableContainer">
+				<table class="mainTable">
+					<thead>
+						<tr>
+							<th class="mainTable__th">資源名稱</th>
+							<th class="mainTable__th" colspan="3">
+								<select id="year" name="year" class="form-control col-md-2 d-inline-block">
+									<option value="">--- 選擇年度 ---</option>
+									<option value="109">109</option>
+									<option value="108">108</option>
+									<option value="107">107</option>
+								</select> 年度 第 <select id="season" name="season" class="form-control col-md-2 d-inline-block">
+									<option value="">--- 選擇季度 ---</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+								</select> 季&nbsp;&nbsp;&nbsp;社區宣導活動紀錄表
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th class="mainTable__th">
+								日期
+							</th>
+							<td class="mainTable__td">
+								<input type="text" class="Wdate form-control" id="occur_date" name="occur_date">
+							</td>
+							<th class="mainTable__th">單位</th>
+							<td class="mainTable__td"><input class="form-control" type="text" id="unit" name="unit"></td>
+						</tr>
+						<tr>
+							<th class="mainTable__th">目的</th>
+							<td class="mainTable__td" colspan="3">
+								<textarea class="mainTable__textarea form-control" id="purpose" name="purpose" rows="5"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<th class="mainTable__th">照片紀錄</th>
+							<td class="mainTable__td mainTable__td--file" colspan="3">
+								<table class="fileUploadTable">
+									<tbody>
+										<tr>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile01" name="uploadfile01">
+												</div>
+											</td>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile02" name="uploadfile02">
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile03" name="uploadfile03">
+												</div>
+											</td>
+											<td>
+												<div class="fileUploadTable__block form-control">
+													<input type="file" id="uploadfile04" name="uploadfile04">
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="btnBar"><button class="btn btn-w btn-white" onclick="return doSubmit();">存擋</button></div>
+		</form>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 187px; height: 200px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

@@ -1,0 +1,713 @@
+﻿@using Website.Models;
+@{
+	List<Personnel> personnels = ViewBag.personnels;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>人事資料 | 台灣柏佐克智慧型居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/layout.css">
+	<link rel="stylesheet" href="/css/page2-3.css">
+	<link rel="stylesheet" href="/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<script src="/js/jquery-1.10.2.min.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+	<link rel="stylesheet" type="text/css" href="/libs/datepicker/css/bootstrap-datepicker3.min.css">
+	<script src="/libs/datepicker/js/bootstrap-datepicker.min.js"></script>
+	<script src="/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>
+	<script>
+		$(function () {
+			$('.datepicker').datepicker({
+				format: "yyyy-mm-dd",
+				language: "zh-TW",
+				// endDate: new Date(),
+				// endDate: '-18y',
+				endDate: '+0d',
+				todayHighlight: true
+			});
+
+
+			// 新增 ~ 符號來表示 +-
+			$.mask.definitions['~'] = '[+-]';
+
+			// $('#born ').mask('999-99-99');
+			$('#phone').mask('(99) 999-9999');
+			// $('#phoneext').mask("(99) 999-9999? #999");
+			// $("#tin").mask("99-9999999");
+			// $("#ssn").mask("999-99-9999");
+			$("#phone ").mask("9999-999-999");
+			$("#ID_number").mask("a999999999");
+			// 自訂遮罩並使用半形空白來替換遮罩字元
+			// 並加上 completed 事件
+			$("#product").mask("a*-999-a999", {
+				placeholder: " ",
+				completed: function () {
+					alert("您輸入的值是: " + this.val());
+				}
+			});
+			// $("#eyescript").mask("~9.99 ~9.99 999");
+
+			$('#funcBtn01').click(function () {
+				location.href = "/Home/HRmanagement";
+			});
+
+			$('#funcBtn02').click(function () {
+				if ($('#choosewho').val() == '') {
+					alert('請輸入姓名！');
+					// alert('請輸入身分證字號/護照編號！');
+					$('#choosewho').focus();
+					return false;
+				}
+				else {
+					location.href = "/Home/HRmanagement_Edit" + $('#choosewho').val();
+				}
+			});
+
+			$('#funcBtn03').click(function () {
+				if ($('#choosewho').val() == '') {
+					alert('請輸入身分證字號/護照編號！');
+					$('#choosewho').focus();
+					return false;
+				}
+				else {
+					if (confirm('確定要設定離職？')) {
+						$.ajax({
+							url: "/Home/setClosed",
+							type: "POST",
+							dataType: 'json',
+							data: {
+								ID_number: $('#choosewho').val()
+							},
+							success: function (data, status, xhr) {
+								// console.log(data,status,xhr);
+								if (data.code == 200) {
+									alert(data.message);
+
+									if (data.result != '')
+										location.href = data.result;
+								}
+								else {
+									alert(data.message);
+								}
+							},
+							error: function (xhr, ajaxOptions, thrownError) {
+								console.log(xhr, ajaxOptions, thrownError);
+								// alert('發生錯誤!');
+							}
+						});
+					}
+				}
+			});
+
+			$('#funcBtn04').click(function () {
+				if ($('#choosewho').val() == '') {
+					alert('請輸入身分證字號/護照編號！');
+					$('#choosewho').focus();
+					return false;
+				}
+				else {
+					if (confirm('確定要設定復職？')) {
+						$.ajax({
+							url: "/Home/setOpened",
+							type: "POST",
+							dataType: 'json',
+							data: {
+								ID_number: $('#choosewho').val()
+							},
+							success: function (data, status, xhr) {
+								// console.log(data,status,xhr);
+								if (data.code == 200) {
+									alert(data.message);
+
+									if (data.result != '')
+										location.href = data.result;
+								}
+								else {
+									alert(data.message);
+								}
+							},
+							error: function (xhr, ajaxOptions, thrownError) {
+								console.log(xhr, ajaxOptions, thrownError);
+								// alert('發生錯誤!');
+							}
+						});
+					}
+				}
+			});
+			function imdjw() {
+				var name = $('#name').val();
+				var post1 = $('#post1').val();
+				var post2 = $('#post2').val();
+				var six = $('#six').val();
+				var blood = $('#blood').val();
+				var born = $('#born').val();
+				var signature = $('#signature').val();
+				var ID_number = $('#ID_number').val();
+				var phone = $('#phone').val();
+				var census = $('#census').val();
+				var contact = $('#contact').val();
+				var identity_card_positive = $('#identity_card_positive').val();
+				var identity_card_rebel = $('#identity_card_rebel').val();
+				var education = $('#education').val();
+				var professional_license = $('#professional_license').val();
+				var CPR_training_certificate = $('#CPR_training_certificate').val();
+				var Long_term_work_permit = $('#Long_term_work_permit').val();
+				var related_training1 = $('#related_training1').val();
+				var related_training2 = $('#related_training2').val();
+				var related_training3 = $('#related_training3').val();
+				var related_training4 = $('#related_training4').val();
+				var work_contract_scan = $('#work_contract_scan').val();
+				//>>>>>>			//image.AddEmployee(name, post1, post2, six, blood, born, signature, ID_number, phone, census, contact, identity_card_positive, identity_card_rebel, education, professional_license, CPR_training_certificate, Long_term_work_permit, related_training1, related_training2, related_training3, related_training4, work_contract_scan);
+			}
+			function doSubmit() {
+				if ($('#name').val() == '') {
+					alert('請輸入姓名！');
+					$('#name').focus();
+					return false;
+				}
+				else if ($('#post1 ').val() == '') {
+					alert('請選擇職務1！');
+					$('#post1 ').focus();
+					return false;
+				}
+				else if ($('#post2 ').val() == '') {
+					alert('請選擇職務二！');
+					$('#post2 ').focus();
+					return false;
+				}
+				else if ($('#six ').val() == '') {
+					alert('請選擇性別！');
+					$('#six ').focus();
+					return false;
+				}
+				else if ($('#blood').val() == '') {
+					alert('請輸入血型！');
+					$('#blood').focus();
+					return false;
+				}
+				else if ($('#born ').val() == '') {
+					alert('請輸入生日！');
+					$('#born ').focus();
+					return false;
+				}
+				else if ($('#ID_number').val() == '') {
+					alert('請輸入身分證字號！');
+					$('#ID_number').focus();
+					return false;
+				}
+				else if ($('#phone ').val() == '') {
+					alert('請輸入手機！');
+					$('#phone ').focus();
+					return false;
+				}
+				else if ($('#census ').val() == '') {
+					alert('請輸入戶籍地址！');
+					$('#census ').focus();
+					return false;
+				}
+				else if ($('#contact ').val() == '') {
+					alert('請輸入聯絡地址！');
+					$('#contact ').focus();
+					return false;
+				}
+				else {
+
+					$('#wait_content').show();
+					$('#wait').show();
+
+					$('#form1').submit();
+				}
+			}
+	</script>
+	<style>
+		.selectCss {
+		}
+
+		.btn-white {
+			border: 1px solid #000;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+			font-size: 40pt;
+			position: absolute;
+		}
+
+		.slogan p {
+			position: relative;
+			bottom: 70px;
+			left: 20%;
+		}
+
+		.h2 {
+			width: 200px;
+		}
+
+		body, html {
+			overflow-x: hidden;
+		}
+
+		.header__btn:hover {
+			color: white;
+			text-decoration: none;
+		}
+		.autoimg{
+			height:150px;
+			width:150px;
+		}
+		.auto{
+			height:50px;
+			width:50px;
+		}
+	</style>
+</head>
+
+<!--<script src="/js/jquery.maskedinput-1.2.2.min.js"></script>-->
+
+<body style="">
+	<div class="fixedBtns"><button id="lastPage" onclick="history.back();">上一頁</button><button id="homepageBtn" onclick="location.href='/Home/Director'">回首頁</button></div>
+
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<img src="~/images/icon_profile.png" alt="">
+			<h1 class="h1">人事管理</h1>
+		</div>
+
+		<div class="header__textCell">
+			<div class="text" style="padding: 30px 0px 10px 0px;">
+				<p>人事管理發展是有關人事方面的計劃、組織、指揮、協調、信息和控制等一系列管理工作的總稱。</p>
+				<p>通過科學的方法、正確的用人原則和合理的管理制度，調整人與人、人與事、人與組織的關係，謀求對工作人員的體力、心力和智力作最適當的利用與最高的發揮，並保護其合法的利益。</p>
+				<p><span style="background-color: transparent;">         由於我們是從事照顧工作、務必要求每位工作人員都有效的CPR證照</span><br></p>
+				<p><br></p>
+			</div>
+			<div class="header__btns">
+				<span class="head__btn__span">新進</span><i class="fas fa-arrow-right fa-lg header__btns__arrow"></i>
+				<a href="https://eservice.nhi.gov.tw/nhiweb1/system/loginca.aspx" target="_blank" class="header__btn">新進人事表</a>
+				<a href="#contract" class="header__btn">工作契約</a>
+				<a href="/Home/Pre_employment_training" class="header__btn">職前訓練</a>
+				<a href="/Home/Organization_account_management" class="header__btn">單位帳號管理</a>
+			</div>
+			<div class="header__btns">
+				<span class="head__btn__span">在職</span><i class="fas fa-arrow-right fa-lg header__btns__arrow"></i>
+				<a href="/Home/Staffattendance" class="header__btn">員工出勤</a>
+				<a href="/Home/Personnelassessment" class="header__btn">人事考核</a>
+				<a href="/Home/training" class="header__btn">內外訓登錄</a>
+				<a href="/Home/HRmanagement/leave" class="header__btn">員工離職</a>
+			</div>
+		</div>
+	</header>
+
+	<main class="main wrapper">
+
+		<table width="90%" style="border: 1px solid #000">
+			<tbody>
+				<tr style="border: 1px solid #000">
+					<td width="15%">姓名</td>
+					<td width="15%">身分證字號</td>
+					<td width="15%">主要職務</td>
+					<td width="15%">職務代理</td>
+				</tr>
+				@foreach (Personnel personnel in personnels)
+				{
+
+					<tr>
+						<td>@personnel.name</td>
+						<td>@personnel.ID_number</td>
+						<td>@personnel.post1</td>
+						<td>@personnel.post2</td>
+					</tr>
+
+				}
+			</tbody>
+		</table>
+
+		<br>
+
+		<header>
+			<h2 class="h2">人事資料</h2>
+		</header>
+		<form method="post" action="/Home/HRmanagement" enctype="multipart/form-data">
+			<div class="slogan">
+				<p>
+					身分證字號/護照編號：<input type="text" class="inputName" id="choosewho" name="edit_data" value="">
+					<!-- <button id="funcBtn01" class="header__btn"><i class="far fa-copy"></i> 新增新進人事</button> -->
+					<input type="submit" id="funcBtn02" class="header__btn" value="修正編輯"/>
+					<button id="funcBtn03" class="header__btn"><i class="fas fa-times"></i> 員工離職</button>
+					<button id="funcBtn04" class="header__btn"><i class="fas fa-times"></i> 員工復職</button>
+				</p>
+			</div>
+
+
+			<input type="hidden" id="name123" name="name123" value="">
+			<div class="tableContainer" style="overflow-x: hidden">
+				<table>
+					<tbody>
+						<tr>
+
+							<th>姓名</th>
+							<td colspan="2">
+								<label for="inputname">
+									<input type="text" id="name" name="name" value="" >
+								</label>
+							</td>
+							<th>
+								主要職務
+								<label for="inputpost1">
+									<select class="selectCss" id="post1 " name="post1" >
+										<option value="">---請選擇---</option>
+										<option value="主任">主任</option>
+										<option value="督導">督導</option>
+										<option value="照服員">照服員</option>
+									</select>
+								</label>
+							</th>
+							<td colspan="2">
+								職務代理
+								<label for="inputpost2">
+									<select class="selectCss" id="post2 " name="post2" >
+										<option value="">---請選擇---</option>
+										<option value="主任">主任</option>
+										<option value="督導">督導</option>
+										<option value="照服員">照服員</option>
+									</select>
+								</label>
+							</td>
+							<th rowspan="2" class="signture">
+								<label for="inputsignature">
+									<input type="image" id="signature" name="signature" value="file.name" hidden="hidden" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" />
+									<img src="#" id="blah" alt="電子簽章" class="auto" />
+								</label>
+							</th>
+						</tr>
+						<tr>
+							<th>性別</th>
+							<td>
+								<label for="inputsix">
+									<select id="six " name="six" style="width:150px;"  >
+										<option value="">---請選擇---</option>
+										<option value="M">男</option>
+										<option value="F">女</option>
+										<option value="O">其他</option>
+									</select>
+								</label>
+							</td>
+							<th>血型</th>
+							<td>
+								<label for="inputblood">
+									<input type="text" id="blood" name="blood" placeholder="請輸入血型..." value=""  >
+								</label>
+							</td>
+
+							<th>出生日期</th>
+							<td>
+								<label for="inputborn">
+									<input type="text" class="datepicker" id="born" name="born" style="width:100%;" placeholder="請選擇生日..." value=""  >
+								</label>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<table>
+					<tbody>
+						<tr>
+							<th>身分證字號</th>
+							<td>
+								<label for="inputID_number">
+									<input type="text" id="ID_number" name="ID_number" placeholder="請輸入身分證/護照編號..." value=""  >
+								</label>
+							</td>
+							<th>手機</th>
+							<td>
+								<label for="inputphone">
+									<input type="text" id="phone" name="phone" placeholder="請輸入手機號碼..." value=""  >
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>戶籍地址</th>
+							<td colspan="3">
+								<label for="inputcensus">
+									<input type="text" id="census" name="census" placeholder="請輸入戶籍地址..."  >
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>聯絡地址</th>
+							<td colspan="3">
+								<label for="inputcontact">
+									<input type="text" id="contact" name="contact" placeholder="請輸入聯絡地址..."  >
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>證件資料</th>
+							<td colspan="3">
+								<div class="serviceBlock">
+									<div class="serviceBlock__whiteBlock">
+										<header>身分證正面存檔</header>
+										<label for="inputidentity_card_positive">
+											<input type="file" id="identity_card_positive" name="identity_card_positive" value="file.name" onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah1" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>身分證反面存檔</header>
+										<label for="inputidentity_card_rebel">
+											<input type="file" id="identity_card_rebel" name="identity_card_rebel" value="file.name" onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah2" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>最高學歷證書存檔</header>
+										<label for="inputeducation">
+											<input type="file" id="education " name="education " value="file.name" onchange="document.getElementById('blah3').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1X.jpg" id="blah3" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>專業證書件存檔</header>
+										<label for="inputprofessional_license">
+											<input type="file" id="professional_license" name="professional_license" value="file.name" onchange="document.getElementById('blah4').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" " id="blah4" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>CPR 訓練證書存檔</header>
+										<label for="inputCPR_training_certificate">
+											<input type="file" id="CPR_training_certificate" name="CPR_training_certificate" value="file.name" onchange="document.getElementById('blah5').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah5" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>長照工作證存檔</header>
+										<label for="inputLong_term_work_permit">
+											<input type="file" id="Long_term_work_permit" name="Long_term_work_permit" value="file.name" onchange="document.getElementById('blah6').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah6" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>相關訓練證書存檔</header>
+										<label for="inputrelated_training1">
+											<input type="file" id="related_training1" name="related_training1" value="file.name" onchange="document.getElementById('blah7').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah7" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>相關訓練證書存檔</header>
+										<label for="inputrelated_training2">
+											<input type="file" id="related_training2" name="related_training2" value="file.name" onchange="document.getElementById('blah8').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah8" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>相關訓練證書存檔</header>
+										<label for="inputrelated_training3">
+											<input type="file" id="related_training3" name="related_training3" value="file.name" onchange="document.getElementById('blah9').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah9" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock">
+										<header>相關訓練證書存檔</header>
+										<label for="inputrelated_training4">
+											<input type="file" id="related_training4" name="related_training4" value="file.name" onchange="document.getElementById('blah10').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah10" alt="your image" class="autoimg">
+										</label>
+									</div>
+									<div class="serviceBlock__whiteBlock serviceBlock__whiteBlock--big">
+										<header>工作契約文件掃描存檔</header>
+										<label for="inputwork_contract_scan">
+											<input type="file" id="work_contract_scan" name="work_contract_scan" value="file.name" onchange="document.getElementById('blah11').src = window.URL.createObjectURL(this.files[0])"  >
+											<br />
+											<img src="~/images/照片1.jpg" id="blah11" alt="your image" class="autoimg">
+										</label>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<br />
+			<br />
+			<div class="text-center">
+				<input type="submit" class="btn btn-danger btn btn-lg" onclick="window.alert('已儲存');" value="儲存" />
+				<!--<button class="saveBtn btn-big btn-orange" onclick="return doSubmit();">儲存</button>
+			<input type="submit" class="btn btn-danger btn-lg" onclick="window.alert('已儲存');">儲存-->
+				<!--	Html.ActionLink("回首頁", "Home_attendant_index", "Home", new { class = "btn btn-danger btn-lg" })-->
+			</div>
+		</form>
+
+		<div class="contract">
+			<a name="contract"></a>
+			<header><span class="title">聘雇契約</span> 立契約書人</header><br>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="cell"></span>（以下簡稱甲方）</p>
+			<p>單位<span class="cell"></span>（以下簡稱乙方）</p>
+			<br>
+			<p>
+				緣乙方同意聘用甲方，甲方亦同意受聘為乙方之員工，雙方特就僱傭關係協議條款如下，以玆遵守。
+			</p>
+			<ul class="cjkUL cjkUL--2digit">
+				<li li-idx="ㄧ、">聘僱日期 雙方同意自民國   年   月   日起三個工作日為訓練期(若離職、單位亦求償)，其後三個月為試用期，以職務試用，試用期間屆滿，經乙方考核合格(必須能獨立履行該職務工作)者，始予正式聘用，聘用日溯自前述日期起算。如甲方經考核不合格或有違約當由乙方解聘，絕無異議，本契約自乙方通知甲方所指定之日期起解除之。</li>
+				<li li-idx="二、">職務、職位、工作地點、工作時間及其調整甲方同意所擔任之職務與職位，工作地點或工作範圍依乙方書面通知所載者為準。爾後視乙方發展、業務需要或甲方專長、工作狀況及工作表現與能力得調整之。</li>
+				<li li-idx="三、">
+					工資與福利
+					<ul class="numberUL">
+						<li>甲方之工資，依乙方按現行法令規定與甲方簽約時所定之數額為準 ，正式以職務聘用。受聘期間乙方視甲方工作表現得依乙方調薪規定調整之，前述薪資結構與內容，乙方得於必要時按內部敘薪辦法調整之。 前項薪資中包括每月全勤獎金新台幣二仟元與伙食津貼新台幣一仟八佰元，甲方對薪資相關事項應有保密之義務。</li>
+						<li>乙方對甲方的管理依乙方管理規章之規定。</li>
+					</ul>
+				</li>
+				<li li-idx="四、">
+					工作守則及忠誠義務
+					<ul class="numberUL">
+						<li>甲方應遵守乙方所制定的工作時間、休假制度或其他規範，並於乙方所指定之場所履行工作義務。</li>
+						<li>甲方應親自履行本契約之義務，並應盡其學識、經驗，依法令、乙方策略，以其職務在一般同業標準所認同應具有之注意程度為乙方盡心盡力執行職務，達到單位工作考核乙等以上之表現。</li>
+						<li>非經乙方事前書面同意，甲方不得於本合約存續期間，以自己或他人名義經營與乙方相同或類似業務性質之機構，或為之受僱人、受任人或顧問。</li>
+						<li>甲方違反本條，乙方得終止契約並請求甲方因違約所得之利益作為損害賠償標的，並以甲方違反期間所領受之工資總額為最低賠償數額。</li>
+					</ul>
+				</li>
+				<li li-idx="五、">
+					保證責任
+					<p>
+						甲方保證不於乙方處所及其工作上使用任何違法或侵害他人之權利或利益之工具或資訊。
+					</p>
+				</li>
+				<li li-idx="六、">
+					保密義務
+					<ul class="numberUL">
+						<li>
+							本契約所指「機密資訊」係指甲方於受僱期間內，因使用乙方之設備、資源或因職務關係，直接或間接收受、接觸、知悉、構思、創作或開發之資料及資訊，不論其是否以書面為之，是否已完成，亦不問是否可申請登記專利權或其他智慧財產權等。
+						</li>
+						<li>
+							甲方對於乙方之機密資訊應保持其機密性，非經乙方事前書面同意，不得洩漏、告知、 交付或轉移予他人或對外發表，亦不得為自己或第三人利用或使用之，離職後亦同。
+						</li>
+						<li>
+							本條保密義務於本契約解除或終止兩年內仍有效，但對乙方已公開，為眾所皆知或成為 公共財產之資訊則不在此限。
+						</li>
+						<li>
+							甲方因職務收到他人之機密資訊時，應告知乙方負責人，對該他人之機密資訊並應依該 他人與甲方約定之保密規定及本契約之規定履行。
+						</li>
+						<li>
+							甲方於受僱前如有簽署任何文件，致使其無法履行聘僱契約書之規定時，應於簽訂本契約同時告知乙方，否則甲方即應完全依本聘僱契約約定履行。
+						</li>
+					</ul>
+				</li>
+				<li li-idx="七、">
+					智慧財產權甲方於工作期間內，基於職務或與甲方業務有關之任何發明、著作產出資料或構想，包括著作、專利或其他智慧財產，皆歸屬予乙方或乙方指定人所有。乙方如有登記、申請之需求，不論甲方是否仍在職，皆應義務提供所有協助並簽署必要文件。
+				</li>
+				<li li-idx="八、">
+					文件所有權
+					<p>
+						甲方於工作期間所產出之筆記、資料、參考文件、圖表等各種文件媒體之所有權皆歸乙方所有。甲方於離職或乙方請求時，應立即交還乙方或其指定人。
+					</p>
+				</li>
+				<li li-idx="九、">
+					終止契約
+					<ul class="numberUL">
+						<li>
+							除本契約第一條試用不合格或違約之情形外，非依勞工相關法令所規定之原因及方式， 乙方不得解除或中止本契約。
+						</li>
+						<li>
+							除法令另有規定外，甲方如欲終止本契約，到職日起三個月未滿者，於五日前預告之；工作三個月以上一年未滿者，於十日前預告之；工作一年以上三年未滿者，於二十日前預告之；工作三年以上者，於三十日前預告之。倘若不足預告天數以每日新台幣一仟元折抵之。
+						</li>
+						<li>
+							雙方聘僱關係終止時，甲方應依乙方內部規章，辦理移交程序，若甲方未按乙方規定， 依各級職交接期限內移交手續者，不得向乙方請求逾時報酬或其他費用。
+						</li>
+						<li>
+							本契約終止後，第五、六、七、八條之規定及保密約款仍繼續有效，其他既存權利亦不 受影響。
+						</li>
+					</ul>
+				</li>
+				<li li-idx="十、">
+					法律責任
+					<p>
+						甲方如有違反本契約之情事或發生任何事故損害乙方權益之行為，除依乙方管理規章接受懲處與賠償外，並應負相關法律責任。
+					</p>
+				</li>
+				<li li-idx="十一、">
+					法律適用
+					<p>
+						雙方間之法律權利義務關係，本契約有明文規定者概依本契約，本契約未規定者，依勞動基準法、民法或其他相關法令；法令未規定者依本行業慣例。
+					</p>
+				</li>
+				<li li-idx="十二、">
+					管轄法院
+					<ul class="numberUL">
+						<li>
+							凡因本契約引起之糾紛，如有訴訟之必要，雙方同意以乙方所在地之地方法院為第一 審管轄法院。
+						</li>
+						<li>
+							本契約書共壹式貳份，由甲、乙雙方簽章後，各執壹份為憑。
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<p><br></p>
+			<p>立契約書人</p>
+			<p>甲方：</p>
+			<p>身分證字號：</p>
+			<p>聯絡電話：</p>
+			<p>戶籍地址（需填里與鄰）：</p>
+			<p><br></p>
+			<p>乙方</p>
+			<p>法定代理人：</p>
+			<p>地址：</p>
+			<p><br></p>
+			<p>
+				中華民國<span class="cellYMD"></span> 年 <span class="cellYMD"></span> 月
+				<span class="cellYMD"></span> 日
+			</p>
+		</div>
+
+		<div class="text-center">
+			<span style="font-size:1.5rem;color:red">＊按下「友善列印」會跳出新視窗，請透過瀏覽器的「檔案」-&gt;「列印」功能來進行列印。</span>
+			<button class="saveBtn btn-big btn-white" onclick="window.open('/Home/HRmanagement_print')"><i class="fas fa-print"></i>友善列印</button><br>
+		</div>
+	</main>
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>行政工作 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<link rel="stylesheet" href="~/css/page2-3-3.css">
+	<link rel="stylesheet" href="~/css/page2-4.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="/js/DatePicker/WdatePicker.js"></script>
+	<link href="https://www.wecare365.com.tw/js/DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$(document).on("click", "#occur_date", function (e) {
+				// var rowid = $(e.target).parents("tr").attr("rowid");
+				WdatePicker({
+					el: e.target,
+					autoPickDate: true,
+					dateFmt: "yyyy-MM-dd",
+					// dateFmt:"yyyy-MM-dd HH:mm:ss",
+					// maxDate:"#F{$dp.$D('noticeendtime' + rowid + '')}"
+				});
+			});
+		});
+
+		function doSubmit() {
+			if ($('#occur_date').val() == '') {
+				alert('請輸入公文日期！');
+				$('#occur_date').focus();
+				return false;
+			}
+			else if ($('#title').val() == '') {
+				alert('請輸入公文主題！');
+				$('#title').focus();
+				return false;
+			}
+			else if ($('#uploadfile01').val() == '') {
+				alert('請選擇檔案！');
+				$('#uploadfile01').focus();
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#form1').submit();
+			}
+		}
+	</script>
+	<style>
+		.h1 {
+			display: inline-block;
+			width: 250px;
+			height: 80px;
+			line-height: 80px;
+			border: none;
+			background-color: #5677fc;
+			color: white;
+		}
+
+		.serviceBlock__whiteBlock {
+			border-radius: 5px;
+			width: 250px;
+		}
+
+		.tableContainer table th {
+			height: 3rem;
+		}
+
+		.tableContainer table tbody td {
+			font-size: 1rem;
+		}
+
+		.fa-calendar-alt {
+			font-size: 60pt;
+			margin-bottom: 20px;
+		}
+
+		.header__iconCell {
+			width: 250px;
+		}
+
+		.wrapper {
+			width: 90%;
+		}
+
+		.row.form1 {
+			width: 60%;
+			margin: 0px auto;
+			margin-left: 30%;
+		}
+
+		.serviceBlock__whiteBlock {
+			width: 500px;
+		}
+
+		.col-12 {
+			padding: 2px;
+		}
+
+		table.tableCss tr th {
+			height: 4rem;
+		}
+
+		table.tableCss tr td {
+			height: 3rem;
+		}
+	</style>
+</head>
+
+
+
+
+
+
+<body style="">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<i class="fas fa-calendar-alt"></i>
+			<h1 class="h1">行政工作</h1>
+		</div>
+		<br>
+
+		<form id="form1" name="form1" method="post" action="/user/adminwork_save" target="actFrame" enctype="multipart/form-data">
+			<div class="row form1">
+				<div class="col-12 col-sm-1 serviceBlock__h3Col">&nbsp;</div>
+				<div class="col-12 col-md-12">
+					公文日期：<input type="text" class="form-control col-md-2 d-inline-block Wdate" id="occur_date" name="occur_date">
+				</div>
+				<div class="col-12 col-md-12">
+					公文主題：<input type="text" class="form-control col-md-6 d-inline-block" id="title" name="title">
+				</div>
+				<div class="col-12 col-md-12" style="margin: 0px 90px;">
+					<div class="serviceBlock__whiteBlock">
+						<header>公文檔案掃描存擋</header>
+						<input type="file" id="uploadfile01" name="uploadfile01">
+					</div>
+				</div>
+				<div class="text-center" style="margin:0px auto; left:-50px; position:relative;">
+					<button class="serviceBlock__saveBtn btn-w btn-blue" onclick="return doSubmit();">上傳</button>
+				</div>
+			</div>
+		</form>
+
+	</header>
+
+	<main class="main wrapper">
+		<div class="serviceBlock">
+			<div class="container">
+			</div>
+		</div>
+	</main>
+
+	<hr>
+
+	<header class="header wrapper">
+		<div class="queryBlock">
+			<p style="font-size: 24pt;">公文列表</p>
+		</div>
+	</header>
+
+
+	<main class="main">
+		<div class="wrapper">
+			<div class="tableContainer">
+				<table class="tableCss">
+					<thead>
+						<tr>
+							<th style="width: 5%;">#</th>
+							<th style="width: 30%;">公文日期</th>
+							<th>公文主題</th>
+							<th>檔案</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>2020-06-17</td>
+							<td>YUKUYKMYUJUY</td>
+							<td><a href="/uploads/adminwork/2/S__148856834.jpg" target="_blank">檢視檔案</a></td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>2020-04-27</td>
+							<td>公文主題公文主題公文主題公文主題</td>
+							<td><a href="/uploads/adminwork/1/《遙控器學習設定》一支bbtv機上盒遙控器就能搞定開關電視、轉台、調整音量.pdf" target="_blank">檢視檔案</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+	<div id="_my97DP" style="position: absolute; top: -1970px; left: -1970px;"><iframe style="width: 186px; height: 198px;" src="https://www.wecare365.com.tw/js/DatePicker/My97DatePicker.htm" frameborder="0" border="0" scrolling="no"></iframe></div>
+</body>
+</html>

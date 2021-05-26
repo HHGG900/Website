@@ -1,0 +1,548 @@
+﻿@using Website.Models;
+@{
+	List<Assessment> assessments = ViewBag.assessments;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>人事考核 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/layout.css">
+	<link rel="stylesheet" href="/css/page2-3-3.css">
+	<link rel="stylesheet" href="/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/2594af17cb.js"></script>
+	<script>
+		window.onload = function () {
+			console.log("@ViewBag.year");
+			console.log("@ViewBag.name");
+		}
+		function save() {
+			var year = document.getElementById("s_year").value;
+			window.alert(year);
+			$.post('Home/Personnelassessment',
+				{ years: year },
+				function (loc) {
+					window.location.href = "Home/Personnelassessment";
+				});
+
+		}
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#s_year').val('109');
+
+			$('#editModal').on('hidden.bs.modal', function (e) {
+				// do something...
+			});
+
+			$('#editModal').on('show.bs.modal', function (event) {
+				var button = $(event.relatedTarget);
+				var id = button.data('id');
+				var title = button.data('title');
+				var name = button.data('name');
+				alert('id=' + id);
+				var modal = $(this);
+				modal.find('.modal-id').val(id);
+				modal.find('.modal-title').text(title);
+				modal.find('#name').text(name);
+			});
+
+			$('#s_year').change(function () {
+				$()
+			})
+		});
+
+		function doSubmit(act) {
+			var model = $('#editModal');
+
+			if (model.find('#uploadfile01').val() == '') {
+				alert('請輸入照片！');
+				model.find('#uploadfile01').focus();
+				return false;
+			}
+			else {
+				model.ViewBagiewBagiewBagiewBagide();
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#form2').submit();
+			}
+		}
+	</script>
+	<style>
+		.btnBgColorWithShadow--blue {
+			font-family: '標楷體', 'Noto Sans TC', '微軟正黑體', sans-serif;
+		}
+
+		.btn-query {
+			height: inherit;
+			padding: 4px;
+			border-radius: 4px;
+			direction: ltr;
+		}
+
+		.queryBlock input {
+			height: inherit;
+		}
+
+		.tableContainer table td.tdCamera {
+			background-size: inherit;
+		}
+
+		.fs-small {
+			font-size: small;
+		}
+
+		.editModal {
+			position: relative;
+			top: 0px;
+			left: 0px;
+		}
+	</style>
+</head>
+
+
+
+
+
+
+<body>
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1 class="h1">人事考核</h1>
+		<div class="queryBlock">
+			<div class="btns">
+				<button class="btnBgColorWithShadow--blue" onclick="location.href='Directorselfassessment'">主任自我考核表</button>
+				<button class="btnBgColorWithShadow--blue" onclick="location.href='SupervisionAssessmentForm'">居督考核表</button>
+				<button class="btnBgColorWithShadow--blue" onclick="location.href='HomeWaiterAssessmentForm'">居家服務員考核表</button>
+			</div>
+			<!--<div class="btns">
+				<button id="no4" class="btnBgColorWithShadow--blue">生活支援員考核表</button>
+				<button id="no5" class="btnBgColorWithShadow--blue">司機考核表</button>
+				</div>
+
+			<br>-->
+			<br>
+			<form id="form1" method="post" action="~/Home/Personnelassessment1">
+				<p>
+					已存檔者--查詢年度
+					<select id="s_year" name="s_year" class="form-control col-md-2 d-inline-block">
+						<option value="">--- 請選擇 ---</option>
+						<option value="109">109</option>
+						<option value="108">108</option>
+						<option value="107">107</option>
+					</select>
+					年
+					<button class="btnBgColorWithShadow--blue btn-query mg-left-30" onclick="save();"><i class="fas fa-search"></i>查詢</button>
+				</p>
+			</form>
+		</div>
+	</header>
+	<main class="main">
+		<div class="wrapper">
+			<div class="tableContainer">
+				<table>
+					<thead>
+						<tr>
+							<th>員工姓名</th>
+							<th>考核分數</th>
+							<th>考核等第</th>
+							<th>獎懲措施</th>
+							<th>獎懲照片</th>
+						</tr>
+					</thead>
+					<tbody>
+						@try
+						{
+							foreach (Assessment assessmen in assessments)
+							{
+								<tr>
+									<td>@assessmen.name</td>
+									<td><a href="1" target="_blank">@assessmen.total</a></td>
+									<td>@assessmen.grade</td>
+									<td>@assessmen.rewards</td>
+									<td class="tdCamera">
+										<img src="/uploads/personnel_assessment/1/416621.jpg" style="width: 100%;"><br>
+										<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="@assessmen.name" data-title="上傳照片" data-id="1"><i class="fas fa-edit"></i>上傳照片</button>
+									</td>
+								</tr>
+							}
+						}
+						catch {; }
+						<tr>
+							<td>黃XX</td>
+							<td><a href="1" target="_blank">69</a></td>
+							<td>丙等</td>
+							<td>年終不續約</td>
+							<td class="tdCamera">
+								<img src="/uploads/personnel_assessment/1/416621.jpg" style="width: 100%;"><br>
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="黃XX" data-title="上傳照片" data-id="1"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>陳AA</td>
+							<td><a href="3" target="_blank">80</a></td>
+							<td>乙等</td>
+							<td>弱項再教育</td>
+							<td class="tdCamera">
+								<img src="/uploads/personnel_assessment/3/142846.jpg" style="width: 100%;"><br>
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="陳AA" data-title="上傳照片" data-id="3"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>陳AA</td>
+							<td><a href="/personnel_assessment/no2/4" target="_blank">80</a></td>
+							<td>乙等</td>
+							<td>弱項再教育</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="陳AA" data-title="上傳照片" data-id="4"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>林課程員</td>
+							<td><a href="/personnel_assessment/no3/5" target="_blank">97</a></td>
+							<td>優等</td>
+							<td>一個月年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="林課程員" data-title="上傳照片" data-id="5"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>余課程員</td>
+							<td><a href="/personnel_assessment/no3/6" target="_blank">100</a></td>
+							<td>優等</td>
+							<td>一個月年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="余課程員" data-title="上傳照片" data-id="6"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>林生活支援員</td>
+							<td><a href="/personnel_assessment/no4/7" target="_blank">95</a></td>
+							<td>優等</td>
+							<td>一個月年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="林生活支援員" data-title="上傳照片" data-id="7"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>張司機</td>
+							<td><a href="/personnel_assessment/no5/8" target="_blank">86</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="張司機" data-title="上傳照片" data-id="8"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>黃小達</td>
+							<td><a href="/personnel_assessment/no2/9" target="_blank">81</a></td>
+							<td>乙等</td>
+							<td>弱項再教育</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="黃小達" data-title="上傳照片" data-id="9"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>黃小達</td>
+							<td><a href="/personnel_assessment/no3/10" target="_blank">92</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="黃小達" data-title="上傳照片" data-id="10"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>黃國達</td>
+							<td><a href="/personnel_assessment/no2/11" target="_blank">105</a></td>
+							<td>優等</td>
+							<td>一個月年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="黃國達" data-title="上傳照片" data-id="11"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>黃小達</td>
+							<td><a href="/personnel_assessment/no2/12" target="_blank">100</a></td>
+							<td>優等</td>
+							<td>一個月年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="黃小達" data-title="上傳照片" data-id="12"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>00123-22</td>
+							<td><a href="/personnel_assessment/no3/13" target="_blank">88</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="00123-22" data-title="上傳照片" data-id="13"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>0</td>
+							<td><a href="/personnel_assessment/no3/14" target="_blank">90.6</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="0" data-title="上傳照片" data-id="14"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>00123-36226</td>
+							<td><a href="/personnel_assessment/no4/15" target="_blank">0</a></td>
+							<td>丙等</td>
+							<td>年終不續約</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="00123-36226" data-title="上傳照片" data-id="15"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>0</td>
+							<td><a href="/personnel_assessment/no4/16" target="_blank">48.7</a></td>
+							<td>丙等</td>
+							<td>年終不續約</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="0" data-title="上傳照片" data-id="16"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>黃阿皮</td>
+							<td><a href="/personnel_assessment/no2/17" target="_blank">80</a></td>
+							<td>乙等</td>
+							<td>弱項再教育</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="黃阿皮" data-title="上傳照片" data-id="17"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>0</td>
+							<td><a href="/personnel_assessment/no2/18" target="_blank">NaN</a></td>
+							<td>丙等</td>
+							<td>年終不續約</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="0" data-title="上傳照片" data-id="18"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>黃小達</td>
+							<td><a href="/personnel_assessment/no3/19" target="_blank">86</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="黃小達" data-title="上傳照片" data-id="19"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>0</td>
+							<td><a href="/personnel_assessment/no2/20" target="_blank">94</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="0" data-title="上傳照片" data-id="20"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>0</td>
+							<td><a href="/personnel_assessment/no2/21" target="_blank">81.5</a></td>
+							<td>乙等</td>
+							<td>弱項再教育</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="0" data-title="上傳照片" data-id="21"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>0</td>
+							<td><a href="/personnel_assessment/no2/22" target="_blank">94</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="0" data-title="上傳照片" data-id="22"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>黃婉婷</td>
+							<td><a href="/personnel_assessment/no3/23" target="_blank">89</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="黃婉婷" data-title="上傳照片" data-id="23"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+						<tr>
+							<td>0</td>
+							<td><a href="/personnel_assessment/no2/24" target="_blank">94</a></td>
+							<td>甲等</td>
+							<td>一萬元年終</td>
+							<td class="tdCamera">
+								<button class="btn btn-blue editModal" data-toggle="modal" data-target="#editModal" data-name="0" data-title="上傳照片" data-id="24"><i class="fas fa-edit"></i>上傳照片</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div id="auditRule" class="wrapper">
+			<header>
+				<h2>員工考核辦法</h2>
+			</header>
+			<table class="auditRule__tb">
+				<tbody>
+					<tr>
+						<td class="auditRule__num">第一條</td>
+						<td>本辦法所稱員工，係指依據單位章程所聘僱之全職及兼職人員。</td>
+					</tr>
+					<tr>
+						<td class="auditRule__num">第二條</td>
+						<td>進用員工須年滿二十歲、未滿六十歲，身心健康且具國中畢業以上學歷具專業技能者，以中華民國國民為原則。</td>
+					</tr>
+					<tr>
+						<td class="auditRule__num">第三條</td>
+						<td>
+							員工薪資規定如下：
+							<table class="auditRule__tb">
+								<tbody>
+									<tr>
+										<td class="auditRule__num">一、</td>
+										<td>全職員工薪資計算依本社員工薪給。</td>
+									</tr>
+									<tr>
+										<td class="auditRule__num">二、</td>
+										<td>兼職員工薪資依本社員工薪給按日、時數計算之。</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td class="auditRule__num">第四條</td>
+						<td>新進員工於試用期滿，工作考核及格為正式全職員工，依本社員工薪給表核定薪資。</td>
+					</tr>
+					<tr>
+						<td class="auditRule__num">第五條</td>
+						<td>員工年度考績於每年十二月底辦理，由員工之主管依員工平日工作績效及勤惰表現進行考核，員工年度考績結果彙整成表陳報理事長核定。</td>
+					</tr>
+					<tr>
+						<td class="auditRule__num">第六條</td>
+						<td>員工考績區分為優等、甲等、乙等、丙等；考核期間自元月一日起至十二月卅一日止，考績核定後，自次年一月一日生效。</td>
+					</tr>
+					<tr>
+						<td class="auditRule__num">第七條</td>
+						<td>
+							員工考績獎懲如下：
+							<table class="auditRule__tb">
+								<tbody>
+									<tr>
+										<td class="auditRule__num">一、</td>
+										<td>考績列優等（九十五分以上）者給予1個月本薪年終獎金獎勵。</td>
+									</tr>
+									<tr>
+										<td class="auditRule__num">二、</td>
+										<td>列甲等（八十五分以上未滿九十五分）者給予1萬元年終獎金獎勵。</td>
+									</tr>
+									<tr>
+										<td class="auditRule__num">三、</td>
+										<td>列乙等（七十五分以上未滿八十五分）者不予績效獎金獎勵，並實施加強職教育。</td>
+									</tr>
+									<tr>
+										<td class="auditRule__num">四、</td>
+										<td>列丙等（未滿七十五分）者不予績效獎金獎勵，次年不予續聘。</td>
+									</tr>
+									<tr>
+										<td class="auditRule__num">五、</td>
+										<td>兼職員工不辦理考績，年終獎金以過年紅包為之。</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td class="auditRule__num">第八條</td>
+						<td>員工應忠誠服務，嚴守分際，保持行政中立，如有踰越或不當行為，足以影響本社聲譽或損害本社權益，經理、監事會查明事證確鑿，應將調查結果陳請理事長，逕予終止聘僱。</td>
+					</tr>
+					<tr>
+						<td class="auditRule__num">第九條</td>
+						<td>員工如有業務過失，依照相關法令處理；倘涉嫌侵占、挪用公款或其他不法行為，由理事長召開臨時人評會處理。 臨時人評會以理事長為召集人，由理事長指聘理事及監事各二人共四人組成，對案情進行調查，查明事證確鑿，經決議後應移送司法機關偵辦，並追討不法所得。</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+
+	<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form id="form2" name="form2" method="post" action="/personnel_assessment/save_uploadfile" target="actFrame" enctype="multipart/form-data">
+					<input type="hidden" class="modal-id" id="id" name="id" value="">
+					<input type="hidden" id="uploadfile01_ori" name="uploadfile01_ori" value="">
+					<div class="modal-header">
+						<h5 class="modal-title" id="editModalLabel">上傳照片</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="message-text" class="col-form-label col-md-12">
+								員工姓名:<span class="col-md-12" id="name" name="name"></span>
+							</label>
+							<label for="message-text" class="col-form-label col-md-12">
+								<span class="redfont">＊</span>獎懲照片:<input type="file" class="form-control col-md-12" id="uploadfile01" name="uploadfile01">
+							</label>
+						</div>
+					</div>
+				</form>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+					<button type="button" class="btn btn-primary" onclick="doSubmit('edit');">送出修改</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

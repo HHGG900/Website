@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>財務管理 | 台灣柏佐克智慧型居服管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/layout.css">
+	<link rel="stylesheet" href="/css/page2-5.css">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="/js/jquery-1.10.2.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+		});
+	</script>
+	<style>
+		.fa-american-sign-language-interpreting {
+			font-size: 60pt;
+			margin-bottom: 20px;
+		}
+
+		.container.container-btn {
+			max-width: 600px;
+			margin-left: 35%;
+		}
+
+		.fa-book {
+			font-size: 60pt;
+			margin-bottom: 10px;
+		}
+
+		.header__textCell {
+			font-size: 1.5rem;
+		}
+
+		.btnA {
+			font-size: 28px;
+			;
+		}
+
+			.btnA:hover {
+				text-decoration: none;
+			}
+	</style>
+</head>
+
+
+
+
+
+<body style="">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<i class="fas fa-book"></i>
+			<h1 class="h1">財務管理</h1>
+		</div>
+		<br>
+		<div class="header__textCell">
+			<div class="text" style="padding: 0px;">
+				<p>
+					<span style="background-color: transparent;">財務管理是在一定的整體目標下,關於資產的購置(投資),資本的融通(籌資)和經營中現金流量(營運資金),以及利潤分配的管理。</span>
+				</p>
+				<p><span style="background-color: transparent;">(一) 投資是指中心對於資產(設施.施設.接送車輛等)投入資金決策</span><br></p>
+				<p><span style="background-color: transparent;">(二) 籌資是指中心為滿足經營資金的需要，向中心外部或個人以及從經營者本人籌措資金的一種財務活動</span></p>
+				<p>
+					<span style="background-color: transparent;">(三) 利潤分配是指中心按照中心規章規定的政策和比例，對已實現的凈利潤在組織、投資者和員工之間進行分配</span>
+				</p>
+			</div>
+		</div>
+	</header>
+	<main class="main wrapper">
+		<div class="container container-btn">
+			<div class="row">
+				<div class="col-12 col-sm-6"><a href="/Home/Financial_Management_Method" class="btnA">財務管理辦法</a></div>
+				<div class="col-12 col-sm-6"><a href="/Home/Property_Management_Method" class="btnA">財產管理辦法</a></div>
+				<div class="col-12 col-sm-6"><a href="/Home/Carecharge" class="btnA">照顧收費</a></div>
+				<div class="col-12 col-sm-6"><a href="/Home/License_verification" class="btnA">照顧核銷</a></div>
+				<div class="col-12 col-sm-6"><a href="/Home/Expenditureregister" class="btnA">財務收支明細</a></div>
+				<div class="col-12 col-sm-6"><a href="/Home/Property_registration" class="btnA">財產登記</a></div>
+			</div>
+		</div>
+	</main>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

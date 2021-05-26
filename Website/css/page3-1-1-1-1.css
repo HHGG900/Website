@@ -1,0 +1,121 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 5, ../sass/page3-1-1-1-1.scss */
+header {
+  text-align: center;
+}
+
+/* line 8, ../sass/page3-1-1-1-1.scss */
+h1 {
+  font-size: 1.8rem;
+}
+
+/* line 11, ../sass/page3-1-1-1-1.scss */
+.hint {
+  display: inline-block;
+  margin: 10px auto 0;
+  font-size: 1rem;
+  line-height: 2.6rem;
+  background-color: #e51c23;
+  color: #fff;
+}
+
+/* line 19, ../sass/page3-1-1-1-1.scss */
+.cases {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+/* line 24, ../sass/page3-1-1-1-1.scss */
+.cases .cases__case {
+  width: 15%;
+  border: 1px solid #bbbbbb;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 1rem;
+}
+/* line 33, ../sass/page3-1-1-1-1.scss */
+.cases .cases__case.cases__case--alarm {
+  background-color: #ff9800;
+}
+
+/* line 38, ../sass/page3-1-1-1-1.scss */
+.btnSet {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* line 42, ../sass/page3-1-1-1-1.scss */
+.btnSet__btn {
+  display: inline-block;
+  border: none;
+  background-color: #5677fc;
+  box-shadow: 0 8px 10px #0003;
+  font-size: 1.3rem;
+  width: 11.5rem;
+  height: 3rem;
+  color: #fff;
+}
+/* line 78, ../sass/_var.scss */
+.btnSet__btn:hover, .btnSet__btn:active {
+  background-color: #3d63fc;
+}
+
+/* line 50, ../sass/page3-1-1-1-1.scss */
+.btnSet__btn + .btnSet__btn {
+  margin-left: 70px;
+}
+
+/* line 54, ../sass/page3-1-1-1-1.scss */
+.main {
+  margin-top: 3rem;
+}
+
+@media (max-width: 767.98px) {
+  /* line 60, ../sass/page3-1-1-1-1.scss */
+  .cases .cases__case {
+    width: 23%;
+  }
+}
+@media (max-width: 575.98px) {
+  /* line 68, ../sass/page3-1-1-1-1.scss */
+  .cases .cases__case {
+    width: 48%;
+  }
+}

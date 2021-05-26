@@ -1,0 +1,337 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>支出流水帳 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="~/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<link rel="stylesheet" href="~/css/page2-3-3.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<!--Get your own code at fontawesome.com-->
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+		});
+	</script>
+
+</head>
+<body>
+	<p align="right">
+		<button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button>
+	</p>
+	<center>
+		<font size="8">支出分項代碼表</font>
+		<br />
+		<table class="table table-striped" width="600" height="100">
+			<tr>
+				<td align="center" valign="middle">A人事類</td>
+				<td align="center" valign="middle">A1主任薪資</td>
+				<td align="center" valign="middle">A2督導薪資</td>
+				<td align="center" valign="middle">A3照顧員薪資</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">B活動課程類</td>
+				<td align="center" valign="middle">B1活動會議費</td>
+				<td align="center" valign="middle">B2訓練課程費</td>
+				<td align="center" valign="middle">B3員工福利費</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">C設備交通費</td>
+				<td align="center" valign="middle">C1設備租金</td>
+				<td align="center" valign="middle">C2設備維修費</td>
+				<td align="center" valign="middle">C3設備折舊費</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">D行銷類</td>
+				<td align="center" valign="middle">D1廣告宣導費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">E保險規費類</td>
+				<td align="center" valign="middle">E1勞健保勞退費</td>
+				<td align="center" valign="middle">E2保險費</td>
+				<td align="center" valign="middle">E3稅金</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">F餐費</td>
+				<td align="center" valign="middle">F1誤餐費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">G房舍類</td>
+				<td align="center" valign="middle">G1房租</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">H常態支出類</td>
+				<td align="center" valign="middle">H1燃料費</td>
+				<td align="center" valign="middle">H2水電費</td>
+				<td align="center" valign="middle">H3電話費</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">H4郵費</td>
+				<td align="center" valign="middle">H5網路費</td>
+				<td align="center" valign="middle">H6清潔用品費</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">I文教類</td>
+				<td align="center" valign="middle">I1文具費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">J特色類</td>
+				<td align="center" valign="middle">J1特色費</td>
+				<td align="center" valign="middle">J2激勵特色費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+		</table>
+		<br />
+		<br />
+		<br />
+		<font size="8">流水帳</font>
+		<br />
+		<table width="1150" height="100">
+			<tr>
+				<td align="center">
+					支出:&nbsp;日期<input type="date" />&nbsp;分類代號<input type="text" />&nbsp;&nbsp;品名<input type="text" />&nbsp;&nbsp;金額<input type="number" />&nbsp;<input type="submit" size="5" value="輸入" />
+
+				</td>
+			</tr>
+		</table>
+		<table width="550" height="100" border="1">
+			<tr>
+				<td align="center" valign="middle" width="100">日期</td>
+				<td align="center" valign="middle" width="40">分類代號</td>
+				<td align="center" valign="middle">品名</td>
+				<td align="center" valign="middle" width="100">金額</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+		</table>
+		<br />
+		<br />
+		<font size="8">分類帳</font>
+		<br />
+		<table width="1150" height="100">
+			<tr>
+				<td align="center">
+					統計期間:&nbsp;&nbsp;<input type="date" />&nbsp;&nbsp;&nbsp;至&nbsp;&nbsp;&nbsp;<input type="date" />&nbsp;&nbsp;&nbsp;<input type="submit" size="5" value="查詢" />
+				</td>
+			</tr>
+		</table>
+		<br />
+		<table width="550" height="250" border="0">
+			<tr>
+				<td align="center" valign="middle">支出分類</td>
+				<td align="center" valign="middle">支出細項</td>
+				<td align="center" valign="middle">支出金額</td>
+				<td align="center" valign="middle">支出小計</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle" rowspan="3">人事類</td>
+				<td align="center" valign="middle">A1主任薪資</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle" rowspan="3">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">A2督導薪資</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">A3照顧員薪資</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle" rowspan="3">B活動課程類</td>
+				<td align="center" valign="middle">B1活動會議費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle" rowspan="3">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">B2訓練課程費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">B3員工福利費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle" rowspan="3">C設備類</td>
+				<td align="center" valign="middle">C1設備租金</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle" rowspan="3">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">C2設備維修費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">C3設備折舊費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">D行銷類</td>
+				<td align="center" valign="middle">D1廣告宣導費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle" rowspan="3">E保險規費類</td>
+				<td align="center" valign="middle">E1勞健保勞退費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle" rowspan="3">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">E2保險費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">E3稅金</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">F餐費類</td>
+				<td align="center" valign="middle">F1誤餐費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">G房舍類</td>
+				<td align="center" valign="middle">G1房租</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle" rowspan="6">H常態支出類</td>
+				<td align="center" valign="middle">H1燃料費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle" rowspan="6">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">H2水電費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">H3電話費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">H4郵費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">H5網路費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">H6清潔用品費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">I文教類</td>
+				<td align="center" valign="middle">I1文具費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle" rowspan="3">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle" rowspan="2">J特色類</td>
+				<td align="center" valign="middle">J1特色費</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">J2激勵特色費</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">K無可歸類</td>
+				<td align="center" valign="middle">K1雜支</td>
+				<td align="center" valign="middle">&nbsp;</td>
+				<td align="center" valign="middle">&nbsp;</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle" colspan="2">支出總計</td>
+				<td align="center" valign="middle" colspan="2">&nbsp;</td>
+			</tr>
+
+
+
+
+
+
+
+
+
+		</table>
+	</center>
+</body>
+</html>

@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>照服員-異常事件通報</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+	<script src="~/Scripts/jquery.validate.min.js"></script>
+	<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<style type="text/css">
+		.auto-style1 {
+			font-family: 標楷體;
+			text-align: center;
+		}
+
+		.auto-style3 {
+			width: 330px;
+			height: 192px;
+		}
+
+		.auto-style5 {
+			width: 25px;
+			height: 24px;
+			font-family: 標楷體;
+		}
+
+		.auto-style8 {
+			width: 35px;
+			height: 28px;
+			font-family: 標楷體;
+			font-size: large;
+		}
+
+		.auto-style9 {
+			font-size: x-large;
+		}
+
+		.auto-style10 {
+			font-size: large;
+		}
+
+		textarea {
+			resize: none;
+		}
+
+		.auto-style11 {
+			width: 327px;
+			height: 229px;
+			font-family: 標楷體;
+		}
+
+		.auto-style12 {
+			text-align: left;
+		}
+
+		.auto-style15 {
+			text-align: right;
+			font-family: 標楷體;
+		}
+
+		.auto-style16 {
+			font-family: 標楷體;
+		}
+
+		.auto-style17 {
+			font-size: large;
+			font-family: 標楷體;
+		}
+
+		.auto-style18 {
+			font-size: x-large;
+			font-family: 標楷體;
+		}
+
+		.auto-style19 {
+			text-align: center;
+		}
+
+		.auto-style20 {
+			font-size: medium;
+			font-family: 標楷體;
+		}
+
+		.auto-style21 {
+			width: 110px;
+			text-align: center;
+		}
+	</style>
+
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#actButton1').click(function () {
+				location.href = "/unusual_notify";
+			});
+
+
+
+		});
+
+		function doSubmit(thisform) {
+			var category_checked = $('input[name="category"]:checked').val();
+
+			if ($('#description').val() == "") {
+				alert('請輸入事件描述！');
+				$('#description').focus();
+				return false;
+			}
+			else if (typeof category_checked == "undefined") {
+				alert('請選擇異常類別！');
+				$('#category-1').focus();
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				$('#form1').submit();
+			}
+		}
+	</script>
+
+</head>
+<body style="background-color:#FAF4FF;">
+	<div>
+		<div class="auto-style19">
+			<div class="auto-style19">
+				<div>
+					<marquee direction="up" scrollamount="1" class="auto-style10">
+						<font color="#ff0099">
+							公告：8/18(六)辦理員工體檢，相關注意事項請查閱公告
+						</font>
+					</marquee>
+				</div>
+				<br class="auto-style16" />
+				<span class="auto-style17">
+					<br />
+					記錄時間 @DateTime.Now
+				</span><br class="auto-style16" />
+			</div>
+			<div>
+				<img src="../../images/人員.png" class="auto-style8" /> <span class="auto-style17">服務人員 :</span><span class="auto-style18"> </span> <span class="auto-style16">
+					&nbsp;<br />
+					<br />
+				</span>
+			</div>
+		</div>
+		<div class="auto-style1">
+			<strong>
+				<span class="auto-style9">
+					<span class="auto-style16">事件描述</span><br class="auto-style16" />
+				</span>
+			</strong><br class="auto-style16" />
+			<textarea class="auto-style11" name="S1"></textarea>
+			<br class="auto-style16" />
+			<br class="auto-style16" />
+			<br class="auto-style16" />
+			<br class="auto-style16" />
+		</div>
+		<table align="center" class="auto-style3">
+			<tr>
+				<td class="auto-style21">
+					<span class="auto-style18">
+						<strong>
+							異常<br />
+							類別
+						</strong>
+					</span>
+				</td>
+				<td class="auto-style12">
+					<input type="radio" name="1" class="auto-style5" /> <span class="auto-style17">個案進步</span> <span class="auto-style9">
+						<input type="radio" name="2" class="auto-style5" /><span class="auto-style16"> </span>
+					</span>
+					<span class="auto-style17">情緒改善</span><span class="auto-style18">
+						<br />
+
+					</span>
+					<input type="radio" name="3" class="auto-style5" />  <span class="auto-style17">正向反饋</span><span class="auto-style9">
+						<span class="auto-style10">
+							<input type="radio" name="4" class="auto-style5" /><span class="auto-style16">
+								負向反饋&nbsp;
+								<br />
+							</span>
+							<input type="radio" name="5" class="auto-style5" /><span class="auto-style16">
+								日照適應
+							</span>
+							<input type="radio" name="6" class="auto-style5" /><span class="auto-style16">
+								情緒異常
+							</span>
+							<br class="auto-style16" />
+							<input type="radio" name="7" class="auto-style5" /><span class="auto-style16">
+								行為異常&nbsp;
+							</span>
+							<input type="radio" name="8" class="auto-style5" /><span class="auto-style16">
+								服藥異常&nbsp;&nbsp;
+								<br />
+							</span>
+							<input type="radio" name="9" class="auto-style5" /><span class="auto-style16"> 不明傷口 </span>
+							<input type="radio" name="10" class="auto-style5" /><span class="auto-style16">
+								意外事件&nbsp;
+								<br />
+							</span>
+							<input type="radio" name="11" class="auto-style5" /><span class="auto-style16">
+								不明疼痛&nbsp;
+							</span><input type="radio" name="12" class="auto-style5" /><span class="auto-style16"> 設備損壞</span><br class="auto-style16" />
+							<input type="radio" name="13" class="auto-style5" /><span class="auto-style16">
+								設施損壞
+							</span>
+							<input type="radio" name="14" class="auto-style5" /><span class="auto-style16">
+								心理疾病&nbsp;&nbsp;
+								<br />
+							</span>
+							<input type="radio" name="15" class="auto-style5" /><span class="auto-style16">
+								更好建議
+							</span>
+						</span>
+					</span>
+				</td>
+			</tr>
+		</table>
+		<p>
+			<br class="auto-style16" />
+		</p>
+		<table align="center" class="auto-style3">
+			<tr>
+				<td class="auto-style21">
+					<strong>
+						<span class="auto-style9">
+							<span class="auto-style16">
+								十大<br />
+								指標<br />
+							</span>
+						</span><span class="auto-style20">(不是就不用選)</span>
+					</strong>
+				</td>
+				<td class="auto-style12">
+					<input type="radio" name="1" class="auto-style5" /> <span class="auto-style17">跌倒</span><span class="auto-style9">
+						&nbsp;
+						<input type="radio" name="2" class="auto-style5" /><span class="auto-style16"> </span>
+					</span>
+					<span class="auto-style17">感染</span><span class="auto-style18">
+						&nbsp;&nbsp;
+
+						<br />
+
+					</span>
+					<input type="radio" name="3" class="auto-style5" />&nbsp;  <span class="auto-style17">約束</span><span class="auto-style9">
+						&nbsp;
+						<span class="auto-style10">
+							<input type="radio" name="4" class="auto-style5" /><span class="auto-style16">
+								非計畫重改<br />
+							</span><input type="radio" name="5" class="auto-style5" /><span class="auto-style16"> 壓瘡&nbsp;&nbsp;&nbsp; </span><input type="radio" name="6" class="auto-style5" /><span class="auto-style16"> 疼痛</span><br class="auto-style16" />
+							<input type="radio" name="7" class="auto-style5" /><span class="auto-style16">
+								非計畫住院 <input type="radio" name="91" class="auto-style5" checked="true" value="V1" /> 憂鬱<br />
+							</span><input type="radio" name="8" class="auto-style5" /><span class="auto-style16">
+								多重用藥&nbsp;
+							</span><input type="radio" name="10" class="auto-style5" /><span class="auto-style16">
+								管路移除&nbsp;
+							</span>
+						</span>
+					</span>
+				</td>
+			</tr>
+		</table>
+		<br />
+		<br />
+		<br />
+
+		<div class="auto-style19">
+			<input type="submit" class="btn btn-primary btn-lg" value="送出" />
+		</div>
+		<br />
+		<br />
+
+		<p class="auto-style15">
+			@Html.ActionLink("回首頁", "Home_attendant_index", "Home", new { @class = "btn btn-danger btn-lg" })
+
+		</p>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+/* line 39, ../sass/_var.scss */
+.wrapper {
+  width: 1400px;
+  margin: auto;
+}
+@media (max-width: 1599.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 1100px;
+  }
+}
+@media (max-width: 1199.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: 940px;
+  }
+}
+@media (max-width: 991.98px) {
+  /* line 39, ../sass/_var.scss */
+  .wrapper {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+}
+
+/* line 67, ../sass/_var.scss */
+.colorDust {
+  color: #926707;
+}
+
+/* line 70, ../sass/_var.scss */
+.colorRed {
+  color: #e51c23;
+}
+
+/* line 5, ../sass/page2-6.scss */
+.header {
+  position: relative;
+}
+
+/* line 8, ../sass/page2-6.scss */
+.header__iconCell {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 174px;
+}
+/* line 13, ../sass/page2-6.scss */
+.header__iconCell .h1 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* line 18, ../sass/page2-6.scss */
+.header__textCell {
+  margin-left: 254px;
+}
+
+/* line 21, ../sass/page2-6.scss */
+.header__btns {
+  text-align: center;
+  margin-top: 30px;
+}
+
+/* line 25, ../sass/page2-6.scss */
+.header__btn {
+  display: inline-block;
+  border: none;
+  background-color: #5677fc;
+  box-shadow: 0 8px 10px #0003;
+  font-size: 1.3rem;
+  min-width: 11.5rem;
+  height: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  color: #fff;
+}
+/* line 78, ../sass/_var.scss */
+.header__btn:hover, .header__btn:active {
+  background-color: #3d63fc;
+}
+
+/* line 35, ../sass/page2-6.scss */
+.header__btn + .header__btn {
+  margin-left: 70px;
+}
+
+/* line 39, ../sass/page2-6.scss */
+.main {
+  margin-top: 3rem;
+}
+
+/* line 45, ../sass/page2-6.scss */
+.h2 {
+  display: inline-block;
+  font-size: 1.7rem;
+  border: 1px solid #bbbbbb;
+  background-color: #fff;
+  width: 300px;
+  height: 80px;
+  text-align: center;
+  line-height: 80px;
+}
+
+/* line 55, ../sass/page2-6.scss */
+.btnBar {
+  position: relative;
+  overflow: visible;
+  height: 0;
+  width: 100%;
+  text-align: right;
+}
+/* line 62, ../sass/page2-6.scss */
+.btnBar .btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 1.3rem;
+}
+
+/* line 70, ../sass/page2-6.scss */
+.tableContainer {
+  margin-top: 10px;
+  overflow-x: auto;
+  border-left: 1px solid #101010;
+  border-right: 1px solid #101010;
+}
+/* line 76, ../sass/page2-6.scss */
+.tableContainer table {
+  min-width: 100%;
+  border-collapse: collapse;
+}
+/* line 80, ../sass/page2-6.scss */
+.tableContainer table th,
+.tableContainer table td {
+  border: 1px solid #101010;
+  white-space: nowrap;
+  padding: 5px 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0.9rem;
+}
+/* line 91, ../sass/page2-6.scss */
+.tableContainer table thead th:nth-child(n + 3) {
+  width: 66px;
+  white-space: nowrap;
+}
+/* line 95, ../sass/page2-6.scss */
+.tableContainer table thead th:first-child {
+  border-left: none;
+}
+/* line 98, ../sass/page2-6.scss */
+.tableContainer table thead th:last-child {
+  border-right: none;
+}
+/* line 103, ../sass/page2-6.scss */
+.tableContainer table tbody td:first-child {
+  border-left: none;
+}
+/* line 106, ../sass/page2-6.scss */
+.tableContainer table tbody td:last-child {
+  border-right: none;
+}
+
+/* line 113, ../sass/page2-6.scss */
+.chckboxStar__chckbox {
+  display: none;
+}
+
+/* line 116, ../sass/page2-6.scss */
+.chckboxStar__label {
+  cursor: pointer;
+}
+/* line 118, ../sass/page2-6.scss */
+.chckboxStar__label .far {
+  display: inline-block;
+}
+/* line 121, ../sass/page2-6.scss */
+.chckboxStar__label .fas {
+  display: none;
+}
+
+/* line 126, ../sass/page2-6.scss */
+.chckboxStar__chckbox:checked + .chckboxStar__label .far {
+  display: none;
+}
+/* line 129, ../sass/page2-6.scss */
+.chckboxStar__chckbox:checked + .chckboxStar__label .fas {
+  display: inline-block;
+}
+
+/* line 134, ../sass/page2-6.scss */
+.sumary {
+  text-align: right;
+  font-size: 1.3rem;
+}
+/* line 137, ../sass/page2-6.scss */
+.sumary span {
+  color: #5677fc;
+}
+
+/* line 141, ../sass/page2-6.scss */
+.saveBtn {
+  margin-top: 20px;
+}

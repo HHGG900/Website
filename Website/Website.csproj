@@ -1,0 +1,452 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8A1D41D5-6E66-4414-9B12-261659607836}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Website</RootNamespace>
+    <AssemblyName>Website</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44345</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="css\all.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\custom.css" />
+    <Content Include="css\font-awesome\all.css" />
+    <Content Include="css\hosted-fonts.css" />
+    <Content Include="css\index.css" />
+    <Content Include="css\layout.css" />
+    <Content Include="css\plugins\iCheck\flat\_all.css" />
+    <Content Include="css\plugins\iCheck\futurico\futurico.css" />
+    <Content Include="css\plugins\iCheck\line\_all.css" />
+    <Content Include="css\plugins\iCheck\minimal\_all.css" />
+    <Content Include="css\plugins\iCheck\polaris\polaris.css" />
+    <Content Include="css\plugins\iCheck\square\_all.css" />
+    <Content Include="images\icon_magnifier.png" />
+    <Content Include="images\raw_1536051633.png" />
+    <Content Include="images\raw_1536052176.png" />
+    <Content Include="images\uplod_picture.png" />
+    <Content Include="images\照片1.jpg" />
+    <Content Include="js\DatePicker\WdatePicker.js" />
+    <Content Include="js\jquery.cookie.js" />
+    <Content Include="Models\Sign_in.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Sign_in.edmx</DependentUpon>
+      <LastGenOutput>Sign_in.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Sign_in.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Sign_in.edmx</DependentUpon>
+      <LastGenOutput>Sign_in1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\main.js" />
+    <Content Include="css\page2-1.css" />
+    <Content Include="css\page2-2-1-1.css" />
+    <Content Include="css\page2-2-1.css" />
+    <Content Include="css\page2-2.css" />
+    <Content Include="css\page2-3-3.css" />
+    <Content Include="css\page2-3.css" />
+    <Content Include="css\page2-4.css" />
+    <Content Include="css\page2-5-3.css" />
+    <Content Include="css\page2-5.css" />
+    <Content Include="css\page2-6-1.css" />
+    <Content Include="css\page2-6.css" />
+    <Content Include="css\page2-8-1.css" />
+    <Content Include="css\page2-9-2.css" />
+    <Content Include="css\page2.css" />
+    <Content Include="css\page3-1-1-1-1.css" />
+    <Content Include="css\page3-1-2-2.css" />
+    <Content Include="css\page3-1-5-1.css" />
+    <Content Include="css\page3-1.css" />
+    <Content Include="css\plugins\iCheck\_all.css" />
+    <Content Include="css\wait.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="images\camera-solid.svg" />
+    <Content Include="images\icon_bullhorn.png" />
+    <Content Include="images\icon_insurance.png" />
+    <Content Include="images\icon_map.png" />
+    <Content Include="images\img-arrow-right.png" />
+    <Content Include="images\img-book2.png" />
+    <Content Include="images\img-book4-2.jpg" />
+    <Content Include="images\img-book6-1.jpg" />
+    <Content Include="images\img-book6-2.jpg" />
+    <Content Include="images\img-book7-2.png" />
+    <Content Include="images\img-book9.png" />
+    <Content Include="images\img_certificate.jpg" />
+    <Content Include="images\img_decoration_heart.png" />
+    <Content Include="images\img_decoration_people.png" />
+    <Content Include="images\img_emergency_process.jpg" />
+    <Content Include="images\img_enternotice.png" />
+    <Content Include="images\img_form1.jpg" />
+    <Content Include="images\loading.gif" />
+    <Content Include="images\loading2.gif" />
+    <Content Include="images\num-1.png" />
+    <Content Include="images\num-2.png" />
+    <Content Include="images\v2_pi2srf.png" />
+    <Content Include="images\v2_pi2th6.png" />
+    <Content Include="images\v2_pihdxy.png" />
+    <Content Include="images\v2_pozcrz.png" />
+    <Content Include="images\img-book4-1.png" />
+    <Content Include="images\v2_pq3o0z.png" />
+    <Content Include="images\icon_calendar.png" />
+    <Content Include="images\icon_profile.png" />
+    <Content Include="images\favicon.ico" />
+    <Content Include="images\v2_pv1z3x.png" />
+    <Content Include="images\v2_pv1zba.png" />
+    <Content Include="images\img-book3.png" />
+    <Content Include="images\v2_pyfohf.png" />
+    <Content Include="js\jquery-1.10.2.min.js" />
+    <Content Include="libs\datepicker\css\bootstrap-datepicker3.min.css" />
+    <Content Include="libs\datepicker\js\bootstrap-datepicker.min.js" />
+    <Content Include="libs\datepicker\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Scripts\additional-methods.js" />
+    <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="home\announce" />
+    <Content Include="case_manage\conversation_record_pre" />
+    <Content Include="css\font-awesome\webfonts\fa-regular-400.woff2" />
+    <Content Include="css\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="user\unitAccountManage" />
+    <EntityDeploy Include="Models\Sign_in.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Sign_in.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Sign_in.edmx.diagram">
+      <DependentUpon>Sign_in.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="css\WdatePicker.css" />
+    <Content Include="Scripts\DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\iCheck\icheck.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="popper.js\popper.min.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
+    <Content Include="Scripts\util.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Assessment.cs" />
+    <Compile Include="Models\Assessment_db.cs" />
+    <Compile Include="Models\daycheck.cs" />
+    <Compile Include="Models\Daycheck_db.cs" />
+    <Compile Include="Models\image.cs" />
+    <Compile Include="Models\Internal_and_external_training.cs" />
+    <Compile Include="Models\Internal_and_external_training_db.cs" />
+    <Compile Include="Models\Organization_account.cs" />
+    <Compile Include="Models\Organization_account_db.cs" />
+    <Compile Include="Models\Personnel.cs" />
+    <Compile Include="Models\Personnel_db.cs" />
+    <Compile Include="Models\Pre_employment_training_records.cs" />
+    <Compile Include="Models\Pre_employment_training_records_db.cs" />
+    <Compile Include="Models\Roster.cs" />
+    <Compile Include="Models\Roster_db.cs" />
+    <Compile Include="Models\Select.cs" />
+    <Compile Include="Models\Sign_in.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sign_in.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sign_in.cs">
+      <DependentUpon>Sign_in.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sign_in.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sign_in.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sign_in1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Sign_in.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sign_in_db.cs" />
+    <Compile Include="Models\worker_arrive.cs" />
+    <Compile Include="Models\worker_arrive_db.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <None Include="packages.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\DirectorHandbook.cshtml" />
+    <Content Include="Views\Home\Director.cshtml" />
+    <Content Include="Views\Home\HRmanagement.cshtml" />
+    <Content Include="Views\Home\training.cshtml" />
+    <Content Include="Views\Home\Staffattendance.cshtml" />
+    <Content Include="Views\Home\Personnelassessment.cshtml" />
+    <Content Include="Views\Home\Directorselfassessment.cshtml" />
+    <Content Include="Views\Home\SupervisionAssessmentForm.cshtml" />
+    <Content Include="Views\Home\HomeWaiterAssessmentForm.cshtml" />
+    <Content Include="Views\Home\Planmanagement.cshtml" />
+    <Content Include="Views\Home\Financialplan.cshtml" />
+    <Content Include="Views\Home\Taxreturn.cshtml" />
+    <Content Include="Views\Home\Grievancemanagement.cshtml" />
+    <Content Include="Views\Home\Firststep.cshtml" />
+    <Content Include="Views\Home\Secondstep.cshtml" />
+    <Content Include="Views\Home\Thirdtep.cshtml" />
+    <Content Include="Views\Home\fourthstep.cshtml" />
+    <Content Include="Views\Home\Expenditureregister.cshtml" />
+    <Content Include="Views\Home\Carecharge.cshtml" />
+    <Content Include="Views\Share\Layout.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
+    <Content Include="Views\Home\Logintest.cshtml" />
+    <Content Include="Views\Home\Insurance_security_management.cshtml" />
+    <Content Include="Views\Home\License_verification.cshtml" />
+    <Content Include="Views\Home\Property_registration.cshtml" />
+    <Content Include="Views\Home\Link_work.cshtml" />
+    <Content Include="Views\Home\Resource_teamwork.cshtml" />
+    <Content Include="Views\Home\Community_advocacy.cshtml" />
+    <Content Include="Views\Home\Internal_regulations.cshtml" />
+    <Content Include="Views\Home\Employee_Handbook_1.cshtml" />
+    <Content Include="Views\Home\Employee_Handbook_2.cshtml" />
+    <Content Include="Views\Home\Employee_Handbook_3.cshtml" />
+    <Content Include="Views\Home\Employee_Handbook_4.cshtml" />
+    <Content Include="Views\Home\Employee_Handbook_5.cshtml" />
+    <Content Include="Views\Home\Property_Management_Method.cshtml" />
+    <Content Include="Views\Home\Financial_Management_Method.cshtml" />
+    <Content Include="Views\Home\Personal_information_Method.cshtml" />
+    <Content Include="Views\Home\Work_safety_measures_for_employees.cshtml" />
+    <Content Include="Views\Home\Key_points_of_job_agency.cshtml" />
+    <Content Include="Views\Home\Employee_benefits.cshtml" />
+    <Content Include="Views\Home\Evaluation_area.cshtml" />
+    <Content Include="Views\Home\The_first_Organization_management.cshtml" />
+    <Content Include="Views\Home\The_second_Professional_management.cshtml" />
+    <Content Include="Views\Home\The_third_human_resource_management.cshtml" />
+    <Content Include="Views\Home\The_Fourth_Improvement_and_innovation.cshtml" />
+    <Content Include="Views\Home\SuperviseHandbook.cshtml" />
+    <Content Include="Views\Home\Supervise.cshtml" />
+    <Content Include="Views\Home\Case_scheduling.cshtml" />
+    <Content Include="Views\Home\Case_information.cshtml" />
+    <Content Include="Views\Home\New_cases.cshtml" />
+    <Content Include="Views\Home\Assessing_care_plan_selection_cases.cshtml" />
+    <Content Include="Views\Home\New_cases_print.cshtml" />
+    <Content Include="Views\Home\Assessing_care_plan_selection_cases_information.cshtml" />
+    <Content Include="Views\Home\First_care_plan.cshtml" />
+    <Content Include="Views\Home\Visit.cshtml" />
+    <Content Include="Views\Home\Visit_information.cshtml" />
+    <Content Include="Views\Home\abnormal_event_process.cshtml" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\abnormal_event_process_one.cshtml" />
+    <Content Include="Views\Home\abnormal_event_process_two.cshtml" />
+    <Content Include="Views\Home\abnormal_event_process_three.cshtml" />
+    <Content Include="Views\Home\Sense_control.cshtml" />
+    <Content Include="Views\Home\Sense_control_Report.cshtml" />
+    <Content Include="Views\Home\meeting.cshtml" />
+    <Content Include="Views\Home\meeting_Record.cshtml" />
+    <Content Include="Views\Home\Satisfaction_improvement_meeting.cshtml" />
+    <Content Include="Views\Home\Education_Training.cshtml" />
+    <Content Include="Views\Home\Pre_employment_training.cshtml" />
+    <Content Include="Views\Home\On_the_job_training.cshtml" />
+    <Content Include="Views\Home\Business_supervision.cshtml" />
+    <Content Include="Views\Home\Employee_bulletin_board.cshtml" />
+    <Content Include="Views\Home\Family_Notice_board.cshtml" />
+    <Content Include="Views\Home\Family_Notice.cshtml" />
+    <Content Include="Views\Home\Column_area.cshtml" />
+    <Content Include="Views\Home\Family_work_records.cshtml" />
+    <Content Include="Views\Home\Physical_examination.cshtml" />
+    <Content Include="Views\Home\Employee_Benefits_Supervise.cshtml" />
+    <Content Include="Views\Home\Official_documents.cshtml" />
+    <Content Include="Views\Home\Service_record.cshtml" />
+    <Content Include="Views\Home\Record_quality_inspection_report.cshtml" />
+    <Content Include="Views\Home\Family_Care_Form.cshtml" />
+    <Content Include="Views\Home\Service_satisfaction.cshtml" />
+    <Content Include="Views\Home\Abnormal_event.cshtml" />
+    <Content Include="Views\Home\Appeal.cshtml" />
+    <Content Include="Views\Home\Service_Day_report.cshtml" />
+    <Content Include="user\attendance" />
+    <Content Include="user\personal_information" />
+    <Content Include="user\pre_training" />
+    <Content Include="Views\Home\Organization_account_management.cshtml" />
+    <Content Include="Views\Home\Pre_employment_training_Supervise.cshtml" />
+    <Content Include="Views\Home\Financial_Management.cshtml" />
+    <Content Include="Views\Home\Report_review.cshtml" />
+    <Content Include="Views\Home\HRmanagement_print.cshtml" />
+    <Content Include="Views\Home\New_class_schedule.cshtml" />
+    <Content Include="Views\Home\conversation_record.cshtml" />
+    <Content Include="Views\Home\conversation_record2.cshtml" />
+    <Content Include="Views\Home\HRmanagement_Edit.cshtml" />
+    <Content Include="Views\Home\Organization_account_management_Edit.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Photos\" />
+    <Folder Include="uploads\personnel_assessment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52985</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44345/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

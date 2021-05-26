@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>初評 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page3-1-1-1-1.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		var choosenId = 0;
+
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('#doButton').click(function () {
+				// var info = $(this).attr('info');
+				var medication_assistance = $('input[name=medication_assistance]:checked').val();
+				// alert('medication_assistance='+medication_assistance);
+				if ($('#name').val() == '') {
+					alert('請輸入姓名');
+					$('#name').focus();
+					return false;
+				}
+				else if ($('#approved_project').val() == '') {
+					alert('請輸入核定項目');
+					$('#approved_project').focus();
+					return false;
+				}
+				else if ($('#care_target_cases').val() == '') {
+					alert('請輸入照顧目標(個案)');
+					$('#approved_project').focus();
+					return false;
+				}
+				else if ($('#care_target_family').val() == '') {
+					alert('請輸入照顧目標(家屬)');
+					$('#care_target_family').focus();
+					return false;
+				}
+				else if ($('#human_relationship').val() == '') {
+					alert('請輸入人際關係');
+					$('#human_relationship').focus();
+					return false;
+				}
+				else if ($('#independent_movement').val() == '') {
+					alert('請輸入自立運動');
+					$('#independent_movement').focus();
+					return false;
+				}
+				else if (typeof (medication_assistance) == 'undefined') {
+					alert('請選擇用藥協助');
+					$('#medication_assistance1').focus();
+					return false;
+				}
+				else if ($('#diet_method').val() == '') {
+					alert('請輸入飲食方式');
+					$('#diet_method').focus();
+					return false;
+				}
+				else if ($('#excretion_method').val() == '') {
+					alert('請輸入排泄方式');
+					$('#excretion_method').focus();
+					return false;
+				}
+				else if ($('#care_consideration').val() == '') {
+					alert('請輸入照顧注意事項');
+					$('#care_consideration').focus();
+					return false;
+				}
+				else if ($('#others').val() == '') {
+					alert('請輸入其他');
+					$('#others').focus();
+					return false;
+				}
+				else {
+					$("#wait_content").show();
+					$("#wait").show();
+
+					setTimeout(doSubmit(), 5000);
+				}
+			});
+		});
+
+		function doSubmit() {
+			var thisform = $('#form1');
+
+			thisform.submit();
+		}
+	</script>
+	<style>
+		.wrapper {
+			width: 90%;
+		}
+
+		.section {
+			border-style: dashed;
+			width: 90%;
+			margin: auto;
+			padding: 0.25rem;
+			margin-bottom: 0.5rem;
+		}
+
+			.section h2 {
+				text-align: center;
+				margin-bottom: 0.5rem;
+			}
+
+			.section.section--dust {
+				border-color: #926707;
+				border-width: 4px;
+				width: 40%;
+				float: left;
+				height: 600px;
+			}
+
+			.section.section--green {
+				-moz-border-radius: 8px;
+				-webkit-border-radius: 8px;
+				border-radius: 8px;
+				border-color: #009688;
+				border-width: 2px;
+				width: 42%;
+				float: left;
+				height: 700px;
+			}
+
+		.section--green table td {
+			color: blue;
+		}
+		/* line 59, ../sass/page4-2-1.scss */
+		.section table th {
+			vertical-align: top;
+			text-align: right;
+		}
+		/* line 64, ../sass/page4-2-1.scss */
+		.section table td label {
+			white-space: nowrap;
+		}
+
+		.arrow_right {
+			height: 700px;
+			width: 200px;
+			display: inline-block;
+			float: left;
+			margin: 0px 10px;
+		}
+
+			.arrow_right img {
+				margin-top: 100%;
+			}
+	</style>
+</head>
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<br>
+	<br>
+	<main class="wrapper">
+		<div class="section section--green">
+			<table>
+				<tbody>
+					<tr>
+						<th>個案姓名：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>暱稱：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>地址：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>慣用語言：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>喜歡語言：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>喜歡話題：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>興趣喜好：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>專長：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>過去職業：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>現在個性：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>禁忌：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>易接受方式：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>疾病史：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>BMI：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>口腔面向：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>循環狀況：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>跌倒因子：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>行動能力：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>管路：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>皮膚：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>睡眠狀況：</th>
+						<td></td>
+					</tr>
+					<tr>
+						<th>物質濫用：</th>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="arrow_right">
+			<img src="/images/img-arrow-right.png">
+		</div>
+
+		<div class="section section--dust">
+			<h1 style="text-align: center;">個別化照顧計畫</h1><br>
+			<form id="form1" name="form1" method="post" action="/case_manage/add_firstview" target="actFrame" enctype="multipart/form-data">
+				<input type="hidden" id="id" name="id" value="">
+				<input type="hidden" id="case_id" name="case_id" value="">
+				<input type="hidden" id="case_name" name="case_name" value="">
+				<input type="hidden" id="alertStartDate" name="alertStartDate" value="">
+				<table>
+					<tbody>
+						<tr>
+							<th>核定項目：</th>
+							<td><input type="text" id="approved_project" name="approved_project" style="width:365px;" value=""></td>
+						</tr>
+						<tr>
+							<th>照顧目標：</th>
+							<td>
+								<div>個案→ <input type="text" id="care_target_cases" name="care_target_cases" style="width:300px;" value=""></div>
+								<div>家屬→ <input type="text" id="care_target_family" name="care_target_family" style="width:300px;" value=""></div>
+							</td>
+						</tr>
+						<tr>
+							<th>人際關係：</th>
+							<td><input type="text" id="human_relationship" name="human_relationship" style="width:365px;" value=""></td>
+						</tr>
+						<tr>
+							<th>自立運動：</th>
+							<td><input type="text" id="independent_movement" name="independent_movement" style="width:365px;" value=""></td>
+						</tr>
+						<tr>
+							<th>用藥協助：</th>
+							<td>
+								<label for="help1"><input type="radio" name="medication_assistance" id="medication_assistance1" value="1"><span>不需要</span></label>
+								<label for="help2"><input type="radio" name="medication_assistance" id="medication_assistance2" value="2"><span>需要協助給藥</span></label>
+							</td>
+						</tr>
+						<tr>
+							<th>飲食方式：</th>
+							<td><input type="text" id="diet_method" name="diet_method" style="width:365px;" value=""></td>
+						</tr>
+						<tr>
+							<th>排泄方式：</th>
+							<td><input type="text" id="excretion_method" name="excretion_method" style="width:365px;" value=""></td>
+						</tr>
+						<tr>
+							<th nowrap="nowrap">照顧注意事項：</th>
+							<td><input type="text" id="care_consideration" name="care_consideration" style="width:365px;" value=""></td>
+						</tr>
+						<tr>
+							<th>其他：</th>
+							<td><input type="text" id="others" name="others" style="width:365px;" value=""></td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+
+		<div class="btnBar btnSet"><button id="doButton" class="btn btn-w btn-white">存檔</button></div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

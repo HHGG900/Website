@@ -1,0 +1,870 @@
+﻿@using Website.Models;
+@{
+	List<worker_arrive> Worker_arrive = ViewBag.Worker_arrive;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>員工出勤 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/layout.css">
+	<link rel="stylesheet" href="/css/page2-3-3.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.js"></script>
+	<link rel="stylesheet" type="text/css" href="/libs/datepicker/css/bootstrap-datepicker3.min.css">
+	<script src="/libs/datepicker/js/bootstrap-datepicker.min.js"></script>
+	<script src="/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				location.href = "/Home/Director";
+				// history.back();
+			});
+
+			$('.datepicker').datepicker({
+				format: "yyyy-mm-dd",
+				language: "zh-TW",
+				todayHighlight: true
+			});
+		});
+
+		function export_excel() {
+			var urlString = '/user/attendance?excel=1';
+			location.href = urlString;
+		}
+	</script>
+	<style>
+		.btnBgColorWithShadow--blue {
+			font-family: '標楷體', 'Noto Sans TC', '微軟正黑體', sans-serif;
+			height: inherit;
+			padding: 4px;
+			border-radius: 4px;
+			direction: ltr;
+		}
+
+			.btnBgColorWithShadow--blue + .btnBgColorWithShadow--blue {
+				margin-left: inherit;
+			}
+
+		.queryBlock input {
+			height: inherit;
+			width: 120px;
+		}
+
+		.queryBlock {
+			margin-left: 20%;
+		}
+
+		.mg-left-30 {
+			margin-left: 30px;
+		}
+
+		.tableContainer table td.tdCamera {
+			background-size: inherit;
+		}
+
+		.fs-small {
+			font-size: small;
+		}
+
+		.tableContainer table {
+			background-color: inherit;
+		}
+
+		.datepicker {
+			width: 150px;
+		}
+
+		.tableContainer {
+			width: 90%;
+			margin: 0px auto;
+		}
+
+			.tableContainer table th {
+				height: 0.6rem;
+				font-size: 1.5rem;
+			}
+
+			.tableContainer table td {
+				height: 1rem;
+				font-size: 1.2rem;
+			}
+
+			.tableContainer table tr th:nth-child(1) {
+				width: 10%;
+			}
+	</style>
+</head>
+
+
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1 class="h1">員工出勤</h1><br><br>
+		<div class="queryBlock" style="display: inline-block;">
+			<p>
+			</p><form action="~/Home/Staffattendance" method="POST">
+				查詢期間 <input type="text" class="datepicker" id="startdate" name="time1" value=""> 到 <input type="text" class="datepicker" id="enddate" name="time2" value="">
+				<input type="submit" class="btnBgColorWithShadow--blue btn-query mg-left-30" value="查詢" />
+			</form>
+			<p></p>
+		</div>
+		<div style="display: inline-block;">
+			<button class="btnBgColorWithShadow--blue btn-query" onclick="export_excel();"><i class="fas fa-file-export"></i>匯出</button>
+		</div>
+	</header>
+
+	<main class="main">
+		<!--    <div class="wrapper">-->
+		<div class="tableContainer">
+			<table>
+				<thead>
+					<tr>
+						<th>日期</th>
+						<th>姓名</th>
+						<th>上班時間</th>
+						<th>下班時間</th>
+					</tr>
+				</thead>
+				<tbody>
+					@try
+					{
+						foreach (worker_arrive worker in Worker_arrive)
+						{
+							<tr>
+								<td>@worker.tim</td>
+								<td>@worker.worker_name</td>
+								<td>@worker.arrive_time</td>
+								<td>@worker.leave_time</td>
+							</tr>
+						}
+					}
+					catch { }
+
+					<tr>
+						<td>2020-12-11</td>
+						<td>余5a</td>
+						<td>2020-12-11 10:49:15</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-12-04</td>
+						<td>黃忠達</td>
+						<td>2020-12-04 08:13:05</td>
+						<td>2020-12-04 08:16:02</td>
+					</tr>
+					<tr>
+						<td>2020-12-02</td>
+						<td>黃忠達</td>
+						<td>2020-12-02 18:34:27</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-12-01</td>
+						<td>黃國達</td>
+						<td>2020-12-01 20:04:29</td>
+						<td>2020-12-01 20:04:29</td>
+					</tr>
+					<tr>
+						<td>2020-11-30</td>
+						<td>黃忠達</td>
+						<td>2020-11-30 10:15:31</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-11-28</td>
+						<td>黃忠達</td>
+						<td>2020-11-28 00:13:27</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-11-27</td>
+						<td>黃忠達</td>
+						<td>2020-11-27 10:21:29</td>
+						<td>2020-11-27 23:34:04</td>
+					</tr>
+					<tr>
+						<td>2020-11-26</td>
+						<td>余5a</td>
+						<td>2020-11-26 13:13:13</td>
+						<td>2020-11-26 21:29:33</td>
+					</tr>
+					<tr>
+						<td>2020-11-26</td>
+						<td>黃忠達</td>
+						<td>2020-11-26 00:01:05</td>
+						<td>2020-11-26 10:08:43</td>
+					</tr>
+					<tr>
+						<td>2020-11-25</td>
+						<td>黃忠達</td>
+						<td>2020-11-25 09:10:00</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-11-19</td>
+						<td>黃忠達</td>
+						<td>2020-11-19 10:05:15</td>
+						<td>2020-11-19 10:05:24</td>
+					</tr>
+					<tr>
+						<td>2020-10-19</td>
+						<td>黃忠達</td>
+						<td>2020-10-19 10:33:44</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-10-08</td>
+						<td>黃忠達</td>
+						<td>2020-10-08 16:31:16</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-10-06</td>
+						<td>黃國達</td>
+						<td>2020-10-06 21:30:11</td>
+						<td>2020-10-06 21:30:15</td>
+					</tr>
+					<tr>
+						<td>2020-10-06</td>
+						<td>黃忠達</td>
+						<td>2020-10-06 14:13:59</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-10-05</td>
+						<td>黃中達</td>
+						<td>2020-10-05 15:05:16</td>
+						<td>2020-10-05 15:05:20</td>
+					</tr>
+					<tr>
+						<td>2020-10-05</td>
+						<td>余7a</td>
+						<td>2020-10-05 14:54:14</td>
+						<td>2020-10-05 15:02:14</td>
+					</tr>
+					<tr>
+						<td>2020-10-05</td>
+						<td>余5a</td>
+						<td>2020-10-05 14:51:28</td>
+						<td>2020-10-05 14:52:15</td>
+					</tr>
+					<tr>
+						<td>2020-09-24</td>
+						<td>黃忠達</td>
+						<td>2020-09-24 09:38:41</td>
+						<td>2020-09-24 09:42:32</td>
+					</tr>
+					<tr>
+						<td>2020-09-22</td>
+						<td>余5a</td>
+						<td>2020-09-22 12:15:40</td>
+						<td>2020-09-22 13:36:28</td>
+					</tr>
+					<tr>
+						<td>2020-09-05</td>
+						<td>黃國達</td>
+						<td>2020-09-05 22:45:01</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-09-05</td>
+						<td>黃忠達</td>
+						<td>2020-09-05 22:15:07</td>
+						<td>2020-09-05 22:41:07</td>
+					</tr>
+					<tr>
+						<td>2020-08-30</td>
+						<td>余5a</td>
+						<td>2020-08-30 19:23:05</td>
+						<td>2020-08-30 22:20:57</td>
+					</tr>
+					<tr>
+						<td>2020-08-30</td>
+						<td>黃中達</td>
+						<td>2020-08-30 19:56:52</td>
+						<td>2020-08-30 20:29:04</td>
+					</tr>
+					<tr>
+						<td>2020-08-30</td>
+						<td>黃忠達</td>
+						<td>2020-08-30 18:27:19</td>
+						<td>2020-08-30 20:28:38</td>
+					</tr>
+					<tr>
+						<td>2020-08-30</td>
+						<td>黃國達</td>
+						<td>2020-08-30 11:47:09</td>
+						<td>2020-08-30 18:43:23</td>
+					</tr>
+					<tr>
+						<td>2020-08-30</td>
+						<td>余主任2</td>
+						<td>2020-08-30 16:19:59</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-08-21</td>
+						<td>黃忠達</td>
+						<td>2020-08-21 15:15:45</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-08-21</td>
+						<td>黃國達</td>
+						<td>2020-08-21 14:36:45</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-07-09</td>
+						<td>黃中達</td>
+						<td>2020-07-09 10:54:11</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-07-09</td>
+						<td>黃忠達</td>
+						<td>2020-07-09 10:52:06</td>
+						<td>2020-07-09 10:53:21</td>
+					</tr>
+					<tr>
+						<td>2020-07-04</td>
+						<td>黃忠達</td>
+						<td>2020-07-04 20:09:20</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-07-03</td>
+						<td>黃忠達</td>
+						<td>2020-07-03 15:16:33</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-07-02</td>
+						<td>余5a</td>
+						<td>2020-07-02 17:18:49</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-07-02</td>
+						<td>余7a</td>
+						<td>2020-07-02 17:17:53</td>
+						<td>2020-07-02 17:18:17</td>
+					</tr>
+					<tr>
+						<td>2020-06-30</td>
+						<td>黃國達</td>
+						<td>2020-06-30 18:48:12</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-06-30</td>
+						<td>黃中達</td>
+						<td>2020-06-30 15:44:50</td>
+						<td>2020-06-30 17:41:05</td>
+					</tr>
+					<tr>
+						<td>2020-06-30</td>
+						<td>黃忠達</td>
+						<td>2020-06-30 15:43:54</td>
+						<td>2020-06-30 15:44:27</td>
+					</tr>
+					<tr>
+						<td>2020-06-30</td>
+						<td>余7a</td>
+						<td>2020-06-30 15:27:20</td>
+						<td>2020-06-30 15:28:44</td>
+					</tr>
+					<tr>
+						<td>2020-06-25</td>
+						<td>余5a</td>
+						<td>2020-06-25 15:13:46</td>
+						<td>2020-06-25 17:01:01</td>
+					</tr>
+					<tr>
+						<td>2020-06-25</td>
+						<td>余6a</td>
+						<td>2020-06-25 15:38:15</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-06-25</td>
+						<td>黃忠達</td>
+						<td>2020-06-25 14:58:37</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-06-24</td>
+						<td>黃忠達</td>
+						<td>2020-06-24 21:46:19</td>
+						<td>2020-06-24 21:47:43</td>
+					</tr>
+					<tr>
+						<td>2020-06-24</td>
+						<td>黃中達</td>
+						<td>2020-06-24 21:43:33</td>
+						<td>2020-06-24 21:45:34</td>
+					</tr>
+					<tr>
+						<td>2020-06-24</td>
+						<td>黃國達</td>
+						<td>2020-06-24 15:09:14</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-06-11</td>
+						<td>黃忠達</td>
+						<td>2020-06-11 12:54:44</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-06-04</td>
+						<td>余5a</td>
+						<td>2020-06-04 10:20:59</td>
+						<td>2020-06-04 19:34:35</td>
+					</tr>
+					<tr>
+						<td>2020-06-04</td>
+						<td>黃忠達</td>
+						<td>2020-06-04 14:57:16</td>
+						<td>2020-06-04 19:16:49</td>
+					</tr>
+					<tr>
+						<td>2020-06-04</td>
+						<td>余7a</td>
+						<td>2020-06-04 12:00:55</td>
+						<td>2020-06-04 16:37:30</td>
+					</tr>
+					<tr>
+						<td>2020-06-04</td>
+						<td>黃一達</td>
+						<td>2020-06-04 14:55:42</td>
+						<td>2020-06-04 14:56:50</td>
+					</tr>
+					<tr>
+						<td>2020-06-04</td>
+						<td>黃國達</td>
+						<td>2020-06-04 13:05:20</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-06-04</td>
+						<td>余6a</td>
+						<td>2020-06-04 11:51:28</td>
+						<td>2020-06-04 11:52:34</td>
+					</tr>
+					<tr>
+						<td>2020-06-03</td>
+						<td>余5a</td>
+						<td>2020-06-03 23:11:20</td>
+						<td>2020-06-03 23:11:38</td>
+					</tr>
+					<tr>
+						<td>2020-06-02</td>
+						<td>黃忠達</td>
+						<td>2020-06-02 14:34:01</td>
+						<td>2020-06-02 23:01:42</td>
+					</tr>
+					<tr>
+						<td>2020-05-30</td>
+						<td>黃國達</td>
+						<td>2020-05-30 19:35:39</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-30</td>
+						<td>黃忠達</td>
+						<td>2020-05-30 12:44:49</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-28</td>
+						<td>余6a</td>
+						<td>2020-05-28 15:06:56</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-28</td>
+						<td>余7a</td>
+						<td>2020-05-28 13:59:06</td>
+						<td>2020-05-28 15:06:29</td>
+					</tr>
+					<tr>
+						<td>2020-05-28</td>
+						<td>余5a</td>
+						<td>2020-05-28 13:58:23</td>
+						<td>2020-05-28 15:06:15</td>
+					</tr>
+					<tr>
+						<td>2020-05-28</td>
+						<td>黃忠達</td>
+						<td>2020-05-28 13:54:23</td>
+						<td>2020-05-28 15:05:05</td>
+					</tr>
+					<tr>
+						<td>2020-05-26</td>
+						<td>黃忠達</td>
+						<td>2020-05-26 15:19:03</td>
+						<td>2020-05-26 15:23:50</td>
+					</tr>
+					<tr>
+						<td>2020-05-22</td>
+						<td>黃忠達</td>
+						<td>2020-05-22 16:51:41</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-21</td>
+						<td>黃忠達</td>
+						<td>2020-05-21 00:25:06</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-20</td>
+						<td>黃忠達</td>
+						<td>2020-05-20 18:05:11</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-14</td>
+						<td>黃忠達</td>
+						<td>2020-05-14 20:34:00</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-14</td>
+						<td>黃一達</td>
+						<td>2020-05-14 16:04:48</td>
+						<td>2020-05-14 20:26:32</td>
+					</tr>
+					<tr>
+						<td>2020-05-14</td>
+						<td>余5a</td>
+						<td>2020-05-14 10:19:03</td>
+						<td>2020-05-14 19:00:28</td>
+					</tr>
+					<tr>
+						<td>2020-05-14</td>
+						<td>余7a</td>
+						<td>2020-05-14 10:17:27</td>
+						<td>2020-05-14 16:15:22</td>
+					</tr>
+					<tr>
+						<td>2020-05-14</td>
+						<td>余6a</td>
+						<td>2020-05-14 14:20:15</td>
+						<td>2020-05-14 16:01:55</td>
+					</tr>
+					<tr>
+						<td>2020-05-14</td>
+						<td>黃國達</td>
+						<td>2020-05-14 11:37:12</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-10</td>
+						<td>余7a</td>
+						<td>2020-05-10 16:58:17</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-10</td>
+						<td>余5a</td>
+						<td>2020-05-10 00:05:28</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-08</td>
+						<td>黃國達</td>
+						<td>2020-05-08 21:11:12</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-08</td>
+						<td>黃一達</td>
+						<td>2020-05-08 19:40:07</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-07</td>
+						<td>余6a</td>
+						<td>2020-05-07 10:03:49</td>
+						<td>2020-05-07 17:36:19</td>
+					</tr>
+					<tr>
+						<td>2020-05-07</td>
+						<td>黃忠達</td>
+						<td>2020-05-07 16:59:45</td>
+						<td>2020-05-07 16:58:55</td>
+					</tr>
+					<tr>
+						<td>2020-05-07</td>
+						<td>余5a</td>
+						<td>2020-05-07 11:13:01</td>
+						<td>2020-05-07 16:37:15</td>
+					</tr>
+					<tr>
+						<td>2020-05-07</td>
+						<td>黃一達</td>
+						<td>2020-05-07 15:22:34</td>
+						<td>2020-05-07 15:29:29</td>
+					</tr>
+					<tr>
+						<td>2020-05-07</td>
+						<td>黃國達</td>
+						<td>2020-05-07 11:26:07</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-05-04</td>
+						<td>余5a</td>
+						<td>2020-05-04 22:22:15</td>
+						<td>2020-05-04 22:22:19</td>
+					</tr>
+					<tr>
+						<td>2020-05-04</td>
+						<td>余6a</td>
+						<td>2020-05-04 22:17:11</td>
+						<td>2020-05-04 22:17:20</td>
+					</tr>
+					<tr>
+						<td>2020-05-02</td>
+						<td>余5a</td>
+						<td>2020-05-02 14:59:37</td>
+						<td>2020-05-02 15:15:36</td>
+					</tr>
+					<tr>
+						<td>2020-05-01</td>
+						<td>余6a</td>
+						<td>2020-05-01 11:28:52</td>
+						<td>2020-05-01 14:12:01</td>
+					</tr>
+					<tr>
+						<td>2020-05-01</td>
+						<td>黃中達</td>
+						<td>2020-05-01 12:07:48</td>
+						<td>2020-05-01 12:15:43</td>
+					</tr>
+					<tr>
+						<td>2020-05-01</td>
+						<td>黃忠達</td>
+						<td>2020-05-01 11:52:10</td>
+						<td>2020-05-01 12:11:15</td>
+					</tr>
+					<tr>
+						<td>2020-05-01</td>
+						<td>黃一達</td>
+						<td>2020-05-01 11:25:24</td>
+						<td>2020-05-01 11:25:58</td>
+					</tr>
+					<tr>
+						<td>2020-04-30</td>
+						<td>劉孟禎</td>
+						<td>2020-04-30 20:06:13</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-30</td>
+						<td>黃國達</td>
+						<td>2020-04-30 20:05:16</td>
+						<td>2020-04-30 20:05:20</td>
+					</tr>
+					<tr>
+						<td>2020-04-30</td>
+						<td>黃大達</td>
+						<td>2020-04-30 18:00:45</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-29</td>
+						<td>黃一達</td>
+						<td>2020-04-29 15:34:26</td>
+						<td>2020-04-29 18:29:20</td>
+					</tr>
+					<tr>
+						<td>2020-04-29</td>
+						<td>余5a</td>
+						<td>2020-04-29 18:08:49</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-28</td>
+						<td>黃小達</td>
+						<td>2020-04-28 10:32:55</td>
+						<td>2020-04-28 10:32:59</td>
+					</tr>
+					<tr>
+						<td>2020-04-27</td>
+						<td>黃大達</td>
+						<td>2020-04-27 18:42:43</td>
+						<td>2020-04-27 18:43:47</td>
+					</tr>
+					<tr>
+						<td>2020-04-27</td>
+						<td>黃小達</td>
+						<td>2020-04-27 15:57:52</td>
+						<td>2020-04-27 18:36:19</td>
+					</tr>
+					<tr>
+						<td>2020-04-27</td>
+						<td>黃國達</td>
+						<td>2020-04-27 15:24:05</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-27</td>
+						<td>hankyu1976</td>
+						<td>2020-04-27 14:25:36</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-27</td>
+						<td>余5a</td>
+						<td>2020-04-27 10:16:20</td>
+						<td>2020-04-27 14:14:42</td>
+					</tr>
+					<tr>
+						<td>2020-04-26</td>
+						<td>hankyu1976</td>
+						<td>2020-04-26 18:47:46</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-26</td>
+						<td>38554</td>
+						<td>2020-04-26 11:00:24</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-26</td>
+						<td>余5a</td>
+						<td>2020-04-26 10:48:01</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-24</td>
+						<td>hankyu1976</td>
+						<td>2020-04-24 17:57:07</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-23</td>
+						<td>hankyu1976</td>
+						<td>2020-04-23 00:33:04</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-22</td>
+						<td>hankyu1976</td>
+						<td>2020-04-22 23:15:21</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-20</td>
+						<td>hankyu1976</td>
+						<td>2020-04-20 01:25:09</td>
+						<td>2020-04-20 01:25:15</td>
+					</tr>
+					<tr>
+						<td>2020-04-18</td>
+						<td>yu001</td>
+						<td>2020-04-18 18:57:28</td>
+						<td>2020-04-18 18:57:32</td>
+					</tr>
+					<tr>
+						<td>2020-04-13</td>
+						<td>hankyu1976</td>
+						<td>2020-04-13 22:33:58</td>
+						<td>2020-04-13 22:34:01</td>
+					</tr>
+					<tr>
+						<td>2020-04-10</td>
+						<td>hankyu1976</td>
+						<td>2020-04-10 09:52:23</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-08</td>
+						<td>hankyu1976</td>
+						<td>2020-04-08 11:30:09</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2020-04-06</td>
+						<td>hankyu1976</td>
+						<td>2020-04-06 23:16:08</td>
+						<td>2020-04-06 23:16:13</td>
+					</tr>
+					<tr>
+						<td>2020-03-31</td>
+						<td>hankyu1976</td>
+						<td>2020-03-31 18:11:31</td>
+						<td>2020-03-31 18:11:35</td>
+					</tr>
+					<tr>
+						<td>2020-03-26</td>
+						<td>hankyu1976</td>
+						<td>2020-03-26 17:00:18</td>
+						<td>2020-03-26 17:00:22</td>
+					</tr>
+					<tr>
+						<td>2020-03-24</td>
+						<td>hankyu1976</td>
+						<td></td>
+						<td>2020-03-24 13:47:10</td>
+					</tr>
+					<tr>
+						<td>2020-03-21</td>
+						<td>hankyu1976</td>
+						<td>2020-03-21 16:20:47</td>
+						<td>2020-03-21 16:20:52</td>
+					</tr>
+					<tr>
+						<td>2020-03-19</td>
+						<td>hankyu1976</td>
+						<td>2020-03-19 10:17:17</td>
+						<td>2020-03-19 10:18:29</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!--    </div>-->
+	</main>
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

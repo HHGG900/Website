@@ -1,0 +1,690 @@
+﻿	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>計畫管理 | 台灣柏佐克智慧型居服管理系統</title>
+		<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+		<link rel="stylesheet" href="~/css/font-awesome/all.css">
+		<script src="https://kit.fontawesome.com/2594af17cb.js" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="~/css/bootstrap.min.css">
+		<link rel="stylesheet" href="~/css/layout.css">
+		<link rel="stylesheet" href="~/css/page2-2.css">
+		<link rel="stylesheet" href="~/css/custom.css">
+		<link rel="stylesheet" href="~/css/wait.css">
+		<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+		<script src="~/Scripts/jquery-3.2.1.js"></script>
+		<script>
+			var allitems = 0;
+			var checked = 0;
+
+			$(function () {
+				$('#homepageBtn').click(function () {
+					location.href = "/Home/Director";
+				});
+
+				$('#lastPage').click(function () {
+					history.back();
+				});
+
+				$('#step1').click(function () {
+					window.open("/Home/Report_review");
+				});
+
+				$('#step2').click(function () {
+					location.href = "/Home/Financialplan";
+				});
+
+				$("input[type=checkbox]").each(function () {
+					allitems++;
+				});
+
+				$("input[type=checkbox]:checked").each(function () {
+					result = $(this).val();
+					checked++;
+					// alert('result1='+result);
+				});
+
+				$("input[type=checkbox]").click(function () {
+					var prop = $(this).prop("checked") ? 1 : 2;
+					var item = $(this).val();
+					var info = $(this).attr("info");
+					var month = $(this).attr("month");
+					// alert('result='+ item + ', info='+info+ ', month='+month+', prop='+prop);
+					if (true && (month > 12)) {
+						alert('請勿提早點擊工作計畫！');
+						return false;
+					}
+					else {
+						var ajaxData = {
+							"saveData": {
+								"id": "-1",
+								"year": $('#s_year').val(),
+								"month": month,
+								"prop": prop,
+								"user_id": '22',
+								"unitcode": '0001',
+								"item": $(this).val()
+							}
+						};
+
+						$.ajax({
+							url: "/monthly/saveTodo",
+							async: true,
+							cache: false,
+							method: "POST",
+							data: ajaxData,
+							success: function (data, status, xhr) {
+								// PM.show({ title: "會員管理", text: '修改完成！', type: "info" });
+								// setTimeout(function(){
+								//     location.reload();
+								// },500);
+								// alert('儲存成功');
+								if (prop) {
+									checked++;
+									// alert('checked='+checked);
+									upate();
+								}
+							},
+							error: function (xhr, stauts, err) {
+								//PM.erro();
+								alert('發生錯誤，請聯絡管理員！');
+							}
+						});
+					}
+				});
+
+				upate();
+
+				$('#s_year').change(function () {
+
+					$('#wait').show();
+					$('#wait_content').show();
+
+					$('#form1').submit();
+				})
+			});
+
+			function upate() {
+				var not_work_num = allitems - checked;
+				var work_percentage = checked * 100 / allitems;
+
+				$('#work_num').html(checked);
+				$('#not_work_num').html(not_work_num);
+				$('#work_percentage').html(work_percentage.toFixed(2));
+			}
+		</script>
+		<style>
+			.s_year_div {
+				position: relative;
+				top: -20px;
+				display: inline;
+				font-size: 30px;
+			}
+
+			.s_year_lable {
+				position: relative;
+				top: 5px;
+			}
+		</style>
+	</head>
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<div class="header__iconCell">
+			<img src="~/images/icon_calendar.png" alt="">
+			<h1 class="h1">計畫管理</h1>
+		</div>
+		<div class="header__textCell">
+			<br>
+			在管理學中，計劃具有兩重含義--其一是計劃工作，是指根據對中心外部環境與內部條件的分析，提出在未來一定時期內要達到的中心目標的途徑。其二是計劃形式，是指用文字和指標等形式所表述的中心以及中心內不同部門和不同成員，在未來一定時期內關於行動方向、內容和方式安排的管理。
+			<br>
+			<br>
+			無論是計劃工作還是計劃形式，計劃都是根據評鑑的需要以及中心的自身能力，通過計劃的編製、執行和檢查，確定中心在一定時期內的工作目標，有效地運用中心的人力、物力、財力等資源，協調安排好中心的各項活動，最佳的評鑑效益
+			<div class="header__btns">
+				<button id="step1" class="header__btn">報表檢核</button>
+				<button id="step2" class="header__btn">財務計畫</button>
+			</div>
+		</div>
+	</header>
+	<main class="main wrapper">
+		<header>
+			<form id="form1" name="form1" method="post">
+				<h2 class="h2">年度工作計畫</h2>
+				<div class="s_year_div">
+					<select id="s_year" name="s_year" class="form-control col-md-1 d-inline-block">
+						<option selected="">109</option>
+						<option>108</option>
+					</select> <span class="s_year_lable">年度</span>
+				</div>
+			</form>
+		</header>
+		<div class="slogan">
+			<p>每執行完畢即點擊一次空心圖案，使之變成實心圖形紀錄之</p>
+		</div>
+		<!--    <form action="">-->
+		<div class="tableContainer">
+			<table>
+				<thead>
+					<tr>
+						<th>類別</th>
+						<th>工作項目 / 月份</th>
+						<th>一月</th>
+						<th>二月</th>
+						<th>三月</th>
+						<th>四月</th>
+						<th>五月</th>
+						<th>六月</th>
+						<th>七月</th>
+						<th>八月</th>
+						<th>九月</th>
+						<th>十月</th>
+						<th>十一月</th>
+						<th>十二月</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th rowspan="4">會議</th>
+						<th>主管月會</th>
+						<td>
+							<input type="checkbox" name="mission_0_0" id="mission_0_0" value="0_0" class="chckboxStar__chckbox" month="1" info="35" checked="">
+							<label for="mission_0_0" class="chckboxStar__label">
+								<i class="far fa-star"></i><i class="fas fa-star"></i>
+							</label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_1" id="mission_0_1" value="0_1" class="chckboxStar__chckbox" month="2" info="37" checked="">
+							<label for="mission_0_1" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_2" id="mission_0_2" value="0_2" month="3" info="38" class="chckboxStar__chckbox" checked="">
+							<label for="mission_0_2" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_3" id="mission_0_3" value="0_3" month="4" info="89" class="chckboxStar__chckbox" checked="">
+							<label for="mission_0_3" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_4" id="mission_0_4" value="0_4" month="5" info="107" class="chckboxStar__chckbox" checked="">
+							<label for="mission_0_4" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_5" id="mission_0_5" value="0_5" month="6" info="" class="chckboxStar__chckbox">
+							<label for="mission_0_5" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_6" id="mission_0_6" value="0_6" month="7" info="" class="chckboxStar__chckbox">
+							<label for="mission_0_6" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_7" id="mission_0_7" value="0_7" month="8" info="" class="chckboxStar__chckbox">
+							<label for="mission_0_7" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_8" id="mission_0_8" value="0_8" month="9" info="" class="chckboxStar__chckbox">
+							<label for="mission_0_8" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_9" id="mission_0_9" value="0_9" month="10" info="" class="chckboxStar__chckbox">
+							<label for="mission_0_9" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_10" id="mission_0_10" value="0_10" month="11" info="" class="chckboxStar__chckbox">
+							<label for="mission_0_10" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_0_11" id="mission_0_11" value="0_11" month="12" info="" class="chckboxStar__chckbox">
+							<label for="mission_0_11" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+					</tr>
+					<tr>
+						<th>團體督導月會</th>
+						<td>
+							<input type="checkbox" name="mission_1_0" id="mission_1_0" value="1_0" class="chckboxStar__chckbox" month="1" info="36" checked="">
+							<label for="mission_1_0" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_1" id="mission_1_1" value="1_1" class="chckboxStar__chckbox" month="2" info="39" checked="">
+							<label for="mission_1_1" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_2" id="mission_1_2" value="1_2" class="chckboxStar__chckbox" month="3" info="88" checked="">
+							<label for="mission_1_2" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_3" id="mission_1_3" value="1_3" class="chckboxStar__chckbox" month="4" info="90" checked="">
+							<label for="mission_1_3" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_4" id="mission_1_4" value="1_4" class="chckboxStar__chckbox" month="5" info="108" checked="">
+							<label for="mission_1_4" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_5" id="mission_1_5" value="1_5" class="chckboxStar__chckbox" month="6" info="">
+							<label for="mission_1_5" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_6" id="mission_1_6" value="1_6" class="chckboxStar__chckbox" month="7" info="">
+							<label for="mission_1_6" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_7" id="mission_1_7" value="1_7" class="chckboxStar__chckbox" month="8" info="">
+							<label for="mission_1_7" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_8" id="mission_1_8" value="1_8" class="chckboxStar__chckbox" month="9" info="">
+							<label for="mission_1_8" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_9" id="mission_1_9" value="1_9" class="chckboxStar__chckbox" month="10" info="">
+							<label for="mission_1_9" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_10" id="mission_1_10" value="1_10" class="chckboxStar__chckbox" month="11" info="">
+							<label for="mission_1_10" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+							<input type="checkbox" name="mission_1_11" id="mission_1_11" value="1_11" class="chckboxStar__chckbox" month="12" info="">
+							<label for="mission_1_11" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+					</tr>
+					<tr>
+						<th>服務滿意改善會議</th>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_2_2" id="mission_2_2" value="2_2" class="chckboxStar__chckbox" month="3" info="68" checked="">
+							<label for="mission_2_2" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_2_5" id="mission_2_5" value="2_5" class="chckboxStar__chckbox" month="6" info="">
+							<label for="mission_2_5" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_2_8" id="mission_2_8" value="2_8" class="chckboxStar__chckbox" month="6" info="">
+							<label for="mission_2_8" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_2_11" id="mission_2_11" value="2_11" class="chckboxStar__chckbox" month="6" info="">
+							<label for="mission_2_11" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+					</tr>
+					<tr>
+						<th>品質會議</th>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_3_2" id="mission_3_2" value="3_2" class="chckboxStar__chckbox" month="3" info="68" checked="">
+							<label for="mission_3_2" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_3_5" id="mission_3_5" value="3_5" class="chckboxStar__chckbox" month="6" info="">
+							<label for="mission_3_5" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_3_8" id="mission_3_8" value="3_8" class="chckboxStar__chckbox" month="6" info="">
+							<label for="mission_3_8" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_3_11" id="mission_3_11" value="3_11" class="chckboxStar__chckbox" month="6" info="">
+							<label for="mission_3_11" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+					</tr>
+
+					<tr>
+						<th rowspan="1">教育<br>訓練</th>
+						<th>在職訓練</th>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_4_1" id="mission_4_1" value="4_1" class="chckboxStar__chckbox" month="2" info="69" checked="">
+							<label for="mission_4_1" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_3_4" id="mission_4_4" value="4_4" class="chckboxStar__chckbox" month="5" info="134" checked="">
+							<label for="mission_4_4" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_4_7" id="mission_4_7" value="4_7" class="chckboxStar__chckbox" month="8" info="245" checked="">
+							<label for="mission_4_7" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_4_10" id="mission_4_10" value="4_10" class="chckboxStar__chckbox" month="11" info="">
+							<label for="mission_4_10" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th rowspan="1">社區<br>連結</th>
+						<th>社區宣導</th>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_5_3" id="mission_5_3" value="5_3" class="chckboxStar__chckbox" month="4" info="91" checked="">
+							<label for="mission_5_3" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_5_10" id="mission_5_10" value="5_10" class="chckboxStar__chckbox" month="11" info="">
+							<label for="mission_5_10" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th rowspan="5">家屬<br>工作</th>
+						<th>家屬座談會</th>
+						<td>
+							<input type="checkbox" name="mission_6_0" id="mission_6_0" value="6_0" class="chckboxStar__chckbox" month="1" info="80" checked="">
+							<label for="mission_6_0" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_6_3" id="mission_6_3" value="6_3" class="chckboxStar__chckbox" month="4" info="85" checked="">
+							<label for="mission_6_3" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_6_6" id="mission_6_6" value="6_6" class="chckboxStar__chckbox" month="7" info="250" checked="">
+							<label for="mission_6_6" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_6_9" id="mission_6_9" value="6_9" class="chckboxStar__chckbox" month="10" info="">
+							<label for="mission_6_9" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>舒壓課程</th>
+						<td>
+							<input type="checkbox" name="mission_7_0" id="mission_7_0" value="7_0" class="chckboxStar__chckbox" month="1" info="79" checked="">
+							<label for="mission_7_0" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_7_3" id="mission_7_3" value="7_3" class="chckboxStar__chckbox" month="4" info="86" checked="">
+							<label for="mission_7_3" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_7_6" id="mission_7_6" value="7_6" class="chckboxStar__chckbox" month="7" info="251" checked="">
+							<label for="mission_7_6" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_7_9" id="mission_7_9" value="7_9" class="chckboxStar__chckbox" month="10" info="">
+							<label for="mission_7_9" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>經驗分享支持團體</th>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_8_1" id="mission_8_1" value="8_1" class="chckboxStar__chckbox" month="2" info="78" checked="">
+							<label for="mission_8_1" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_8_4" id="mission_8_4" value="8_4" class="chckboxStar__chckbox" month="5" info="150" checked="">
+							<label for="mission_8_4" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_8_7" id="mission_8_7" value="8_7" class="chckboxStar__chckbox" month="8" info="252" checked="">
+							<label for="mission_8_7" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+						</td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_8_10" id="mission_8_10" value="8_10" class="chckboxStar__chckbox" month="11" info="">
+							<label for="mission_8_10" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>照顧技巧課程</th>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_9_1" id="mission_9_1" value="9_1" class="chckboxStar__chckbox" month="2" info="78" checked="">
+							<label for="mission_9_1" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_9_4" id="mission_9_4" value="9_4" class="chckboxStar__chckbox" month="5" info="150" checked="">
+							<label for="mission_9_4" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_9_7" id="mission_9_7" value="9_7" class="chckboxStar__chckbox" month="8" info="252" checked="">
+							<label for="mission_9_7" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+						</td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_9_10" id="mission_9_10" value="9_10" class="chckboxStar__chckbox" month="11" info="">
+							<label for="mission_9_10" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>家屬生活講座</th>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_10_1" id="mission_10_1" value="10_1" class="chckboxStar__chckbox" month="2" info="78" checked="">
+							<label for="mission_10_1" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_10_4" id="mission_10_4" value="10_4" class="chckboxStar__chckbox" month="5" info="150" checked="">
+							<label for="mission_10_4" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_10_7" id="mission_10_7" value="10_7" class="chckboxStar__chckbox" month="8" info="252" checked="">
+							<label for="mission_10_7" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td>
+						</td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_10_10" id="mission_10_10" value="10_10" class="chckboxStar__chckbox" month="11" info="">
+							<label for="mission_10_10" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<th rowspan="6">員工<br>福利</th>
+						<th>員工體檢</th>
+						<td>
+							<input type="checkbox" name="mission_11_0" id="mission_11_0" value="11_0" class="chckboxStar__chckbox" month="1" info="73" checked="">
+							<label for="mission_11_0" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>分紅獎勵</th>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_12_6" id="mission_12_6" value="12_6" class="chckboxStar__chckbox" month="7" info="262" checked="">
+							<label for="mission_12_6" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>晉級獎勵</th>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_13_1" id="mission_13_1" value="13_1" class="chckboxStar__chckbox" month="2" info="61" checked="">
+							<label for="mission_13_1" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>久任獎勵</th>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_14_1" id="mission_14_1" value="14_1" class="chckboxStar__chckbox" month="2" info="62" checked="">
+							<label for="mission_14_1" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>員工全家聚餐</th>
+						<td>
+							<input type="checkbox" name="mission_15_0" id="mission_15_0" value="15_0" class="chckboxStar__chckbox" month="1" info="63" checked="">
+							<label for="mission_15_0" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<th>員工自強活動</th>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_16_3" id="mission_16_3" value="16_3" class="chckboxStar__chckbox" month="4" info="64" checked="">
+							<label for="mission_16_3" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<input type="checkbox" name="mission_17_9" id="mission_17_9" value="17_9" class="chckboxStar__chckbox" month="10" info="">
+							<label for="mission_17_9" class="chckboxStar__label"><i class="far fa-star"></i><i class="fas fa-star"></i></label>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="sumary">
+			執行統計：已經執行 <span id="work_num">50</span> 項，未執行 <span id="not_work_num">36</span> 項目，執行率 <span id="work_percentage">58.14</span> %
+		</div>
+		<!--        <div class="text-right"><button class="saveBtn btn-big btn-orange">儲存</button></div>-->
+		<!--    </form>-->
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

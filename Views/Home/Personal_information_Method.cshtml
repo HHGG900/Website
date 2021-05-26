@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>個資保安辦法 | 台灣柏佐克智慧型日間照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-8-1.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Director";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+		});
+	</script>
+</head>
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1>個資保安辦法</h1>
+	</header>
+	<main class="main wrapper">
+		<p>
+			隨著網路技術與通訊科技不斷地推陳出新，無論是政府機關或私人企業，均有可能面臨資訊安全的衝擊，不僅是機關的正常運作、企業的永續經營受到影響，甚或國家的安全亦受到威脅，如何加強本單位照顧服務資訊安全工作，尤其是網路安全管理，為當前重要課題。
+		</p>
+		<p><br></p>
+		<p>加強防範措施為：</p>
+		<ul class="numberUL">
+			<li>
+				全面檢討網路及系統安全性，針對漏洞追蹤改善：<br />
+					(1)立即協調資訊單位檢查所有服務主機，並依特性分別訂定安全等級。<br />
+					(2)建議視資訊系統建置情形指派管理人員，依安全等級定期記錄檢查。
+			<li />
+			<li>
+				成立網路安全小組:訂定主機安全等級，加強資訊安全稽核。
+			</li>
+			<li>
+				資訊單位定期進行弱點掃瞄<br />
+					(1)至少每季或半年做一次通盤性弱點掃瞄。<br />
+					(2)對較嚴重的特定弱點或病毒，則不定期依需要掃瞄。
+			</li>
+			<li>
+				加強宣導一般人員對資訊安全的認知：<br />
+					(1)個人電腦應安裝防毒軟體。<br />
+					(2)不隨便打開來路不明的E-Mail或下載來路不明的檔案。
+			</li>
+			<li>
+				提升系統管理人員資訊安全管理能力<br />
+					(1)主機建立系統稽核檔，避免被植入後門或木馬程式。<br />
+
+					(2)即時更新作業系統及應用程式之修補程式。<br />
+
+					(3)注意網路上相關安全議題，及早防範。<br />
+
+					(4)按時分析系統紀錄檔。<br />
+
+					(5)加強系統管理者對主機系統紀錄（Ｌｏｇ）之解讀能力。
+			</li>
+			<li>
+				落實系統取存控制<br />
+					(1)系統存取權限應嚴格控管。<br />
+
+					(2)使用者帳號密碼應定期更新，且不得使用不安全密碼。<br />
+
+					(3)需以遠端登錄方式維護之主機，需限制存取清單，並加強控管。
+			</li>
+			<li>
+				存放機密性、敏感性資料電腦主機，不可連接到網際網路。
+			</li>
+			<li>
+				資訊系統安全等級的分類，加強資通安全軟硬體環境建置，將重要的資訊系統或資料從 網際網路隔離出來。
+			</li>
+		</ul>
+</main>
+
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>複評估計畫 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page3-1-2-2.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+			$('#bmi').val('1');
+
+			$('#oral_condition').val('1');
+
+			$('#circulation').val('1');
+
+			$('#ability_to_act').val('2');
+
+			$('#fall_factor').val('1');
+
+			$('#drug_abuse').val('1');
+
+		});
+
+		function doSubmit() {
+			var thisform = $('#form1');
+
+			if ($('#name').val() == '') {
+				alert('請輸入姓名');
+				$('#name').focus();
+				return false;
+			}
+			else if ($('#nickname').val() == '') {
+				alert('請輸入暱稱');
+				$('#nickname').focus();
+				return false;
+			}
+			else if ($('#address').val() == '') {
+				alert('請輸入住址');
+				$('#address').focus();
+				return false;
+			}
+			else if ($('#prefer_lang').val() == '') {
+				alert('請輸入慣用語言');
+				$('#prefer_lang').focus();
+				return false;
+			}
+			else if ($('#like_lang').val() == '') {
+				alert('請輸入喜歡語言');
+				$('#like_lang').focus();
+				return false;
+			}
+			else if ($('#like_topic').val() == '') {
+				alert('請輸入喜歡話題');
+				$('#like_topic').focus();
+				return false;
+			}
+			else if ($('#hobby').val() == '') {
+				alert('請輸入興趣喜好');
+				$('#hobby').focus();
+				return false;
+			}
+			else if ($('#expertise').val() == '') {
+				alert('請輸入專長');
+				$('#expertise').focus();
+				return false;
+			}
+			else if ($('#past_occupation').val() == '') {
+				alert('請輸入過去職業');
+				$('#past_occupation').focus();
+				return false;
+			}
+			else if ($('#personality_now').val() == '') {
+				alert('請輸入現在個性');
+				$('#personality_now').focus();
+				return false;
+			}
+			else if ($('#taboo').val() == '') {
+				alert('請輸入禁忌');
+				$('#taboo').focus();
+				return false;
+			}
+			else if ($('#easy_accept_method').val() == '') {
+				alert('請輸入易接受方式');
+				$('#easy_accept_method').focus();
+				return false;
+			}
+			else if ($('#medical_history').val() == '') {
+				alert('請輸入疾病史');
+				$('#medical_history').focus();
+				return false;
+			}
+			else if ($('#bmi').val() == '') {
+				alert('請選擇BMI');
+				$('#bmi').focus();
+				return false;
+			}
+			else if ($('#oral_condition').val() == '') {
+				alert('請選擇口腔情況');
+				$('#oral_condition').focus();
+				return false;
+			}
+			else if ($('#circulation').val() == '') {
+				alert('請選擇循環狀況');
+				$('#circulation').focus();
+				return false;
+			}
+			else if ($('#ability_to_act').val() == '') {
+				alert('請選擇行動能力');
+				$('#ability_to_act').focus();
+				return false;
+			}
+			else if ($('#fall_factor').val() == '') {
+				alert('請選擇跌倒因子');
+				$('#fall_factor').focus();
+				return false;
+			}
+			else if ($('#pipeline').val() == '') {
+				alert('請輸入管路');
+				$('#pipeline').focus();
+				return false;
+			}
+			else if ($('#skin').val() == '') {
+				alert('請輸入皮膚');
+				$('#skin').focus();
+				return false;
+			}
+			else if ($('#sleep_condition').val() == '') {
+				alert('請輸入睡眠狀況');
+				$('#sleep_condition').focus();
+				return false;
+			}
+			else if ($('#drug_abuse').val() == '') {
+				alert('請選擇藥物濫用');
+				$('#drug_abuse').focus();
+				return false;
+			}
+			else if ($('#emergency_contact').val() == '') {
+				alert('請輸入緊急連絡欄位');
+				$('#emergency_contact').focus();
+				return false;
+			}
+			else if ($('#contact_number').val() == '') {
+				alert('請輸入聯絡電話欄位');
+				$('#contact_number').focus();
+				return false;
+			}
+			else {
+				$('#wait_content').show();
+				$('#wait').show();
+
+				thisform.submit();
+			}
+		}
+	</script>
+	<style type="text/css">
+		div.justify {
+			text-align: justify;
+			text-justify: inter-ideograph;
+			-ms-text-justify: inter-ideograph; /* IE9 */
+			-moz-text-align-last: justify; /* Firefox */
+			-webkit-text-align-last: justify; /* Chrome */
+		}
+
+			div.justify:after {
+				content: ':';
+				display: inline-block;
+				width: 100%;
+			}
+
+		.container {
+			max-width: 1200px;
+		}
+
+		.selectCss {
+			width: 420px;
+			height: 50px;
+			position: relative;
+			left: -15px;
+			padding: 5px 10px;
+		}
+	</style>
+</head>
+
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+
+	<main class="main">
+		<form id="form1" name="form1" method="post" action="/Home/conversation_record" target="actFrame" enctype="multipart/form-data">
+			<input type="hidden" id="id" name="id" value="">
+			<input type="hidden" id="client_id" name="client_id" value="">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-lg-6">個案全名：<input type="text" id="name" name="name" style="width:400px;" value=""></div>
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">暱稱：</span><input type="text" id="nickname" name="nickname" style="width:400px;" value="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-12">
+						<div style="width: 140px;display: inline-block;text-align: right;">住址：</div><input type="text" id="address" name="address" style="width:1000px;" value="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">慣用語言：<input type="text" id="prefer_lang" name="prefer_lang" style="width:400px;" value=""></div>
+					<div class="col-12 col-lg-6">喜歡語言：<input type="text" id="like_lang" name="like_lang" style="width:400px;" value=""></div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">喜歡話題：<input type="text" id="like_topic" name="like_topic" style="width:400px;" value=""></div>
+					<div class="col-12 col-lg-6">興趣喜好：<input type="text" id="hobby" name="hobby" style="width:400px;" value=""></div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">專長：</span><input type="text" id="expertise" name="expertise" style="width:400px;" value="">
+					</div>
+					<div class="col-12 col-lg-6">過去職業：<input type="text" id="past_occupation" name="past_occupation" style="width:400px;" value=""></div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">現在個性：<input type="text" id="personality_now" name="personality_now" style="width:400px;" value=""></div>
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">禁忌：</span><input type="text" id="taboo" name="taboo" style="width:400px;" value="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-12">
+						<div style="width:170px;position: relative;left: -30px;display: inline-block;">易接受方式：</div><input type="text" id="easy_accept_method" name="easy_accept_method" style="width:1000px;position: relative;left: -30px;" value="">
+					</div>
+					<!--                <div class="col-12 col-lg-12">-->
+					<!--                    <span style="width:30px;">易接受方式：</span><input type="text" id="address" name="address" style="width:92%;"/>-->
+					<!--                </div>-->
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-12">
+						<div style="width: 140px;display: inline-block;text-align: right;">疾病史：</div><input type="text" id="medical_history" name="medical_history" style="width:1000px;" value="">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12 col-lg-6">
+						<div style="width: 140px;display: inline-block;text-align: right;">BMI：</div>
+						<select class="selectCss" id="bmi" name="bmi">
+							<option value="">---請選擇---</option>
+							<option value="1">1. 適當體態</option>
+							<option value="2">2. 輕微瘦</option>
+							<option value="3">3. 輕微胖</option>
+							<option value="4">4. 過度瘦</option>
+							<option value="5">5. 過度胖</option>
+						</select>
+					</div>
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">口腔情況：</span>
+						<select class="selectCss" id="oral_condition" name="oral_condition">
+							<option value="">---請選擇---</option>
+							<option value="1">1. 假全牙</option>
+							<option value="2">2. 少部分缺牙</option>
+							<option value="3">3. 一半部分缺牙</option>
+							<option value="4">4. 全缺牙</option>
+						</select>
+						<!-- <input type="text" id="oral_condition" name="oral_condition" style="width:400px;"/> -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">循環狀況：</span>
+						<select class="selectCss" id="circulation" name="circulation">
+							<option value="">---請選擇---</option>
+							<option value="1">1. 良好</option>
+							<option value="2">2. 不好</option>
+							<option value="3">3. 上肢不好</option>
+							<option value="4">4. 下肢不好</option>
+						</select>
+						<!-- <input type="text" id="circulation" name="circulation" style="width:400px;"/> -->
+					</div>
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">行動能力：</span>
+						<select class="selectCss" id="ability_to_act" name="ability_to_act">
+							<option value="">---請選擇---</option>
+							<option value="1">1. 良好</option>
+							<option value="2">2. 行動需注意</option>
+							<option value="3">3. 部分協助</option>
+							<option value="4">4. 全協助</option>
+						</select>
+						<!-- <input type="text" id="ability_to_act" name="ability_to_act" style="width:400px;"/> -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-12">
+						<div style="width:140px;display: inline-block;">跌倒因子：</div>
+						<select class="selectCss" id="fall_factor" name="fall_factor">
+							<option value="">---請選擇---</option>
+							<option value="1">1. 無風險</option>
+							<option value="2">2. 特殊情況有風險</option>
+							<option value="3">3. 低風險</option>
+							<option value="4">4. 中度風險</option>
+							<option value="5">5. 高度風險</option>
+						</select>
+						<!-- <input type="text" id="fall_factor" name="fall_factor" style="width:87%;"> -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">管路：</span><input type="text" id="pipeline" name="pipeline" style="width:400px;" value="">
+					</div>
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">皮膚：</span><input type="text" id="skin" name="skin" style="width:400px;" value="">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">睡眠狀況：</span><input type="text" id="sleep_condition" name="sleep_condition" style="width:400px;" value="">
+					</div>
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">藥物濫用：</span>
+						<select class="selectCss" id="drug_abuse" name="drug_abuse">
+							<option value="">---請選擇---</option>
+							<option value="1">1. 無</option>
+							<option value="2">2. 有家屬服藥會混亂</option>
+							<option value="3">3. 無家屬服藥會混亂</option>
+							<option value="4">4. 無法管制</option>
+						</select>
+						<!-- <input type="text" id="drug_abuse" name="drug_abuse" style="width:400px;"/> -->
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">緊急連絡：</span><input type="text" id="emergency_contact" name="emergency_contact" style="width:400px;" value="">
+					</div>
+					<div class="col-12 col-lg-6">
+						<span style="width: 140px;display: inline-block;text-align: right;">聯絡電話：</span><input type="text" id="contact_number" name="contact_number" style="width:400px;" value="">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12 text-center">
+						<button class="btn btn-big btn-default" onclick="history.back(-1);">返回</button>
+						<button class="btn btn-big btn-info" onclick="return doSubmit();">存檔&amp;下一步</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>計畫管理 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page3-1-1-1-1.css">
+	<link rel="stylesheet" href="~/css/wait.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+		var choosenId = 0;
+
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+
+			$('.cases__case').click(function () {
+				var info = $(this).attr('info');
+				$("#wait_content").show();
+				$("#wait").show();
+
+				setTimeout(check_case(info), 5000);
+			});
+
+			$('#first').click(function () {
+				location.href = '/Home/conversation_record/' + choosenId;
+				// location.href = '/case_manage/firstreview/'+choosenId;
+			});
+
+			$('#second').click(function () {
+				location.href = '/Home/conversation_record2/' + choosenId;
+				// location.href = '/case_manage/secondreview/'+choosenId;
+			});
+		});
+
+		function check_case(info) {
+			$('#first').hide();
+			$('#second').hide();
+
+			$.ajax({
+				url: "/case_manage/check_case",
+				type: "POST",
+				dataType: 'json',
+				data: {
+					id: info
+				},
+				success: function (data, status, xhr) {
+					console.log(data, status, xhr);
+					$('#wait_content').hide();
+					$('#wait').hide();
+					$('.checkzone').html('');
+
+					if (data.code == 200) {
+						if (data.result) {
+							choosenId = data.result.id;
+
+							$('#checkzone' + choosenId).html('<i class="fas fa-check-circle"></i>');
+
+							if (data.over6months2 == "Y" && data.secondReviewData) {
+								$('#second').html('編輯複評');
+								$('#second').show();
+							}
+							else if (data.over6months2 == "N" && data.secondReviewData) {
+								$('#second').hide();
+							}
+							else if (data.firstReviewData == 0) {
+								$('#first').html('新增初評');
+								$('#first').show();
+							}
+							else if (data.firstReviewData && data.over6months == "N") {
+								$('#first').html('編輯初評');
+								$('#first').show();
+							}
+							else {
+								if (data.over6months == "Y" && data.secondReviewData == 0) {
+									$('#second').html('新增複評');
+									$('#second').show();
+								}
+								else $('#second').hide();
+							}
+						}
+						else {
+							// alert('not');
+							$('#first').hide();
+							$('#second').hide();
+						}
+
+						/* ezBSAlert({
+							messageText: data.message,
+							alertType: "success"
+						}).done(function(e)
+						{
+							// location.href='/home/index';
+						}); */
+					}
+					else {
+						ezBSAlert({
+							messageText: data.message,
+							alertType: "danger"
+						}).done(function (e) {
+							// location.href='/shoppingcart';
+						});
+					}
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					console.log(xhr, ajaxOptions, thrownError);
+					alert('發生錯誤!');
+
+					/* PM.erro({
+						title: '確認error',
+						text: '請重新確認！'
+					}); */
+				}
+			});
+		}
+	</script>
+	<style>
+		.hint {
+			padding: 0px 10px;
+		}
+
+		.cases__case, .btnSet__btn {
+			cursor: pointer;
+		}
+
+		.fa-check, .fa-check-circle {
+			color: green;
+		}
+
+		.fa-dice-one {
+			color: #55ca5e;
+		}
+
+		.fa-dice-two {
+			color: #ca3c25;
+		}
+
+		.reviewzone {
+			width: 50px;
+			/*float: right;*/
+			position: absolute;
+			padding-right: 10px;
+			/*position: relative;*/
+			/*bottom: -5px;*/
+		}
+
+		.cases .cases__case {
+			/*font-size: 1.4rem;*/
+			/*padding-bottom: 0.1rem;*/
+			width: 200px;
+		}
+
+		li.cases__case.orange {
+			background-color: #ff9800;
+		}
+
+		.btnSet__btn + .btnSet__btn {
+			margin-left: 0px;
+		}
+
+		.blueFont {
+			color: blue;
+		}
+	</style>
+</head>
+
+
+
+
+<body style="zoom: 1;">
+	<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+	<header class="header wrapper">
+		<h1 class="h1">評估與照顧計畫---選擇個案</h1>
+		<p class="blueFont">
+			<img src="~/images/num-1.png" style="position: relative; top: 5px;"> 表示「應初評未初評」。
+			<img src="~/images/num-2.png" style="position: relative; top: 5px;"> 表示「應複評未複評」。
+		</p>
+		<!-- <p class="hint">橘色代表應複評未複評，跳至首頁警示欄提醒</p> -->
+	</header>
+	<main class="main wrapper">
+		<ul class="cases">
+			<li class="cases__case " info="74">
+				<span id="checkzone74" class="checkzone"></span>
+				張某某                <span class="reviewzone">
+				</span>
+			</li>
+			<li class="cases__case orange" info="7">
+				<span id="checkzone7" class="checkzone"></span>
+				陳陳某1                <span class="reviewzone">
+					<img src="/images/num-2.png">
+				</span>
+			</li>
+			<li class="cases__case orange" info="5">
+				<span id="checkzone5" class="checkzone"></span>
+				余001                <span class="reviewzone">
+					<img src="/images/num-2.png">
+				</span>
+			</li>
+			<li class="cases__case orange" info="9">
+				<span id="checkzone9" class="checkzone"></span>
+				林某1A                <span class="reviewzone">
+					<img src="/images/num-2.png">
+				</span>
+			</li>
+			<li class="cases__case " info="11">
+				<span id="checkzone11" class="checkzone"></span>
+				黃大達01                <span class="reviewzone">
+					<img src="/images/num-1.png">
+				</span>
+			</li>
+			<li class="cases__case " info="13">
+				<span id="checkzone13" class="checkzone"></span>
+				余002                <span class="reviewzone">
+					<img src="/images/num-1.png">
+				</span>
+			</li>
+		</ul>
+		<div class="btnSet">
+			<button id="first" class="btnSet__btn" style="display:none">初評</button>
+			<button id="second" class="btnSet__btn" style="display:none">半年複評</button>
+		</div>
+	</main>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
+	<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148420718-4');
+	</script>
+
+	<div id="wait" style="display:none">
+		<p><img src="/images/loading.gif" width="150" height="150"></p>
+	</div>
+	<div id="wait_content" style="display:none">
+		<p>請稍後，系統正在處理中...</p>
+	</div>
+	<iframe name="actFrame" src="about:blank" style="DISPLAY: none; Z-INDEX: 10; WIDTH: 148px; POSITION: absolute; HEIGHT: 194px; left: 105px; top: 5px" marginwidth="0" marginheight="0" frameborder="0" noresize="" scrolling="no"></iframe>
+
+
+</body>
+</html>
