@@ -93,7 +93,7 @@ namespace Website.Models
         
         public float total { get; set; }
 
-        public int gettotal { get; set; }
+        public string gettotal { get; set; }
 
         public string pic { get; set; }
         public string grade { get; set; }

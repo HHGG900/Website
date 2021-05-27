@@ -209,7 +209,7 @@ namespace Website.Models
 						twentythere = reader.GetString(reader.GetOrdinal("twentythere")),
 						twentyfour = reader.GetString(reader.GetOrdinal("twentyfour")),
 						twentyfive = reader.GetString(reader.GetOrdinal("twentyfive")),
-						gettotal = (int)reader.GetValue(reader.GetOrdinal("total")),
+						gettotal = (string)reader.GetValue(reader.GetOrdinal("total")),
 						//pic = reader.GetString(reader.GetOrdinal("pic")),
 						grade = reader.GetString(reader.GetOrdinal("grade")),
 						rewards = reader.GetString(reader.GetOrdinal("rewards")),
