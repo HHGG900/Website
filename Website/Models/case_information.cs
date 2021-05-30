@@ -45,8 +45,8 @@ namespace Website.Models
 		public string nateunit { get; set; }    //照會單位
 		public string waiter { get; set; }
 		public string status { get; set; }	//服務員別
-		public string no_service_reason { get; set; }	//
-		public string no_service_date { get; set; }	//
+		public string no_service_reason { get; set; }	//無服務緣由
+		public string no_service_date { get; set; }	//無服務日期
 		
 	}
 }
