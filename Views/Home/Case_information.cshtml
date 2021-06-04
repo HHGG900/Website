@@ -24,6 +24,35 @@
 	<script>
 		var item = 1;
 		var toEdit = 0;
+		function Addhtml() {
+			item++;
+			if (item <= 10) {
+				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+					'<label for="message-text" class="col-form-label col-md-6">' +
+					'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+					'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+					'</label>' +
+					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
+					'</div>';
+				document.getElementById("addDiv").innerHTML += addhtml;
+			}
+			else {
+				window.alert('照會項目已滿!!');
+			}
+		}
+
+		function Delhtml() {
+			item = 0;
+			var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+				'<label for="message-text" class="col-form-label col-md-6">' +
+				'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+				'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+				'</label>' +
+				'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
+				'</div>';
+			console.log(item);
+			document.getElementById("addDiv").innerHTML = addhtml;
+		}
 
 		$(function () {
 
@@ -53,7 +82,7 @@
 				todayHighlight: true
 			});
 
-			
+
 
 			$('#addNoteDetail').click(function () {
 				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
@@ -184,30 +213,8 @@
 				$('#addDiv' + num).remove();
 			}
 		}
-		function Addhtml() {
-			var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
-				'<label for="message-text" class="col-form-label col-md-6">' +
-				'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
-				'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
-				'</label>' +
-				'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
-				'</div>';
-			document.getElementById("addDiv").innerHTML += addhtml;
-			item++;
-		}
+		var num = 10;
 
-		function Delhtml() {
-			var addhtml = '<div id="addDiv' +0 + '" class="form-group">' +
-				'<label for="message-text" class="col-form-label col-md-6">' +
-				'<a href="javascript:delNoteDetail(' + 0 + ');" class="delNoteDetail" info="' + 0 + '" ><i class="fas fa-minus-circle"></i></a>' +
-				'照會項目:<input class="form-control" id="note_item-' + 0 + '" name="note_item[]">' +
-				'</label>' +
-				'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + 0 + '" name="note_count[]"></label>' +
-				'</div>';
-			console.log(item);
-			document.getElementById("addDiv").innerHTML = addhtml;
-			item = 1;
-		}
 
 		function addNoteDetail(num) {
 			// var item = 2;
@@ -275,7 +282,7 @@
 				var status = $('#status').val();
 				var no_service_reason = $('#no_service_reason').val();
 				var no_service_date = $('#no_service_date').val();
-
+				//var
 				var note_item_str = $('input[name="note_item[]"]').map(function () {
 					return $(this).val();
 				}).get().join('####');
@@ -373,6 +380,37 @@
 					// $('#addModal').hide();
 					// $('#wait_content').show();
 					// $('#wait').show();
+					var BAlist = [];
+					for (var i = 0; i <= 9; i++) {
+						try {
+							BAlist.push(document.getElementById('note_item-' + String(i)).value);
+							BAlist.push(document.getElementById('note_count-' + String(i)).value);
+						} catch {
+							BAlist.push("");
+							BAlist.push("");
+						}
+
+					}
+					var list = {
+						name: name,
+						six: gender,
+						birthday: birthday,
+						identity: pid_last_5,
+						telephone: phone,
+						economic: economic_class,
+						obstacleclass: obstacle_category,
+						obstacledegree: obstacle_degree,
+						contact: contact_person,
+						phone: contact_mobile,
+						notedate: note_date,
+						CMS: cms_class,
+						BAList: BAlist,
+						nateunit: note_unit,
+						waiter: familypart,
+						status: status,
+						no_service_reason: no_service_reason,
+						no_service_date: no_service_date
+					}
 					var patientdata = {
 						lastName: firstname,
 						firstname: lastname,
@@ -385,58 +423,64 @@
 						status: status_label[status],
 						userId: '5f1fc5e10dac9d003b2dc30e'
 					}
-					console.log(patientdata);
-					$.ajax({
-						url: "/case_manage/save_case_infomation",
-						type: "POST",
-						dataType: 'json',
-						data: {
-							user_id: '22',
-							name: name,
-							firstname: firstname,
-							lastname: lastname,
-							gender: gender,
-							birthday: birthday,
-							pid_last_5: pid_last_5,
-							phone: phone,
-							economic_class: economic_class,
-							obstacle_category: obstacle_category,
-							obstacle_degree: obstacle_degree,
-							contact_person: contact_person,
-							contact_mobile: contact_mobile,
-							note_date: note_date,
-							cms_class: cms_class,
-							note_item_str: note_item_str,
-							note_count_str: note_count_str,
-							note_unit: note_unit,
-							familypart: familypart,
-							status: status,
-							no_service_reason: no_service_reason,
-							no_service_date: no_service_date
-						},
-						success: function (data, status, xhr) {
-							console.log(data, status, xhr);
-							if (data.code == 200) {
-								alert(data.message);
-								// send_casedata_to_jubo(patientdata);
-								if (data.result != '') location.href = data.result;
-							}
-							else {
-								alert(data.message);
-								// ezBSAlert({
-								//     messageText: data.message,
-								//     alertType: "danger"
-								// }).done(function(e)
-								// {
-								//     location.href='/shoppingcart';
-								// });
-							}
-						},
-						error: function (xhr, ajaxOptions, thrownError) {
-							console.log(xhr, ajaxOptions, thrownError);
-							alert('發生錯誤!');
-						}
-					});
+					console.log(list);
+					$.post('@Url.Action("Case_information")',
+						{ case_Information: list },
+						function (result) {
+							window.alert("儲存成功");
+							window.location.href = result;
+						});
+					//$.ajax({
+					//	url: "/case_manage/save_case_infomation",
+					//	type: "POST",
+					//	dataType: 'json',
+					//	data: {
+					//		user_id: '22',
+					//		name: name,
+					//		firstname: firstname,
+					//		lastname: lastname,
+					//		gender: gender,
+					//		birthday: birthday,
+					//		pid_last_5: pid_last_5,
+					//		phone: phone,
+					//		economic_class: economic_class,
+					//		obstacle_category: obstacle_category,
+					//		obstacle_degree: obstacle_degree,
+					//		contact_person: contact_person,
+					//		contact_mobile: contact_mobile,
+					//		note_date: note_date,
+					//		cms_class: cms_class,
+					//		note_item_str: note_item_str,
+					//		note_count_str: note_count_str,
+					//		note_unit: note_unit,
+					//		familypart: familypart,
+					//		status: status,
+					//		no_service_reason: no_service_reason,
+					//		no_service_date: no_service_date
+					//	},
+					//	success: function (data, status, xhr) {
+					//		console.log(data, status, xhr);
+					//		if (data.code == 200) {
+					//			alert(data.message);
+					//			// send_casedata_to_jubo(patientdata);
+					//			if (data.result != '') location.href = data.result;
+					//		}
+					//		else {
+					//			alert(data.message);
+					//			// ezBSAlert({
+					//			//     messageText: data.message,
+					//			//     alertType: "danger"
+					//			// }).done(function(e)
+					//			// {
+					//			//     location.href='/shoppingcart';
+					//			// });
+					//		}
+					//	},
+					//	error: function (xhr, ajaxOptions, thrownError) {
+					//		console.log(xhr, ajaxOptions, thrownError);
+					//		alert('發生錯誤!');
+					//	}
+					//});
 				}
 			}
 			else {
@@ -1040,8 +1084,8 @@
 						<div id="addDiv0" class="form-group">
 							<label for="message-text" class="col-form-label col-md-6">
 								<a href="javascript:void(0);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
-								照會項目:<input class="form-control" id="note_item-1" name="note_item[]">
-							</label><label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-1" name="note_count[]"></label>
+								照會項目:<input class="form-control" id="note_item-0" name="note_item[]">
+							</label><label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-0" name="note_count[]"></label>
 						</div>
 					</div>
 						<div class="form-group">

@@ -255,6 +255,8 @@
     </Compile>
     <Compile Include="Models\Assessment.cs" />
     <Compile Include="Models\Assessment_db.cs" />
+    <Compile Include="Models\Case_information.cs" />
+    <Compile Include="Models\Case_information_db.cs" />
     <Compile Include="Models\daycheck.cs" />
     <Compile Include="Models\Daycheck_db.cs" />
     <Compile Include="Models\image.cs" />

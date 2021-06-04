@@ -859,7 +859,17 @@ namespace Website.Controllers
 		//個案資料
 		public ActionResult Case_information()
 		{
+
 			return View();
+		}
+		[HttpPost]
+		public ActionResult Case_information(Case_information case_Information)
+		{
+			Case_information_db case_Information_Db = new Case_information_db();
+			case_Information_Db.New_case_information(case_Information);
+
+			
+			return Json(Url.Action("Case_information"));
 		}
 		//個案新進
 		public ActionResult New_cases()
