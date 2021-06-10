@@ -859,15 +859,21 @@ namespace Website.Controllers
 		//個案資料
 		public ActionResult Case_information()
 		{
+			Case_information_db case_Information = new Case_information_db();
+			List<Case_informatio> list1 = case_Information.Get_Case_informatio("1");
+			List<Case_informatio> list2 = case_Information.Get_Case_informatio("2");
+			List<Case_informatio> list3 = case_Information.Get_Case_informatio("3");
+			ViewBag.case1 = list1;
+			ViewBag.case2 = list2;
+			ViewBag.case3 = list3;
 
 			return View();
 		}
 		[HttpPost]
-		public ActionResult Case_information(Case_information case_Information)
+		public ActionResult Case_information(Case_informatio case_Information)
 		{
 			Case_information_db case_Information_Db = new Case_information_db();
 			case_Information_Db.New_case_information(case_Information);
-
 			
 			return Json(Url.Action("Case_information"));
 		}

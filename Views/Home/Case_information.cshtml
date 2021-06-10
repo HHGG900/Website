@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Website.Models;
+@{
+	List<Case_informatio> case1 = ViewBag.case1;
+}
+@{
+	List<Case_informatio> case2 = ViewBag.case2;
+}
+@{
+	List<Case_informatio> case3 = ViewBag.case3;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -42,7 +52,7 @@
 		}
 
 		function Delhtml() {
-			item = 0;
+			item = 1;
 			var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
 				'<label for="message-text" class="col-form-label col-md-6">' +
 				'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
@@ -281,8 +291,7 @@
 				var familypart = $('#familypart').val();
 				var status = $('#status').val();
 				var no_service_reason = $('#no_service_reason').val();
-				var no_service_date = $('#no_service_date').val();
-				//var
+				var no_service_date = $('#no_service_date').val()
 				var note_item_str = $('input[name="note_item[]"]').map(function () {
 					return $(this).val();
 				}).get().join('####');
@@ -381,7 +390,7 @@
 					// $('#wait_content').show();
 					// $('#wait').show();
 					var BAlist = [];
-					for (var i = 0; i <= 9; i++) {
+					for (var i = 1; i <= 10; i++) {
 						try {
 							BAlist.push(document.getElementById('note_item-' + String(i)).value);
 							BAlist.push(document.getElementById('note_count-' + String(i)).value);
@@ -409,7 +418,8 @@
 						waiter: familypart,
 						status: status,
 						no_service_reason: no_service_reason,
-						no_service_date: no_service_date
+						no_service_date: no_service_date,
+						BAnum : String(item)
 					}
 					var patientdata = {
 						lastName: firstname,
@@ -755,6 +765,111 @@
 						</tr>
 					</thead>
 					<tbody>
+						@foreach (Case_informatio ca in case1)
+						{
+							<tr style="		background-color: #e65256;">
+								<td style="color:white;" rowspan="@ca.BAnum">
+									<input type="radio" id="chk5" name="chk" value="9">
+								</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.name</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.six</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.birthday</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.identity</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.telephone</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.economic</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.obstacleclass</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.obstacledegree</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.contact</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.phone</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.notedate</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.CMS</td>
+								<td style="color:white;">@ca.BAList[0]</td>
+								<td style="color:white;">@ca.BAList[10]</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.nateunit</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.waiter</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.status</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.no_service_reason</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.no_service_date</td>
+							</tr>
+
+							for (int i = 1; i < Int32.Parse(ca.BAnum); i++)
+							{
+								<tr style="	background-color: #e65256;">
+									<td style="color:white;">@ca.BAList[i]</td>
+									<td style="color:white;">@ca.BAList[i + 10]</td>
+								</tr>
+							}
+						}
+						@foreach (Case_informatio ca in case2)
+						{
+							<tr style="background-color:#009688;">
+								<td style="color:white;" rowspan="@ca.BAnum">
+									<input type="radio" id="chk5" name="chk" value="9">
+								</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.name</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.six</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.birthday</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.identity</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.telephone</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.economic</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.obstacleclass</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.obstacledegree</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.contact</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.phone</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.notedate</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.CMS</td>
+								<td style="color:white;">@ca.BAList[0]</td>
+								<td style="color:white;">@ca.BAList[10]</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.nateunit</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.waiter</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.status</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.no_service_reason</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.no_service_date</td>
+							</tr>
+
+							for (int i = 1; i < Int32.Parse(ca.BAnum); i++)
+							{
+								<tr style="background-color:#009688;">
+									<td style="color:white;">@ca.BAList[i]</td>
+									<td style="color:white;">@ca.BAList[i + 10]</td>
+								</tr>
+							}
+						}
+						@foreach (Case_informatio ca in case3)
+						{
+							<tr style="background-color: #930a9a;">
+								<td style="color:white;" rowspan="@ca.BAnum">
+									<input type="radio" id="chk5" name="chk" value="9">
+								</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.name</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.six</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.birthday</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.identity</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.telephone</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.economic</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.obstacleclass</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.obstacledegree</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.contact</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.phone</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.notedate</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.CMS</td>
+								<td style="color:white;">@ca.BAList[0]</td>
+								<td style="color:white;">@ca.BAList[10]</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.nateunit</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.waiter</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.status</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.no_service_reason</td>
+								<td style="color:white;" rowspan="@ca.BAnum">@ca.no_service_date</td>
+							</tr>
+
+							for (int i = 1; i < Int32.Parse(ca.BAnum); i++)
+							{
+								<tr style="background-color: #930a9a;">
+									<td style="color:white;">@ca.BAList[i]</td>
+									<td style="color:white;">@ca.BAList[i + 10]</td>
+								</tr>
+							}
+						}
 						<tr style="background-color:#e65256;">
 							<td style="color:white;" rowspan="1">
 								<input type="radio" id="chk0" name="chk" value="6">
@@ -984,7 +1099,7 @@
 							<td style="color:white;" rowspan="1">2020-04-22</td>
 						</tr>
 					</tbody>
-				</table>
+					</table>
 			</div>
 		</div>
 	</main>
@@ -1088,37 +1203,37 @@
 							</label><label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-0" name="note_count[]"></label>
 						</div>
 					</div>
-						<div class="form-group">
-							<label for="message-text" class="col-form-label col-md-6">
-								<span class="redfont">＊</span>照會單位:<input class="form-control" id="note_unit">
-							</label>
-							<label for="message-text" class="col-form-label col-md-6">
-								<span class="redfont">＊</span>服務員別:
-								<select class="form-control" id="familypart">
-									<option value="">---請選擇---</option>
-									<option value="2">羅小賢</option>
-									<option value="3">阿賢</option>
-									<option value="4">大賢</option>
-								</select>
-							</label>
-						</div>
-						<div class="form-group">
-							<label for="message-text" class="col-form-label col-md-6">
-								<span class="redfont">＊</span>個案狀態:
-								<select class="form-control" id="status">
-									<option value="">---請選擇---</option>
-									<option value="2">穩定服務</option>
-									<option value="1">停案</option>
-									<option value="3">結案</option>
-								</select>
-							</label>
-							<label id="no_service_reason_label" for="no_service_reason" class="col-form-label col-md-6">無服務原因:<input class="form-control" id="no_service_reason"></label>
-						</div>
-						<div class="form-group" id="no_service_date_div">
-							<label for="no_service_date" class="col-form-label col-md-6">無服務日期:<input class="form-control datepicker" id="no_service_date"></label>
-							<label for="" class="col-form-label col-md-6"></label>
-						</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>照會單位:<input class="form-control" id="note_unit">
+						</label>
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>服務員別:
+							<select class="form-control" id="familypart">
+								<option value="">---請選擇---</option>
+								<option value="2">羅小賢</option>
+								<option value="3">阿賢</option>
+								<option value="4">大賢</option>
+							</select>
+						</label>
 					</div>
+					<div class="form-group">
+						<label for="message-text" class="col-form-label col-md-6">
+							<span class="redfont">＊</span>個案狀態:
+							<select class="form-control" id="status">
+								<option value="">---請選擇---</option>
+								<option value="2">穩定服務</option>
+								<option value="1">停案</option>
+								<option value="3">結案</option>
+							</select>
+						</label>
+						<label id="no_service_reason_label" for="no_service_reason" class="col-form-label col-md-6">無服務原因:<input class="form-control" id="no_service_reason"></label>
+					</div>
+					<div class="form-group" id="no_service_date_div">
+						<label for="no_service_date" class="col-form-label col-md-6">無服務日期:<input class="form-control datepicker" id="no_service_date"></label>
+						<label for="" class="col-form-label col-md-6"></label>
+					</div>
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
 					<button type="button" class="btn btn-primary" onclick="sendmessage('add');">送出新增</button>
@@ -1218,7 +1333,7 @@
 							</select>
 						</label>
 					</div>
-					
+
 					<div id="addDiv" class="form-group">
 						<label for="message-text" class="col-form-label col-md-6">
 							<a href="javascript:addNoteDetail(1);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
@@ -1277,11 +1392,11 @@
 
 	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
 	<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-    gtag('config', 'UA-148420718-4');
+		gtag('config', 'UA-148420718-4');
 	</script>
 
 	<div id="wait" style="display:none">

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Website.Models
 {
-	public class Case_information
+	public class Case_informatio
 	{
 		public string name { get; set; }
 		public string six { get; set; }  //性別
@@ -48,6 +48,8 @@ namespace Website.Models
 		public string status { get; set; }  //個案狀態
 		public string no_service_reason { get; set; }   //無服務緣由
 		public string no_service_date { get; set; } //無服務日期
+		public string BAnum { get; set; }
+		
 
 	}
 }

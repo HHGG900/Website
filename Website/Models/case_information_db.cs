@@ -11,12 +11,12 @@ namespace Website.Models
 	{
 		private readonly string ConnStr = "Data Source=WIN-6M12QM5R44F;Initial Catalog=webphone;Persist Security Info=True;User ID=sa;Password=1qaz!QAZ;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-		public void New_case_information(Case_information case_Information)
+		public void New_case_information(Case_informatio case_Information)
 		{
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
 			SqlCommand sqlCommand = new SqlCommand(
-				@"INSERT INTO case_Informatio(name,six,birthday,[identity],telephone,economic,obstacleclass,obstacledegree,contact,phone,notedate,CMS,BA1project,BA2project,BA3project,BA4project,BA5poject,BA6project,BA7project,BA8project,BA9project,BA10project,BA1amount,BA2amount,BA3amount,BA4amount,BA5amount,BA6amount,BA7amount,BA8amount,BA9amount,BA10amount,nateunit,waiter,status,no_service_reason,no_service_date)
-				VALUES (@name,@six,@birthday,@identity,@telephone,@economic,@obstacleclass,@obstacledegree,@contact,@phone,@notedate,@CMS,@BA1project,@BA2project,@BA3project,@BA4project,@BA5project,@BA6project,@BA7project,@BA8project,@BA9project,@BA10project,@BA1amount,@BA2amount,@BA3amount,@BA4amount,@BA5amount,@BA6amount,@BA7amount,@BA8amount,@BA9amount,@BA10amount,@nateunit,@waiter,@status,@no_service_reason,@no_service_date)");
+				@"INSERT INTO case_Informatio(name,six,birthday,[identity],telephone,economic,obstacleclass,obstacledegree,contact,phone,notedate,CMS,BA1project,BA2project,BA3project,BA4project,BA5project,BA6project,BA7project,BA8project,BA9project,BA10project,BA1amount,BA2amount,BA3amount,BA4amount,BA5amount,BA6amount,BA7amount,BA8amount,BA9amount,BA10amount,nateunit,waiter,status,no_service_reason,no_service_date, BAnum)
+				VALUES (@name,@six,@birthday,@identity,@telephone,@economic,@obstacleclass,@obstacledegree,@contact,@phone,@notedate,@CMS,@BA1project,@BA2project,@BA3project,@BA4project,@BA5project,@BA6project,@BA7project,@BA8project,@BA9project,@BA10project,@BA1amount,@BA2amount,@BA3amount,@BA4amount,@BA5amount,@BA6amount,@BA7amount,@BA8amount,@BA9amount,@BA10amount,@nateunit,@waiter,@status,@no_service_reason,@no_service_date ,@BAnum)");
 			sqlCommand.Connection = sqlConnection;
 			sqlCommand.Parameters.Add(new SqlParameter("@name", case_Information.name));
 			sqlCommand.Parameters.Add(new SqlParameter("@six", case_Information.six));
@@ -127,26 +127,49 @@ namespace Website.Models
 				sqlCommand.Parameters.Add(new SqlParameter("@no_service_date", DBNull.Value));
 			else
 				sqlCommand.Parameters.Add(new SqlParameter("@no_service_date", case_Information.no_service_date));
-
+			sqlCommand.Parameters.Add(new SqlParameter("@BAnum", case_Information.BAnum));
 			sqlConnection.Open();
 			sqlCommand.ExecuteNonQuery();
 			sqlConnection.Close();
 		}
 
-		public List<Case_information> GetDaycheckByUserId(string usr_index)
+		public List<Case_informatio> Get_Case_informatio(string status)
 		{
-			List<Case_information> case_information = new List<Case_information>();
+			List<Case_informatio> case_information = new List<Case_informatio>();
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
-			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM case_informatio");
+			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM case_informatio where status = '" + status + "'");
 			sqlCommand.Connection = sqlConnection;
 			sqlConnection.Open();
-
+			List<string> list = new List<string>();
 			SqlDataReader reader = sqlCommand.ExecuteReader();
+			
 			if (reader.HasRows)
 			{
 				while (reader.Read())
 				{
-					Case_information case_information1 = new Case_information
+					
+					list.Add(GetString(reader.GetOrdinal("BA1project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA2project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA3project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA4project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA5project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA6project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA7project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA8project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA9project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA10project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA1amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA2amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA3amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA4amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA5amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA6amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA7amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA8amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA9amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA10amount"), reader));
+					string[] list1 = list.ToArray();
+					Case_informatio case_information1 = new Case_informatio
 					{
 						name = reader.GetString(reader.GetOrdinal("name")),
 						six = reader.GetString(reader.GetOrdinal("six")),
@@ -154,43 +177,56 @@ namespace Website.Models
 						identity = reader.GetString(reader.GetOrdinal("identity")),
 						telephone = reader.GetString(reader.GetOrdinal("telephone")),
 						economic = reader.GetString(reader.GetOrdinal("economic")),
-						obstacleclass = reader.GetString(reader.GetOrdinal("obstacleclass")),
-						obstacledegree = reader.GetString(reader.GetOrdinal("obstacledegree")),
+						obstacleclass = GetString(reader.GetOrdinal("obstacleclass"), reader),
+						obstacledegree = GetString(reader.GetOrdinal("obstacledegree"), reader),
 						contact = reader.GetString(reader.GetOrdinal("contact")),
 						phone = reader.GetString(reader.GetOrdinal("phone")),
 						notedate = reader.GetString(reader.GetOrdinal("notedate")),
 						CMS = reader.GetString(reader.GetOrdinal("CMS")),
-						BA1project = reader.GetString(reader.GetOrdinal("BA1project")),
-						BA2project = reader.GetString(reader.GetOrdinal("BA2project")),
-						BA3project = reader.GetString(reader.GetOrdinal("BA3project")),
-						BA4project = reader.GetString(reader.GetOrdinal("BA4project")),
-						BA5project = reader.GetString(reader.GetOrdinal("BA5project")),
-						BA6project = reader.GetString(reader.GetOrdinal("BA6project")),
-						BA7project = reader.GetString(reader.GetOrdinal("BA7project")),
-						BA8project = reader.GetString(reader.GetOrdinal("BA8project")),
-						BA9project = reader.GetString(reader.GetOrdinal("BA9project")),
-						BA10project = reader.GetString(reader.GetOrdinal("BA10project")),
-						BA1amount = reader.GetString(reader.GetOrdinal("BA1amount")),
-						BA2amount = reader.GetString(reader.GetOrdinal("BA2amount")),
-						BA3amount = reader.GetString(reader.GetOrdinal("BA3amount")),
-						BA4amount = reader.GetString(reader.GetOrdinal("BA4amount")),
-						BA5amount = reader.GetString(reader.GetOrdinal("BA5amount")),
-						BA6amount = reader.GetString(reader.GetOrdinal("BA6amount")),
-						BA7amount = reader.GetString(reader.GetOrdinal("BA7amount")),
-						BA8amount = reader.GetString(reader.GetOrdinal("BA8amount")),
-						BA9amount = reader.GetString(reader.GetOrdinal("BA9amount")),
-						BA10amount = reader.GetString(reader.GetOrdinal("BA10amount")),
-						nateunit = reader.GetString(reader.GetOrdinal("nateunit")),
-						waiter = reader.GetString(reader.GetOrdinal("waiter")),
+						BA1project = GetString(reader.GetOrdinal("BA1project"),reader),
+						BA2project = GetString(reader.GetOrdinal("BA2project"),reader),
+						BA3project = GetString(reader.GetOrdinal("BA3project"), reader),
+						BA4project = GetString(reader.GetOrdinal("BA4project"), reader),
+						BA5project = GetString(reader.GetOrdinal("BA5project"), reader),
+						BA6project = GetString(reader.GetOrdinal("BA6project"), reader),
+						BA7project = GetString(reader.GetOrdinal("BA7project"), reader),
+						BA8project = GetString(reader.GetOrdinal("BA8project"), reader),
+						BA9project = GetString(reader.GetOrdinal("BA9project"), reader),
+						BA10project = GetString(reader.GetOrdinal("BA10project"), reader),
+						BA1amount = GetString(reader.GetOrdinal("BA1amount"), reader),
+						BA2amount = GetString(reader.GetOrdinal("BA2amount"), reader),
+						BA3amount = GetString(reader.GetOrdinal("BA3amount"), reader),
+						BA4amount = GetString(reader.GetOrdinal("BA4amount"), reader),
+						BA5amount = GetString(reader.GetOrdinal("BA5amount"), reader),
+						BA6amount = GetString(reader.GetOrdinal("BA6amount"), reader),
+						BA7amount = GetString(reader.GetOrdinal("BA7amount"), reader),
+						BA8amount = GetString(reader.GetOrdinal("BA8amount"), reader),
+						BA9amount = GetString(reader.GetOrdinal("BA9amount"), reader),
+						BA10amount = GetString(reader.GetOrdinal("BA10amount"), reader),
+						BAList = list1,
+						nateunit = GetString(reader.GetOrdinal("nateunit"), reader),
+						waiter = GetString(reader.GetOrdinal("waiter"), reader),
 						status = reader.GetString(reader.GetOrdinal("status")),
-						no_service_reason = reader.GetString(reader.GetOrdinal("no_service_reason")),
-						no_service_date = reader.GetString(reader.GetOrdinal("no_service_date")),
+						no_service_reason = GetString(reader.GetOrdinal("no_service_reason"), reader),
+						no_service_date = GetString(reader.GetOrdinal("no_service_date"), reader),
+						BAnum = reader.GetString(reader.GetOrdinal("BAnum")),
 					};
 					case_information.Add(case_information1);
 				}
 			}
 			sqlConnection.Close();
 			return case_information;
+		}
+		public string GetString(int i, SqlDataReader reader)
+		{
+			try
+			{
+				return reader.GetString(i);
+			}
+			catch
+			{
+				return " ";
+			}
 		}
 	}
 }
