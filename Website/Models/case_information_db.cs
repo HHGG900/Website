@@ -11,12 +11,15 @@ namespace Website.Models
 	{
 		private readonly string ConnStr = "Data Source=WIN-6M12QM5R44F;Initial Catalog=webphone;Persist Security Info=True;User ID=sa;Password=1qaz!QAZ;MultipleActiveResultSets=True;Application Name=EntityFramework";
 
-		public void New_case_information(Case_informatio case_Information)
+		public void New_case_information(Case_informatio case_Information, string uername)
 		{
+			string []list;
+			select_indect select = new select_indect();
+			list = select.Get_Case_informatio(uername, "case_Informatio");
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
 			SqlCommand sqlCommand = new SqlCommand(
-				@"INSERT INTO case_Informatio(name,six,birthday,[identity],telephone,economic,obstacleclass,obstacledegree,contact,phone,notedate,CMS,BA1project,BA2project,BA3project,BA4project,BA5project,BA6project,BA7project,BA8project,BA9project,BA10project,BA1amount,BA2amount,BA3amount,BA4amount,BA5amount,BA6amount,BA7amount,BA8amount,BA9amount,BA10amount,nateunit,waiter,status,no_service_reason,no_service_date, BAnum)
-				VALUES (@name,@six,@birthday,@identity,@telephone,@economic,@obstacleclass,@obstacledegree,@contact,@phone,@notedate,@CMS,@BA1project,@BA2project,@BA3project,@BA4project,@BA5project,@BA6project,@BA7project,@BA8project,@BA9project,@BA10project,@BA1amount,@BA2amount,@BA3amount,@BA4amount,@BA5amount,@BA6amount,@BA7amount,@BA8amount,@BA9amount,@BA10amount,@nateunit,@waiter,@status,@no_service_reason,@no_service_date ,@BAnum)");
+				@"INSERT INTO case_Informatio(name,six,birthday,[identity],telephone,economic,obstacleclass,obstacledegree,contact,phone,notedate,CMS,BA1project,BA2project,BA3project,BA4project,BA5project,BA6project,BA7project,BA8project,BA9project,BA10project,BA1amount,BA2amount,BA3amount,BA4amount,BA5amount,BA6amount,BA7amount,BA8amount,BA9amount,BA10amount,nateunit,waiter,status,no_service_reason,no_service_date, BAnum, [index], class)
+				VALUES (@name,@six,@birthday,@identity,@telephone,@economic,@obstacleclass,@obstacledegree,@contact,@phone,@notedate,@CMS,@BA1project,@BA2project,@BA3project,@BA4project,@BA5project,@BA6project,@BA7project,@BA8project,@BA9project,@BA10project,@BA1amount,@BA2amount,@BA3amount,@BA4amount,@BA5amount,@BA6amount,@BA7amount,@BA8amount,@BA9amount,@BA10amount,@nateunit,@waiter,@status,@no_service_reason,@no_service_date ,@BAnum, @index, @class)");
 			sqlCommand.Connection = sqlConnection;
 			sqlCommand.Parameters.Add(new SqlParameter("@name", case_Information.name));
 			sqlCommand.Parameters.Add(new SqlParameter("@six", case_Information.six));
@@ -128,6 +131,11 @@ namespace Website.Models
 			else
 				sqlCommand.Parameters.Add(new SqlParameter("@no_service_date", case_Information.no_service_date));
 			sqlCommand.Parameters.Add(new SqlParameter("@BAnum", case_Information.BAnum));
+			if (list[1] == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@index", "1"));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@index", list[1] + "1"));
+			sqlCommand.Parameters.Add(new SqlParameter("@class", list[0]));
 			sqlConnection.Open();
 			sqlCommand.ExecuteNonQuery();
 			sqlConnection.Close();

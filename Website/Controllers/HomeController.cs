@@ -775,6 +775,8 @@ namespace Website.Controllers
 		//督導主頁面
 		public ActionResult Supervise()
 		{
+			ViewBag.username = TempData["name"] as string;
+			TempData.Keep();
 			return View();
 		}
 		[HttpPost]
@@ -859,6 +861,8 @@ namespace Website.Controllers
 		//個案資料
 		public ActionResult Case_information()
 		{
+			ViewBag.name = TempData["name"] as string;
+			TempData.Keep();
 			Case_information_db case_Information = new Case_information_db();
 			List<Case_informatio> list1 = case_Information.Get_Case_informatio("1");
 			List<Case_informatio> list2 = case_Information.Get_Case_informatio("2");
@@ -873,8 +877,8 @@ namespace Website.Controllers
 		public ActionResult Case_information(Case_informatio case_Information)
 		{
 			Case_information_db case_Information_Db = new Case_information_db();
-			case_Information_Db.New_case_information(case_Information);
-			
+			case_Information_Db.New_case_information(case_Information, TempData["name"] as string);
+			TempData.Keep();
 			return Json(Url.Action("Case_information"));
 		}
 		//個案新進

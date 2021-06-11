@@ -34,6 +34,9 @@
 	<script>
 		var item = 1;
 		var toEdit = 0;
+		window.onload = function () {
+			console.log('@ViewBag.name');
+		}
 		function Addhtml() {
 			item++;
 			if (item <= 10) {

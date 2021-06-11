@@ -271,6 +271,7 @@
     <Compile Include="Models\Roster.cs" />
     <Compile Include="Models\Roster_db.cs" />
     <Compile Include="Models\Select.cs" />
+    <Compile Include="Models\select_indect.cs" />
     <Compile Include="Models\Sign_in.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
