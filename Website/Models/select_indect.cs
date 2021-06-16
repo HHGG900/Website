@@ -10,22 +10,22 @@ namespace Website.Models
 	public class select_indect
 	{
 		private readonly string ConnStr = "Data Source=WIN-6M12QM5R44F;Initial Catalog=webphone;Persist Security Info=True;User ID=sa;Password=1qaz!QAZ;MultipleActiveResultSets=True;Application Name=EntityFramework";
-		
+
 		//居督名稱, 資料庫名稱 回傳 序號 類別
-		public string[] Get_Case_informatio(string name, string sheet)
+		public list_index_class Get_Case_informatio(string name, string sheet)
 		{
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
-			SqlCommand sqlCommand = new SqlCommand("SELECT Top 1 [index] FROM " + sheet + " ORDER BY [index]");
+			SqlCommand sqlCommand = new SqlCommand("SELECT Top 1 [index] FROM " + sheet + " ORDER BY [index] DESC");
 			//sqlCommand.Parameters.Add(new SqlParameter("@name", name));
 			sqlCommand.Connection = sqlConnection;
 			sqlConnection.Open();
 			SqlDataReader reader = sqlCommand.ExecuteReader();
-			string index = "";
+			int index = 0;
 			if (reader.HasRows)
 			{
 				while (reader.Read())
 				{
-					index = reader.GetString(reader.GetOrdinal("index"));
+					index = reader.GetInt32(reader.GetOrdinal("index"));
 				};
 			}
 			sqlConnection.Close();
@@ -44,7 +44,11 @@ namespace Website.Models
 					xlass = reader1.GetString(reader1.GetOrdinal("class"));
 				};
 			}
-			string []list = { xlass, index };
+			list_index_class list = new list_index_class
+			{
+				class1 = xlass,
+				index = index
+			};
 			sqlConnection.Close();
 			return list;
 		}

@@ -864,9 +864,9 @@ namespace Website.Controllers
 			ViewBag.name = TempData["name"] as string;
 			TempData.Keep();
 			Case_information_db case_Information = new Case_information_db();
-			List<Case_informatio> list1 = case_Information.Get_Case_informatio("1");
-			List<Case_informatio> list2 = case_Information.Get_Case_informatio("2");
-			List<Case_informatio> list3 = case_Information.Get_Case_informatio("3");
+			List<Case_informatio> list1 = case_Information.Get_Case_informatio("停案");
+			List<Case_informatio> list2 = case_Information.Get_Case_informatio("穩定服務");
+			List<Case_informatio> list3 = case_Information.Get_Case_informatio("結案");
 			ViewBag.case1 = list1;
 			ViewBag.case2 = list2;
 			ViewBag.case3 = list3;
