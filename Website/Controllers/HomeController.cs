@@ -863,6 +863,9 @@ namespace Website.Controllers
 		{
 			ViewBag.name = TempData["name"] as string;
 			TempData.Keep();
+			Personnel_db personnel_Db = new Personnel_db();
+			List<Personnel> personnels = personnel_Db.personnel_select_worker(ViewBag.name);
+
 			Case_information_db case_Information = new Case_information_db();
 			List<Case_informatio> list1 = case_Information.Get_Case_informatio("停案");
 			List<Case_informatio> list2 = case_Information.Get_Case_informatio("穩定服務");
@@ -870,7 +873,7 @@ namespace Website.Controllers
 			ViewBag.case1 = list1;
 			ViewBag.case2 = list2;
 			ViewBag.case3 = list3;
-
+			ViewBag.personnel = personnels;
 			return View();
 		}
 		[HttpPost]

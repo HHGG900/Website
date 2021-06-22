@@ -8,6 +8,9 @@
 @{
 	List<Case_informatio> case3 = ViewBag.case3;
 }
+@{ 
+	List<Personnel> personnels = ViewBag.personnel;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1214,6 +1217,10 @@
 							<span class="redfont">＊</span>服務員別:
 							<select class="form-control" id="familypart">
 								<option value="">---請選擇---</option>
+								@foreach (Personnel personnel in personnels)
+								{
+									<option value="@personnel.name">@personnel.name</option>
+								}
 								<option value="羅小賢">羅小賢</option>
 								<option value="阿賢">阿賢</option>
 								<option value="大賢">大賢</option>
