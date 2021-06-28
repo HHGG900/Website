@@ -46,7 +46,27 @@
 				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
 					'<label for="message-text" class="col-form-label col-md-6">' +
 					'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
-					'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+					'照會項目:<select class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+						'<option value="">-請選擇-</option>'+
+						'<option value="BA01 基本身體清潔">BA01 基本身體清潔</option>'+
+					'<option value="BA02 基本日常照顧">BA02 基本日常照顧</option>' +
+					'<option value="BA03 測量生命徵象">BA03 測量生命徵象</option>' +
+					'<option value="BA04 協助進食或管灌餵食">BA04 協助進食或管灌餵食</option>' +
+					'<option value="BA05 餐食照顧">BA05 餐食照顧</option>' +
+					'<option value="BA07 協助沐浴及洗頭">BA07 協助沐浴及洗頭</option>' +
+					'<option value="BA08 足部照護">BA08 足部照護</option>' +
+					'<option value="BA010 翻身拍背">BA010 翻身拍背</option>' +
+					'<option value="BA011 肢體關節活動">BA011 肢體關節活動</option>' +
+					'<option value="BA012 協助上(下)樓梯">BA012 協助上(下)樓梯</option>' +
+					'<option value="BA013 陪同外出">BA013 陪同外出</option>' +
+					'<option value="BA014 陪同就醫">BA014 陪同就醫</option>' +
+					'<option value="BA017 協助執行輔助性醫療">BA017 協助執行輔助性醫療</option>' +
+					'<option value="BA018 安全看視">BA018 安全看視</option>' +
+					'<option value="BA020 陪伴服務">BA020 陪伴服務</option>' +
+					'<option value="BA022 巡視服務">BA022 巡視服務</option>' +
+					'<option value="BA023 協助洗頭">BA023 協助洗頭</option>' +
+					'<option value="BA024 協助排泄">BA024 協助排泄</option>' +
+					'</select>' +
 					'</label>' +
 					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
 					'</div>';
@@ -62,7 +82,27 @@
 			var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
 				'<label for="message-text" class="col-form-label col-md-6">' +
 				'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
-				'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+				'照會項目:<select class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+				'<option value="">-請選擇-</option>' +
+				'<option value="BA01 基本身體清潔">BA01 基本身體清潔</option>' +
+				'<option value="BA02 基本日常照顧">BA02 基本日常照顧</option>' +
+				'<option value="BA03 測量生命徵象">BA03 測量生命徵象</option>' +
+				'<option value="BA04 協助進食或管灌餵食">BA04 協助進食或管灌餵食</option>' +
+				'<option value="BA05 餐食照顧">BA05 餐食照顧</option>' +
+				'<option value="BA07 協助沐浴及洗頭">BA07 協助沐浴及洗頭</option>' +
+				'<option value="BA08 足部照護">BA08 足部照護</option>' +
+				'<option value="BA010 翻身拍背">BA010 翻身拍背</option>' +
+				'<option value="BA011 肢體關節活動">BA011 肢體關節活動</option>' +
+				'<option value="BA012 協助上(下)樓梯">BA012 協助上(下)樓梯</option>' +
+				'<option value="BA013 陪同外出">BA013 陪同外出</option>' +
+				'<option value="BA014 陪同就醫">BA014 陪同就醫</option>' +
+				'<option value="BA017 協助執行輔助性醫療">BA017 協助執行輔助性醫療</option>' +
+				'<option value="BA018 安全看視">BA018 安全看視</option>' +
+				'<option value="BA020 陪伴服務">BA020 陪伴服務</option>' +
+				'<option value="BA022 巡視服務">BA022 巡視服務</option>' +
+				'<option value="BA023 協助洗頭">BA023 協助洗頭</option>' +
+				'<option value="BA024 協助排泄">BA024 協助排泄</option>' +
+				'</select>' +
 				'</label>' +
 				'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
 				'</div>';
@@ -104,7 +144,7 @@
 				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
 					'<label for="message-text" class="col-form-label col-md-6">' +
 					'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
-					'照會項目:<input class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+					'照會項目:<select class="form-control" id="note_item-' + item + '" name="note_item[]">' +
 					'</label>' +
 					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
 					'</div>';
@@ -1150,11 +1190,11 @@
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>經濟別:
 							<select class="form-control" id="economic_class">
-								<option value="">---請選擇---</option>
-								<option value="1">一般戶</option>
-								<option value="2">長照中低(1.5-2.5倍)</option>
-								<option value="3">長照低收(未達1.5倍)</option>
-								<option value="4">長照低收(未達1倍)</option>
+								<option value="">-請選擇-</option>
+								<option value="一般戶">一般戶</option>
+								<option value="長照中低(1.5-2.5倍)">長照中低(1.5-2.5倍)</option>
+								<option value="長照低收(未達1.5倍)">長照低收(未達1.5倍)</option>
+								<option value="長照低收(未達1倍)">長照低收(未達1倍)</option>
 							</select>
 						</label>
 					</div>
@@ -1166,9 +1206,9 @@
 							障礙程度:
 							<select class="form-control" id="obstacle_degree">
 								<option value="">---請選擇---</option>
-								<option value="1">重度</option>
-								<option value="2">中度</option>
-								<option value="3">輕度</option>
+								<option value="重度">重度</option>
+								<option value="中度">中度</option>
+								<option value="輕度">輕度</option>
 							</select>
 						</label>
 					</div>
@@ -1188,14 +1228,14 @@
 							<span class="redfont">＊</span>CMS等級:
 							<select class="form-control" id="cms_class">
 								<option value="">---請選擇---</option>
-								<option value="1">第1級</option>
-								<option value="2">第2級</option>
-								<option value="3">第3級</option>
-								<option value="4">第4級</option>
-								<option value="5">第5級</option>
-								<option value="6">第6級</option>
-								<option value="7">第7級</option>
-								<option value="8">第8級</option>
+								<option value="第1級">第1級</option>
+								<option value="第2級">第2級</option>
+								<option value="第3級">第3級</option>
+								<option value="第4級">第4級</option>
+								<option value="第5級">第5級</option>
+								<option value="第6級">第6級</option>
+								<option value="第7級">第7級</option>
+								<option value="第8級">第8級</option>
 							</select>
 						</label>
 					</div>
@@ -1205,8 +1245,30 @@
 						<div id="addDiv0" class="form-group">
 							<label for="message-text" class="col-form-label col-md-6">
 								<a href="javascript:void(0);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
-								照會項目:<input class="form-control" id="note_item-0" name="note_item[]">
-							</label><label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-0" name="note_count[]"></label>
+								照會項目:
+								<select class="form-control" id="note_item-0" name="note_item[]">
+									<option value="">-請選擇-</option>
+									<option value="BA01 基本身體清潔">BA01 基本身體清潔</option>
+									<option value="BA02 基本日常照顧">BA02 基本日常照顧</option>
+									<option value="BA03 測量生命徵象">BA03 測量生命徵象</option>
+									<option value="BA04 協助進食或管灌餵食">BA04 協助進食或管灌餵食</option>
+									<option value="BA05 餐食照顧">BA05 餐食照顧</option>
+									<option value="BA07 協助沐浴及洗頭">BA07 協助沐浴及洗頭</option>
+									<option value="BA08 足部照護">BA08 足部照護</option>
+									<option value="BA010 翻身拍背">BA010 翻身拍背</option>
+									<option value="BA011 肢體關節活動">BA011 肢體關節活動</option>
+									<option value="BA012 協助上(下)樓梯">BA012 協助上(下)樓梯</option>
+									<option value="BA013 陪同外出">BA013 陪同外出</option>
+									<option value="BA014 陪同就醫">BA014 陪同就醫</option>
+									<option value="BA017 協助執行輔助性醫療">BA017 協助執行輔助性醫療</option>
+									<option value="BA018 安全看視">BA018 安全看視</option>
+									<option value="BA020 陪伴服務">BA020 陪伴服務</option>
+									<option value="BA022 巡視服務">BA022 巡視服務</option>
+									<option value="BA023 協助洗頭">BA023 協助洗頭</option>
+									<option value="BA024 協助排泄">BA024 協助排泄</option>
+								</select>
+							</label>
+							<label for="message-text" class="col-form-label ">&nbsp;照會數量:<input class="form-control" id="note_count-0" name="note_count[]"></label>
 						</div>
 					</div>
 					<div class="form-group">
@@ -1216,14 +1278,14 @@
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>服務員別:
 							<select class="form-control" id="familypart">
-								<option value="">---請選擇---</option>
+								<option value="">-請選擇-</option>
 								@foreach (Personnel personnel in personnels)
 								{
 									<option value="@personnel.name">@personnel.name</option>
 								}
-								<option value="羅小賢">羅小賢</option>
-								<option value="阿賢">阿賢</option>
-								<option value="大賢">大賢</option>
+							<option value="服務員1">服務員1</option>
+							<option value="服務員2">服務員2</option>
+							<option value="服務員3">服務員3</option>
 							</select>
 						</label>
 					</div>
@@ -1231,7 +1293,7 @@
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>個案狀態:
 							<select class="form-control" id="status">
-								<option value="">---請選擇---</option>
+								<option value="">-請選擇-</option>
 								<option value="穩定服務">穩定服務</option>
 								<option value="停案">停案</option>
 								<option value="結案">結案</option>
@@ -1294,11 +1356,11 @@
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>經濟別:
 							<select class="form-control" id="economic_class">
-								<option value="">---請選擇---</option>
-								<option value="1">一般戶</option>
-								<option value="2">長照中低(1.5-2.5倍)</option>
-								<option value="3">長照低收(未達1.5倍)</option>
-								<option value="4">長照低收(未達1倍)</option>
+								<option value="">-請選擇-</option>
+								<option value="一般戶">一般戶</option>
+								<option value="長照中低(1.5-2.5倍)">長照中低(1.5-2.5倍)</option>
+								<option value="長照低收(未達1.5倍)">長照低收(未達1.5倍)</option>
+								<option value="長照低收(未達1倍)">長照低收(未達1倍)</option>
 							</select>
 						</label>
 					</div>
@@ -1310,9 +1372,9 @@
 							障礙程度:
 							<select class="form-control" id="obstacle_degree">
 								<option value="">---請選擇---</option>
-								<option value="1">重度</option>
-								<option value="2">中度</option>
-								<option value="3">輕度</option>
+								<option value="重度">重度</option>
+								<option value="中度">中度</option>
+								<option value="輕度">輕度</option>
 							</select>
 						</label>
 					</div>
@@ -1331,15 +1393,15 @@
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>CMS等級:
 							<select class="form-control" id="cms_class">
-								<option value="">---請選擇---</option>
-								<option value="1">第1級</option>
-								<option value="2">第2級</option>
-								<option value="3">第3級</option>
-								<option value="4">第4級</option>
-								<option value="5">第5級</option>
-								<option value="6">第6級</option>
-								<option value="7">第7級</option>
-								<option value="8">第8級</option>
+								<option value="">-請選擇-</option>
+								<option value="第1級">第1級</option>
+								<option value="第2級">第2級</option>
+								<option value="第3級">第3級</option>
+								<option value="第4級">第4級</option>
+								<option value="第5級">第5級</option>
+								<option value="第6級">第6級</option>
+								<option value="第7級">第7級</option>
+								<option value="第8級">第8級</option>
 							</select>
 						</label>
 					</div>
@@ -1347,10 +1409,29 @@
 					<div id="addDiv" class="form-group">
 						<label for="message-text" class="col-form-label col-md-6">
 							<a href="javascript:addNoteDetail(1);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
-							照會項目:<input class="form-control" id="note_item-1" name="note_item[]">
-						</label>
-						<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-1" name="note_count[]"></label>
-					</div>
+							照會項目:
+							<select class="form-control" id="note_item-0" name="note_item[]">
+								<option value="">-請選擇-</option>
+								<option value="BA01 基本身體清潔">BA01 基本身體清潔</option>
+								<option value="BA02 基本日常照顧">BA02 基本日常照顧</option>
+								<option value="BA03 測量生命徵象">BA03 測量生命徵象</option>
+								<option value="BA04 協助進食或管灌餵食">BA04 協助進食或管灌餵食</option>
+								<option value="BA05 餐食照顧">BA05 餐食照顧</option>
+								<option value="BA07 協助沐浴及洗頭">BA07 協助沐浴及洗頭</option>
+								<option value="BA08 足部照護">BA08 足部照護</option>
+								<option value="BA010 翻身拍背">BA010 翻身拍背</option>
+								<option value="BA011 肢體關節活動">BA011 肢體關節活動</option>
+								<option value="BA012 協助上(下)樓梯">BA012 協助上(下)樓梯</option>
+								<option value="BA013 陪同外出">BA013 陪同外出</option>
+								<option value="BA014 陪同就醫">BA014 陪同就醫</option>
+								<option value="BA017 協助執行輔助性醫療">BA017 協助執行輔助性醫療</option>
+								<option value="BA018 安全看視">BA018 安全看視</option>
+								<option value="BA020 陪伴服務">BA020 陪伴服務</option>
+								<option value="BA022 巡視服務">BA022 巡視服務</option>
+								<option value="BA023 協助洗頭">BA023 協助洗頭</option>
+								<option value="BA024 協助排泄">BA024 協助排泄</option>
+							</select>&nbsp; 照會數量:<input class="form-control" id="note_count-1" name="note_count[]"></label>
+						</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>照會單位:<input class="form-control" id="note_unit">
@@ -1358,10 +1439,10 @@
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>服務員別:
 							<select class="form-control" id="familypart">
-								<option value="">---請選擇---</option>
-								<option value="2">羅小賢</option>
-								<option value="3">阿賢</option>
-								<option value="4">大賢</option>
+								<option value="">-請選擇-</option>
+								<option value="服務員1">服務員1</option>
+								<option value="服務員2">服務員2</option>
+								<option value="服務員3">服務員3</option>
 							</select>
 						</label>
 					</div>
@@ -1369,7 +1450,7 @@
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>個案狀態:
 							<select class="form-control" id="status">
-								<option value="">---請選擇---</option>
+								<option value="">-請選擇-</option>
 								<option value="2">穩定服務</option>
 								<option value="1">停案</option>
 								<option value="3">結案</option>
