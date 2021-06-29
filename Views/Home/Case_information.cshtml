@@ -40,13 +40,52 @@
 		window.onload = function () {
 			console.log('@ViewBag.name');
 		}
+		function select_change(num) {
+			var select_velue = document.getElementById("note_item-" + num).value;
+			if (select_velue == "基本身體清潔")
+				document.getElementById("note_count-" + num).value = "BA01";
+			if (select_velue == "基本日常照顧")
+				document.getElementById("note_count-" + num).value = "BA02";
+			if (select_velue == "測量生命徵象")
+				document.getElementById("note_count-" + num).value = "BA03";
+			if (select_velue == "協助進食或管灌餵食")
+				document.getElementById("note_count-" + num).value = "BA04";
+			if (select_velue == "餐食照顧")
+				document.getElementById("note_count-" + num).value = "BA05";
+			if (select_velue == "協助沐浴及洗頭")
+				document.getElementById("note_count-" + num).value = "BA07";
+			if (select_velue == "足部照護")
+				document.getElementById("note_count-" + num).value = "BA08";
+			if (select_velue == "翻身拍背")
+				document.getElementById("note_count-" + num).value = "BA010";
+			if (select_velue == "肢體關節活動")
+				document.getElementById("note_count-" + num).value = "BA011";
+			if (select_velue == "協助上(下)樓梯")
+				document.getElementById("note_count-" + num).value = "BA012";
+			if (select_velue == "陪同外出")
+				document.getElementById("note_count-" + num).value = "BA013";
+			if (select_velue == "陪同就醫")
+				document.getElementById("note_count-" + num).value = "BA014";
+			if (select_velue == "協助執行輔助性醫療")
+				document.getElementById("note_count-" + num).value = "BA017";
+			if (select_velue == "安全看視")
+				document.getElementById("note_count-" + num).value = "BA018";
+			if (select_velue == "陪伴服務")
+				document.getElementById("note_count-" + num).value = "BA020";
+			if (select_velue == "巡視服務")
+				document.getElementById("note_count-" + num).value = "BA022";
+			if (select_velue == "協助洗頭")
+				document.getElementById("note_count-" + num).value = "BA023";
+			if (select_velue == "協助排泄")
+				document.getElementById("note_count-" + num).value = "BA024";
+		}
 		function Addhtml() {
 			item++;
 			if (item <= 10) {
 				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
 					'<label for="message-text" class="col-form-label col-md-6">' +
 					'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
-					'照會項目:<select class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+					'照會項目:<select class="form-control" id="note_item-' + item + '" onchange = "select_change('+item+')" name="note_item[]">' +
 						'<option value="">-請選擇-</option>'+
 						'<option value="基本身體清潔">基本身體清潔</option>'+
 					'<option value="基本日常照顧">基本日常照顧</option>' +
@@ -82,7 +121,7 @@
 			var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
 				'<label for="message-text" class="col-form-label col-md-6">' +
 				'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
-				'照會項目:<select class="form-control" id="note_item-' + item + '" name="note_item[]">' +
+				'照會項目:<select class="form-control" id="note_item-' + item + '" onchange = "select_change(' + item +')" name="note_item[]">' +
 				'<option value="">-請選擇-</option>' +
 				'<option value="基本身體清潔">基本身體清潔</option>' +
 				'<option value="基本日常照顧">基本日常照顧</option>' +
@@ -1246,7 +1285,7 @@
 							<label for="message-text" class="col-form-label col-md-6">
 								<a href="javascript:void(0);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
 								照會項目:
-								<select class="form-control" id="note_item-0" name="note_item[]">
+								<select class="form-control" id="note_item-0" onchange="select_change(0);" name="note_item[]">
 									<option value="">-請選擇-</option>
 									<option value="基本身體清潔">基本身體清潔</option>
 									<option value="基本日常照顧">基本日常照顧</option>
@@ -1410,7 +1449,7 @@
 						<label for="message-text" class="col-form-label col-md-6">
 							<a href="javascript:addNoteDetail(1);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
 							照會項目:
-							<select class="form-control" id="note_item-0" name="note_item[]">
+							<select class="form-control" id="note_item-0" onchange="select_change(0)" name="note_item[]">
 								<option value="">-請選擇-</option>
 								<option value="基本身體清潔">基本身體清潔</option>
 								<option value="基本日常照顧">基本日常照顧</option>

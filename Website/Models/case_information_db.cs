@@ -148,14 +148,13 @@ namespace Website.Models
 			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM case_informatio where status = '" + status + "'");
 			sqlCommand.Connection = sqlConnection;
 			sqlConnection.Open();
-			List<string> list = new List<string>();
 			SqlDataReader reader = sqlCommand.ExecuteReader();
 			
 			if (reader.HasRows)
 			{
 				while (reader.Read())
 				{
-					
+					List<string> list = new List<string>();
 					list.Add(GetString(reader.GetOrdinal("BA1project"), reader));
 					list.Add(GetString(reader.GetOrdinal("BA2project"), reader));
 					list.Add(GetString(reader.GetOrdinal("BA3project"), reader));
