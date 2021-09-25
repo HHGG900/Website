@@ -77,17 +77,52 @@ namespace Website.Models
 			sqlCommand.Parameters.Add(new SqlParameter("@phone", personnel.phone));
 			sqlCommand.Parameters.Add(new SqlParameter("@census", personnel.census));
 			sqlCommand.Parameters.Add(new SqlParameter("@contact", personnel.contact));
-			sqlCommand.Parameters.Add(new SqlParameter("@identity_card_positive", personnel.identity_card_positive));
-			sqlCommand.Parameters.Add(new SqlParameter("@identity_card_rebel", personnel.identity_card_rebel));
-			sqlCommand.Parameters.Add(new SqlParameter("@education", personnel.education));
-			sqlCommand.Parameters.Add(new SqlParameter("@professional_license", personnel.professional_license));
-			sqlCommand.Parameters.Add(new SqlParameter("@CPR_training_certificate", personnel.CPR_training_certificate));
-			sqlCommand.Parameters.Add(new SqlParameter("@Long_term_work_permit", personnel.Long_term_work_permit));
-			sqlCommand.Parameters.Add(new SqlParameter("@related_training1", personnel.related_training1));
-			sqlCommand.Parameters.Add(new SqlParameter("@related_training2", personnel.related_training2));
-			sqlCommand.Parameters.Add(new SqlParameter("@related_training3", personnel.related_training3));
-			sqlCommand.Parameters.Add(new SqlParameter("@related_training4", personnel.related_training4));
-			sqlCommand.Parameters.Add(new SqlParameter("@work_contract_scan", personnel.work_contract_scan));
+			if (personnel.identity_card_positive == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@identity_card_positive", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@identity_card_positive", personnel.identity_card_positive));
+
+			if (personnel.identity_card_rebel == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@identity_card_rebel", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@identity_card_rebel", personnel.identity_card_rebel));
+			if (personnel.education == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@education", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@education", personnel.education));
+			if (personnel.professional_license == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@edprofessional_licenseucation", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@professional_license", personnel.professional_license));
+			if (personnel.CPR_training_certificate == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@CPR_training_certificate", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@CPR_training_certificate", personnel.CPR_training_certificate));
+			if (personnel.Long_term_work_permit == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@Long_term_work_permit", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@Long_term_work_permit", personnel.Long_term_work_permit));
+			if (personnel.related_training1 == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@related_training1", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@related_training1", personnel.related_training1));
+			if (personnel.related_training2 == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@related_training2", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@related_training2", personnel.related_training2));
+			if (personnel.related_training3 == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@related_training3", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@related_training3", personnel.related_training3));
+			if (personnel.related_training4 == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@related_training4", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@related_training4", personnel.related_training4));
+			if (personnel.work_contract_scan == null)
+				sqlCommand.Parameters.Add(new SqlParameter("@work_contract_scan", DBNull.Value));
+			else
+				sqlCommand.Parameters.Add(new SqlParameter("@work_contract_scan", personnel.work_contract_scan));
+
 			if (personnel.signature == null)
 				sqlCommand.Parameters.Add(new SqlParameter("@signature", DBNull.Value));
 
@@ -108,7 +143,7 @@ namespace Website.Models
 			sqlCommand.Parameters.Add(new SqlParameter("@post2", personnel.post2));
 			sqlCommand.Parameters.Add(new SqlParameter("@six", personnel.six));
 			sqlCommand.Parameters.Add(new SqlParameter("@blood", personnel.blood));
-			sqlCommand.Parameters.Add(new SqlParameter("@born", personnel.born)); 
+			sqlCommand.Parameters.Add(new SqlParameter("@born", personnel.born));
 			sqlCommand.Parameters.Add(new SqlParameter("@ID_number", personnel.ID_number));
 			sqlCommand.Parameters.Add(new SqlParameter("@phone", personnel.phone));
 			sqlCommand.Parameters.Add(new SqlParameter("@census", personnel.census));

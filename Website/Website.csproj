@@ -120,6 +120,7 @@
     <Content Include="images\raw_1536051633.png" />
     <Content Include="images\raw_1536052176.png" />
     <Content Include="images\uplod_picture.png" />
+    <Content Include="images\樣本.jpg" />
     <Content Include="images\照片1.jpg" />
     <Content Include="js\DatePicker\WdatePicker.js" />
     <Content Include="js\jquery.cookie.js" />

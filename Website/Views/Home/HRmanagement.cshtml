@@ -226,6 +226,11 @@
 					$('#form1').submit();
 				}
 			}
+			function nofind() {
+				var img = event.srcElement;
+				img.src = "~/images/樣本.jpg" ; //替換的圖片
+				img.onerror = null; //控制不要一直觸發錯誤
+			}
 	</script>
 	<style>
 		.selectCss {
@@ -455,89 +460,89 @@
 									<div class="serviceBlock__whiteBlock">
 										<header>身分證正面存檔</header>
 										<label for="inputidentity_card_positive">
-											<input type="file" id="identity_card_positive" name="identity_card_positive" value="file.name" onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="identity_card_positive" name="identity_card_positive" value="file.name" placeholder="file.name" onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah1" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah1" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>身分證反面存檔</header>
 										<label for="inputidentity_card_rebel">
-											<input type="file" id="identity_card_rebel" name="identity_card_rebel" value="file.name" onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="identity_card_rebel" name="identity_card_rebel" value="file.name" placeholder="file.name" onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah2" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah2" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>最高學歷證書存檔</header>
 										<label for="inputeducation">
-											<input type="file" id="education " name="education " value="file.name" onchange="document.getElementById('blah3').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="education " name="education " value="file.name" placeholder="file.name" onchange="document.getElementById('blah3').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1X.jpg" id="blah3" alt="your image" class="autoimg">
+											<img src="~/images/照片1X.jpg" id="blah3" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>專業證書件存檔</header>
 										<label for="inputprofessional_license">
-											<input type="file" id="professional_license" name="professional_license" value="file.name" onchange="document.getElementById('blah4').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="professional_license" name="professional_license" value="file.name" placeholder="file.name" onchange="document.getElementById('blah4').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" " id="blah4" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" " id="blah4" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>CPR 訓練證書存檔</header>
 										<label for="inputCPR_training_certificate">
-											<input type="file" id="CPR_training_certificate" name="CPR_training_certificate" value="file.name" onchange="document.getElementById('blah5').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="CPR_training_certificate" name="CPR_training_certificate" value="file.name" placeholder="file.name" onchange="document.getElementById('blah5').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah5" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah5" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>長照工作證存檔</header>
 										<label for="inputLong_term_work_permit">
-											<input type="file" id="Long_term_work_permit" name="Long_term_work_permit" value="file.name" onchange="document.getElementById('blah6').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="Long_term_work_permit" name="Long_term_work_permit" value="file.name" placeholder="file.name" onchange="document.getElementById('blah6').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah6" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah6" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>相關訓練證書存檔</header>
 										<label for="inputrelated_training1">
-											<input type="file" id="related_training1" name="related_training1" value="file.name" onchange="document.getElementById('blah7').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="related_training1" name="related_training1" value="file.name" placeholder="file.name" onchange="document.getElementById('blah7').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah7" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah7" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>相關訓練證書存檔</header>
 										<label for="inputrelated_training2">
-											<input type="file" id="related_training2" name="related_training2" value="file.name" onchange="document.getElementById('blah8').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="related_training2" name="related_training2" value="file.name"  placeholder="file.name" onchange="document.getElementById('blah8').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah8" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah8" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>相關訓練證書存檔</header>
 										<label for="inputrelated_training3">
-											<input type="file" id="related_training3" name="related_training3" value="file.name" onchange="document.getElementById('blah9').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="related_training3" name="related_training3" value="file.name" placeholder="file.name" onchange="document.getElementById('blah9').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah9" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah9" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock">
 										<header>相關訓練證書存檔</header>
 										<label for="inputrelated_training4">
-											<input type="file" id="related_training4" name="related_training4" value="file.name" onchange="document.getElementById('blah10').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="related_training4" name="related_training4" value="file.name" placeholder="file.name" onchange="document.getElementById('blah10').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah10" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah10" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 									<div class="serviceBlock__whiteBlock serviceBlock__whiteBlock--big">
 										<header>工作契約文件掃描存檔</header>
 										<label for="inputwork_contract_scan">
-											<input type="file" id="work_contract_scan" name="work_contract_scan" value="file.name" onchange="document.getElementById('blah11').src = window.URL.createObjectURL(this.files[0])"  >
+											<input type="file" id="work_contract_scan" name="work_contract_scan" value="file.name" placeholder="file.name" onchange="document.getElementById('blah11').src = window.URL.createObjectURL(this.files[0])"  >
 											<br />
-											<img src="~/images/照片1.jpg" id="blah11" alt="your image" class="autoimg">
+											<img src="~/images/照片1.jpg" id="blah11" alt="your image" class="autoimg" onerror="nofind()">
 										</label>
 									</div>
 								</div>
