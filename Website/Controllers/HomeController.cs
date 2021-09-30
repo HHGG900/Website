@@ -45,15 +45,17 @@ namespace Website.Controllers
 			Sign_in_db sign_db = new Sign_in_db();
 			List<Sign_in> sign = new List<Sign_in>();
 			sign = sign_db.sign_in_select(usr_index, usr_key, usr_name);
-			
+			int i = 0;
 			//抓去職位名
 			foreach (Sign_in sig in sign)
 			{
-				if (sig.post1 != "")
+				i += 1;
+				//if (sig.post1 != "")
 					post1 = sig.post1;
-				if(sig.post2 != "")
+				//if(sig.post2 != "")
 					post2 = sig.post2;
-			}	
+			}
+			TempData["i"] = i.ToString();
 			TempData["post1"] = post1;
 			TempData["post2"] = post2;
 			TempData["name"] = usr_name;
@@ -204,7 +206,7 @@ namespace Website.Controllers
 				personnel.work_contract_scan = string.Format("work_contract_scan-{0}-{1}.jpg", personnel.name, DateTime.Now.ToString("yyyyMMddHmm"));
 				Personnel_db personnel_db = new Personnel_db();
 				personnel_db.personnel_insert(personnel);
-				if (personnel.post1 == "居家服務員" || personnel.post2 == "居家服務員")
+				if (personnel.post1 == "照服員" || personnel.post2 == "照服員")
 				{
 					Roster_db roster = new Roster_db();
 					roster.Roster_insert(personnel.name);
@@ -867,12 +869,14 @@ namespace Website.Controllers
 			List<Personnel> personnels = personnel_Db.personnel_select_worker(ViewBag.name);
 
 			Case_information_db case_Information = new Case_information_db();
+			List<Case_informatio> list4 = case_Information.Get_ALL_Case_informatio();
 			List<Case_informatio> list1 = case_Information.Get_Case_informatio("停案");
 			List<Case_informatio> list2 = case_Information.Get_Case_informatio("穩定服務");
 			List<Case_informatio> list3 = case_Information.Get_Case_informatio("結案");
 			ViewBag.case1 = list1;
 			ViewBag.case2 = list2;
 			ViewBag.case3 = list3;
+			ViewBag.case4 = list4;
 			ViewBag.personnel = personnels;
 			return View();
 		}
@@ -883,6 +887,22 @@ namespace Website.Controllers
 			case_Information_Db.New_case_information(case_Information, TempData["name"] as string);
 			TempData.Keep();
 			return Json(Url.Action("Case_information"));
+		}
+		[HttpPost]
+		public ActionResult Case_information11(Case_informatio case_Information)
+		{
+			Case_information_db case_Information_Db = new Case_information_db();
+			case_Information_Db.Update_case_information(case_Information, TempData["name"] as string);
+			TempData.Keep();
+			return Json(Url.Action("Case_information"));
+		}
+		[HttpPost]
+		public ActionResult get_case_infomation_data(string id)
+		{
+			Case_information_db case_Information_Db = new Case_information_db();
+			List<Case_informatio> list1 = case_Information_Db.Get_One_Case_informatio(id);
+			TempData.Keep();
+			return Json(list1);
 		}
 		//個案新進
 		public ActionResult New_cases()

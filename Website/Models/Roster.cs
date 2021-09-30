@@ -225,6 +225,8 @@ namespace Website.Models
 		[DisplayName("")]
 		 
 		public string in_time { get; set; }
+		public string arrival { get; set; }
+		
 
 	}
 }

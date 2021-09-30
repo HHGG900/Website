@@ -8,7 +8,10 @@
 @{
 	List<Case_informatio> case3 = ViewBag.case3;
 }
-@{ 
+@{
+	List<Case_informatio> case4 = ViewBag.case4;
+}
+@{
 	List<Personnel> personnels = ViewBag.personnel;
 }
 <!DOCTYPE html>
@@ -35,7 +38,7 @@
 	<script src="/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>
 
 	<script>
-		var item = 1;
+		var item = 0;
 		var toEdit = 0;
 		window.onload = function () {
 			console.log('@ViewBag.name');
@@ -79,12 +82,53 @@
 			if (select_velue == "協助排泄")
 				document.getElementById("note_count-" + num).value = "BA024";
 		}
+		function select_change1(num) {
+			console.log("123");
+			var select_velue = document.getElementById("note_item1-" + num).value;
+			
+			if (select_velue == "基本身體清潔")
+				document.getElementById("note_count1-" + num).value = "BA01";
+			if (select_velue == "基本日常照顧")
+				document.getElementById("note_count1-" + num).value = "BA02";
+			if (select_velue == "測量生命徵象")
+				document.getElementById("note_count1-" + num).value = "BA03";
+			if (select_velue == "協助進食或管灌餵食")
+				document.getElementById("note_count1-" + num).value = "BA04";
+			if (select_velue == "餐食照顧")
+				document.getElementById("note_count1-" + num).value = "BA05";
+			if (select_velue == "協助沐浴及洗頭")
+				document.getElementById("note_count1-" + num).value = "BA07";
+			if (select_velue == "足部照護")
+				document.getElementById("note_count1-" + num).value = "BA08";
+			if (select_velue == "翻身拍背")
+				document.getElementById("note_count1-" + num).value = "BA010";
+			if (select_velue == "肢體關節活動")
+				document.getElementById("note_count1-" + num).value = "BA011";
+			if (select_velue == "協助上(下)樓梯")
+				document.getElementById("note_count1-" + num).value = "BA012";
+			if (select_velue == "陪同外出")
+				document.getElementById("note_count1-" + num).value = "BA013";
+			if (select_velue == "陪同就醫")
+				document.getElementById("note_count1-" + num).value = "BA014";
+			if (select_velue == "協助執行輔助性醫療")
+				document.getElementById("note_count1-" + num).value = "BA017";
+			if (select_velue == "安全看視")
+				document.getElementById("note_count1-" + num).value = "BA018";
+			if (select_velue == "陪伴服務")
+				document.getElementById("note_count1-" + num).value = "BA020";
+			if (select_velue == "巡視服務")
+				document.getElementById("note_count1-" + num).value = "BA022";
+			if (select_velue == "協助洗頭")
+				document.getElementById("note_count1-" + num).value = "BA023";
+			if (select_velue == "協助排泄")
+				document.getElementById("note_count1-" + num).value = "BA024";
+		}
 		function Addhtml() {
 			item++;
 			if (item <= 10) {
 				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
 					'<label for="message-text" class="col-form-label col-md-6">' +
-					'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+					'<a href="jacaascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
 					'照會項目:<select class="form-control" id="note_item-' + item + '" onchange = "select_change('+item+')" name="note_item[]">' +
 						'<option value="">-請選擇-</option>'+
 						'<option value="基本身體清潔">基本身體清潔</option>'+
@@ -93,7 +137,7 @@
 					'<option value="協助進食或管灌餵食">協助進食或管灌餵食</option>' +
 					'<option value="餐食照顧">餐食照顧</option>' +
 					'<option value="協助沐浴及洗頭">協助沐浴及洗頭</option>' +
-					'<option value="足部照護">足部照護</option>' +
+					'<opcaion value="足部照護">足部照護</option>' +
 					'<option value="翻身拍背">翻身拍背</option>' +
 					'<option value="肢體關節活動">肢體關節活動</option>' +
 					'<option value="協助上(下)樓梯">協助上(下)樓梯</option>' +
@@ -116,10 +160,47 @@
 			}
 		}
 
+		function AddhtmlAddhtml() {
+			item++;
+			if (item <= 10) {
+				var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+					'<label for="message-text" class="col-form-label col-md-6">' +
+					'<a href="jacaascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+					'照會項目:<select class="form-control" id="note_item1-' + item + '" onchange = "select_change1(' + item + ');" name="note_item[]">' +
+					'<option value="">-請選擇-</option>' +
+					'<option value="基本身體清潔">基本身體清潔</option>' +
+					'<option value="基本日常照顧">基本日常照顧</option>' +
+					'<option value="測量生命徵象">測量生命徵象</option>' +
+					'<option value="協助進食或管灌餵食">協助進食或管灌餵食</option>' +
+					'<option value="餐食照顧">餐食照顧</option>' +
+					'<option value="協助沐浴及洗頭">協助沐浴及洗頭</option>' +
+					'<opcaion value="足部照護">足部照護</option>' +
+					'<option value="翻身拍背">翻身拍背</option>' +
+					'<option value="肢體關節活動">肢體關節活動</option>' +
+					'<option value="協助上(下)樓梯">協助上(下)樓梯</option>' +
+					'<option value="陪同外出">陪同外出</option>' +
+					'<option value="陪同就醫">陪同就醫</option>' +
+					'<option value="協助執行輔助性醫療">協助執行輔助性醫療</option>' +
+					'<option value="安全看視">安全看視</option>' +
+					'<option value="陪伴服務">陪伴服務</option>' +
+					'<option value="巡視服務">巡視服務</option>' +
+					'<option value="協助洗頭">協助洗頭</option>' +
+					'<option value="協助排泄">協助排泄</option>' +
+					'</select>' +
+					'</label>' +
+					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count1-' + item + '" name="note_count[]"></label>' +
+					'</div>';
+				document.getElementById("addDivadd").innerHTML += addhtml;
+			}
+			else {
+				window.alert('照會項目已滿!!');
+			}
+		}
+
 		function Delhtml() {
-			item = 1;
+			item = 0;
 			var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
-				'<label for="message-text" class="col-form-label col-md-6">' +
+				'<label for="message-text" class="col-form-label col-mca-6">' +
 				'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
 				'照會項目:<select class="form-control" id="note_item-' + item + '" onchange = "select_change(' + item +')" name="note_item[]">' +
 				'<option value="">-請選擇-</option>' +
@@ -129,7 +210,7 @@
 				'<option value="協助進食或管灌餵食">協助進食或管灌餵食</option>' +
 				'<option value="餐食照顧">餐食照顧</option>' +
 				'<option value="協助沐浴及洗頭">協助沐浴及洗頭</option>' +
-				'<option value="足部照護">足部照護</option>' +
+				'<ocation value="足部照護">足部照護</option>' +
 				'<option value="翻身拍背">翻身拍背</option>' +
 				'<option value="肢體關節活動">肢體關節活動</option>' +
 				'<option value="協助上(下)樓梯">協助上(下)樓梯</option>' +
@@ -147,6 +228,39 @@
 				'</div>';
 			console.log(item);
 			document.getElementById("addDiv").innerHTML = addhtml;
+		}
+
+		function Delhtml1() {
+			item = 0;
+			var addhtml = '<div id="addDiv' + item + '" class="form-group">' +
+				'<label for="message-text" class="col-form-label col-mca-6">' +
+				'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+				'照會項目:<select class="form-control" id="note_item1-' + item + '" onchange = "select_change1(' + item + ')" name="note_item[]">' +
+				'<option value="">-請選擇-</option>' +
+				'<option value="基本身體清潔">基本身體清潔</option>' +
+				'<option value="基本日常照顧">基本日常照顧</option>' +
+				'<option value="測量生命徵象">測量生命徵象</option>' +
+				'<option value="協助進食或管灌餵食">協助進食或管灌餵食</option>' +
+				'<option value="餐食照顧">餐食照顧</option>' +
+				'<option value="協助沐浴及洗頭">協助沐浴及洗頭</option>' +
+				'<ocation value="足部照護">足部照護</option>' +
+				'<option value="翻身拍背">翻身拍背</option>' +
+				'<option value="肢體關節活動">肢體關節活動</option>' +
+				'<option value="協助上(下)樓梯">協助上(下)樓梯</option>' +
+				'<option value="陪同外出">陪同外出</option>' +
+				'<option value="陪同就醫">陪同就醫</option>' +
+				'<option value="協助執行輔助性醫療">協助執行輔助性醫療</option>' +
+				'<option value="安全看視">安全看視</option>' +
+				'<option value="陪伴服務">陪伴服務</option>' +
+				'<option value="巡視服務">巡視服務</option>' +
+				'<option value="協助洗頭">協助洗頭</option>' +
+				'<option value="協助排泄">協助排泄</option>' +
+				'</select>' +
+				'</label>' +
+				'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count1-' + item + '" name="note_count[]"></label>' +
+				'</div>';
+			console.log(item);
+			document.getElementById("addDivadd").innerHTML = addhtml;
 		}
 
 		$(function () {
@@ -185,7 +299,7 @@
 					'<a href="javascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
 					'照會項目:<select class="form-control" id="note_item-' + item + '" name="note_item[]">' +
 					'</label>' +
-					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count-' + item + '" name="note_count[]"></label>' +
+					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count1-' + item + '" name="note_count[]"></label>' +
 					'</div>';
 
 				$('#addDiv').append(addhtml);
@@ -211,96 +325,73 @@
 				}
 
 				if (toEdit == 0) {
-					$.ajax({
-						url: "/case_manage/get_case_infomation_data",
-						type: "POST",
-						dataType: 'json',
-						data: {
-							id: chk,
-						},
-						success: function (data, status, xhr) {
-							console.log(data, status, xhr);
-							if (data.code == 200) {
-								toEdit = 1;
-								modal.find('#id').val(data.result.id);
-								modal.find('#firstname').val(data.result.firstname);
-								modal.find('#lastname').val(data.result.lastname);
-								// modal.find('#lastname').val(data.result.name);
-								modal.find('#gender').val(data.result.gender);
-								modal.find('#birthday').val(data.result.birthday);
-								modal.find('#pid_last_5').val(data.result.pid_last_5);
-								modal.find('#phone').val(data.result.phone);
-								modal.find('#economic_class').val(data.result.economic_class);
-								modal.find('#obstacle_category').val(data.result.obstacle_category);
-								modal.find('#obstacle_degree').val(data.result.obstacle_degree);
-								modal.find('#contact_person').val(data.result.contact_person);
-								modal.find('#contact_mobile').val(data.result.contact_mobile);
-								modal.find('#note_date').val(data.result.note_date);
-								modal.find('#cms_class').val(data.result.cms_class);
-								modal.find('#note_unit').val(data.result.note_unit);
-								modal.find('#familypart').val(data.result.familypart);
-								modal.find('#status').val(data.result.status);
-								modal.find('#no_service_reason').val(data.result.no_service_reason);
-								modal.find('#no_service_date').val(data.result.no_service_date);
 
-								var note_details = data.result.note_details_decode;
-								console.log(note_details);
-								var num = note_details.length;
-								addNoteDetail(num - 1);
+					@foreach (Case_informatio ca in case4)
+					{
 
-								for (var i = 0; i < note_details.length; i++) {
-									var j = i + 1;
-									// console.log(note_details);
-									modal.find('#note_item-' + j).val(note_details[i].note_item);
-									modal.find('#note_count-' + j).val(note_details[i].note_count);
-								}
-								// modal.find('#note_item-1').val(data.result.note_details_decode-0->note_item);
-								// modal.find('#note_count-1').val(data.result.note_details_decode[0]->note_count);
-							}
-							else {
-								alert('無此資料!');
-								return false;
-							}
-						},
-						error: function (xhr, ajaxOptions, thrownError) {
-							console.log(xhr, ajaxOptions, thrownError);
-							alert('發生錯誤!');
-							return false;
+						@:if (@ca.index == chk){
+							@:toEdit = 1;
+							@*@:modal.find('#id').val(@ca.index);*@
+							@:modal.find('#lastname').val('@ca.name');
+							// modal.find('#lastname').val(data.result.name);
+							@:modal.find('#gender').val('@ca.six');
+							@:modal.find('#birthday').val('@ca.birthday');
+							@:modal.find('#pid_last_5').val('@ca.identity');
+							@:modal.find('#phone').val('@ca.telephone');
+							@:modal.find('#economic_class').val('@ca.economic');
+							@:modal.find('#obstacle_category').val('@ca.obstacleclass');
+							@:modal.find('#obstacle_degree').val('@ca.obstacledegree');
+							@:modal.find('#contact_person').val('@ca.contact');
+							@:modal.find('#contact_mobile').val('@ca.phone');
+							@:modal.find('#note_date').val('@ca.notedate');
+							@:modal.find('#cms_class').val('@ca.CMS');
+							@:modal.find('#note_unit').val('@ca.nateunit');
+							@:modal.find('#familypart').val('@ca.waiter');
+							@:modal.find('#status').val('@ca.status');
+							@:modal.find('#no_service_reason').val('@ca.no_service_reason');
+							@:modal.find('#no_service_date').val('@ca.no_service_date');
+
+
+						@:addDetail(@Int32.Parse(ca.BAnum) - 1);
+						int j = 0;
+						for (int i = 0; i < Int32.Parse(ca.BAnum); i++)
+						{
+							@:modal.find('#note_item1-' + @j).val('@ca.BAList[i]');
+							@:modal.find('#note_count1-' + @j).val('@ca.BAList[i + 10]');
+							j += 1;
 						}
-					});
-
+						@:}
+					}
 				}
+						});
 
-				// var button = $(event.relatedTarget) // Button that triggered the modal
-				// var notetitle = button.data('notetitle') // Extract info from data-* attributes
-				// alert('notetitle='+notetitle);
-			});
+
 
 			$('#exampleModal').on('show.bs.modal', function (event) {
-				var button = $(event.relatedTarget) // Button that triggered the modal
+							var button = $(event.relatedTarget) // Button that triggered the modal
 				var notetitle = button.data('notetitle') // Extract info from data-* attributes
 				var recipient = button.data('whatever') // Extract info from data-* attributes
 				var messageid = button.data('messageid') // Extract info from data-* attributes
 				// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 				// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-				var modal = $(this)
+							var modal = $(this)
 				modal.find('.modal-id').val(messageid);
-				modal.find('.modal-title').text('修改公告： ' + notetitle);
-				modal.find('.modal-body textarea').val(recipient);
-			})
+							modal.find('.modal-title').text('修改公告： ' + notetitle);
+							modal.find('.modal-body textarea').val(recipient);
+						})
 
 			$('#addModal').find('#status').click(function () {
-				var thisValue = $(this).val();
+							var thisValue = $(this).val();
 
-				if (thisValue == 2) {
+							if (thisValue == 2) {
 					$('#addModal').find('#no_service_reason_label').hide();
 					$('#addModal').find('#no_service_date_div').hide();
-				}
-				else if (thisValue == 1 || thisValue == 3) {
+							}
+							else if (thisValue == 1 || thisValue == 3) {
 					$('#addModal').find('#no_service_reason_label').show();
 					$('#addModal').find('#no_service_date_div').show();
-				}
-			})
+							}
+						})
 		});
 
 		function delNoteDetail(num) {
@@ -308,8 +399,45 @@
 				$('#addDiv' + num).remove();
 			}
 		}
-		var num = 10;
 
+
+		function addDetail(num) {
+			item = 0;
+			var addhtml = "";
+			for (i = 0; i < num; i++) {
+				item++;
+				 addhtml += '<div id="addDiv' + item + '" class="form-group">' +
+					'<label for="message-text" class="col-form-label col-md-6">' +
+					'<a href="jacaascript:delNoteDetail(' + item + ');" class="delNoteDetail" info="' + item + '" ><i class="fas fa-minus-circle"></i></a>' +
+					'照會項目:<select class="form-control" id="note_item1-' + item + '" onchange = "select_change1(' + item + ')" name="note_item[]">' +
+					'<option value="">-請選擇-</option>' +
+					'<option value="基本身體清潔">基本身體清潔</option>' +
+					'<option value="基本日常照顧">基本日常照顧</option>' +
+					'<option value="測量生命徵象">測量生命徵象</option>' +
+					'<option value="協助進食或管灌餵食">協助進食或管灌餵食</option>' +
+					'<option value="餐食照顧">餐食照顧</option>' +
+					'<option value="協助沐浴及洗頭">協助沐浴及洗頭</option>' +
+					'<opcaion value="足部照護">足部照護</option>' +
+					'<option value="翻身拍背">翻身拍背</option>' +
+					'<option value="肢體關節活動">肢體關節活動</option>' +
+					'<option value="協助上(下)樓梯">協助上(下)樓梯</option>' +
+					'<option value="陪同外出">陪同外出</option>' +
+					'<option value="陪同就醫">陪同就醫</option>' +
+					'<option value="協助執行輔助性醫療">協助執行輔助性醫療</option>' +
+					'<option value="安全看視">安全看視</option>' +
+					'<option value="陪伴服務">陪伴服務</option>' +
+					'<option value="巡視服務">巡視服務</option>' +
+					'<option value="協助洗頭">協助洗頭</option>' +
+					'<option value="協助排泄">協助排泄</option>' +
+					'</select>' +
+					'</label>' +
+					'<label for="message-text" class="col-form-label col-md-6">照會數量:<input class="form-control" id="note_count1-' + item + '" name="note_count[]"></label>' +
+					'</div>';
+			}
+			$('#editModal').find('#addDivadd').append(addhtml);
+
+
+		}
 
 		function addNoteDetail(num) {
 			// var item = 2;
@@ -504,7 +632,7 @@
 						status: status,
 						no_service_reason: no_service_reason,
 						no_service_date: no_service_date,
-						BAnum : String(item)
+						BAnum: String(item)
 					}
 					var patientdata = {
 						lastName: firstname,
@@ -525,57 +653,7 @@
 							window.alert("儲存成功");
 							window.location.href = result;
 						});
-					//$.ajax({
-					//	url: "/case_manage/save_case_infomation",
-					//	type: "POST",
-					//	dataType: 'json',
-					//	data: {
-					//		user_id: '22',
-					//		name: name,
-					//		firstname: firstname,
-					//		lastname: lastname,
-					//		gender: gender,
-					//		birthday: birthday,
-					//		pid_last_5: pid_last_5,
-					//		phone: phone,
-					//		economic_class: economic_class,
-					//		obstacle_category: obstacle_category,
-					//		obstacle_degree: obstacle_degree,
-					//		contact_person: contact_person,
-					//		contact_mobile: contact_mobile,
-					//		note_date: note_date,
-					//		cms_class: cms_class,
-					//		note_item_str: note_item_str,
-					//		note_count_str: note_count_str,
-					//		note_unit: note_unit,
-					//		familypart: familypart,
-					//		status: status,
-					//		no_service_reason: no_service_reason,
-					//		no_service_date: no_service_date
-					//	},
-					//	success: function (data, status, xhr) {
-					//		console.log(data, status, xhr);
-					//		if (data.code == 200) {
-					//			alert(data.message);
-					//			// send_casedata_to_jubo(patientdata);
-					//			if (data.result != '') location.href = data.result;
-					//		}
-					//		else {
-					//			alert(data.message);
-					//			// ezBSAlert({
-					//			//     messageText: data.message,
-					//			//     alertType: "danger"
-					//			// }).done(function(e)
-					//			// {
-					//			//     location.href='/shoppingcart';
-					//			// });
-					//		}
-					//	},
-					//	error: function (xhr, ajaxOptions, thrownError) {
-					//		console.log(xhr, ajaxOptions, thrownError);
-					//		alert('發生錯誤!');
-					//	}
-					//});
+
 				}
 			}
 			else {
@@ -585,7 +663,7 @@
 				// var name                = editModal.find('#name').val();
 				var firstname = editModal.find('#firstname').val();
 				var lastname = editModal.find('#lastname').val();
-				var name = firstname + lastname;
+				var name = lastname;
 				var gender = editModal.find('#gender').val();
 				var birthday = editModal.find('#birthday').val();
 				var pid_last_5 = editModal.find('#pid_last_5').val();
@@ -603,7 +681,7 @@
 				var no_service_reason = editModal.find('#no_service_reason').val();
 				var no_service_date = editModal.find('#no_service_date').val();
 
-				var note_item_str = editModal.find('input[name="note_item[]"]').map(function () {
+				var note_item_str = editModal.find('input[name="note_item1[]"]').map(function () {
 					return $(this).val();
 				}).get().join('####');
 
@@ -677,71 +755,53 @@
 					return false;
 				}
 				else {
-					$('#editModal').hide();
-					$('#wait_content').show();
-					$('#wait').show();
-
-					var patientdata = {
-						lastName: lastname,
-						firstName: firstname,
-						// checkInDate: note_date,
-						branch: '0001',
-						room: familypart_label[familypart],
-						bed: '小家',
-						idNumber: pid_last_5,
-						sex: gender_label[gender],
-						status: status_label[status],
-						userId: '5f7305b178c794002fcc2b50'
-					}
-					console.log(patientdata);
-					$.ajax({
-						url: "/case_manage/save_case_infomation",
-						type: "POST",
-						dataType: 'json',
-						data: {
-							//user_id: '',
-							id: id,
-							name: name,
-							firstname: firstname,
-							lastname: lastname,
-							gender: gender,
-							birthday: birthday,
-							pid_last_5: pid_last_5,
-							phone: phone,
-							economic_class: economic_class,
-							obstacle_category: obstacle_category,
-							obstacle_degree: obstacle_degree,
-							contact_person: contact_person,
-							contact_mobile: contact_mobile,
-							note_date: note_date,
-							cms_class: cms_class,
-							note_item_str: note_item_str,
-							note_count_str: note_count_str,
-							note_unit: note_unit,
-							familypart: familypart,
-							status: status,
-							no_service_reason: no_service_reason,
-							no_service_date: no_service_date
-						},
-						success: function (data, status, xhr) {
-							console.log(data, status, xhr);
-							if (data.code == 200) {
-								alert(data.message);
-								// send_casedata_to_jubo(patientdata);
-								if (data.result != '') location.href = data.result;
-							}
-							else {
-								alert(data.message);
-							}
-						},
-						error: function (xhr, ajaxOptions, thrownError) {
-							console.log(xhr, ajaxOptions, thrownError);
-							alert('發生錯誤!');
+					var BAlist = [];
+					for (var i = 0; i <= 10; i++) {
+						try {
+							BAlist.push(document.getElementById('note_item1-' + String(i)).value);
+							BAlist.push(document.getElementById('note_count1-' + String(i)).value);
+						} catch {
+							BAlist.push("");
+							BAlist.push("");
 						}
-					});
+
+					}
+					var chk = $('input[type=radio]:checked').val();
+					var list = {
+						index: chk,
+						name: lastname,
+						six: gender,
+						birthday: birthday,
+						identity: pid_last_5,
+						telephone: phone,
+						economic: economic_class,
+						obstacleclass: obstacle_category,
+						obstacledegree: obstacle_degree,
+						contact: contact_person,
+						phone: contact_mobile,
+						notedate: note_date,
+						CMS: cms_class,
+						BAList: BAlist,
+						nateunit: note_unit,
+						waiter: familypart,
+						status: status,
+						no_service_reason: no_service_reason,
+						no_service_date: no_service_date,
+						BAnum: String(item+1)
+					}
+					
+					console.log(list);
+					$.post('@Url.Action("Case_information11")',
+						{ case_Information: list },
+						function (result) {
+							window.alert("儲存成功");
+							window.location.href = result;
+						});
+				}
+			
 				}
 			}
-		}
+		
 	</script>
 	<style>
 		.tableContainer table th, .tableContainer table td {
@@ -854,7 +914,7 @@
 						{
 							<tr style="		background-color: #e65256;">
 								<td style="color:white;" rowspan="@ca.BAnum">
-									<input type="radio" id="chk5" name="chk" value="9">
+									<input type="radio" id="chk5" name="chk" value=@ca.index>
 								</td>
 								<td style="color:white;" rowspan="@ca.BAnum">@ca.name</td>
 								<td style="color:white;" rowspan="@ca.BAnum">@ca.six</td>
@@ -889,7 +949,7 @@
 						{
 							<tr style="background-color:#009688;">
 								<td style="color:white;" rowspan="@ca.BAnum">
-									<input type="radio" id="chk5" name="chk" value="9">
+									<input type="radio" id="chk5" name="chk" value=@ca.index>
 								</td>
 								<td style="color:white;" rowspan="@ca.BAnum">@ca.name</td>
 								<td style="color:white;" rowspan="@ca.BAnum">@ca.six</td>
@@ -924,7 +984,7 @@
 						{
 							<tr style="background-color: #930a9a;">
 								<td style="color:white;" rowspan="@ca.BAnum">
-									<input type="radio" id="chk5" name="chk" value="9">
+									<input type="radio" id="chk5" name="chk" value=@ca.index>
 								</td>
 								<td style="color:white;" rowspan="@ca.BAnum">@ca.name</td>
 								<td style="color:white;" rowspan="@ca.BAnum">@ca.six</td>
@@ -955,236 +1015,9 @@
 								</tr>
 							}
 						}
-						<tr style="background-color:#e65256;">
-							<td style="color:white;" rowspan="1">
-								<input type="radio" id="chk0" name="chk" value="6">
-							</td>
-							<td style="color:white;" rowspan="1">個案2</td>
-							<td style="color:white;" rowspan="1">女</td>
-							<td style="color:white;" rowspan="1">2009-01-07</td>
-							<td style="color:white;" rowspan="1">中文</td>
-							<td style="color:white;" rowspan="1">中文</td>
-							<td style="color:white;" rowspan="1">長照低收(未達1倍)</td>
-							<td style="color:white;" rowspan="1">興趣喜好1</td>
-							<td style="color:white;" rowspan="1">中度</td>
-							<td style="color:white;" rowspan="1">過去職業過去職業過去職業</td>
-							<td style="color:white;" rowspan="1">現在個性現在個性現在個性</td>
-							<td style="color:white;" rowspan="1">2020-03-01</td>
-							<td style="color:white;" rowspan="1">6</td>
-							<td style="color:white;">2622-</td>
-							<td style="color:white;">2</td>
-							<td style="color:white;" rowspan="1">BMIBMIBMI</td>
-							<td style="color:white;" rowspan="1">第三小家</td>
-							<td style="color:white;" rowspan="1">停案</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1"></td>
-						</tr>
-						<tr style="background-color:#e65256;">
-							<td style="color:white;" rowspan="2">
-								<input type="radio" id="chk1" name="chk" value="10">
-							</td>
-							<td style="color:white;" rowspan="2">黃一達</td>
-							<td style="color:white;" rowspan="2">男</td>
-							<td style="color:white;" rowspan="2">2020-04-05</td>
-							<td style="color:white;" rowspan="2">66666</td>
-							<td style="color:white;" rowspan="2">0+30+</td>
-							<td style="color:white;" rowspan="2">長照中低(1.5-2.5倍)</td>
-							<td style="color:white;" rowspan="2"></td>
-							<td style="color:white;" rowspan="2"></td>
-							<td style="color:white;" rowspan="2">21+.0</td>
-							<td style="color:white;" rowspan="2">0212.0</td>
-							<td style="color:white;" rowspan="2">2020-04-26</td>
-							<td style="color:white;" rowspan="2">1</td>
-							<td style="color:white;">1132</td>
-							<td style="color:white;">2</td>
-							<td style="color:white;" rowspan="2">32132</td>
-							<td style="color:white;" rowspan="2">第二小家</td>
-							<td style="color:white;" rowspan="2">停案</td>
-							<td style="color:white;" rowspan="2"></td>
-							<td style="color:white;" rowspan="2"></td>
-						</tr>
-						<tr style="background-color:#e65256;">
-							<td style="color:white;">231</td>
-							<td style="color:white;">33</td>
-						</tr>
-						<tr style="background-color:#009688;">
-							<td style="color:white;" rowspan="1">
-								<input type="radio" id="chk2" name="chk" value="74">
-							</td>
-							<td style="color:white;" rowspan="1">張某某</td>
-							<td style="color:white;" rowspan="1">男</td>
-							<td style="color:white;" rowspan="1">1980-01-01</td>
-							<td style="color:white;" rowspan="1">F123455555</td>
-							<td style="color:white;" rowspan="1">0988555555</td>
-							<td style="color:white;" rowspan="1">一般戶</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1">輕度</td>
-							<td style="color:white;" rowspan="1">張家長</td>
-							<td style="color:white;" rowspan="1">0988555555</td>
-							<td style="color:white;" rowspan="1">2020-08-01</td>
-							<td style="color:white;" rowspan="1">1</td>
-							<td style="color:white;"></td>
-							<td style="color:white;"></td>
-							<td style="color:white;" rowspan="1">照會單位照會單位照會單位</td>
-							<td style="color:white;" rowspan="1">第一小家</td>
-							<td style="color:white;" rowspan="1">穩定服務</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1"></td>
-						</tr>
-						<tr style="background-color:#009688;">
-							<td style="color:white;" rowspan="1">
-								<input type="radio" id="chk3" name="chk" value="7">
-							</td>
-							<td style="color:white;" rowspan="1">陳陳某1</td>
-							<td style="color:white;" rowspan="1">男</td>
-							<td style="color:white;" rowspan="1">2010-01-01</td>
-							<td style="color:white;" rowspan="1">F888888888</td>
-							<td style="color:white;" rowspan="1">09111111111</td>
-							<td style="color:white;" rowspan="1">長照中低(1.5-2.5倍)</td>
-							<td style="color:white;" rowspan="1">障礙類別</td>
-							<td style="color:white;" rowspan="1">重度</td>
-							<td style="color:white;" rowspan="1">陳家屬</td>
-							<td style="color:white;" rowspan="1">09111111111</td>
-							<td style="color:white;" rowspan="1">2020-01-08</td>
-							<td style="color:white;" rowspan="1">7</td>
-							<td style="color:white;">照會項目ㄙㄘdghdgd</td>
-							<td style="color:white;">20</td>
-							<td style="color:white;" rowspan="1">照會單位</td>
-							<td style="color:white;" rowspan="1">第二小家</td>
-							<td style="color:white;" rowspan="1">穩定服務</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1"></td>
-						</tr>
-						<tr style="background-color:#009688;">
-							<td style="color:white;" rowspan="1">
-								<input type="radio" id="chk4" name="chk" value="5">
-							</td>
-							<td style="color:white;" rowspan="1"> 余001</td>
-							<td style="color:white;" rowspan="1">男</td>
-							<td style="color:white;" rowspan="1">2020-04-01</td>
-							<td style="color:white;" rowspan="1">F123456789</td>
-							<td style="color:white;" rowspan="1">喜歡語言</td>
-							<td style="color:white;" rowspan="1">一般戶</td>
-							<td style="color:white;" rowspan="1">興趣喜好</td>
-							<td style="color:white;" rowspan="1">中度</td>
-							<td style="color:white;" rowspan="1">余昊騰</td>
-							<td style="color:white;" rowspan="1">0988777666</td>
-							<td style="color:white;" rowspan="1">2020-04-07</td>
-							<td style="color:white;" rowspan="1">1</td>
-							<td style="color:white;">照會項目1</td>
-							<td style="color:white;">2</td>
-							<td style="color:white;" rowspan="1">照會單位</td>
-							<td style="color:white;" rowspan="1">第二小家</td>
-							<td style="color:white;" rowspan="1">穩定服務</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1"></td>
-						</tr>
-						<tr style="background-color:#009688;">
-							<td style="color:white;" rowspan="3">
-								<input type="radio" id="chk5" name="chk" value="9">
-							</td>
-							<td style="color:white;" rowspan="3">林某1A</td>
-							<td style="color:white;" rowspan="3">男</td>
-							<td style="color:white;" rowspan="3">2020-04-17</td>
-							<td style="color:white;" rowspan="3">12345</td>
-							<td style="color:white;" rowspan="3">02-33334444</td>
-							<td style="color:white;" rowspan="3">長照低收(未達1倍)</td>
-							<td style="color:white;" rowspan="3">障礙類別</td>
-							<td style="color:white;" rowspan="3">輕度</td>
-							<td style="color:white;" rowspan="3">余001</td>
-							<td style="color:white;" rowspan="3">0988777666</td>
-							<td style="color:white;" rowspan="3">2020-04-30</td>
-							<td style="color:white;" rowspan="3">5</td>
-							<td style="color:white;">照會項目1</td>
-							<td style="color:white;">4</td>
-							<td style="color:white;" rowspan="3">明康護理所</td>
-							<td style="color:white;" rowspan="3">第一小家</td>
-							<td style="color:white;" rowspan="3">穩定服務</td>
-							<td style="color:white;" rowspan="3"></td>
-							<td style="color:white;" rowspan="3"></td>
-						</tr>
-						<tr style="background-color:#009688;">
-							<td style="color:white;">照會項目2</td>
-							<td style="color:white;">5</td>
-						</tr>
-						<tr style="background-color:#009688;">
-							<td style="color:white;">照會項目3</td>
-							<td style="color:white;">6</td>
-						</tr>
-						<tr style="background-color:#009688;">
-							<td style="color:white;" rowspan="1">
-								<input type="radio" id="chk6" name="chk" value="11">
-							</td>
-							<td style="color:white;" rowspan="1">黃大達01</td>
-							<td style="color:white;" rowspan="1">男</td>
-							<td style="color:white;" rowspan="1">2020-04-27</td>
-							<td style="color:white;" rowspan="1"> L77777777</td>
-							<td style="color:white;" rowspan="1">15661651515</td>
-							<td style="color:white;" rowspan="1">一般戶</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1">23</td>
-							<td style="color:white;" rowspan="1">253623566</td>
-							<td style="color:white;" rowspan="1">2020-05-13</td>
-							<td style="color:white;" rowspan="1">4</td>
-							<td style="color:white;"></td>
-							<td style="color:white;"></td>
-							<td style="color:white;" rowspan="1">3115156</td>
-							<td style="color:white;" rowspan="1">第二小家</td>
-							<td style="color:white;" rowspan="1">穩定服務</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1"></td>
-						</tr>
-						<tr style="background-color:#009688;">
-							<td style="color:white;" rowspan="1">
-								<input type="radio" id="chk7" name="chk" value="13">
-							</td>
-							<td style="color:white;" rowspan="1">余002</td>
-							<td style="color:white;" rowspan="1">男</td>
-							<td style="color:white;" rowspan="1">2020-05-06</td>
-							<td style="color:white;" rowspan="1">L77777776</td>
-							<td style="color:white;" rowspan="1">0988333222</td>
-							<td style="color:white;" rowspan="1">一般戶</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1">中度</td>
-							<td style="color:white;" rowspan="1">余媽</td>
-							<td style="color:white;" rowspan="1">0988777666</td>
-							<td style="color:white;" rowspan="1">2020-05-13</td>
-							<td style="color:white;" rowspan="1">2</td>
-							<td style="color:white;"></td>
-							<td style="color:white;"></td>
-							<td style="color:white;" rowspan="1">照會單位</td>
-							<td style="color:white;" rowspan="1">第一小家</td>
-							<td style="color:white;" rowspan="1">穩定服務</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;" rowspan="1"></td>
-						</tr>
-						<tr style="background-color:#930a9a;">
-							<td style="color:white;" rowspan="1">
-								<input type="radio" id="chk8" name="chk" value="8">
-							</td>
-							<td style="color:white;" rowspan="1">陳某2</td>
-							<td style="color:white;" rowspan="1">女</td>
-							<td style="color:white;" rowspan="1">0000-00-00</td>
-							<td style="color:white;" rowspan="1">22333</td>
-							<td style="color:white;" rowspan="1">02-99998888</td>
-							<td style="color:white;" rowspan="1">長照中低(1.5-2.5倍)</td>
-							<td style="color:white;" rowspan="1">障礙類別</td>
-							<td style="color:white;" rowspan="1">重度</td>
-							<td style="color:white;" rowspan="1">Yu</td>
-							<td style="color:white;" rowspan="1">0988670970</td>
-							<td style="color:white;" rowspan="1">2020-04-30</td>
-							<td style="color:white;" rowspan="1"></td>
-							<td style="color:white;"></td>
-							<td style="color:white;"></td>
-							<td style="color:white;" rowspan="1">明康護理所</td>
-							<td style="color:white;" rowspan="1">第二小家</td>
-							<td style="color:white;" rowspan="1">結案</td>
-							<td style="color:white;" rowspan="1">不繼續</td>
-							<td style="color:white;" rowspan="1">2020-04-22</td>
-						</tr>
+						
 					</tbody>
-					</table>
+				</table>
 			</div>
 		</div>
 	</main>
@@ -1322,9 +1155,9 @@
 								{
 									<option value="@personnel.name">@personnel.name</option>
 								}
-							<option value="服務員1">服務員1</option>
-							<option value="服務員2">服務員2</option>
-							<option value="服務員3">服務員3</option>
+								<option value="服務員1">服務員1</option>
+								<option value="服務員2">服務員2</option>
+								<option value="服務員3">服務員3</option>
 							</select>
 						</label>
 					</div>
@@ -1444,33 +1277,38 @@
 							</select>
 						</label>
 					</div>
-
-					<div id="addDiv" class="form-group">
-						<label for="message-text" class="col-form-label col-md-6">
-							<a href="javascript:addNoteDetail(1);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
-							照會項目:
-							<select class="form-control" id="note_item-0" onchange="select_change(0)" name="note_item[]">
-								<option value="">-請選擇-</option>
-								<option value="基本身體清潔">基本身體清潔</option>
-								<option value="基本日常照顧">基本日常照顧</option>
-								<option value="測量生命徵象">測量生命徵象</option>
-								<option value="協助進食或管灌餵食">協助進食或管灌餵食</option>
-								<option value="餐食照顧">餐食照顧</option>
-								<option value="協助沐浴及洗頭">協助沐浴及洗頭</option>
-								<option value="足部照護">足部照護</option>
-								<option value="翻身拍背">翻身拍背</option>
-								<option value="肢體關節活動">肢體關節活動</option>
-								<option value="協助上(下)樓梯">協助上(下)樓梯</option>
-								<option value="陪同外出">陪同外出</option>
-								<option value="陪同就醫">陪同就醫</option>
-								<option value="協助執行輔助性醫療">協助執行輔助性醫療</option>
-								<option value="安全看視">安全看視</option>
-								<option value="陪伴服務">陪伴服務</option>
-								<option value="巡視服務">巡視服務</option>
-								<option value="協助洗頭">協助洗頭</option>
-								<option value="協助排泄">協助排泄</option>
-							</select>&nbsp; 照會數量:<input class="form-control" id="note_count-1" name="note_count[]"></label>
+					<button onclick="AddhtmlAddhtml()">新增照會項目</button>
+					<button onclick="Delhtml1()">削減照會項目</button>
+					<div id="addDivadd" class="form-group">
+						<div id="addDiv0" class="form-group">
+							<label for="message-text" class="col-form-label col-md-6">
+								<a href="javascript:void(0);" id="addNoteDetail"><i class="fas fa-plus-circle"></i></a>
+								照會項目:
+								<select class="form-control" id="note_item1-0" onchange="select_change1(0);" name="note_item[]">
+									<option value="">-請選擇-</option>
+									<option value="基本身體清潔">基本身體清潔</option>
+									<option value="基本日常照顧">基本日常照顧</option>
+									<option value="測量生命徵象">測量生命徵象</option>
+									<option value="協助進食或管灌餵食">協助進食或管灌餵食</option>
+									<option value="餐食照顧">餐食照顧</option>
+									<option value="協助沐浴及洗頭">協助沐浴及洗頭</option>
+									<option value="足部照護">足部照護</option>
+									<option value="翻身拍背">翻身拍背</option>
+									<option value="肢體關節活動">肢體關節活動</option>
+									<option value="協助上(下)樓梯">協助上(下)樓梯</option>
+									<option value="陪同外出">陪同外出</option>
+									<option value="陪同就醫">陪同就醫</option>
+									<option value="協助執行輔助性醫療">協助執行輔助性醫療</option>
+									<option value="安全看視">安全看視</option>
+									<option value="陪伴服務">陪伴服務</option>
+									<option value="巡視服務">巡視服務</option>
+									<option value="協助洗頭">協助洗頭</option>
+									<option value="協助排泄">協助排泄</option>
+								</select>
+							</label>
+							<label for="message-text" class="col-form-label ">&nbsp;照會數量:<input class="form-control" id="note_count1-0" name="note_count[]"></label>
 						</div>
+					</div>
 					<div class="form-group">
 						<label for="message-text" class="col-form-label col-md-6">
 							<span class="redfont">＊</span>照會單位:<input class="form-control" id="note_unit">
@@ -1494,9 +1332,9 @@
 							<span class="redfont">＊</span>個案狀態:
 							<select class="form-control" id="status">
 								<option value="">-請選擇-</option>
-								<option value="2">穩定服務</option>
-								<option value="1">停案</option>
-								<option value="3">結案</option>
+								<option value="穩定服務">穩定服務</option>
+								<option value="停案">停案</option>
+								<option value="結案">結案</option>
 							</select>
 						</label>
 						<label for="message-text" class="col-form-label col-md-6">無服務原因:<input class="form-control" id="no_service_reason"></label>

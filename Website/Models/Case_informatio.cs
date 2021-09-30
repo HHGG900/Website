@@ -10,6 +10,7 @@ namespace Website.Models
 {
 	public class Case_informatio
 	{
+		public string index { get; set; } //編號
 		public string name { get; set; }
 		public string six { get; set; }  //性別
 		public string birthday { get; set; }    //生日

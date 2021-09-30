@@ -16,7 +16,7 @@ namespace Website.Models
 				SqlConnection sqlConnection = new SqlConnection(ConnStr);
 				SqlCommand sqlCommand = new SqlCommand(
 					@"INSERT INTO sign_in (usr_index ,usr_name , usr_key, working_yes_no)
-				VALUES (@usr_index, @usr_name, @usr_key, 1)");
+				VALUES (@usr_index, @usr_name, @usr_key, y)");
 				sqlCommand.Connection = sqlConnection;
 				sqlCommand.Parameters.Add(new SqlParameter("@usr_index", sign_in.usr_index));
 				sqlCommand.Parameters.Add(new SqlParameter("@usr_name", sign_in.usr_name));
@@ -40,36 +40,39 @@ namespace Website.Models
 				{
 					while (reader.Read())
 					{
-						if (reader.GetString(reader.GetOrdinal("work_yes_no")) == "y")
+					if (reader.GetString(reader.GetOrdinal("work_yes_no")) == "y")
+						if ((reader.GetString(reader.GetOrdinal("usr_name")) == usr_name) && (reader.GetString(reader.GetOrdinal("usr_key")) == usr_key)){
+							SqlConnection sqlConnection1 = new SqlConnection(ConnStr);
+							SqlCommand Command = new SqlCommand("SELECT post1,post2 FROM personnel WHERE name = @usr_name ");
+							Command.Connection = sqlConnection1;
+							Command.Parameters.Add(new SqlParameter("@usr_name", usr_name));
+							sqlConnection1.Open();
 
-							if ((reader.GetString(reader.GetOrdinal("usr_name")) == usr_name) && (reader.GetString(reader.GetOrdinal("usr_key")) == usr_key))
-							{
-								SqlConnection sqlConnection1 = new SqlConnection(ConnStr);
-								SqlCommand Command = new SqlCommand("SELECT post1,post2 FROM personnel WHERE name = @usr_name ");
-								Command.Connection = sqlConnection1;
-								Command.Parameters.Add(new SqlParameter("@usr_name", usr_name));
-								sqlConnection1.Open();
-
-								SqlDataReader reader1 = Command.ExecuteReader();
-								if (reader1.HasRows)
-									while (reader1.Read())
-									{
+							SqlDataReader reader1 = Command.ExecuteReader();
+							if (reader1.HasRows)
+								while (reader1.Read())
+								{
 									Sign_in sign_in = new Sign_in
 									{
 										post1 = reader1.GetString(reader1.GetOrdinal("post1")),
 										post2 = reader1.GetString(reader1.GetOrdinal("post2"))
 									};
 									sign.Add(sign_in);
-									}
+								}
 							sqlConnection1.Close();
-							}
-						else { 
+						}
+
+						else
+						{
 							Sign_in sign_in = new Sign_in
 							{
 								post1 = "±b±K¿ù»~"
 							};
-							sign.Add(sign_in); 
+							sign.Add(sign_in);
 						}
+						
+						
+					
 					else
 					{
 						Sign_in sign_in = new Sign_in
@@ -78,7 +81,7 @@ namespace Website.Models
 						};
 						sign.Add(sign_in);
 					}
-
+					
 
 				}
 				}

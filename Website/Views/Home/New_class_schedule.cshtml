@@ -20,10 +20,7 @@
 	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
 	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
 	<script>
-		window.onload = function () {
-			if (@TempData["tr"] == true)
-				document.getElementById("inpu").innerHTML = "";
-		}
+		
 		
 		$(function () {
 			$('#homepageBtn').click(function () {
@@ -206,7 +203,7 @@
 					{
 						<tr>
 							<td> @ros.worker_name</td>
-							<td>1</td>
+							<td>@ros.arrival</td>
 							<td></td>					
 						</tr>
 					}

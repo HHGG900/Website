@@ -27,23 +27,20 @@
 			var s2 = "";
 			var s = "";
 			console.log(123);
-			console.log('@ViewBag.name');
-			
+			console.log('@ViewBag.post1');
+			console.log('@ViewBag.post2');
+			console.log('@TempData["i"]');
+
 			if ("@ViewBag.post1" == "已離職")
 				window.alert("員工已離職");
 			else if ("@ViewBag.post1" == "帳密錯誤")
 				window.alert("請重新輸入帳密");
-			else if ("@ViewBag.post1" == "主任" & "@ViewBag.post2" == "督導") {
+			else if ("@ViewBag.post1" == "主任" | "@ViewBag.post2" == "督導" | "@ViewBag.post2" == "主任" | "@ViewBag.post1" == "督導") {
 				var log1 = "location.href='/Home/DirectorHandbook'";
 				var log2 = "location.href='/Home/SuperviseHandbook'";
 				s2 = "<button  class='btn - w btn - info' onclick = " + log2 + "><font style='vertical - align: inherit; '><font style='vertical - align: inherit;'>督導登入</font></font></button>";
 				s = "<button  class='btn - w btn - info' onclick = " + log1 + "><font style='vertical - align: inherit; '><font style='vertical - align: inherit;'>主任登入</font></font></button>";
 			}
-			else if ("@ViewBag.post1" == "督導") {
-				window.location.href = '/Home/SuperviseHandbook';
-			}
-			else if ("@ViewBag.post1" == "主任")
-				window.location.href = '/Home/DirectorHandbook';
 			else
 				s = log.innerHTML;
 			log.innerHTML = s + s2;
@@ -158,7 +155,7 @@
 		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
 
-		gtag('config', 'UA-148420718-4');
+		gtag('coTempDataempDatafig', 'UA-148420718-4');
 	</script>
 
 	<div id="wait" style="display:none">

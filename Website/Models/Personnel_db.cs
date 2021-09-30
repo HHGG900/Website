@@ -157,7 +157,7 @@ namespace Website.Models
 		{
 			List<Personnel> personnel = new List<Personnel>();
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
-			SqlCommand sqlCommand = new SqlCommand("SELECT name FROM personnel WHERE (post1 ='居家服務員' or post2 = '居家服務員' ) and name in (SELECT unitname from organization_account where class = (SELECT class from organization_account where(unitname = @ID_number)))");
+			SqlCommand sqlCommand = new SqlCommand("SELECT name FROM personnel WHERE (post1 ='照服員' or post2 = '照服員' ) and name in (SELECT unitname from organization_account where class = (SELECT class from organization_account where(unitname = @ID_number)))");
 			sqlCommand.Connection = sqlConnection;
 			sqlCommand.Parameters.Add(new SqlParameter("@ID_number", ID_number));
 			sqlConnection.Open();

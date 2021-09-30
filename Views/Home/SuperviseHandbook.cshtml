@@ -17,45 +17,7 @@
 	<script src="~/Scripts/bootstrap.min.js"></script>
 	<script src="~/Scripts/util.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script> -->
-	<script>
-		$(function () {
-			$('#gonext').click(function () {
-				$.ajax({
-					url: "/Home/Supervise",
-					type: "POST",
-					dataType: 'json',
-					data: {
-						id: '22'
-					},
-					success: function (data, status, xhr) {
-						// console.log(data,status,xhr);
-						if (data.code == 200) {
-							location.href = '/home/index';
-							/* ezBSAlert({
-								messageText: data.message,
-								alertType: "success"
-							}).done(function(e)
-							{
-								location.href='/home/index';
-							}); */
-						}
-						else {
-							ezBSAlert({
-								messageText: data.message,
-								alertType: "danger"
-							}).done(function (e) {
-								location.href = '/shoppingcart';
-							});
-						}
-					},
-					error: function (xhr, ajaxOptions, thrownError) {
-						console.log(xhr, ajaxOptions, thrownError);
-						alert('發生錯誤!');
-					}
-				});
-			});
-		});
-	</script>
+	
 	<style>
 		.cjkQuoteUL > li > lj {
 			/*padding-left: 54px;*/
