@@ -11,6 +11,7 @@
 	<title>人事資料 | 台灣柏佐克智慧型居服管理系統</title>
 	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
 	<link rel="stylesheet" href="/css/font-awesome/all.css">
+	<link rel="stylesheet" href="~/css/font-awesome/5.13.0/css/all.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/layout.css">
 	<link rel="stylesheet" href="/css/page2-3.css">
@@ -20,9 +21,13 @@
 	<script src="/js/jquery-1.10.2.min.js"></script>
 	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="/libs/datepicker/css/bootstrap-datepicker3.min.css">
 	<script src="/libs/datepicker/js/bootstrap-datepicker.min.js"></script>
 	<script src="/libs/datepicker/locales/bootstrap-datepicker.zh-TW.min.js" charset="UTF-8"></script>
+	
 	<script>
 		$(function () {
 			$('.datepicker').datepicker({
@@ -228,7 +233,7 @@
 			}
 			function nofind() {
 				var img = event.srcElement;
-				img.src = "~/images/樣本.jpg" ; //替換的圖片
+				img.src = "~/images/樣本.jpg"; //替換的圖片
 				img.onerror = null; //控制不要一直觸發錯誤
 			}
 	</script>
@@ -264,13 +269,15 @@
 			color: white;
 			text-decoration: none;
 		}
-		.autoimg{
-			height:150px;
-			width:150px;
+
+		.autoimg {
+			height: 150px;
+			width: 150px;
 		}
-		.auto{
-			height:50px;
-			width:50px;
+
+		.auto {
+			height: 50px;
+			width: 50px;
 		}
 	</style>
 </head>
@@ -414,7 +421,7 @@
 							<th>出生日期</th>
 							<td>
 								<label for="inputborn">
-									<input type="text" class="datepicker" id="born" name="born" style="width:100%;" placeholder="請選擇生日..." value=""  >
+									<input class="form-control datepicker2" id="born" name="born" style="width:100%;" placeholder="請選擇生日..." value=""  >
 								</label>
 							</td>
 						</tr>

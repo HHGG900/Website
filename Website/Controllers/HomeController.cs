@@ -390,7 +390,7 @@ namespace Website.Controllers
 			ViewBag.inf = TempData["name"];
 			TempData.Keep("name");
 			Organization_account_db organization_accountn_db = new Organization_account_db();
-			List<Organization_account> organization_accounts = organization_accountn_db.GetOrganization_account(ViewBag.inf);
+			List<Organization_account> organization_accounts = organization_accountn_db.GetOrganization_account(TempData["name"] as string);
 			ViewBag.organization_accounts = organization_accounts;
 			
 			return View();
@@ -1113,15 +1113,16 @@ namespace Website.Controllers
 		{
 			return View();
 		}
-
-
-
-
-
-
-
-
-
+		[HttpPost]
+		public ActionResult Appeal(appeal appeal)
+		{
+			appeal_db appeal_Db = new appeal_db();
+			worker_arrive_db worker_db = new worker_arrive_db();
+			Daycheck_db daycheck_db = new Daycheck_db();
+			appeal_Db.appeal_insert(appeal);
+			
+			return RedirectToAction("Appeal");
+		}
 
 	}
 }

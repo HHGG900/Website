@@ -48,8 +48,8 @@ namespace Website.Models
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
 			
 			SqlCommand sqlCommand = new SqlCommand(
-				@"INSERT INTO organization_account (unitname  ,unitcode ,name ,nickname ,phone  ,status,time  )
-						VALUES(@unitname,@unitcode,@name,@nickname,@phone,@status,@time)");
+				@"INSERT INTO organization_account (unitname  ,unitcode ,name ,nickname ,phone  ,status,time ,class )
+						VALUES(@unitname,@unitcode,@name,@nickname,@phone,@status,@time, (select class from organization_account where name = @classname))");
 			sqlCommand.Connection = sqlConnection;
 			sqlCommand.Parameters.Add(new SqlParameter("@unitname", organization_account.unitname));
 			sqlCommand.Parameters.Add(new SqlParameter("@unitcode", organization_account.unitcode));
@@ -58,6 +58,7 @@ namespace Website.Models
 			sqlCommand.Parameters.Add(new SqlParameter("@phone", organization_account.phone));
 			sqlCommand.Parameters.Add(new SqlParameter("@status", organization_account.status));
 			sqlCommand.Parameters.Add(new SqlParameter("@time", organization_account.time));
+			sqlCommand.Parameters.Add(new SqlParameter("@classname", conname));
 			sqlConnection.Open();
 			sqlCommand.ExecuteNonQuery();
 			sqlConnection.Close();

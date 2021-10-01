@@ -58,10 +58,22 @@
 				return false;
 			}
 			else {
-				$('#wait_content').show();
-				$('#wait').show();
+				var list = {
+					US_name: $('#appellant_name').val(),
+					user_status: appellant_identity,
+					phone: $('#phone').val(),
+					fall_class: typeof (category),
+					conten: $('#reason').val(),
+						
+					}
 
-				$('#form1').submit();
+					console.log(list);
+					$.post('@Url.Action("Case_information")',
+						{ case_Information: list },
+						function (result) {
+							window.alert("儲存成功");
+							window.location.href = result;
+						});
 			}
 		}
 	</script>
