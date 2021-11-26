@@ -643,13 +643,78 @@ namespace Website.Controllers
 		{
 			return View();
 		}
+		public ActionResult CarechargeBill()
+		{
+			care_place_db Care_db = new care_place_db();
+			List<int> int_ls = new List<int>();
+			List<Care_place> care_tim = new List<Care_place>();
+			care_tim = TempData["care_tim"] as List<Care_place>;
+			foreach (Care_place ca in care_tim)
+			{
+				int_ls.Add(ca.BA01_tem);
+				int_ls.Add(ca.BA02_tem);
+				int_ls.Add(ca.BA03_tem);
+				int_ls.Add(ca.BA04_tem);
+				int_ls.Add(ca.BA05_tem);
+				int_ls.Add(ca.BA06_tem);
+				int_ls.Add(ca.BA07_tem);
+				int_ls.Add(ca.BA08_tem);
+				int_ls.Add(ca.BA09_tem);
+			}
+			Case_information_db case_Information_Db = new Case_information_db();
+			List<Case_informatio> case_s = case_Information_Db.Get_Case_informatio_one(TempData["name"] as string, TempData["case_name"] as string);
+
+			ViewBag.BAList = int_ls;
+			ViewBag.caseone = case_s;
+			ViewBag.year = TempData["year"];
+			ViewBag.month = TempData["month"];
+			ViewBag.arrive = TempData["arrive"];
+			ViewBag.care_tim = TempData["care_tim"];
+			ViewBag.name = TempData["case_name"] as string;
+			ViewBag.endday = TempData["endday"];
+			ViewBag.beginday = TempData["beginday"];
+			TempData.Keep();
+			return View();
+		}
 		//照顧收費
 		public ActionResult Carecharge()
 		{
+			string name = TempData["name"] as string;
+			Case_information_db case_Information_Db = new Case_information_db();
+			List<Case_informatio> case_s = case_Information_Db.Get_ALL_Case_informatio(name);
+			ViewBag.case_s = case_s;
+			TempData.Keep();
 			return View();
 		}
-		//照顧核銷
-		public ActionResult License_verification()
+		[HttpPost]
+		public ActionResult Carecharge(string year, string month, string id)
+		{
+			care_place_db care_Place = new care_place_db();
+			List<Care_place> care = care_Place.Care_place_select(TempData["name"]as string,id,year,month);
+			worker_arrive_db worker_db = new worker_arrive_db();
+			
+			DateTime ThisMonBeginDay = new DateTime(Int32.Parse(year)+1911, Int32.Parse(month), 1);
+			DateTime ThisMonEndDay = ThisMonBeginDay.AddMonths(1).AddDays(-1);
+
+			string beginday = string.Format(ThisMonBeginDay.ToString("yyyy-MM-dd"));
+			string endday = string.Format(ThisMonEndDay.ToString("yyyy-MM-dd"));
+			foreach(Care_place care_ in care)
+			{
+				List<worker_arrive> Worker_arrive = worker_db.worker_arrive_select(care_.usr_name, beginday, endday);
+				TempData["arrive"] = Worker_arrive;
+			}
+
+			TempData["beginday"] = beginday;
+			TempData["endday"] = endday;
+			TempData["care_tim"] = care;
+			TempData["case_name"] = id;
+			TempData["year"] = year;
+			TempData["month"] = month;
+			TempData.Keep();
+			return Json("CarechargeBill");
+		}
+			//照顧核銷
+			public ActionResult License_verification()
 		{
 			return View();
 		}
@@ -869,7 +934,7 @@ namespace Website.Controllers
 			List<Personnel> personnels = personnel_Db.personnel_select_worker(ViewBag.name);
 
 			Case_information_db case_Information = new Case_information_db();
-			List<Case_informatio> list4 = case_Information.Get_ALL_Case_informatio();
+			List<Case_informatio> list4 = case_Information.Get_ALL_Case_informatio(ViewBag.name);
 			List<Case_informatio> list1 = case_Information.Get_Case_informatio("停案");
 			List<Case_informatio> list2 = case_Information.Get_Case_informatio("穩定服務");
 			List<Case_informatio> list3 = case_Information.Get_Case_informatio("結案");

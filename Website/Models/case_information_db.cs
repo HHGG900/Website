@@ -353,11 +353,12 @@ namespace Website.Models
 		}
 
 
-		public List<Case_informatio> Get_ALL_Case_informatio()
+		public List<Case_informatio> Get_ALL_Case_informatio(string name)
 		{
 			List<Case_informatio> case_information = new List<Case_informatio>();
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
-			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM case_informatio ");
+			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM case_informatio where  waiter = @name and class = (select class from organization_account where name = @name)");
+			sqlCommand.Parameters.Add(new SqlParameter("@name", name));
 			sqlCommand.Connection = sqlConnection;
 			sqlConnection.Open();
 			SqlDataReader reader = sqlCommand.ExecuteReader();
@@ -437,7 +438,92 @@ namespace Website.Models
 			sqlConnection.Close();
 			return case_information;
 		}
+		public List<Case_informatio> Get_Case_informatio_one(string name, string caser)
+		{
+			List<Case_informatio> case_information = new List<Case_informatio>();
+			SqlConnection sqlConnection = new SqlConnection(ConnStr);
+			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM case_informatio where name = @caser and class = (select class from organization_account where name = @name)");
+			sqlCommand.Parameters.Add(new SqlParameter("@name", name));
+			sqlCommand.Parameters.Add(new SqlParameter("@caser", caser));
+			sqlCommand.Connection = sqlConnection;
+			sqlConnection.Open();
+			List<string> list = new List<string>();
+			SqlDataReader reader = sqlCommand.ExecuteReader();
 
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+
+					list.Add(GetString(reader.GetOrdinal("BA1project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA2project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA3project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA4project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA5project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA6project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA7project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA8project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA9project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA10project"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA1amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA2amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA3amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA4amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA5amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA6amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA7amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA8amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA9amount"), reader));
+					list.Add(GetString(reader.GetOrdinal("BA10amount"), reader));
+					string[] list1 = list.ToArray();
+					Case_informatio case_information1 = new Case_informatio
+					{
+						name = reader.GetString(reader.GetOrdinal("name")),
+						six = reader.GetString(reader.GetOrdinal("six")),
+						birthday = reader.GetString(reader.GetOrdinal("birthday")),
+						identity = reader.GetString(reader.GetOrdinal("identity")),
+						telephone = reader.GetString(reader.GetOrdinal("telephone")),
+						economic = reader.GetString(reader.GetOrdinal("economic")),
+						obstacleclass = GetString(reader.GetOrdinal("obstacleclass"), reader),
+						obstacledegree = GetString(reader.GetOrdinal("obstacledegree"), reader),
+						contact = reader.GetString(reader.GetOrdinal("contact")),
+						phone = reader.GetString(reader.GetOrdinal("phone")),
+						notedate = reader.GetString(reader.GetOrdinal("notedate")),
+						CMS = reader.GetString(reader.GetOrdinal("CMS")),
+						BA1project = GetString(reader.GetOrdinal("BA1project"), reader),
+						BA2project = GetString(reader.GetOrdinal("BA2project"), reader),
+						BA3project = GetString(reader.GetOrdinal("BA3project"), reader),
+						BA4project = GetString(reader.GetOrdinal("BA4project"), reader),
+						BA5project = GetString(reader.GetOrdinal("BA5project"), reader),
+						BA6project = GetString(reader.GetOrdinal("BA6project"), reader),
+						BA7project = GetString(reader.GetOrdinal("BA7project"), reader),
+						BA8project = GetString(reader.GetOrdinal("BA8project"), reader),
+						BA9project = GetString(reader.GetOrdinal("BA9project"), reader),
+						BA10project = GetString(reader.GetOrdinal("BA10project"), reader),
+						BA1amount = GetString(reader.GetOrdinal("BA1amount"), reader),
+						BA2amount = GetString(reader.GetOrdinal("BA2amount"), reader),
+						BA3amount = GetString(reader.GetOrdinal("BA3amount"), reader),
+						BA4amount = GetString(reader.GetOrdinal("BA4amount"), reader),
+						BA5amount = GetString(reader.GetOrdinal("BA5amount"), reader),
+						BA6amount = GetString(reader.GetOrdinal("BA6amount"), reader),
+						BA7amount = GetString(reader.GetOrdinal("BA7amount"), reader),
+						BA8amount = GetString(reader.GetOrdinal("BA8amount"), reader),
+						BA9amount = GetString(reader.GetOrdinal("BA9amount"), reader),
+						BA10amount = GetString(reader.GetOrdinal("BA10amount"), reader),
+						BAList = list1,
+						nateunit = GetString(reader.GetOrdinal("nateunit"), reader),
+						waiter = GetString(reader.GetOrdinal("waiter"), reader),
+						status = reader.GetString(reader.GetOrdinal("status")),
+						no_service_reason = GetString(reader.GetOrdinal("no_service_reason"), reader),
+						no_service_date = GetString(reader.GetOrdinal("no_service_date"), reader),
+						BAnum = reader.GetString(reader.GetOrdinal("BAnum")),
+					};
+					case_information.Add(case_information1);
+				}
+			}
+			sqlConnection.Close();
+			return case_information;
+		}
 
 		public List<Case_informatio> Get_One_Case_informatio(string id)
 		{

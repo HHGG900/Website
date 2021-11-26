@@ -56,10 +56,10 @@ namespace Website.Models
 				{
 					worker_arrive worker_arrive1 = new worker_arrive
 					{
-						worker_name = reader.GetString(reader.GetOrdinal("worker_name")),
-						arrive_time = reader.GetString(reader.GetOrdinal("arrive_time")),
-						leave_time = reader.GetString(reader.GetOrdinal("leave_time")),
-						tim = reader.GetString(reader.GetOrdinal("tim"))
+						worker_name = GetString(reader.GetOrdinal("worker_name"), reader),
+						arrive_time = GetString(reader.GetOrdinal("arrive_time"), reader),
+						leave_time = GetString(reader.GetOrdinal("leave_time"), reader),
+						tim = GetString(reader.GetOrdinal("tim"), reader)
 					};
 					worker_arrive.Add(worker_arrive1);
 				}
@@ -67,5 +67,17 @@ namespace Website.Models
 			sqlConnection.Close();
 			return worker_arrive;
 		}
+		public string GetString(int i, SqlDataReader reader)
+	{
+		try
+		{
+			return reader.GetString(i);
+		}
+		catch
+		{
+			return " ";
+		}
 	}
+	}
+	
 }

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Website.Models;
+@{
+	List<Case_informatio> case1 = ViewBag.case_s;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -13,6 +17,9 @@
 	<link rel="stylesheet" href="~/css/wait.css">
 	<!--    <link rel="stylesheet" href="/css/page2-5-3.css" />-->
 	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
 	<script src="~/Scripts/jquery.cookie.js"></script>
 	<script>
@@ -55,9 +62,6 @@
 
 			});
 
-
-
-
 			$('#first').click(function () {
 				/*$.cookie("unitname", $('#unitname').val(), {
 					expires: 2147483647, path: '/', domain: '', secure: true
@@ -77,69 +81,78 @@
 				var s_month = $('#s_month').val();
 
 				if (s_year != '' && s_month != '') {
-					get_service_payments();
+					//get_service_payments();
 				}
 			});
 
 		});
 
 		function check_case(info) {
-			$.ajax({
-				url: "/case_manage/get_service_data",
-				type: "POST",
-				dataType: 'json',
-				data: {
+			$.post('@Url.Action("Carecharge")',
+				{
 					id: info,
 					year: $('#s_year').val(),
 					month: $('#s_month').val()
 				},
-				success: function (data, status, xhr) {
-					console.log(data, status, xhr);
-					$('#wait_content').hide();
-					$('#wait').hide();
-					$('.checkzone').html('');
+				function (result) {
+					window.location.href = result;
+					});
+			//	{
+			//	url: "/case_manage/get_service_data",
+			//	type: "POST",
+			//	dataType: 'json',
+			//	data: {
+			//		id: info,
+			//		year: $('#s_year').val(),
+			//		month: $('#s_month').val()
+			//	},
+			//	success: function (data, status, xhr) {
+			//		console.log(data, status, xhr);
+			//		$('#wait_content').hide();
+			//		$('#wait').hide();
+			//		$('.checkzone').html('');
 
-					if (data.code == 200) {
-						$('#checkzone' + info).html('<i class="fas fa-check-circle"></i>');
+			//		if (data.code == 200) {
+			//			$('#checkzone' + info).html('<i class="fas fa-check-circle"></i>');
 
-						if (data.result != 0) {
-							choosenId = data.result.client_id;
+			//			if (data.result != 0) {
+			//				choosenId = data.result.client_id;
 
-							$.cookie("s_year", $('#s_year').val(), {
-								expires: 2147483647, path: '/', domain: '', secure: true
-							});
-							$.cookie("s_month", $('#s_month').val(), {
-								expires: 2147483647, path: '/', domain: '', secure: true
-							});
+			//				$.cookie("s_year", $('#s_year').val(), {
+			//					expires: 2147483647, path: '/', domain: '', secure: true
+			//				});
+			//				$.cookie("s_month", $('#s_month').val(), {
+			//					expires: 2147483647, path: '/', domain: '', secure: true
+			//				});
 
-							var position = $(".block3").offset().top;
-							$('html, body').animate({
-								scrollTop: position * 2 / 3
-							}, 1000);
+			//				var position = $(".block3").offset().top;
+			//				$('html, body').animate({
+			//					scrollTop: position * 2 / 3
+			//				}, 1000);
 
-							$('#first').show();
-						}
-						else {
-							alert('無收費登打紀錄，請先進行再列印！');
-							$('#first').hide();
-						}
-					}
-					else {
-						ezBSAlert({
-							messageText: data.message,
-							alertType: "danger"
-						}).done(function (e) {
-							// location.href='/shoppingcart';
-						});
-					}
-				},
-				error: function (xhr, ajaxOptions, thrownError) {
-					console.log(xhr, ajaxOptions, thrownError);
-					$('#wait_content').hide();
-					$('#wait').hide();
-					alert('發生錯誤!');
-				}
-			});
+			//				$('#first').show();
+			//			}
+			//			else {
+			//				alert('無收費登打紀錄，請先進行再列印！');
+			//				$('#first').hide();
+			//			}
+			//		}
+			//		else {
+			//			ezBSAlert({
+			//				messageText: data.message,
+			//				alertType: "danger"
+			//			}).done(function (e) {
+			//				// location.href='/shoppingcart';
+			//			});
+			//		}
+			//	},
+			//	error: function (xhr, ajaxOptions, thrownError) {
+			//		console.log(xhr, ajaxOptions, thrownError);
+			//		$('#wait_content').hide();
+			//		$('#wait').hide();
+			//		alert('發生錯誤!');
+			//	}
+			//});
 		}
 
 		function get_service_payments() {
@@ -259,6 +272,7 @@
 					收費月份：
 					<select id="s_year" name="s_year" class="form-control col-md-2 d-inline-block">
 						<option value="">---選擇年---</option>
+						<option value="110">110</option>
 						<option value="109">109</option>
 						<option value="108">108</option>
 						<option value="107">107</option>
@@ -285,31 +299,34 @@
 		<div class="row block2">
 			<div class="col-md-12">
 				<ul class="cases">
-					<li class="cases__case" info="5">
-						余001 <span id="checkzone5" class="checkzone"></span>
-						<span id="hasdone5" class="hasdone"></span>
-					</li>
-					<li class="cases__case" info="7">
-						陳陳某1 <span id="checkzone7" class="checkzone"></span>
-						<span id="hasdone7" class="hasdone"></span>
-					</li>
-					<li class="cases__case" info="9">
-						林某1A <span id="checkzone9" class="checkzone"></span>
-						<span id="hasdone9" class="hasdone"></span>
-					</li>
-					<li class="cases__case" info="11">
-						黃大達01 <span id="checkzone11" class="checkzone"></span>
-						<span id="hasdone11" class="hasdone"></span>
-					</li>
-					<li class="cases__case" info="13">
-						余002 <span id="checkzone13" class="checkzone"></span>
-						<span id="hasdone13" class="hasdone"></span>
-					</li>
-					<li class="cases__case" info="74">
-						張某某 <span id="checkzone74" class="checkzone"></span>
-						<span id="hasdone74" class="hasdone"></span>
-					</li>
-				</ul>
+					@foreach (Case_informatio ca in case1)
+					{
+						<li class="cases__case" info=@ca.name>
+							@ca.name<span id="checkzone @ca.index" class="checkzone"></span>
+							<span id="hasdone5" class="hasdone"></span>
+						</li>
+					}
+						<li class="cases__case" info="7">
+							陳陳某1 <span id="checkzone7" class="checkzone"></span>
+							<span id="hasdone7" class="hasdone"></span>
+						</li>
+						<li class="cases__case" info="9">
+							林某1A <span id="checkzone9" class="checkzone"></span>
+							<span id="hasdone9" class="hasdone"></span>
+						</li>
+						<li class="cases__case" info="11">
+							黃大達01 <span id="checkzone11" class="checkzone"></span>
+							<span id="hasdone11" class="hasdone"></span>
+						</li>
+						<li class="cases__case" info="13">
+							余002 <span id="checkzone13" class="checkzone"></span>
+							<span id="hasdone13" class="hasdone"></span>
+						</li>
+						<li class="cases__case" info="74">
+							張某某 <span id="checkzone74" class="checkzone"></span>
+							<span id="hasdone74" class="hasdone"></span>
+						</li>
+					</ul>
 			</div>
 		</div>
 
@@ -333,11 +350,11 @@
 
 	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
 	<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-    gtag('config', 'UA-148420718-4');
+		gtag('config', 'UA-148420718-4');
 	</script>
 
 	<div id="wait" style="display:none">

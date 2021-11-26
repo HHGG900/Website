@@ -1,0 +1,238 @@
+﻿@using Website.Models;
+@{
+	List<Case_informatio> case_s = ViewBag.caseone;
+}
+@using Website.Models;
+@{
+	List<worker_arrive> arrive = ViewBag.arrive;
+}
+@using Website.Models;
+@{
+	List<Care_place> care_tim = ViewBag.care_tim;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>個案新進 | 台灣柏佐克智慧型居服照顧管理系統</title>
+	<link href="~/images/favicon.ico" type="image/x-icon" rel="Shortcut Icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+	<link rel="stylesheet" href="~/css/layout.css">
+	<link rel="stylesheet" href="~/css/page2-2.css">
+	<script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+	<script>
+
+		function sum() {
+			@foreach (Case_informatio case_ in case_s)
+			{
+			for (int i = 0; i < Int32.Parse(case_.BAnum); i++)
+					{
+				@:var mony = document.getElementById("@case_.BAList[i+10]_mony").value;
+				@:if(mony != null) {
+				@: var all_ = @ViewBag.BAList[i] * mony;
+				@:document.getElementById("@case_.BAList[i+10]_all").innerHTML = all_;
+				@:}
+
+					}
+		}
+		}
+		$(function () {
+			$('#homepageBtn').click(function () {
+				location.href = "/Home/Supervise";
+			});
+
+			$('#lastPage').click(function () {
+				history.back();
+			});
+		});
+	</script>
+	<style>
+		.tableContainer table th, .tableContainer table td {
+			font-size: medium;
+		}
+
+		/*.tableContainer {
+					margin-left:50px;
+					margin-right:50px;
+					margin-top:50px;
+					margin-bottom:50px;
+				}
+		*/
+		.tableContainer table tbody td:last-child {
+			border-right: 1px solid #000;
+		}
+
+		.tableContainer table th, .tableContainer table td {
+			padding: 2px;
+		}
+
+		.tableContainer table {
+			background-color: #D8BFD8;
+		}
+
+		.auto-style1 {
+			font-size:32px;
+			text-align: center;
+		}
+
+		* {
+			padding: 0;
+			margin: 0;
+		}
+
+		.table1 {
+			border-collapse: collapse;
+			border: 1px #525152 solid;
+			width: 50%;
+			margin: 0 auto;
+			margin-top: 100px;
+		}
+
+			.table1 th, .table1 td {
+				border: 1px #525152 solid;
+				text-align: center;
+				font-size: medium;
+				line-height: 30px;
+				background: #F5DEB3;
+			}
+
+			.table1 .t1_header {
+				background: #F5DEB3;
+				font-weight: bold;
+				font-size: medium;
+			}
+		/*表格斜線*/
+		.out {
+			border-top: 40px #F5DEB3 solid; /*上邊框寬度等於表格第一行行高*/
+			width: 0px; /*讓容器寬度為0*/
+			height: 0px; /*讓容器高度為0*/
+			border-left: 80px #F5DEB3 solid; /*左邊框寬度等於表格第一行第一格寬度*/
+			position: relative; /*讓裡面的兩個子容器絕對定位*/
+		}
+
+		b {
+			font-style: normal;
+			display: block;
+			font-size: medium;
+			position: absolute;
+			top: -40px;
+			left: -40px;
+			width: 35px;
+		}
+
+		em {
+			font-style: normal;
+			display: block;
+			position: absolute;
+			font-size: medium;
+			top: -25px;
+			left: -70px;
+			width: 55px;
+		}
+
+		.t1 {
+			background: #F5DEB3;
+		}
+
+		.auto-style2 {
+			text-align: center;
+		}
+	</style>
+
+</head>
+<body style="zoom: 1;">
+	<div class="auto-style2">
+		<div class="fixedBtns"><button id="lastPage">上一頁</button><button id="homepageBtn">回首頁</button></div>
+		<form class="form-horizontal" role="form" method="post" action="~/Home/New_class_schedule" name="login_form" id="login_form">
+			@foreach (Case_informatio case_ in case_s)
+			{
+			<div class="tableContainer">
+				<div class="auto-style1">
+
+					<h1 class="h1">@ViewBag.name</h1>
+					<h3>@ViewBag.year 年 @ViewBag.month 月 </h3>
+
+					<h4>長照 @case_.CMS</h4>
+				</div>
+				<table>
+					<tr>
+						<td>
+							照顧服務人員
+						</td>
+						<td>
+							到點時間
+						</td>
+						<td>
+							離點時間
+						</td>
+						<td>
+							日期
+						</td>
+					</tr>
+					@foreach (worker_arrive arr in arrive)
+					{
+						<tr>
+							<td>@arr.worker_name</td>
+							<td>@arr.arrive_time</td>
+							<td>@arr.leave_time</td>
+							<td>@arr.tim</td>
+						</tr>
+					}
+				</table>
+				<table>
+				<tr>
+					<td>代碼</td>
+					<td>服務項目</td>
+					<td>次數</td>
+					<td>單價</td>
+					<td>總價</td>
+					<td>補助</td>
+					<td>服務行政費</td>
+				</tr>
+
+
+				
+					@for (int i = 0; i < Int32.Parse(case_.BAnum); i++)
+					{
+						<tr>
+							<td>@case_.BAList[i + 10]</td>
+							<td>@case_.BAList[i] </td>
+							<td>@ViewBag.BAList[i].ToString() </td>
+							<td><input class="auto-style1" style="width:150px;" id="@case_.BAList[i+10]_mony" /></td>
+							<td><p id="@case_.BAList[i+10]_all"></p></td>
+							<td><p id="@case_.BAList[i+10]_Sub"></p>補助</td>
+							<td><p id="@case_.BAList[i+10]_admin"></p>服務行政費</td>
+						</tr>
+					}
+
+
+
+				</table>
+				<table>
+					<tr>
+						<td>收費金額</td>
+						<td>
+							<div style="width:300px;"></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			}
+				<br />
+
+				<input type="button" class="btn btn-blue" value="計算" onclick="sum();" /><br />
+				<br />
+				
+				<br />
+				<br />
+				<input id="input" type="submit" class="btn btn-blue" value="確認" onclick="window.alert('存取成功');  " />
+
+
+			</form>
+	</div>
+	</div>
+</body>
+</html>

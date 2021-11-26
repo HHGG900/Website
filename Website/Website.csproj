@@ -258,6 +258,8 @@
     <Compile Include="Models\Appeal_db.cs" />
     <Compile Include="Models\Assessment.cs" />
     <Compile Include="Models\Assessment_db.cs" />
+    <Compile Include="Models\Care_place.cs" />
+    <Compile Include="Models\care_place_db.cs" />
     <Compile Include="Models\Case_informatio.cs" />
     <Compile Include="Models\Case_information_db.cs" />
     <Compile Include="Models\list_index_class.cs" />
@@ -402,6 +404,7 @@
     <Content Include="Views\Home\conversation_record2.cshtml" />
     <Content Include="Views\Home\HRmanagement_Edit.cshtml" />
     <Content Include="Views\Home\Organization_account_management_Edit.cshtml" />
+    <Content Include="Views\Home\CarechargeBill.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
