@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Website.Models;
+@{
+	List<appeal> appeal = ViewBag.appeal;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -48,6 +52,23 @@
 			});
 
 		});
+		function doSearch() {
+			var year = document.getElementById("year").value;
+			window.alert(year);
+			if (year == '') {
+				alert('請選擇年度！');
+				$('#year').focus();
+				return false;
+			}
+			else {
+				
+				$.post('@Url.Action("Grievancemanagement")',
+						{ year: year },
+						function (result) {
+							window.location.href = result;
+						});
+			}
+		}
 
 		function toDel(num) {
 			if (confirm('確定要刪除？')) {
@@ -156,15 +177,15 @@
 			</div>
 		</div>
 
-		<form id="form1" method="post">
+		
 			<div class="queryBlock">
 				<p style="font-size: 24pt;">申訴彙整表</p>
 				<p>
-					已存檔者--查詢年度 <input type="text" name="s_year" value="109" style="text-align:right"> 年
-					<button class="btnBgColorWithShadow--blue btn-query" onclick="$('#form1').submit();"><i class="fas fa-search"></i>查詢</button>
+					已存檔者--查詢年度 <input type="text" id="year" value="@DateTime.Now.AddYears(-1911).Year" style="text-align:right"> 年
+					<button class="btnBgColorWithShadow--blue btn-query" onclick="doSearch();"><i class="fas fa-search"></i>查詢</button>
 				</p>
 			</div>
-		</form>
+		
 	</header>
 
 	<main class="main">
@@ -176,21 +197,44 @@
 							<tr>
 								<th>申訴日期</th>
 								<th>人員姓名</th>
+								<th>電話</th>
+								<th>申訴類別</th>
 								<th>申訴事由</th>
-								<th>調查<br>處置<br>(主任)</th>
-								<th>後續<br>追蹤<br>(主任)</th>
-								<th>檢討<br>(主任)</th>
-								<th>回覆<br>(主任)</th>
-								<th>回覆時間</th>
+								@*<th>調查<br>處置<br>(主任)</th>
+		<th>後續<br>追蹤<br>(主任)</th>
+		<th>檢討<br>(主任)</th>
+		<th>回覆<br>(主任)</th>
+		<th>回覆時間</th>*@
 							</tr>
 						</thead>
 						<tbody>
-
+							@try
+							{
+								foreach (appeal appeal1 in appeal)
+								{
+								<thead>
+									<tr>
+										<th style="width:10%">@appeal1.tim</th>
+										<th style="width:15%">@appeal1.US_name</th>
+										<th style="width:30%">@appeal1.phone</th>
+										<th style="width:15%">@appeal1.fall_class</th>
+										<th style="width:30%">@appeal1.conten</th>
+										@*<th style="width:10%">處理<br>措施<br>(督導)</th>*@
+										@*<th style="width:10%">檢討<br>改善<br>(督導)</th>
+		<th style="width:10%">改善<br>追蹤<br>(督導)</th>*@
+									</tr>
+								</thead>
+							}
+						}
+						catch
+						{
 							<tr><td colspan="8">無資料</td></tr>
+}
 
 
-						</tbody>
-					</table>
+
+							</tbody>
+						</table>
 				</div>
 			</div>
 		</form>
@@ -209,11 +253,11 @@
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
 	<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-    gtag('config', 'UA-148420718-4');
+		gtag('config', 'UA-148420718-4');
 	</script>
 
 	<div id="wait" style="display:none">

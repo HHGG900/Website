@@ -613,7 +613,18 @@ namespace Website.Controllers
 		//申訴管理
 		public ActionResult Grievancemanagement()
 		{
+			ViewBag.appeal = TempData["appeal"];
+			TempData.Keep();
 			return View();
+		}
+		[HttpPost]
+		public ActionResult Grievancemanagement(string year)
+		{
+			appeal_db appeal = new appeal_db();
+			List<appeal> appeal1 = appeal.appeal_select(year);
+			TempData["appeal"] = appeal1;
+			TempData.Keep();
+			return Json("Grievancemanagement");
 		}
 		//申訴處理表 - 第一步
 		public ActionResult Firststep()
@@ -1021,7 +1032,18 @@ namespace Website.Controllers
 		//異常處理
 		public ActionResult abnormal_event_process()
 		{
+			ViewBag.exception_s = TempData["exception_s"];
+			TempData.Keep();
 			return View();
+		}
+		[HttpPost]
+		public ActionResult abnormal_event_process(string year)
+		{
+			Exception_notification_db exception_Notification_ = new Exception_notification_db();
+			List<Exception_notification> exception_s = exception_Notification_.GetException_notification(year);
+			TempData["exception_s"] = exception_s;
+			TempData.Keep();
+			return Json("abnormal_event_process");
 		}
 		//異常處理 第一步驟
 		public ActionResult abnormal_event_process_one()
@@ -1182,8 +1204,6 @@ namespace Website.Controllers
 		public ActionResult Appeal(appeal appeal)
 		{
 			appeal_db appeal_Db = new appeal_db();
-			worker_arrive_db worker_db = new worker_arrive_db();
-			Daycheck_db daycheck_db = new Daycheck_db();
 			appeal_Db.appeal_insert(appeal);
 			
 			return RedirectToAction("Appeal");

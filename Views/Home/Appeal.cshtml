@@ -68,8 +68,8 @@
 					}
 
 					console.log(list);
-					$.post('@Url.Action("Case_information")',
-						{ case_Information: list },
+					$.post('@Url.Action("Appeal")',
+						{ appeal: list },
 						function (result) {
 							window.alert("儲存成功");
 							window.location.href = result;
@@ -183,7 +183,7 @@
 	<main class="main">
 		<div class="wrapper">
 			<div class="tableContainer">
-				<form id="form1" name="form1" method="post" action="/employee_appeal/save" target="actFrame" enctype="multipart/form-data">
+				
 					<table>
 						<thead>
 							<tr>
@@ -195,9 +195,9 @@
 							<tr>
 								<th style="text-align: right;">申訴者身份：</th>
 								<td style="text-align: left;">
-									<input type="radio" name="appellant_identity" id="appellant_identity1" value="1">個案本人
-									<input type="radio" name="appellant_identity" id="appellant_identity2" value="2">個案家屬
-									<input type="radio" name="appellant_identity" id="appellant_identity3" value="3">員工
+									<input type="radio" name="appellant_identity" id="appellant_identity1" value="個案本人">個案本人
+									<input type="radio" name="appellant_identity" id="appellant_identity2" value="個案家屬">個案家屬
+									<input type="radio" name="appellant_identity" id="appellant_identity3" value="員工">員工
 								</td>
 							</tr>
 							<tr>
@@ -208,34 +208,34 @@
 							</tr>
 							<tr>
 								<th style="text-align: right;">申訴者日期：</th>
-								<td style="text-align: left;">2020.12.30 10:35</td>
+								<td style="text-align: left;">@DateTime.Now.ToString("yyyy.MM.dd H.mm")</td>
 							</tr>
 							<tr>
 								<th style="text-align: right;">申訴類別：</th>
 								<td style="text-align: left;">
 									<label class="nowrap" for="category1">
-										<input type="radio" name="category" id="category1" value="1">受傷
+										<input type="radio" name="category" id="category1" value="受傷">受傷
 									</label>
 									<label class="nowrap" for="category2">
-										<input type="radio" name="category" id="category2" value="2">不當處置
+										<input type="radio" name="category" id="category2" value="不當處置">不當處置
 									</label>
 									<label class="nowrap" for="category3">
-										<input type="radio" name="category" id="category3" value="3">權益損
+										<input type="radio" name="category" id="category3" value="權益損">權益損
 									</label>
 									<label class="nowrap" for="category4">
-										<input type="radio" name="category" id="category4" value="4">忽略
+										<input type="radio" name="category" id="category4" value="忽略">忽略
 									</label>
 									<label class="nowrap" for="category5">
-										<input type="radio" name="category" id="category5" value="5">被欺
+										<input type="radio" name="category" id="category5" value="被欺">被欺
 									</label>
 									<label class="nowrap" for="category6">
-										<input type="radio" name="category" id="category6" value="6">性騷擾
+										<input type="radio" name="category" id="category6" value="性騷擾">性騷擾
 									</label>
 									<label class="nowrap" for="category7">
-										<input type="radio" name="category" id="category7" value="7">職霸凌
+										<input type="radio" name="category" id="category7" value="職霸凌">職霸凌
 									</label>
 									<label class="nowrap" for="category8">
-										<input type="radio" name="category" id="category8" value="8">誤判
+										<input type="radio" name="category" id="category8" value="誤判">誤判
 									</label>
 								</td>
 							</tr>
@@ -253,7 +253,7 @@
 							</tr>
 						</thead>
 					</table>
-				</form>
+				
 			</div>
 		</div>
 	</main>

@@ -262,6 +262,8 @@
     <Compile Include="Models\care_place_db.cs" />
     <Compile Include="Models\Case_informatio.cs" />
     <Compile Include="Models\Case_information_db.cs" />
+    <Compile Include="Models\Exception_notification.cs" />
+    <Compile Include="Models\Exception_notification_db.cs" />
     <Compile Include="Models\list_index_class.cs" />
     <Compile Include="Models\daycheck.cs" />
     <Compile Include="Models\Daycheck_db.cs" />

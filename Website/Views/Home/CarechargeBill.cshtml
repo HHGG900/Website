@@ -25,20 +25,42 @@
 	<script src="~/Scripts/jquery-3.2.1.min.js"></script>
 	<script>
 
-		function sum() {
+				function sum() {
 			@foreach (Case_informatio case_ in case_s)
 			{
+				@:var all_m = 0
 			for (int i = 0; i < Int32.Parse(case_.BAnum); i++)
 					{
 				@:var mony = document.getElementById("@case_.BAList[i+10]_mony").value;
-				@:if(mony != null) {
-				@: var all_ = @ViewBag.BAList[i] * mony;
+				@:var sub = document.getElementById("@case_.BAList[i+10]_all_Sub").value;
+				@:if (mony != null && sub != null) {
+				@: var all_ = (@ViewBag.BAList[i] - sub) * mony;
 				@:document.getElementById("@case_.BAList[i+10]_all").innerHTML = all_;
-				@:}
-
-					}
+				@:var admin = 0;
+				@:var allsub = 0;
+				@:if ("@case_.economic" == "一般戶") {
+					@:document.getElementById("sub").innerHTML = "84 16";
+					@:admin = all_ * 0.16;
+					@:allsub = all_ * 0.84;
+					@:}
+					@:else if ("@case_.economic" == "長照中低(1.5-2.5倍)") {
+						@:document.getElementById("sub").innerHTML = "95 5";
+					@:admin = all_ * 0.05;
+					@:allsub = all_ * 0.95;
+					@:}
+					@:else {
+						@:document.getElementById("sub").innerHTML = "100 0";
+						@:admin = all_ * 0;
+						@:allsub = all_ * 1;
+						@:}
+						@:document.getElementById("@case_.BAList[i+10]_Sub").innerHTML = allsub;
+						@:document.getElementById("@case_.BAList[i+10]_admin").innerHTML = admin;
+			@:}
+			@:all_m += admin;
 		}
+			@:document.getElementById("all_money").innerHTML = all_m;
 		}
+				}
 		$(function () {
 			$('#homepageBtn').click(function () {
 				location.href = "/Home/Supervise";
@@ -74,7 +96,7 @@
 		}
 
 		.auto-style1 {
-			font-size:32px;
+			font-size: 32px;
 			text-align: center;
 		}
 
@@ -149,90 +171,91 @@
 		<form class="form-horizontal" role="form" method="post" action="~/Home/New_class_schedule" name="login_form" id="login_form">
 			@foreach (Case_informatio case_ in case_s)
 			{
-			<div class="tableContainer">
-				<div class="auto-style1">
+				<div class="tableContainer">
+					<div class="auto-style1">
 
-					<h1 class="h1">@ViewBag.name</h1>
-					<h3>@ViewBag.year 年 @ViewBag.month 月 </h3>
+						<h1 class="h1">@ViewBag.name</h1>
+						<h3>@ViewBag.year 年 @ViewBag.month 月 </h3>
 
-					<h4>長照 @case_.CMS</h4>
+						<h4>長照 @case_.CMS</h4>
+					</div>
+					<table>
+						<tr>
+							<td>
+								照顧服務人員
+							</td>
+							<td>
+								到點時間
+							</td>
+							<td>
+								離點時間
+							</td>
+							<td>
+								日期
+							</td>
+						</tr>
+						@foreach (worker_arrive arr in arrive)
+						{
+							<tr>
+								<td>@arr.worker_name</td>
+								<td>@arr.arrive_time</td>
+								<td>@arr.leave_time</td>
+								<td>@arr.tim</td>
+							</tr>
+						}
+					</table>
+					<table>
+						<tr>
+							<td>代碼</td>
+							<td>服務項目</td>
+							<td>次數</td>
+							<td>補助次數</td>
+							<td>單價</td>
+							<td>總價</td>
+							<td><div id="sub"></div>補助</td>
+							<td>服務行政費</td>
+						</tr>
+
+
+
+						@for (int i = 0; i < Int32.Parse(case_.BAnum); i++)
+						{
+							<tr>
+								<td>@case_.BAList[i + 10]</td>
+								<td>@case_.BAList[i] </td>
+								<td>@ViewBag.BAList[i].ToString() </td>
+								<td><input class="auto-style1" style="width:150px;" id="@case_.BAList[i+10]_all_Sub" /></td>
+								<td><input class="auto-style1" style="width:150px;" id="@case_.BAList[i+10]_mony" /></td>
+								<td><p id="@case_.BAList[i+10]_all"></p></td>
+								<td><p id="@case_.BAList[i+10]_Sub"></p></td>
+								<td><p id="@case_.BAList[i+10]_admin"></p></td>
+							</tr>
+						}
+
+
+
+					</table>
+					<table>
+						<tr>
+							<td>收費金額</td>
+							<td>
+								<div id="all_money" style="width:300px;"></div>
+							</td>
+						</tr>
+					</table>
 				</div>
-				<table>
-					<tr>
-						<td>
-							照顧服務人員
-						</td>
-						<td>
-							到點時間
-						</td>
-						<td>
-							離點時間
-						</td>
-						<td>
-							日期
-						</td>
-					</tr>
-					@foreach (worker_arrive arr in arrive)
-					{
-						<tr>
-							<td>@arr.worker_name</td>
-							<td>@arr.arrive_time</td>
-							<td>@arr.leave_time</td>
-							<td>@arr.tim</td>
-						</tr>
-					}
-				</table>
-				<table>
-				<tr>
-					<td>代碼</td>
-					<td>服務項目</td>
-					<td>次數</td>
-					<td>單價</td>
-					<td>總價</td>
-					<td>補助</td>
-					<td>服務行政費</td>
-				</tr>
-
-
-				
-					@for (int i = 0; i < Int32.Parse(case_.BAnum); i++)
-					{
-						<tr>
-							<td>@case_.BAList[i + 10]</td>
-							<td>@case_.BAList[i] </td>
-							<td>@ViewBag.BAList[i].ToString() </td>
-							<td><input class="auto-style1" style="width:150px;" id="@case_.BAList[i+10]_mony" /></td>
-							<td><p id="@case_.BAList[i+10]_all"></p></td>
-							<td><p id="@case_.BAList[i+10]_Sub"></p>補助</td>
-							<td><p id="@case_.BAList[i+10]_admin"></p>服務行政費</td>
-						</tr>
-					}
-
-
-
-				</table>
-				<table>
-					<tr>
-						<td>收費金額</td>
-						<td>
-							<div style="width:300px;"></div>
-						</td>
-					</tr>
-				</table>
-			</div>
 			}
-				<br />
+			<br />
 
-				<input type="button" class="btn btn-blue" value="計算" onclick="sum();" /><br />
-				<br />
-				
-				<br />
-				<br />
-				<input id="input" type="submit" class="btn btn-blue" value="確認" onclick="window.alert('存取成功');  " />
+			<input type="button" class="btn btn-blue" value="計算" onclick="sum();" /><br />
+			<br />
+
+			<br />
+			<br />
+			<input id="input" type="submit" class="btn btn-blue" value="確認" onclick="window.alert('存取成功');  " />
 
 
-			</form>
-	</div>
+		</form>
 	</div>
 </body>
 </html>

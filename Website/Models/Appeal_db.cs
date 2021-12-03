@@ -13,31 +13,33 @@ namespace Website.Models
 
 		public void appeal_insert(appeal appeal)
 		{
-			string time = DateTime.Now.AddHours(8).ToString("yyyyMMddHmm");
+			string time = DateTime.Now.ToString("yyyy.MM.dd H.mm");
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
 			SqlCommand sqlCommand = new SqlCommand(
-				@"IINSERT into appeal_db (US_name,user_status,phone,fall_class,conten,pic_one,tim)
-				VALUES(@US_name,@user_status,@phone,@fall_class,@conten,@pic_one,@tim)");
+				@"INSERT into appeal (US_name,user_status,phone,fall_class,conten,tim)
+				VALUES(@US_name,@user_status,@phone,@fall_class,@conten,@tim)");
 			sqlCommand.Connection = sqlConnection;
 			sqlCommand.Parameters.Add(new SqlParameter("@US_name", appeal.US_name));
 			sqlCommand.Parameters.Add(new SqlParameter("@user_status", appeal.user_status));
 			sqlCommand.Parameters.Add(new SqlParameter("@phone", appeal.phone));
 			sqlCommand.Parameters.Add(new SqlParameter("@fall_class", appeal.fall_class));
 			sqlCommand.Parameters.Add(new SqlParameter("@conten", appeal.conten));
-			sqlCommand.Parameters.Add(new SqlParameter("@pic_one", appeal.pic_one));
 			sqlCommand.Parameters.Add(new SqlParameter("@tim", time));
 			sqlConnection.Open();
 			sqlCommand.ExecuteNonQuery();
 			sqlConnection.Close();
 		}
 
-		public List<appeal> appeal_select(string UserId)
+		public List<appeal> appeal_select(string year)
 		{
+			string dateTime = new DateTime(Int32.Parse(year) + 1911, 1, 1).ToString("yyyy.MM.dd H.mm");
+			string dateTime2 = new DateTime(Int32.Parse(year) + 1911, 12, 31).ToString("yyyy.MM.dd H.mm");
 			List<appeal> Appeal = new List<appeal>();
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);
-			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM appeal_db WHERE US_name = @US_name");
+			SqlCommand sqlCommand = new SqlCommand("SELECT * FROM appeal WHERE (tim between @date1 and @date2) order by tim desc");
 			sqlCommand.Connection = sqlConnection;
-			sqlCommand.Parameters.Add(new SqlParameter("@US_name", UserId));
+			sqlCommand.Parameters.Add(new SqlParameter("@date1", dateTime));
+			sqlCommand.Parameters.Add(new SqlParameter("@date2", dateTime2));
 			sqlConnection.Open();
 
 			SqlDataReader reader = sqlCommand.ExecuteReader();
@@ -52,7 +54,6 @@ namespace Website.Models
 						phone = reader.GetString(reader.GetOrdinal("phone")),
 						fall_class = reader.GetString(reader.GetOrdinal("fall_class")),
 						conten = reader.GetString(reader.GetOrdinal("conten")),
-						pic_one = reader.GetString(reader.GetOrdinal("pic_one")),
 						tim = reader.GetString(reader.GetOrdinal("tim"))
 					};
 					Appeal.Add(appeal);
