@@ -700,30 +700,38 @@ namespace Website.Controllers
 		[HttpPost]
 		public ActionResult Carecharge(string year, string month, string id)
 		{
-			care_place_db care_Place = new care_place_db();
-			List<Care_place> care = care_Place.Care_place_select(TempData["name"]as string,id,year,month);
-			worker_arrive_db worker_db = new worker_arrive_db();
-			
-			DateTime ThisMonBeginDay = new DateTime(Int32.Parse(year)+1911, Int32.Parse(month), 1);
-			DateTime ThisMonEndDay = ThisMonBeginDay.AddMonths(1).AddDays(-1);
+			try {
+				care_place_db care_Place = new care_place_db();
+				List<Care_place> care = care_Place.Care_place_select(TempData["name"] as string, id, year, month);
+				worker_arrive_db worker_db = new worker_arrive_db();
 
-			string beginday = string.Format(ThisMonBeginDay.ToString("yyyy-MM-dd"));
-			string endday = string.Format(ThisMonEndDay.ToString("yyyy-MM-dd"));
-			foreach(Care_place care_ in care)
-			{
-				List<worker_arrive> Worker_arrive = worker_db.worker_arrive_select(care_.usr_name, beginday, endday);
-				TempData["arrive"] = Worker_arrive;
+				DateTime ThisMonBeginDay = new DateTime(Int32.Parse(year) + 1911, Int32.Parse(month), 1);
+				DateTime ThisMonEndDay = ThisMonBeginDay.AddMonths(1).AddDays(-1);
+
+				string beginday = string.Format(ThisMonBeginDay.ToString("yyyy-MM-dd"));
+				string endday = string.Format(ThisMonEndDay.ToString("yyyy-MM-dd"));
+				foreach (Care_place care_ in care)
+				{
+					List<worker_arrive> Worker_arrive = worker_db.worker_arrive_select(care_.usr_name, beginday, endday);
+					TempData["arrive"] = Worker_arrive;
+				}
+
+				TempData["beginday"] = beginday;
+				TempData["endday"] = endday;
+				TempData["care_tim"] = care;
+				TempData["case_name"] = id;
+				TempData["year"] = year;
+				TempData["month"] = month;
+				TempData.Keep();
+				if(care.Count == 0)
+					return Json("no");
+				else
+					return Json("CarechargeBill");
 			}
-
-			TempData["beginday"] = beginday;
-			TempData["endday"] = endday;
-			TempData["care_tim"] = care;
-			TempData["case_name"] = id;
-			TempData["year"] = year;
-			TempData["month"] = month;
-			TempData.Keep();
-			return Json("CarechargeBill");
-		}
+			catch {
+				return Json("no");
+			}
+					}
 			//照顧核銷
 			public ActionResult License_verification()
 		{
@@ -904,31 +912,8 @@ namespace Website.Controllers
 		[HttpPost]
 		public ActionResult New_class_schedule(Roser roster)
 		{
-			Roster_db roser_db = new Roster_db();
-			if(roster.in_time != null)
-			{
-				List< Roser> roster1 = roser_db.Roser_select_time(roster.in_time);
-				TempData["roser"] = roster1;
-				TempData["tr"] = true;
-			}
-			if(roster.in_name != null)
-			{
-				List<Roser> roster1 = roser_db.Roster_select_name(roster.in_name);
-				TempData["roser_list"] = roster1;
-				TempData["tr"] = false;
-				TempData["work_name"] = roster.in_name;
-			}
-			if (roster.one_one != null)
-			{
-				TempData["tr"] = true;
-				roser_db.Roster_update(roster, TempData["work_name"] as string);
-				TempData.Keep("work_name");
-				List<Roser> roster1 = roser_db.Roster_select_name(TempData["work_name"] as string);
-				TempData["roser_list"] = roster1;
-			}
-				
-			TempData["in_tim"] = roster.in_time;
-			return RedirectToAction("New_class_schedule");
+			
+			return RedirectToAction("Supervise");
 			//if (roster.in_name != null)
 			//{
 

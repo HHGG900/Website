@@ -95,6 +95,11 @@
 					month: $('#s_month').val()
 				},
 				function (result) {
+					if (result == "no") {
+						alert("查無資料");
+						$('#wait_content').hide();
+						$('#wait').hide();
+					} else
 					window.location.href = result;
 					});
 			//	{
