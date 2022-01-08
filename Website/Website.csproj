@@ -270,6 +270,8 @@
     <Compile Include="Models\image.cs" />
     <Compile Include="Models\Internal_and_external_training.cs" />
     <Compile Include="Models\Internal_and_external_training_db.cs" />
+    <Compile Include="Models\marquee.cs" />
+    <Compile Include="Models\marquee_db.cs" />
     <Compile Include="Models\Organization_account.cs" />
     <Compile Include="Models\Organization_account_db.cs" />
     <Compile Include="Models\Personnel.cs" />

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Website.Models;
+@{
+	List<marquee> marquees = ViewBag.marquees;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -87,49 +91,21 @@
 			}
 			else {
 				var messagetext = $('#message-text').val();
-				var messageid = $('#message_id').val();
 				$('#exampleModal').hide();
-
-				$.ajax({
-					url: "/user/edit_marquee",
-					type: "POST",
-					dataType: 'json',
-					data: {
-						id: messageid,
-						message: messagetext,
-						mtype: 1,
-						user_id: 22
-					},
-					success: function (data, status, xhr) {
-						console.log(data, status, xhr);
-						if (data.code == 200) {
-							alert(data.message);
-							location.href = '/user/notepost';
-							// ezBSAlert({
-							//     messageText: data.message,
-							//     alertType: "success"
-							// }).done(function(e)
-							// {
-							//     location.href='/familywork/notepost';
-							// });
-						}
-						else {
-							alert(data.message);
-							// ezBSAlert({
-							//     messageText: data.message,
-							//     alertType: "danger"
-							// }).done(function(e)
-							// {
-							//     location.href='/shoppingcart';
-							// });
-						}
-					},
-					error: function (xhr, ajaxOptions, thrownError) {
-						console.log(xhr, ajaxOptions, thrownError);
-						alert('發生錯誤!');
+				var list = {
+					marquee1: messagetext
 					}
-				});
-			}
+
+					console.log(list);
+					$.post('@Url.Action("Employee_bulletin_board")',
+						{ mar: list },
+						function (result) {
+							window.alert("儲存成功");
+							window.location.href = result;
+						});
+
+				}
+
 
 			$('#wait_content').show();
 			$('#wait').show();
@@ -202,32 +178,21 @@
 	</header>
 	<main class="main wrapper">
 		<div class="header__btns">
-			<button class="header__btn" data-toggle="modal" data-target="#addModal" data-notetitle="跑馬燈公告" data-whatever="" style="background-color: #009688;">新增公告+</button>
+			<button class="header__btn" data-toggle="modal" data-target="#addModal" data-notetitle="跑馬燈公告" data-whatever="" style="background-color: #009688;">跑馬燈公告</button>
 		</div>
-		<div class="serviceBlock serviceBlock2">
-			<h2 class="serviceBlock__h2">跑馬燈公告1</h2>
-			<div class="middlezone">9/1(六)辦理家屬座談會，提供免費監測血糖、尿酸，欲參加者可來電或LINE上報名123213513213</div>
-			<div class="rightzone">
-				<button class="header__btn edit_btn" data-toggle="modal" data-target="#exampleModal" data-notetitle="跑馬燈公告1" data-messageid="1" data-whatever="9/1(六)辦理家屬座談會，提供免費監測血糖、尿酸，欲參加者可來電或LINE上報名123213513213" style="background-color: #009688;">編輯</button>
-			</div>
-		</div>
-		<div class="serviceBlock serviceBlock2">
-			<h2 class="serviceBlock__h2">跑馬燈公告2</h2>
-			<div class="middlezone">test</div>
-			<div class="rightzone">
-				<button class="header__btn edit_btn" data-toggle="modal" data-target="#exampleModal" data-notetitle="跑馬燈公告2" data-messageid="11" data-whatever="test" style="background-color: #009688;">編輯</button>
-			</div>
-		</div>
-		<div class="serviceBlock serviceBlock2">
-			<h2 class="serviceBlock__h2">跑馬燈公告3</h2>
-			<div class="middlezone">員工公告-003-0001</div>
-			<div class="rightzone">
-				<button class="header__btn edit_btn" data-toggle="modal" data-target="#exampleModal" data-notetitle="跑馬燈公告3" data-messageid="16" data-whatever="員工公告-003-0001" style="background-color: #009688;">編輯</button>
-			</div>
-		</div>
+		@foreach (marquee mar in marquees)
+		{
 
+			<div class="serviceBlock serviceBlock2">
+				<h2 class="serviceBlock__h2">跑馬燈公告</h2>
+				<div class="middlezone">@mar.marquee1</div>
+				<div class="rightzone">
+					<button class="header__btn edit_btn" data-toggle="modal" data-target="#exampleModal" data-notetitle="跑馬燈公告1" data-messageid="1" data-whatever="@mar.marquee1" style="background-color: #009688;">編輯</button>
+				</div>
+			</div>
+		}
 
-	</main>
+		</main>
 
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="width:90%">
 		<div class="modal-dialog" role="document">
@@ -287,11 +252,11 @@
 
 	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-148420718-4"></script>
 	<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-    gtag('config', 'UA-148420718-4');
+		gtag('config', 'UA-148420718-4');
 	</script>
 
 	<div id="wait" style="display:none">

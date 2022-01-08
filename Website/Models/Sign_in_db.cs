@@ -15,7 +15,7 @@ namespace Website.Models
 			{
 				SqlConnection sqlConnection = new SqlConnection(ConnStr);
 				SqlCommand sqlCommand = new SqlCommand(
-					@"INSERT INTO sign_in (usr_index ,usr_name , usr_key, working_yes_no)
+					@"INSERT INTO sign_in (usr_index ,usr_name , usr_key, work_yes_no)
 				VALUES (@usr_index, @usr_name, @usr_key, y)");
 				sqlCommand.Connection = sqlConnection;
 				sqlCommand.Parameters.Add(new SqlParameter("@usr_index", sign_in.usr_index));
@@ -25,9 +25,22 @@ namespace Website.Models
 				sqlCommand.ExecuteNonQuery();
 				sqlConnection.Close();
 			}
+		public void sign_in_db_update(Sign_in sign_in, string status)
+		{
+			SqlConnection sqlConnection = new SqlConnection(ConnStr);
+			SqlCommand sqlCommand = new SqlCommand(
+				@"UPDATE sign_in SET usr_key = @usr_key, work_yes_no = @working_yes_no where usr_index = @usr_index");
+			sqlCommand.Connection = sqlConnection;
+			sqlCommand.Parameters.Add(new SqlParameter("@usr_index", sign_in.usr_index));
+			sqlCommand.Parameters.Add(new SqlParameter("@usr_key", sign_in.usr_key));
+			sqlCommand.Parameters.Add(new SqlParameter("@working_yes_no", status));
+			sqlConnection.Open();
+			sqlCommand.ExecuteNonQuery();
+			sqlConnection.Close();
+		}
 
 
-			public List<Sign_in> sign_in_select(string usr_index, string usr_key, string usr_name)
+		public List<Sign_in> sign_in_select(string usr_index, string usr_key, string usr_name)
 			{
 			List<Sign_in> sign = new List<Sign_in>();
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);

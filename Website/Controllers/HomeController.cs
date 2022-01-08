@@ -419,6 +419,15 @@ namespace Website.Controllers
 		{
 			Organization_account_db organization_accountn_db = new Organization_account_db();
 			organization_accountn_db.organization_account_update(organization_account);
+			Sign_in sign = new Sign_in();
+			sign.usr_index = organization_account.unitcode;
+			sign.usr_name = organization_account.name;
+			sign.usr_key = organization_account.phone.Substring(organization_account.phone.Length - 5, 5);
+			string status = "n";
+			if (organization_account.status == "正常")
+				status = "y";
+			Sign_in_db sign_In = new Sign_in_db();
+			sign_In.sign_in_db_update(sign, status);
 			return RedirectToAction("Organization_account_management");
 		}
 
@@ -912,12 +921,32 @@ namespace Website.Controllers
 		[HttpPost]
 		public ActionResult New_class_schedule(Roser roster)
 		{
-			
-			return RedirectToAction("Supervise");
-			//if (roster.in_name != null)
-			//{
 
-			//}
+			Roster_db roser_db = new Roster_db();
+			if (roster.in_time != null)
+			{
+				List<Roser> roster1 = roser_db.Roser_select_time(roster.in_time);
+				TempData["roser"] = roster1;
+				TempData["tr"] = true;
+			}
+			if (roster.in_name != null)
+			{
+				List<Roser> roster1 = roser_db.Roster_select_name(roster.in_name);
+				TempData["roser_list"] = roster1;
+				TempData["tr"] = false;
+				TempData["work_name"] = roster.in_name;
+			}
+			if (roster.one_one != null)
+			{
+				TempData["tr"] = true;
+				roser_db.Roster_update(roster, TempData["work_name"] as string);
+				TempData.Keep("work_name");
+				List<Roser> roster1 = roser_db.Roster_select_name(TempData["work_name"] as string);
+				TempData["roser_list"] = roster1;
+			}
+
+			TempData["in_tim"] = roster.in_time;
+			return RedirectToAction("New_class_schedule");
 
 		}
 
@@ -1102,7 +1131,21 @@ namespace Website.Controllers
 		//員工公吿欄
 		public ActionResult Employee_bulletin_board()
 		{
+			marquee_db marquee = new marquee_db();
+			List<marquee> marquees = marquee.marquee_db_select(TempData["name"] as string);
+
+			TempData.Keep();
+			ViewBag.marquees = marquees;
 			return View();
+		}
+		[HttpPost]
+		public ActionResult Employee_bulletin_board(marquee mar)
+		{
+			marquee_db marquee = new marquee_db();
+			mar.tim = DateTime.Now.ToString("yyyy/MM/dd H:mm");
+			marquee.marquee_insert(mar, TempData["name"] as string);
+			TempData.Keep();
+			return Json("Employee_bulletin_board");
 		}
 		//家屬工作
 		public ActionResult Family_Notice_board()
