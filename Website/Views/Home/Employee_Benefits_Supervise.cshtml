@@ -47,12 +47,20 @@
 				});
 			});
 		});
+		window.onload = function () {
+			var s = "";
+			for (var i = 0; i < 3; i++) {
+				var st = @DateTime.Now.Year-i-1911;
+				s += "<option value="+st+">" + st + "</option>";
 
+			}
+			document.getElementById("year").innerHTML += s;
+		}
 		function doSubmit() {
 			var catalog_num = $('input[name="catalog[]"]:checkbox:checked').map(function () {
 				return $(this).val();
 			}).get().join(',');
-
+			console.log(catalog_num);
 			if ($('#year').val() == '') {
 				alert('請輸入年度!');
 				$('#year').focus();
@@ -99,8 +107,28 @@
 				return false;
 			}
 			else {
-				$('#wait_content').show();
-				$('#wait').show();
+				$('#partner').val(catalog_num);
+				
+				@*var list = {
+					year: $('#year').val(),
+					season: $('#season').val(),
+					date: $('#occur_date').val(),
+					location: $('#place').val(),
+					partner: catalog_num,
+					picture1: $('#uploadfile01').val(),
+					picture2: $('#uploadfile02').val(),
+					picture3: $('#uploadfile03').val(),
+					picture4: $('#uploadfile04').val(),
+					}
+
+					console.log(list);
+					$.post('@Url.Action("Employee_Benefits_Supervise")',
+						{ staff_Service_: list },
+						function (result) {
+							window.alert("儲存成功");
+							window.location.href = result;
+						});*@
+				
 				$('#form1').submit();
 			}
 		}
@@ -248,7 +276,7 @@
 			<div class="mainTable__container">
 
 				<div class="title">員工福利紀錄</div>
-				<form id="form1" name="form1" method="post" action="/user/employee_benefits_save" target="actFrame" enctype="multipart/form-data">
+				<form id="form1" name="form1" method="post" action="/Home/Employee_Benefits_Supervise" enctype="multipart/form-data">
 					<input type="hidden" id="user_id" name="user_id" value="22">
 					<table class="mainTable">
 						<tbody>
@@ -257,9 +285,6 @@
 								<td colspan="3">
 									<select id="year" name="year" class="form-control col-md-2 d-inline-block">
 										<option value="">---選擇年---</option>
-										<option value="109">109</option>
-										<option value="108">108</option>
-										<option value="107">107</option>
 									</select> 年度
 									<span style="margin-left:50px;">
 										第 <select id="season" name="season" class="form-control col-md-2 d-inline-block">
@@ -270,26 +295,28 @@
 											<option value="4">4</option>
 										</select> 季
 									</span><br>
-									<div class="div1"><input type="checkbox" id="catalog1" name="catalog[]" value="1"> 分紅獎勵</div>
-									<div class="div1"><input type="checkbox" id="catalog2" name="catalog[]" value="2"> 年度晉級獎勵</div>
-									<div class="div1"><input type="checkbox" id="catalog3" name="catalog[]" value="3"> 工作優秀獎勵</div><br>
-									<div class="div1"><input type="checkbox" id="catalog4" name="catalog[]" value="4"> 員工家庭聚餐</div>
-									<div class="div1"><input type="checkbox" id="catalog5" name="catalog[]" value="5"> 員工自強活動</div>
-									<div class="div1"><input type="checkbox" id="catalog6" name="catalog[]" value="6"> 久任禮</div>
+									<div class="div1"><input type="checkbox" id="catalog1" name="catalog[]" value="分紅獎勵"> 分紅獎勵</div>
+									<div class="div1"><input type="checkbox" id="catalog2" name="catalog[]" value="年度晉級獎勵"> 年度晉級獎勵</div>
+									<div class="div1"><input type="checkbox" id="catalog3" name="catalog[]" value="工作優秀獎勵"> 工作優秀獎勵</div><br>
+									<div class="div1"><input type="checkbox" id="catalog4" name="catalog[]" value="員工家庭聚餐"> 員工家庭聚餐</div>
+									<div class="div1"><input type="checkbox" id="catalog5" name="catalog[]" value="員工自強活動"> 員工自強活動</div>
+									<div class="div1"><input type="checkbox" id="catalog6" name="catalog[]" value="久任禮"> 久任禮</div>
 
-									<div class="div1"><input type="checkbox" id="catalog4" name="catalog[]" value="4"> 生日禮</div>
-									<div class="div1"><input type="checkbox" id="catalog5" name="catalog[]" value="5"> 身體健檢</div>
-									<div class="div1"><input type="checkbox" id="catalog6" name="catalog[]" value="6"> 獎勵就修</div>
+									<div class="div1"><input type="checkbox" id="catalog4" name="catalog[]" value="生日禮"> 生日禮</div>
+									<div class="div1"><input type="checkbox" id="catalog5" name="catalog[]" value="身體健檢"> 身體健檢</div>
+									<div class="div1"><input type="checkbox" id="catalog6" name="catalog[]" value="獎勵就修"> 獎勵就修</div>
+									<input type="text" id="partner" name="partner" value="" readonly>
+									
 								</td>
 							</tr>
 							<tr>
 								<th>日期</th>
 								<td width="40%">
-									<input type="text" class="Wdate form-control col-md-6" id="occur_date" name="occur_date">
+									<input type="text" class="Wdate form-control col-md-6" id="date" name="date">
 								</td>
 								<th>地點</th>
 								<td>
-									<input type="text" class="place form-control col-md-12" id="place" name="place">
+									<input type="text" class="place form-control col-md-12" id="location" name="location">
 								</td>
 							</tr>
 							<tr>
@@ -299,12 +326,12 @@
 										<div class="row">
 											<div class="col-12 col-md-6">
 												<div class="mainTable__fileBlock tdCamera">
-													<input type="file" id="uploadfile01" name="uploadfile01">
+													<input type="file" id="picture1" name="picture1">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="mainTable__fileBlock tdCamera">
-													<input type="file" id="uploadfile02" name="uploadfile02">
+													<input type="file" id="picture2" name="picture2">
 												</div>
 											</div>
 										</div>
@@ -313,12 +340,12 @@
 										<div class="row">
 											<div class="col-12 col-md-6">
 												<div class="mainTable__fileBlock tdCamera">
-													<input type="file" id="uploadfile03" name="uploadfile03">
+													<input type="file" id="picture3" name="picture3">
 												</div>
 											</div>
 											<div class="col-12 col-md-6">
 												<div class="mainTable__fileBlock tdCamera">
-													<input type="file" id="uploadfile04" name="uploadfile04">
+													<input type="file" id="picture4" name="picture4">
 												</div>
 											</div>
 										</div>

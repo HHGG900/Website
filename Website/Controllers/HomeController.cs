@@ -55,6 +55,9 @@ namespace Website.Controllers
 				//if(sig.post2 != "")
 					post2 = sig.post2;
 			}
+			Organization_account_db organization_Account_Db = new Organization_account_db();
+			string classes = organization_Account_Db.GetOrganization_account_Class(usr_name);
+			TempData["class"] = classes;
 			TempData["i"] = i.ToString();
 			TempData["post1"] = post1;
 			TempData["post2"] = post2;
@@ -1175,10 +1178,38 @@ namespace Website.Controllers
 		//員工福利
 		public ActionResult Employee_Benefits_Supervise()
 		{
+			TempData.Keep();
 			return View();
 		}
+		[HttpPost]
+		public ActionResult Employee_Benefits_Supervise(staff_service_record staff_Service_, HttpPostedFileBase picture1, HttpPostedFileBase picture2, HttpPostedFileBase picture3, HttpPostedFileBase picture4)
+		{
+			staff_service_record_db staff_Service_Record_Db = new staff_service_record_db();
+			staff_Service_.picture1 = string.Format("staff_Service_-picture1-{0}-{1}.jpg", staff_Service_.partner, DateTime.Now.ToString("yyyyMMddHmm"));
+			staff_Service_.picture2 = string.Format("staff_Service_-picture2-{0}-{1}.jpg", staff_Service_.partner, DateTime.Now.ToString("yyyyMMddHmm"));
+			staff_Service_.picture3 = string.Format("staff_Service_-picture3-{0}-{1}.jpg", staff_Service_.partner, DateTime.Now.ToString("yyyyMMddHmm"));
+			staff_Service_.picture4 = string.Format("staff_Service_-picture4-{0}-{1}.jpg", staff_Service_.partner, DateTime.Now.ToString("yyyyMMddHmm"));
+			//staff_Service_.partner = TempData["cata"] as string;
+			savepic(picture1, staff_Service_.picture1);
+			savepic(picture2, staff_Service_.picture2);
+			savepic(picture3, staff_Service_.picture3);
+			savepic(picture4, staff_Service_.picture4);
 
-
+			staff_Service_Record_Db.staff_service_record_db_insert(staff_Service_,TempData["class"] as string);
+			TempData.Keep();
+			return RedirectToAction("Supervise");
+		}
+		public void savepic(HttpPostedFileBase picture1,string picname)
+		{
+			if (picture1 != null)
+			{
+				if (picture1.ContentLength > 0)
+				{
+					var path = Path.Combine(Server.MapPath("~/Photos"), picname);
+					picture1.SaveAs(path);
+				}
+			}
+		}
 		/*政府相關工作----未做*/
 		//服務紀錄登打
 		public ActionResult Service_record()

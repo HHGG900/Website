@@ -43,6 +43,26 @@ namespace Website.Models
 			sqlConnection.Close();
 			return organization_Account;
 		}
+		public string GetOrganization_account_Class(string name)
+		{
+			SqlConnection sqlConnection = new SqlConnection(ConnStr);
+			SqlCommand sqlCommand = new SqlCommand("select class from organization_account where name = @name");
+			sqlCommand.Parameters.Add(new SqlParameter("@name", name));
+			sqlCommand.Connection = sqlConnection;
+			sqlConnection.Open();
+			string classes = "";
+			SqlDataReader reader = sqlCommand.ExecuteReader();
+			if (reader.HasRows)
+			{
+				while (reader.Read())
+				{
+					classes = reader.GetString(reader.GetOrdinal("class"));				
+				}
+			}
+
+			sqlConnection.Close();
+			return classes;
+		}
 		public void organization_account_insert(Organization_account organization_account, string conname)
 		{
 			SqlConnection sqlConnection = new SqlConnection(ConnStr);

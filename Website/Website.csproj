@@ -301,6 +301,8 @@
       <DependentUpon>Sign_in.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sign_in_db.cs" />
+    <Compile Include="Models\staff_service_record.cs" />
+    <Compile Include="Models\staff_service_record_db.cs" />
     <Compile Include="Models\worker_arrive.cs" />
     <Compile Include="Models\worker_arrive_db.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
